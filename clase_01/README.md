@@ -1,5 +1,10 @@
 # Clase 01: ¿Por qué existen las estructuras de datos?
 
+Santiago Saldívar Garcini
+Espero aprender qué son las estructuras de datos y cómo aprovecharlas para que mis proyectos sean más eficientes.
+¿Qué otras estructuras existen y de qué formas puedo aprevecharlas?
+
+
 Primera clase del curso intersemestral de **Estructuras de datos** para estudiantes de Matemáticas Aplicadas.
 
 La idea central de la clase es:
