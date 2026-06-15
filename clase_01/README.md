@@ -1,5 +1,13 @@
 # Clase 01: ¿Por qué existen las estructuras de datos?
 
+Ejercicio 4:
+
+Santiago Vázquez Serna
+
+Espero aprender ESTRUCTURAS DE DATOS
+
+Existe algo mejor para estructurar datos que el set 
+
 Primera clase del curso intersemestral de **Estructuras de datos** para estudiantes de Matemáticas Aplicadas.
 
 La idea central de la clase es:
