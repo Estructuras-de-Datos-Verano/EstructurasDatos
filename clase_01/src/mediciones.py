@@ -34,8 +34,8 @@ def generar_datos(n: int) -> list[int]:
         raise ValueError("n debe ser positivo.")
 
     generador = Random(42)
-    limite = max(10, n // 10)
-    return [generador.randrange(limite) for _ in range(n)]
+    limite = max(10, n // 10) #division entera, limite es 10,000 para que solo haya numeros de a lo mas eso
+    return [generador.randrange(limite) for _ in range(n)] 
 
 
 def medir_tiempo(funcion: Callable[[], Any], repeticiones: int = 5) -> float:
@@ -83,7 +83,7 @@ def buscar_en_lista(datos: Iterable[Any], objetivo: Any) -> bool:
     if datos is None:
         raise ValueError("datos no puede ser None.")
 
-    return objetivo in datos
+    return objetivo in datos #in es un for internamente
 
 
 def buscar_en_conjunto(datos: set[Any], objetivo: Any) -> bool:

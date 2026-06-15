@@ -1,3 +1,7 @@
+Leonardo Daniel Arenas Serafín
+Espero aprender cómo poder trabajar con datos para finalmente aplicar todo lo que llevmos viendo estos dos semestres
+Pregunta: Al tener pocos datos es fácil y natural guardar los datos en listas, conjuntos, diccionarios, etc. Pero al tener datos masivos de millones y millones de datos, ¿qué estructuras diferentes y nuevas hay que son las más convenientes? ¿Serían úiles las matrices y los tensores?
+
 # Clase 01: ¿Por qué existen las estructuras de datos?
 
 Primera clase del curso intersemestral de **Estructuras de datos** para estudiantes de Matemáticas Aplicadas.
