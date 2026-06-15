@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 01 - ¿Por qué existen las estructuras de datos?</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --bg: #101624;
+      --panel: #fbfcff;
+      --ink: #111827;
+      --muted: #536173;
+      --line: #dbe3ee;
+      --soft: #f4f7fb;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --gold: #d97706;
+      --red: #dc2626;
+      --violet: #7c3aed;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    main {
+      width: 100%;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      overflow: hidden;
+      width: min(1380px, 96vw);
+      height: min(820px, 92vh);
+      margin: 4vh auto;
+      padding: 42px 52px 72px;
+      border: 1px solid rgba(255, 255, 255, .64);
+      border-radius: 22px;
+      background: rgba(251, 252, 255, .985);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .30);
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .97), rgba(244, 247, 251, .93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37, 99, 235, .10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15, 118, 110, .10) 28px);
+    }
+
+    .center {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      text-align: center;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: clamp(48px, 5.8vw, 82px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.06;
+      font-weight: 880;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    p,
+    li {
+      font-size: 22px;
+      line-height: 1.36;
+      color: #334155;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 1.25em;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .subtitle {
+      max-width: 980px;
+      margin-inline: auto;
+      font-size: clamp(25px, 2.3vw, 36px);
+      color: #334155;
+      line-height: 1.22;
+    }
+
+    .question {
+      max-width: 1140px;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .quote {
+      max-width: 1080px;
+      font-size: clamp(38px, 4.6vw, 62px);
+      line-height: 1.1;
+      font-weight: 850;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+
+    .card p,
+    .card li {
+      font-size: 21px;
+    }
+
+    .blue {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
+
+    .green {
+      border-color: #99f6e4;
+      background: #ecfdf5;
+    }
+
+    .amber {
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .violet {
+      border-color: #ddd6fe;
+      background: #f5f3ff;
+    }
+
+    .red {
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243449;
+      font-size: 20px;
+      font-weight: 820;
+    }
+
+    .formula {
+      margin: 18px auto 24px;
+      text-align: center;
+      font-size: clamp(28px, 3.2vw, 46px);
+    }
+
+    .formula.small {
+      font-size: clamp(22px, 2.2vw, 32px);
+    }
+
+    .code {
+      overflow: auto;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: #111827;
+      font-size: 18px;
+      line-height: 1.38;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+
+    .code code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    .tree {
+      font-size: 19px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 20px;
+    }
+
+    .table th,
+    .table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: #0f172a;
+      background: #eaf0f8;
+      font-weight: 850;
+    }
+
+    .table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #334155;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .controls input,
+    .controls select {
+      font: inherit;
+      font-size: 17px;
+    }
+
+    .controls select {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: white;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: var(--blue);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    .controls button,
+    .jump-btn {
+      min-height: 42px;
+      padding: 0 14px;
+      font-size: 17px;
+    }
+
+    .jump-btn {
+      background: #0f766e;
+    }
+
+    .plot {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .mini-graph {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      align-items: end;
+      min-height: 250px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .bar-card {
+      display: grid;
+      align-items: end;
+      justify-items: center;
+      gap: 10px;
+      height: 220px;
+      color: #0f172a;
+      font-size: 16px;
+      font-weight: 820;
+    }
+
+    .bar-card span {
+      width: 100%;
+      border-radius: 8px 8px 2px 2px;
+      background: linear-gradient(180deg, #2563eb, #0f766e);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .flow .card {
+      min-height: 210px;
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-size: 42px;
+      line-height: 1;
+    }
+
+    .stack-area {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .stack-box {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      gap: 8px;
+      min-height: 340px;
+      padding: 16px;
+      border: 2px solid #111827;
+      border-top: 0;
+      border-radius: 0 0 8px 8px;
+      background: #f8fafc;
+    }
+
+    .stack-item {
+      padding: 12px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      background: #dbeafe;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .stack-message {
+      min-height: 32px;
+      color: #334155;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .diagram-network {
+      position: relative;
+      min-height: 330px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(15, 23, 42, .04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(15, 23, 42, .04) 1px, transparent 1px),
+        #ffffff;
+      background-size: 30px 30px;
+    }
+
+    .node {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 76px;
+      border: 3px solid #2563eb;
+      border-radius: 50%;
+      background: #eff6ff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .edge {
+      position: absolute;
+      height: 4px;
+      transform-origin: left center;
+      border-radius: 999px;
+      background: #0f766e;
+    }
+
+    .num {
+      position: absolute;
+      right: 32px;
+      bottom: 22px;
+      color: #94a3b8;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav button {
+      min-width: 102px;
+      min-height: 40px;
+      padding: 0 14px;
+      background: rgba(255, 255, 255, .16);
+      font-size: 16px;
+    }
+
+    .counter {
+      min-width: 84px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .progress {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 25;
+      height: 5px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    #bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+      transition: width .18s ease;
+    }
+
+    #notes {
+      display: none;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 40;
+      width: min(430px, 92vw);
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .93);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .32);
+      backdrop-filter: blur(12px);
+      font-size: 16px;
+      line-height: 1.36;
+    }
+
+    #practiceTimer {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    #timerDisplay {
+      min-width: 74px;
+      text-align: center;
+      font-size: 21px;
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #practiceTimer button {
+      min-height: 36px;
+      padding: 0 10px;
+      background: rgba(255, 255, 255, .16);
+      font-size: 14px;
+    }
+
+    #practiceTimer button.active {
+      background: var(--green);
+    }
+
+    #practiceTimer button.danger {
+      background: rgba(220, 38, 38, .82);
+    }
+
+    #inkCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    #inkCanvas.active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    #inkToolbar {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 1002;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      max-width: min(1050px, calc(100vw - 32px));
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+      font-size: 14px;
+    }
+
+    #inkToolbar.collapsed .ink-extra {
+      display: none;
+    }
+
+    #inkToolbar button,
+    #inkToolbar select,
+    #inkToolbar input[type="color"] {
+      height: 36px;
+      border: 0;
+      border-radius: 8px;
+      font-weight: 850;
+    }
+
+    #inkToolbar button,
+    #inkToolbar select {
+      padding: 0 10px;
+    }
+
+    #inkToolbar button {
+      color: white;
+      background: rgba(255, 255, 255, .16);
+    }
+
+    #inkToolbar button.active {
+      background: var(--blue);
+    }
+
+    #inkToolbar button.danger {
+      background: rgba(220, 38, 38, .82);
+    }
+
+    #inkToolbar select {
+      color: #0f172a;
+      background: white;
+    }
+
+    #inkToolbar input[type="color"] {
+      width: 42px;
+      padding: 3px;
+      background: white;
+    }
+
+    .ink-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .10);
+      font-weight: 850;
+    }
+
+    .ink-control input[type="range"] {
+      width: 110px;
+    }
+
+    kbd {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f172a;
+      background: #e2e8f0;
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .slide {
+        width: 96vw;
+        height: auto;
+        min-height: 92vh;
+        padding: 30px 24px 92px;
+        overflow: visible;
+      }
+
+      .two,
+      .three,
+      .four,
+      .split,
+      .flow,
+      .stack-area {
+        grid-template-columns: 1fr;
+      }
+
+      .plot {
+        height: 360px;
+      }
+
+      .nav {
+        width: 94vw;
+        justify-content: center;
+      }
+
+      #practiceTimer {
+        right: 10px;
+        transform: scale(.92);
+        transform-origin: top right;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="slide active title-slide" data-note="Abre con una pregunta, no con una definición. La meta es que vean que las estructuras aparecen por necesidad.">
+      <div class="center">
+        <div>
+          <div class="tag">Estructuras de datos - Clase 01</div>
+          <h1>¿Por qué existen las estructuras de datos?</h1>
+          <p class="subtitle">Representar información para que ciertas operaciones sean naturales o eficientes.</p>
+          <div class="formula small">$$\text{estructura} + \text{operación} \rightarrow \text{costo}$$</div>
+          <p class="note">Curso intersemestral, 5 semanas, proyecto colaborativo en Python.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Presenta la clase como una sesión de laboratorio conceptual. Son 4 horas con conversación, experimento y GitHub.">
+      <h2>Ruta de la sesión</h2>
+      <div class="grid four">
+        <div class="card blue">
+          <h3>1. Motivación</h3>
+          <p>Problemas donde la representación cambia todo.</p>
+        </div>
+        <div class="card green">
+          <h3>2. Conceptos</h3>
+          <p>Problema, datos, algoritmo y resultado.</p>
+        </div>
+        <div class="card amber">
+          <h3>3. Experimentos</h3>
+          <p>Búsqueda y conteo con estructuras de Python.</p>
+        </div>
+        <div class="card violet">
+          <h3>4. Proyecto</h3>
+          <p>Flujo de trabajo con GitHub y primera práctica.</p>
+        </div>
+      </div>
+      <div class="pills">
+        <button class="jump-btn" data-jump="13">Ir al experimento</button>
+        <button class="jump-btn" data-jump="23">Ir al proyecto</button>
+        <button class="jump-btn" data-jump="29">Ir a la tarea</button>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Haz silencio después de leer la pregunta. Pide estimaciones: ¿segundos?, ¿minutos?, ¿depende?">
+      <div class="center">
+        <div class="question">Tengo un millón de números: ¿cómo sé si aparece un valor?</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conecta con Matemáticas Aplicadas: datos numéricos, redes, grafos, rutas, modelos.">
+      <h2>Tres problemas, tres formas de pensar</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Un millón de números</h3>
+          <p>Operación natural: buscar, ordenar, resumir, contar.</p>
+        </div>
+        <div class="card green">
+          <h3>Una red social</h3>
+          <p>Operación natural: saber quién está conectado con quién.</p>
+        </div>
+        <div class="card amber">
+          <h3>Una ciudad</h3>
+          <p>Operación natural: encontrar rutas, vecinos y costos.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Pregunta guía:</strong> ¿qué información necesito guardar para responder rápido las preguntas importantes?</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad breve para activar intuición. Usa el temporizador. Que propongan representaciones antes de nombrar estructuras.">
+      <h2>Actividad inicial: 5 minutos</h2>
+      <div class="split">
+        <div>
+          <p class="question" style="font-size: clamp(34px, 4vw, 54px);">Para cada problema, dibuja una representación posible.</p>
+          <p class="note">No buscamos una respuesta perfecta. Buscamos ver qué operaciones aparecen.</p>
+        </div>
+        <div class="card amber">
+          <h3>Producto del equipo</h3>
+          <ul>
+            <li>Una representación.</li>
+            <li>Una operación importante.</li>
+            <li>Una sospecha sobre qué sería lento.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Primera definición informal. Evita formalismo excesivo; la frase clave es forma de representar información.">
+      <h2>Concepto informal</h2>
+      <div class="card blue">
+        <p class="quote">Una estructura de datos es una forma de representar información para que ciertas operaciones sean naturales o eficientes.</p>
+      </div>
+      <div class="pills">
+        <span class="pill">guardar</span>
+        <span class="pill">buscar</span>
+        <span class="pill">insertar</span>
+        <span class="pill">eliminar</span>
+        <span class="pill">contar</span>
+        <span class="pill">recorrer</span>
+        <span class="pill">conectar</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Esta distinción será una herramienta durante todo el curso. Dar un ejemplo cotidiano.">
+      <h2>Cuatro capas que conviene separar</h2>
+      <div class="flow">
+        <div class="card blue">
+          <h3>Problema</h3>
+          <p>La pregunta que queremos responder.</p>
+        </div>
+        <div class="card green">
+          <h3>Representación</h3>
+          <p>Cómo guardamos los datos.</p>
+        </div>
+        <div class="card amber">
+          <h3>Algoritmo</h3>
+          <p>Los pasos para transformar datos.</p>
+        </div>
+        <div class="card violet">
+          <h3>Resultado</h3>
+          <p>La salida que interpreta el usuario.</p>
+        </div>
+      </div>
+      <div class="formula small">$$\text{misma pregunta} \neq \text{misma representación}$$</div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Aterriza la distinción con un caso cercano: rutas. Señala que un mapa visual no es todavía una estructura precisa.">
+      <h2>Ejemplo: rutas en una ciudad</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Capa</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Problema</td>
+            <td>Encontrar una ruta corta entre dos puntos.</td>
+          </tr>
+          <tr>
+            <td>Representación</td>
+            <td>Intersecciones como nodos y calles como conexiones con costo.</td>
+          </tr>
+          <tr>
+            <td>Algoritmo</td>
+            <td>Explorar conexiones para mejorar distancias conocidas.</td>
+          </tr>
+          <tr>
+            <td>Resultado</td>
+            <td>Una secuencia de puntos y una distancia total.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Introduce operaciones como el lenguaje que conecta representación y eficiencia.">
+      <h2>La pregunta correcta no es solo qué guardo</h2>
+      <div class="center" style="height: 76%;">
+        <div>
+          <div class="question">La pregunta es: ¿qué quiero hacer muchas veces?</div>
+          <div class="pills" style="justify-content: center;">
+            <span class="pill">¿buscar?</span>
+            <span class="pill">¿agregar?</span>
+            <span class="pill">¿contar?</span>
+            <span class="pill">¿consultar vecinos?</span>
+            <span class="pill">¿extraer el mínimo?</span>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Lista como punto de partida natural porque ya la conocen. No satanizar: es excelente para muchas cosas.">
+      <h2>Lista: una representación natural</h2>
+      <div class="split">
+        <div>
+          <pre class="code"><code>datos = [17, 3, 42, 17, 8]
+
+42 in datos      # True
+100 in datos     # False
+datos.append(5)  # agregar al final</code></pre>
+        </div>
+        <div class="grid">
+          <div class="card green">
+            <h3>Muy cómoda para</h3>
+            <p>Guardar una secuencia, recorrerla, conservar orden y agregar al final.</p>
+          </div>
+          <div class="card amber">
+            <h3>Puede ser costosa para</h3>
+            <p>Buscar un valor si no sabemos dónde está.</p>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Aquí se ve el costo conceptual: buscar puede implicar revisar muchos elementos.">
+      <h2>Búsqueda en lista</h2>
+      <div class="split">
+        <div>
+          <pre class="code"><code>def buscar_en_lista(datos, objetivo):
+    for valor in datos:
+        if valor == objetivo:
+            return True
+    return False</code></pre>
+        </div>
+        <div>
+          <div class="mini-graph" aria-label="Costo conceptual de búsqueda en lista">
+            <div class="bar-card"><span style="height: 28%;"></span>mejor caso</div>
+            <div class="bar-card"><span style="height: 46%;"></span>promedio</div>
+            <div class="bar-card"><span style="height: 82%;"></span>peor caso</div>
+            <div class="bar-card"><span style="height: 86%;"></span>ausente</div>
+            <div class="bar-card"><span style="height: 95%;"></span>muchos datos</div>
+          </div>
+          <p class="note" style="margin-top: 14px;">Si el valor no aparece, hay que llegar al final para saberlo.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Presenta set como cambio de representación. Importante: se pierde orden y duplicados.">
+      <h2>Conjunto: buscar se vuelve la operación natural</h2>
+      <div class="split">
+        <div>
+          <pre class="code"><code>datos = [17, 3, 42, 17, 8]
+valores = set(datos)
+
+42 in valores     # True
+100 in valores    # False</code></pre>
+        </div>
+        <div class="grid">
+          <div class="card green">
+            <h3>Ganamos</h3>
+            <p>Búsqueda de pertenencia muy rápida.</p>
+          </div>
+          <div class="card red">
+            <h3>Cambiamos</h3>
+            <p>No conserva repeticiones y no se piensa como secuencia ordenada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section id="bloque-experimentos" class="slide" data-note="Deja que el grupo prediga antes de simular. Recalca que son mediciones del navegador, no una ley universal exacta.">
+      <h2>Experimento interactivo: lista vs conjunto</h2>
+      <div class="controls">
+        <label>
+          Tamaño máximo
+          <select id="maxSize">
+            <option value="30000">30 000</option>
+            <option value="100000" selected>100 000</option>
+            <option value="200000">200 000</option>
+          </select>
+        </label>
+        <label>
+          Consultas
+          <input id="queryCount" type="range" min="50" max="600" step="50" value="200">
+          <span id="queryLabel">200</span>
+        </label>
+        <button id="runSearch">Simular</button>
+      </div>
+      <div id="plotSearch" class="plot"></div>
+      <p id="plotSummary" class="note">Presiona simular para comparar tiempos.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conecta con conteo de frecuencias, muy común en datos, textos y simulaciones.">
+      <h2>Conteo con diccionario</h2>
+      <div class="split">
+        <div>
+          <pre class="code"><code>conteos = {}
+
+for valor in datos:
+    if valor not in conteos:
+        conteos[valor] = 0
+    conteos[valor] += 1</code></pre>
+        </div>
+        <div class="card blue">
+          <h3>Idea</h3>
+          <p>Usamos cada valor como llave y guardamos su frecuencia como valor.</p>
+          <div class="formula small">$$\text{valor} \mapsto \text{frecuencia}$$</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Counter permite mostrar que Python ya trae estructuras especializadas. No reemplaza entender el diccionario.">
+      <h2>Conteo con Counter</h2>
+      <div class="split">
+        <div>
+          <pre class="code"><code>from collections import Counter
+
+conteos = Counter(datos)
+conteos.most_common(5)</code></pre>
+        </div>
+        <div class="grid">
+          <div class="card green">
+            <h3>Más expresivo</h3>
+            <p>Dice directamente qué queremos: contar ocurrencias.</p>
+          </div>
+          <div class="card amber">
+            <h3>Buena pregunta</h3>
+            <p>¿Cuándo prefiero una herramienta general y cuándo una especializada?</p>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Aclara el tema de justicia experimental: construir el set también cuesta. Depende de cuántas consultas haré después.">
+      <h2>¿Qué estamos midiendo?</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Construcción</h3>
+          <p>Crear una lista, conjunto, diccionario o Counter tiene costo.</p>
+        </div>
+        <div class="card green">
+          <h3>Consulta</h3>
+          <p>Una vez creada la estructura, algunas operaciones son muy rápidas.</p>
+        </div>
+        <div class="card amber">
+          <h3>Uso repetido</h3>
+          <p>Una estructura conviene más cuando la operación importante se repite.</p>
+        </div>
+      </div>
+      <div class="formula small">$$\text{costo total} = \text{preparar datos} + \text{responder consultas}$$</div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Resumen comparativo. No prometer tiempos absolutos; hablar de comportamiento esperado y propósito.">
+      <h2>Comparación rápida</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Estructura</th>
+            <th>Natural para</th>
+            <th>Atención</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>list</code></td>
+            <td>Secuencias, orden, recorrido.</td>
+            <td>Buscar puede requerir revisar muchos elementos.</td>
+          </tr>
+          <tr>
+            <td><code>set</code></td>
+            <td>Pertenencia y unicidad.</td>
+            <td>No representa repeticiones como una lista.</td>
+          </tr>
+          <tr>
+            <td><code>dict</code></td>
+            <td>Asociar llaves con valores.</td>
+            <td>Hay que diseñar bien las llaves.</td>
+          </tr>
+          <tr>
+            <td><code>Counter</code></td>
+            <td>Frecuencias.</td>
+            <td>Es una especialización de diccionario.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Esta es la frase que deben llevarse. Pídeles copiarla o explicarla con sus palabras.">
+      <div class="center">
+        <div class="quote">Elegir una estructura de datos es elegir qué operaciones queremos hacer eficientes.</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conecta explícitamente con Matemáticas Aplicadas. No es solo programación: es modelar.">
+      <h2>Conexión con Matemáticas Aplicadas</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Modelos discretos</h3>
+          <p>Grafos, redes, cadenas, eventos y estados.</p>
+        </div>
+        <div class="card green">
+          <h3>Simulación</h3>
+          <p>Muchos datos generados, muchas consultas repetidas.</p>
+        </div>
+        <div class="card amber">
+          <h3>Optimización</h3>
+          <p>Buscar mínimos, vecinos, rutas y restricciones.</p>
+        </div>
+      </div>
+      <div class="diagram-network" style="margin-top: 20px;">
+        <div class="edge" style="left: 164px; top: 86px; width: 180px; transform: rotate(13deg);"></div>
+        <div class="edge" style="left: 350px; top: 132px; width: 210px; transform: rotate(23deg);"></div>
+        <div class="edge" style="left: 198px; top: 236px; width: 250px; transform: rotate(-22deg);"></div>
+        <div class="edge" style="left: 590px; top: 212px; width: 160px; transform: rotate(-33deg);"></div>
+        <div class="node" style="left: 100px; top: 52px;">A</div>
+        <div class="node" style="left: 330px; top: 92px;">B</div>
+        <div class="node" style="left: 558px; top: 170px;">C</div>
+        <div class="node" style="left: 170px; top: 214px;">D</div>
+        <div class="node" style="left: 740px; top: 112px;">E</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Ellos ya cursaron POO. Usa eso como puente: estructura de datos también es una interfaz de operaciones.">
+      <h2>Puente con Programación Orientada a Objetos</h2>
+      <div class="grid four">
+        <div class="card blue">
+          <h3>Clase</h3>
+          <p>Define un tipo de objeto.</p>
+        </div>
+        <div class="card green">
+          <h3>Atributos</h3>
+          <p>Guardan el estado interno.</p>
+        </div>
+        <div class="card amber">
+          <h3>Métodos</h3>
+          <p>Definen operaciones disponibles.</p>
+        </div>
+        <div class="card violet">
+          <h3>Interfaz</h3>
+          <p>Lo que prometemos al usuario.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Idea:</strong> la implementación puede cambiar sin cambiar la forma en que se usa la estructura.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="No implementar completamente. Solo mostrar operaciones y comportamiento esperado. La pila se trabajará con más detalle después.">
+      <h2>Ejemplo conceptual: pila</h2>
+      <div class="stack-area">
+        <div>
+          <div id="stackVisual" class="stack-box" aria-label="Visualización de pila"></div>
+        </div>
+        <div>
+          <div class="controls">
+            <button id="pushStack">push</button>
+            <button id="popStack">pop</button>
+            <button id="peekStack">peek</button>
+            <button id="emptyStack">is_empty</button>
+            <button id="resetStack">reiniciar</button>
+          </div>
+          <div id="stackMessage" class="stack-message">Una pila trabaja con el último elemento que entró.</div>
+          <div class="grid two" style="margin-top: 16px;">
+            <div class="card blue">
+              <h3>Interfaz</h3>
+              <p><code>push</code>, <code>pop</code>, <code>peek</code>, <code>is_empty</code>.</p>
+            </div>
+            <div class="card amber">
+              <h3>Regla</h3>
+              <p>Último en entrar, primero en salir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Separar interfaz de implementación. Esto prepara el proyecto sin entrar a detalles técnicos pesados.">
+      <h2>Interfaz vs implementación</h2>
+      <div class="split">
+        <div class="card green">
+          <h3>Interfaz</h3>
+          <p>Lo que el usuario necesita saber para usar la estructura.</p>
+          <pre class="code"><code>pila.push("dato")
+ultimo = pila.pop()
+vacia = pila.is_empty()</code></pre>
+        </div>
+        <div class="card blue">
+          <h3>Implementación</h3>
+          <p>Cómo se guarda internamente y cómo se logra cada operación.</p>
+          <pre class="code"><code>class Pila:
+    def __init__(self):
+        self._datos = []</code></pre>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Presentación formal del proyecto. Enfatiza librería educativa, no solo tarea aislada.">
+      <h2>Proyecto central del curso</h2>
+      <div class="card blue">
+        <p class="quote">Construiremos una pequeña librería educativa de estructuras de datos y algoritmos en Python.</p>
+      </div>
+      <div class="grid three" style="margin-top: 22px;">
+        <div class="card green">
+          <h3>Clara</h3>
+          <p>Código legible para aprender.</p>
+        </div>
+        <div class="card amber">
+          <h3>Probada</h3>
+          <p>Ejemplos y pruebas pequeñas.</p>
+        </div>
+        <div class="card violet">
+          <h3>Colaborativa</h3>
+          <p>Issues, ramas, pull requests y revisiones.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Esta estructura es sugerida para el repositorio del curso. Ajustarla según el repositorio real.">
+      <h2>Estructura sugerida del repositorio</h2>
+      <pre class="code tree"><code>estructuras-datos/
+├── README.md
+├── pyproject.toml
+├── src/
+│   └── edulib/
+│       ├── __init__.py
+│       ├── listas.py
+│       ├── pilas.py
+│       ├── colas.py
+│       ├── arboles.py
+│       └── grafos.py
+├── tests/
+│   ├── test_pilas.py
+│   └── test_colas.py
+├── notebooks/
+├── docs/
+└── ejemplos/</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Reactivar lo que ya saben de GitHub y convertirlo en flujo de trabajo del curso.">
+      <h2>Flujo de trabajo con GitHub</h2>
+      <div class="flow">
+        <div class="card blue">
+          <h3>Issue</h3>
+          <p>Describe una mejora, bug o tarea.</p>
+        </div>
+        <div class="card green">
+          <h3>Branch</h3>
+          <p>Aísla el trabajo de una persona o equipo.</p>
+        </div>
+        <div class="card amber">
+          <h3>Commit</h3>
+          <p>Guarda un cambio con intención clara.</p>
+        </div>
+        <div class="card violet">
+          <h3>Pull request</h3>
+          <p>Permite revisar, discutir e integrar.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad práctica de GitHub. Caminar por el salón y apoyar a quien se atore.">
+      <h2>Actividad de GitHub</h2>
+      <div class="split">
+        <div>
+          <ol>
+            <li>Clonar el repositorio.</li>
+            <li>Crear una rama propia.</li>
+            <li>Editar el README.</li>
+            <li>Hacer commit.</li>
+            <li>Subir la rama.</li>
+            <li>Abrir pull request.</li>
+          </ol>
+        </div>
+        <div>
+          <pre class="code"><code>git clone URL_DEL_REPOSITORIO
+cd estructuras-datos
+git checkout -b clase-01-tu-nombre
+
+# editar README.md
+
+git add README.md
+git commit -m "Agrega presentación personal"
+git push origin clase-01-tu-nombre</code></pre>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Usar el temporizador. Esta diapositiva organiza el bloque de práctica dentro de la clase.">
+      <h2>Práctica guiada en clase</h2>
+      <div class="grid four">
+        <div class="card blue">
+          <h3>10 min</h3>
+          <p>Preparar entorno y abrir notebook.</p>
+        </div>
+        <div class="card green">
+          <h3>25 min</h3>
+          <p>Medir lista, conjunto, diccionario y Counter.</p>
+        </div>
+        <div class="card amber">
+          <h3>20 min</h3>
+          <p>Actividad de GitHub.</p>
+        </div>
+        <div class="card violet">
+          <h3>10 min</h3>
+          <p>Cierre y reflexión escrita.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Usa el temporizador:</strong> el ritmo importa porque este curso será trabajo colaborativo sostenido.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cierre reflexivo. Pedir respuestas cortas, no ensayos.">
+      <h2>Preguntas de reflexión</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Sobre estructuras</h3>
+          <ul>
+            <li>¿Qué operación queríamos hacer eficiente?</li>
+            <li>¿Qué ganamos al usar un conjunto?</li>
+            <li>¿Qué información cambia o se pierde?</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Sobre diseño</h3>
+          <ul>
+            <li>¿Cómo se conecta esto con POO?</li>
+            <li>¿Qué estructura usarías para amistades?</li>
+            <li>¿Qué estructura usarías para rutas?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cerrar con entregables concretos. Asegurar que todos sepan qué entregar y dónde está la práctica.">
+      <h2>Tarea para la siguiente sesión</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Notebook</h3>
+          <p>Ejecutar y responder las preguntas de reflexión.</p>
+        </div>
+        <div class="card green">
+          <h3>Práctica 01</h3>
+          <p>Completar ejercicios y conclusiones.</p>
+        </div>
+        <div class="card amber">
+          <h3>GitHub</h3>
+          <p>Abrir pull request desde una rama propia.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Frase de salida:</strong> una estructura de datos no es solo dónde guardo datos; es cómo preparo el terreno para operar sobre ellos.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+  </main>
+
+  <nav class="nav" aria-label="Navegación de diapositivas">
+    <button id="prev" type="button">Anterior</button>
+    <span id="counter" class="counter">1 / 1</span>
+    <button id="next" type="button">Siguiente</button>
+  </nav>
+
+  <div class="progress" aria-hidden="true">
+    <div id="bar"></div>
+  </div>
+
+  <aside id="notes" aria-live="polite">
+    <strong>Notas del presentador</strong>
+    <div id="notesText" style="margin-top: 8px;"></div>
+  </aside>
+
+  <div id="practiceTimer" aria-label="Temporizador de práctica">
+    <span id="timerDisplay">00:00</span>
+    <button id="timerStartPause" type="button" title="Iniciar o pausar temporizador (T)">Iniciar</button>
+    <button id="timerReset" class="danger" type="button" title="Reiniciar temporizador">Reiniciar</button>
+  </div>
+
+  <div id="inkToolbar" aria-label="Pizarrón digital">
+    <button id="toggleInk" type="button" title="Activar o desactivar escritura (I)">Lápiz: OFF</button>
+    <span class="ink-extra">
+      <button id="penInk" class="active" type="button" title="Modo pluma (P)">Pluma</button>
+      <button id="eraserInk" type="button" title="Modo borrador (E)">Borrador</button>
+    </span>
+    <label class="ink-control ink-extra">
+      Estilo
+      <select id="inkStyle">
+        <option value="pen" selected>Pluma</option>
+        <option value="marker">Marcador</option>
+        <option value="highlighter">Resaltador</option>
+      </select>
+    </label>
+    <label class="ink-control ink-extra">
+      Color
+      <input id="inkColor" type="color" value="#dc2626">
+    </label>
+    <label class="ink-control ink-extra">
+      Grosor
+      <input id="inkWidth" type="range" min="2" max="34" step="1" value="5">
+      <span id="inkWidthLabel">5</span>
+    </label>
+    <span class="ink-extra">
+      <button id="undoInk" type="button" title="Deshacer último trazo (U)">Deshacer</button>
+      <button id="clearInk" class="danger" type="button" title="Limpiar diapositiva actual (C)">Limpiar</button>
+    </span>
+    <button id="collapseInkToolbar" type="button" title="Minimizar barra">Minimizar</button>
+    <span class="ink-extra">Atajos: <kbd>I</kbd> lápiz, <kbd>U</kbd> deshacer, <kbd>C</kbd> limpiar.</span>
+  </div>
+
+  <canvas id="inkCanvas"></canvas>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    const notes = document.getElementById("notes");
+    const notesText = document.getElementById("notesText");
+    const plotConfig = { responsive: true, displaylogo: false, modeBarButtonsToRemove: ["lasso2d", "select2d"] };
+    let cur = 0;
+    let searchPlotReady = false;
+
+    function refresh() {
+      counter.textContent = `${cur + 1} / ${slides.length}`;
+      bar.style.width = `${100 * (cur + 1) / slides.length}%`;
+
+      slides.forEach((slide, index) => {
+        const num = slide.querySelector(".num");
+        if (num) {
+          num.textContent = `${index + 1} / ${slides.length}`;
+        }
+      });
+
+      notesText.textContent = slides[cur].dataset.note || "Sin notas específicas.";
+
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([slides[cur]]);
+      }
+
+      setTimeout(() => {
+        if (slides[cur].querySelector("#plotSearch")) {
+          updateSearchPlot();
+        }
+      }, 80);
+    }
+
+    function go(index) {
+      if (index < 0 || index >= slides.length || index === cur) {
+        return;
+      }
+
+      saveInkForSlide();
+      slides[cur].classList.remove("active");
+      cur = index;
+      slides[cur].classList.add("active");
+      loadInkForSlide();
+      refresh();
+    }
+
+    function setupNavigation() {
+      prevButton.addEventListener("click", () => go(cur - 1));
+      nextButton.addEventListener("click", () => go(cur + 1));
+
+      document.querySelectorAll("[data-jump]").forEach(button => {
+        button.addEventListener("click", () => {
+          const target = Number(button.dataset.jump) - 1;
+          go(target);
+        });
+      });
+
+      document.addEventListener("keydown", event => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(activeTag);
+
+        if (!isEditing && ["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          go(cur + 1);
+        }
+
+        if (!isEditing && ["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          go(cur - 1);
+        }
+
+        if (!isEditing && event.key.toLowerCase() === "n") {
+          const notesVisible = window.getComputedStyle(notes).display !== "none";
+          notes.style.display = notesVisible ? "none" : "block";
+          refresh();
+        }
+      });
+    }
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function safeOn(id, eventName, handler) {
+      const element = byId(id);
+      if (element) {
+        element.addEventListener(eventName, handler);
+      }
+    }
+
+    function crearDatos(n) {
+      return Array.from({ length: n }, (_, index) => index * 2 + 1);
+    }
+
+    function crearObjetivos(datos, cantidad) {
+      const objetivos = [];
+      const n = datos.length;
+
+      for (let i = 0; i < cantidad; i += 1) {
+        if (i % 2 === 0) {
+          objetivos.push(datos[(i * 7919) % n]);
+        } else {
+          objetivos.push(n * 4 + i);
+        }
+      }
+
+      return objetivos;
+    }
+
+    function medirBusqueda(estructura, objetivos, tipo) {
+      const inicio = performance.now();
+      let encontrados = 0;
+
+      for (const objetivo of objetivos) {
+        const aparece = tipo === "lista" ? estructura.includes(objetivo) : estructura.has(objetivo);
+        if (aparece) {
+          encontrados += 1;
+        }
+      }
+
+      return {
+        milisegundos: Math.max(performance.now() - inicio, 0.001),
+        encontrados
+      };
+    }
+
+    function updateSearchPlot() {
+      if (!window.Plotly) {
+        const plot = byId("plotSearch");
+        if (plot) {
+          plot.innerHTML = "<p style='padding: 20px;'>Plotly no está disponible.</p>";
+        }
+        return;
+      }
+
+      const maxSize = Number(byId("maxSize").value);
+      const queryCount = Number(byId("queryCount").value);
+      const sizes = [1000, 3000, 10000, 30000, 100000, 200000].filter(size => size <= maxSize);
+      const listTimes = [];
+      const setTimes = [];
+
+      byId("queryLabel").textContent = String(queryCount);
+
+      for (const size of sizes) {
+        const datos = crearDatos(size);
+        const objetivos = crearObjetivos(datos, queryCount);
+        const conjunto = new Set(datos);
+        const lista = medirBusqueda(datos, objetivos, "lista");
+        const set = medirBusqueda(conjunto, objetivos, "set");
+        listTimes.push(lista.milisegundos);
+        setTimes.push(set.milisegundos);
+      }
+
+      const data = [
+        {
+          x: sizes,
+          y: listTimes,
+          type: "scatter",
+          mode: "lines+markers",
+          name: "list.includes",
+          line: { color: "#2563eb", width: 4 },
+          marker: { size: 9 }
+        },
+        {
+          x: sizes,
+          y: setTimes,
+          type: "scatter",
+          mode: "lines+markers",
+          name: "set.has",
+          line: { color: "#0f766e", width: 4 },
+          marker: { size: 9 }
+        }
+      ];
+
+      const layout = {
+        margin: { l: 70, r: 28, t: 20, b: 58 },
+        paper_bgcolor: "white",
+        plot_bgcolor: "white",
+        xaxis: { title: "cantidad de datos", rangemode: "tozero", gridcolor: "#e5e7eb" },
+        yaxis: { title: "milisegundos", type: "log", gridcolor: "#e5e7eb" },
+        legend: { orientation: "h", x: 0, y: 1.14 },
+        font: { family: "Inter, Segoe UI, sans-serif", size: 15, color: "#111827" }
+      };
+
+      Plotly.react("plotSearch", data, layout, plotConfig);
+      searchPlotReady = true;
+
+      const last = sizes.length - 1;
+      const ratio = listTimes[last] / Math.max(setTimes[last], 0.001);
+      byId("plotSummary").textContent =
+        `Con ${sizes[last].toLocaleString("es-MX")} datos y ${queryCount} consultas, la lista tardó aproximadamente ${ratio.toFixed(1)} veces lo del conjunto en esta simulación.`;
+    }
+
+    function setupPlotControls() {
+      safeOn("maxSize", "change", updateSearchPlot);
+      safeOn("queryCount", "input", updateSearchPlot);
+      safeOn("runSearch", "click", updateSearchPlot);
+    }
+
+    const stackItems = [];
+    let nextStackValue = 1;
+
+    function renderStack(message) {
+      const visual = byId("stackVisual");
+      const status = byId("stackMessage");
+
+      if (!visual || !status) {
+        return;
+      }
+
+      visual.innerHTML = "";
+
+      if (stackItems.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "note";
+        empty.textContent = "pila vacía";
+        visual.appendChild(empty);
+      } else {
+        for (const item of stackItems) {
+          const block = document.createElement("div");
+          block.className = "stack-item";
+          block.textContent = item;
+          visual.appendChild(block);
+        }
+      }
+
+      status.textContent = message;
+    }
+
+    function setupStackDemo() {
+      safeOn("pushStack", "click", () => {
+        const value = `dato_${nextStackValue}`;
+        nextStackValue += 1;
+        stackItems.push(value);
+        renderStack(`push: entró ${value}.`);
+      });
+
+      safeOn("popStack", "click", () => {
+        if (stackItems.length === 0) {
+          renderStack("pop: no se puede sacar nada porque la pila está vacía.");
+          return;
+        }
+
+        const value = stackItems.pop();
+        renderStack(`pop: salió ${value}.`);
+      });
+
+      safeOn("peekStack", "click", () => {
+        if (stackItems.length === 0) {
+          renderStack("peek: la pila está vacía.");
+          return;
+        }
+
+        renderStack(`peek: el tope es ${stackItems[stackItems.length - 1]}.`);
+      });
+
+      safeOn("emptyStack", "click", () => {
+        renderStack(`is_empty: ${stackItems.length === 0 ? "True" : "False"}.`);
+      });
+
+      safeOn("resetStack", "click", () => {
+        stackItems.length = 0;
+        nextStackValue = 1;
+        renderStack("Pila reiniciada.");
+      });
+
+      renderStack("Una pila trabaja con el último elemento que entró.");
+    }
+
+    const timerDisplay = byId("timerDisplay");
+    const timerStartPause = byId("timerStartPause");
+    const timerReset = byId("timerReset");
+    let timerRunning = false;
+    let timerStartTime = null;
+    let timerElapsedBeforeStart = 0;
+    let timerInterval = null;
+
+    function formatTimer(milliseconds) {
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateTimerDisplay() {
+      const elapsed = timerRunning
+        ? timerElapsedBeforeStart + (Date.now() - timerStartTime)
+        : timerElapsedBeforeStart;
+      timerDisplay.textContent = formatTimer(elapsed);
+    }
+
+    function startTimer() {
+      if (timerRunning) {
+        return;
+      }
+
+      timerRunning = true;
+      timerStartTime = Date.now();
+      timerStartPause.textContent = "Pausar";
+      timerStartPause.classList.add("active");
+      timerInterval = setInterval(updateTimerDisplay, 250);
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      if (!timerRunning) {
+        return;
+      }
+
+      timerElapsedBeforeStart += Date.now() - timerStartTime;
+      timerRunning = false;
+      timerStartTime = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerStartPause.textContent = "Continuar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerStartTime = null;
+      timerElapsedBeforeStart = 0;
+      timerInterval = null;
+      timerStartPause.textContent = "Iniciar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function setupPracticeTimer() {
+      timerStartPause.addEventListener("click", toggleTimer);
+      timerReset.addEventListener("click", resetTimer);
+
+      document.addEventListener("keydown", event => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(activeTag);
+
+        if (!isEditing && event.key.toLowerCase() === "t") {
+          toggleTimer();
+        }
+      });
+
+      updateTimerDisplay();
+    }
+
+    const inkCanvas = byId("inkCanvas");
+    const inkCtx = inkCanvas.getContext("2d");
+    const toggleInk = byId("toggleInk");
+    const penInk = byId("penInk");
+    const eraserInk = byId("eraserInk");
+    const clearInk = byId("clearInk");
+    const undoInk = byId("undoInk");
+    const inkStyle = byId("inkStyle");
+    const inkColor = byId("inkColor");
+    const inkWidth = byId("inkWidth");
+    const inkWidthLabel = byId("inkWidthLabel");
+    const inkToolbar = byId("inkToolbar");
+    const collapseInkToolbar = byId("collapseInkToolbar");
+    const inkBySlide = {};
+    const inkHistoryBySlide = {};
+    let inkActive = false;
+    let inkErasing = false;
+    let inkDrawing = false;
+    let inkLastPoint = null;
+
+    function resizeInkCanvas() {
+      const current = inkCanvas.toDataURL("image/png");
+      const dpr = window.devicePixelRatio || 1;
+      inkCanvas.width = Math.floor(window.innerWidth * dpr);
+      inkCanvas.height = Math.floor(window.innerHeight * dpr);
+      inkCanvas.style.width = `${window.innerWidth}px`;
+      inkCanvas.style.height = `${window.innerHeight}px`;
+      inkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const img = new Image();
+      img.onload = () => inkCtx.drawImage(img, 0, 0, window.innerWidth, window.innerHeight);
+      img.src = current;
+    }
+
+    function clearCanvasOnly() {
+      inkCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    function saveInkForSlide() {
+      if (!inkCanvas) {
+        return;
+      }
+      inkBySlide[cur] = inkCanvas.toDataURL("image/png");
+    }
+
+    function loadInkForSlide() {
+      clearCanvasOnly();
+
+      if (!inkBySlide[cur]) {
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => inkCtx.drawImage(img, 0, 0, window.innerWidth, window.innerHeight);
+      img.src = inkBySlide[cur];
+    }
+
+    function pushInkHistory() {
+      if (!inkHistoryBySlide[cur]) {
+        inkHistoryBySlide[cur] = [];
+      }
+
+      inkHistoryBySlide[cur].push(inkCanvas.toDataURL("image/png"));
+      if (inkHistoryBySlide[cur].length > 30) {
+        inkHistoryBySlide[cur].shift();
+      }
+      saveInkForSlide();
+    }
+
+    function undoInkStroke() {
+      const history = inkHistoryBySlide[cur];
+
+      if (!history || history.length <= 1) {
+        clearCanvasOnly();
+        inkBySlide[cur] = null;
+        inkHistoryBySlide[cur] = [];
+        return;
+      }
+
+      history.pop();
+      inkBySlide[cur] = history[history.length - 1];
+      loadInkForSlide();
+    }
+
+    function setInkActive(active) {
+      inkActive = active;
+      inkCanvas.classList.toggle("active", inkActive);
+      toggleInk.classList.toggle("active", inkActive);
+      toggleInk.textContent = inkActive ? "Lápiz: ON" : "Lápiz: OFF";
+    }
+
+    function setInkTool(tool) {
+      inkErasing = tool === "eraser";
+      penInk.classList.toggle("active", !inkErasing);
+      eraserInk.classList.toggle("active", inkErasing);
+    }
+
+    function getInkPoint(event) {
+      return {
+        x: event.clientX,
+        y: event.clientY,
+        pressure: event.pressure && event.pressure > 0 ? event.pressure : 0.6
+      };
+    }
+
+    function hexToRgba(hex, alpha) {
+      const clean = hex.replace("#", "");
+      const value = parseInt(clean, 16);
+      const r = (value >> 16) & 255;
+      const g = (value >> 8) & 255;
+      const b = value & 255;
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function drawSegment(from, to) {
+      const width = Number(inkWidth.value) * (0.7 + to.pressure);
+      const color = inkColor.value;
+      const style = inkStyle.value;
+
+      inkCtx.lineCap = "round";
+      inkCtx.lineJoin = "round";
+
+      if (inkErasing) {
+        inkCtx.globalCompositeOperation = "destination-out";
+        inkCtx.globalAlpha = 1;
+        inkCtx.strokeStyle = "rgba(0,0,0,1)";
+        inkCtx.lineWidth = Math.max(18, width * 3);
+      } else {
+        inkCtx.globalCompositeOperation = "source-over";
+        inkCtx.globalAlpha = style === "highlighter" ? 0.30 : style === "marker" ? 0.68 : 1;
+        inkCtx.strokeStyle = style === "highlighter" ? hexToRgba(color, 0.55) : color;
+        inkCtx.lineWidth = style === "highlighter" ? width * 5 : style === "marker" ? width * 2 : width;
+      }
+
+      inkCtx.beginPath();
+      inkCtx.moveTo(from.x, from.y);
+      inkCtx.lineTo(to.x, to.y);
+      inkCtx.stroke();
+      inkCtx.globalAlpha = 1;
+      inkCtx.globalCompositeOperation = "source-over";
+    }
+
+    function startInk(event) {
+      if (!inkActive) {
+        return;
+      }
+
+      inkDrawing = true;
+      inkLastPoint = getInkPoint(event);
+      event.preventDefault();
+    }
+
+    function moveInk(event) {
+      if (!inkActive || !inkDrawing) {
+        return;
+      }
+
+      const point = getInkPoint(event);
+      drawSegment(inkLastPoint, point);
+      inkLastPoint = point;
+      event.preventDefault();
+    }
+
+    function stopInk() {
+      if (!inkDrawing) {
+        return;
+      }
+
+      inkDrawing = false;
+      pushInkHistory();
+    }
+
+    function clearCurrentInkSlide() {
+      clearCanvasOnly();
+      inkBySlide[cur] = null;
+      inkHistoryBySlide[cur] = [];
+    }
+
+    function setupInk() {
+      resizeInkCanvas();
+      inkWidthLabel.textContent = inkWidth.value;
+      setInkActive(false);
+      setInkTool("pen");
+
+      inkCanvas.addEventListener("pointerdown", startInk);
+      inkCanvas.addEventListener("pointermove", moveInk);
+      inkCanvas.addEventListener("pointerup", stopInk);
+      inkCanvas.addEventListener("pointercancel", stopInk);
+      inkCanvas.addEventListener("pointerleave", stopInk);
+
+      toggleInk.addEventListener("click", () => setInkActive(!inkActive));
+      penInk.addEventListener("click", () => setInkTool("pen"));
+      eraserInk.addEventListener("click", () => setInkTool("eraser"));
+      clearInk.addEventListener("click", clearCurrentInkSlide);
+      undoInk.addEventListener("click", undoInkStroke);
+      inkWidth.addEventListener("input", () => {
+        inkWidthLabel.textContent = inkWidth.value;
+      });
+      collapseInkToolbar.addEventListener("click", () => {
+        inkToolbar.classList.toggle("collapsed");
+        collapseInkToolbar.textContent = inkToolbar.classList.contains("collapsed") ? "Mostrar" : "Minimizar";
+      });
+
+      document.addEventListener("keydown", event => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(activeTag);
+        const key = event.key.toLowerCase();
+
+        if (isEditing) {
+          return;
+        }
+
+        if (key === "i") {
+          setInkActive(!inkActive);
+        }
+
+        if (key === "p") {
+          setInkTool("pen");
+        }
+
+        if (key === "e") {
+          setInkTool("eraser");
+        }
+
+        if (key === "u") {
+          undoInkStroke();
+        }
+
+        if (key === "c" && inkActive) {
+          clearCurrentInkSlide();
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        saveInkForSlide();
+        resizeInkCanvas();
+        loadInkForSlide();
+        refresh();
+      });
+    }
+
+    window.addEventListener("load", () => {
+      setupNavigation();
+      setupPlotControls();
+      setupStackDemo();
+      setupPracticeTimer();
+      setupInk();
+      refresh();
+
+      setTimeout(() => {
+        if (!searchPlotReady) {
+          updateSearchPlot();
+        }
+      }, 700);
+    });
+  </script>
+</body>
+</html>
