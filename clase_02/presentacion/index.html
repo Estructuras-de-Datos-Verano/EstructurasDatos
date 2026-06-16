@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 02 - Listas, conjuntos, diccionarios y eficiencia</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --bg: #101624;
+      --panel: #fbfcff;
+      --ink: #111827;
+      --muted: #536173;
+      --line: #dbe3ee;
+      --soft: #f4f7fb;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --gold: #d97706;
+      --red: #dc2626;
+      --violet: #7c3aed;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      overflow: hidden;
+      width: min(1380px, 96vw);
+      height: min(820px, 92vh);
+      margin: 4vh auto;
+      padding: 42px 52px 72px;
+      border: 1px solid rgba(255, 255, 255, .64);
+      border-radius: 22px;
+      background: rgba(251, 252, 255, .985);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .30);
+    }
+
+    .slide.active { display: block; }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .97), rgba(244, 247, 251, .93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37, 99, 235, .10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15, 118, 110, .10) 28px);
+    }
+
+    .center {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      text-align: center;
+    }
+
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: clamp(48px, 5.8vw, 82px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.06;
+      font-weight: 880;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    p, li {
+      font-size: 22px;
+      line-height: 1.36;
+      color: #334155;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 1.25em;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .subtitle {
+      max-width: 980px;
+      margin-inline: auto;
+      font-size: clamp(25px, 2.3vw, 36px);
+      color: #334155;
+      line-height: 1.22;
+    }
+
+    .question {
+      max-width: 1140px;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .quote {
+      max-width: 1100px;
+      font-size: clamp(38px, 4.6vw, 62px);
+      line-height: 1.1;
+      font-weight: 850;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .split {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243449;
+      font-size: 20px;
+      font-weight: 820;
+    }
+
+    .formula {
+      margin: 18px auto 24px;
+      text-align: center;
+      font-size: clamp(28px, 3.2vw, 46px);
+    }
+
+    .formula.small { font-size: clamp(22px, 2.2vw, 32px); }
+
+    .code {
+      overflow: auto;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: #111827;
+      font-size: 18px;
+      line-height: 1.38;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 20px;
+    }
+
+    .table th, .table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: #0f172a;
+      background: #eaf0f8;
+      font-weight: 850;
+    }
+
+    .table tr:last-child td { border-bottom: 0; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #334155;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .controls input, .controls select {
+      font: inherit;
+      font-size: 17px;
+    }
+
+    .controls select {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: white;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: var(--blue);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(1.05); }
+
+    .controls button, .jump-btn {
+      min-height: 42px;
+      padding: 0 14px;
+      font-size: 17px;
+    }
+
+    .jump-btn { background: #0f766e; }
+
+    .plot {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .mini-bars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      min-height: 300px;
+      align-items: end;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .mini-bar {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      align-items: end;
+      height: 240px;
+      color: #0f172a;
+      font-size: 18px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .mini-bar span {
+      width: 72%;
+      border-radius: 8px 8px 2px 2px;
+      background: linear-gradient(180deg, #2563eb, #0f766e);
+    }
+
+    .num {
+      position: absolute;
+      right: 32px;
+      bottom: 22px;
+      color: #94a3b8;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav button {
+      min-width: 102px;
+      min-height: 40px;
+      padding: 0 14px;
+      background: rgba(255, 255, 255, .16);
+      font-size: 16px;
+    }
+
+    .counter {
+      min-width: 84px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .progress {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 25;
+      height: 5px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    #bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+      transition: width .18s ease;
+    }
+
+    #notes {
+      display: none;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 40;
+      width: min(430px, 92vw);
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .93);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .32);
+      backdrop-filter: blur(12px);
+      font-size: 16px;
+      line-height: 1.36;
+    }
+
+    #practiceTimer {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    #timerDisplay {
+      min-width: 74px;
+      text-align: center;
+      font-size: 21px;
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #practiceTimer button {
+      min-height: 36px;
+      padding: 0 10px;
+      background: rgba(255, 255, 255, .16);
+      font-size: 14px;
+    }
+
+    #practiceTimer button.active { background: var(--green); }
+    #practiceTimer button.danger { background: rgba(220, 38, 38, .82); }
+
+    kbd {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f172a;
+      background: #e2e8f0;
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .slide {
+        width: 96vw;
+        height: auto;
+        min-height: 92vh;
+        padding: 30px 24px 92px;
+        overflow: visible;
+      }
+      .two, .three, .four, .split, .flow { grid-template-columns: 1fr; }
+      .plot { height: 360px; }
+      .nav { width: 94vw; justify-content: center; }
+      #practiceTimer {
+        right: 10px;
+        transform: scale(.92);
+        transform-origin: top right;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="slide active title-slide" data-note="Abrir retomando la frase de la clase anterior. Hoy la palabra clave es observar: queremos medir, no solo intuir.">
+      <div class="center">
+        <div>
+          <div class="tag">Estructuras de datos - Clase 02</div>
+          <h1>Listas, conjuntos, diccionarios y eficiencia</h1>
+          <p class="subtitle">¿Cómo observamos que una estructura es mejor para cierta operación?</p>
+          <div class="formula small">$$\text{estructura adecuada} = \text{operación importante} + \text{costo razonable}$$</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dar la ruta de 4 horas. Mencionar que el descanso será después de medir tiempos.">
+      <h2>Ruta de la sesión</h2>
+      <div class="grid four">
+        <div class="card blue">
+          <h3>40 min</h3>
+          <p>Repaso y motivación.</p>
+        </div>
+        <div class="card green">
+          <h3>55 min</h3>
+          <p>Medición de tiempos.</p>
+        </div>
+        <div class="card amber">
+          <h3>65 min</h3>
+          <p>Listas, sets, dicts y Counter.</p>
+        </div>
+        <div class="card violet">
+          <h3>55 min</h3>
+          <p>Big-O intuitivo y GitHub.</p>
+        </div>
+      </div>
+      <div class="pills">
+        <button class="jump-btn" data-jump="12">Ir al experimento</button>
+        <button class="jump-btn" data-jump="20">Ir a Big-O</button>
+        <button class="jump-btn" data-jump="26">Ir a GitHub</button>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Pedir que alguien explique con sus palabras la idea de la Clase 01. No corregir demasiado pronto; usar sus frases.">
+      <h2>Repaso de la Clase 01</h2>
+      <div class="card blue">
+        <p class="quote">Elegir una estructura de datos es elegir qué operaciones queremos hacer eficientes.</p>
+      </div>
+      <div class="grid three" style="margin-top: 22px;">
+        <div class="card green"><h3>Problema</h3><p>La pregunta que queremos responder.</p></div>
+        <div class="card amber"><h3>Representación</h3><p>Cómo guardamos la información.</p></div>
+        <div class="card violet"><h3>Algoritmo</h3><p>Cómo transformamos o consultamos los datos.</p></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dejar que predigan. Enfatizar que lista revisa de forma lineal si no tiene información adicional.">
+      <div class="center">
+        <div class="question">¿Qué pasa cuando hacemos <code>123 in lista</code>?</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="No entrar todavía en detalles técnicos de hash. Usar la idea de estructura preparada para pertenencia.">
+      <div class="center">
+        <div class="question">¿Qué pasa cuando hacemos <code>123 in conjunto</code>?</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Que voten por operación según contexto. La discusión debe llevar a que no hay respuesta única.">
+      <h2>¿Qué operación queremos optimizar?</h2>
+      <div class="grid four">
+        <div class="card blue"><h3>Buscar</h3><p>¿Aparece un valor?</p></div>
+        <div class="card green"><h3>Insertar</h3><p>¿Cómo agrego datos?</p></div>
+        <div class="card amber"><h3>Eliminar</h3><p>¿Cómo quito datos?</p></div>
+        <div class="card violet"><h3>Contar</h3><p>¿Cuántas veces aparece?</p></div>
+      </div>
+      <div class="pills">
+        <span class="pill">orden</span>
+        <span class="pill">duplicados</span>
+        <span class="pill">llaves</span>
+        <span class="pill">frecuencias</span>
+        <span class="pill">consulta repetida</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Esta es la idea central. Pedir que la copien o la digan con un ejemplo propio.">
+      <div class="center">
+        <div class="quote">No existe una estructura de datos mejor en absoluto. Existe una estructura más adecuada para ciertas operaciones.</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Arranque del bloque 2. Señalar que medir es parte del oficio: no reemplaza la teoría, pero da intuición.">
+      <h2>Bloque 2: medir tiempos</h2>
+      <div class="split">
+        <div class="card green">
+          <h3>Meta</h3>
+          <p>Comparar operaciones con datos de distintos tamaños.</p>
+        </div>
+        <div class="card amber">
+          <h3>Cuidado</h3>
+          <p>Una medición aislada puede mentir por ruido, caché, carga del sistema o tamaño muy pequeño.</p>
+        </div>
+      </div>
+      <div class="formula small">$$\text{medición útil} = \text{repeticiones} + \text{comparación} + \text{interpretación}$$</div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Explicar que perf_counter mide intervalos con buena resolución. No requiere entender detalles del reloj.">
+      <h2><code>time.perf_counter</code></h2>
+      <div class="split">
+        <pre class="code"><code>import time
+
+inicio = time.perf_counter()
+
+# operación que queremos medir
+resultado = 123 in datos
+
+fin = time.perf_counter()
+tiempo = fin - inicio</code></pre>
+        <div class="card blue">
+          <h3>Idea</h3>
+          <p>Tomamos una marca de tiempo antes y después de la operación.</p>
+          <p>La diferencia aproxima cuánto tardó.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Este código debe coincidir con el notebook. Caminar línea por línea.">
+      <h2>Una función para medir</h2>
+      <pre class="code"><code>import time
+
+def medir_tiempo(funcion, repeticiones=10):
+    tiempos = []
+
+    for _ in range(repeticiones):
+        inicio = time.perf_counter()
+        funcion()
+        fin = time.perf_counter()
+        tiempos.append(fin - inicio)
+
+    return sum(tiempos) / len(tiempos)</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Usar una analogía de medición experimental sin extenderse. Lo importante es promedio y variación.">
+      <h2>¿Por qué usar repeticiones?</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Ruido</h3>
+          <p>La computadora hace otras cosas mientras medimos.</p>
+        </div>
+        <div class="card green">
+          <h3>Escala</h3>
+          <p>Operaciones muy pequeñas pueden verse casi instantáneas.</p>
+        </div>
+        <div class="card amber">
+          <h3>Promedio</h3>
+          <p>Varias mediciones dan una señal más estable.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>No buscamos segundos universales.</strong> Buscamos patrones de crecimiento.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Antes de simular, pedir predicción: ¿qué línea crecerá más? La escala vertical es logarítmica para que ambas curvas se vean.">
+      <h2>Experimento interactivo: búsqueda</h2>
+      <div class="controls">
+        <label>
+          Tamaño máximo
+          <select id="maxSize">
+            <option value="30000">30 000</option>
+            <option value="100000" selected>100 000</option>
+            <option value="200000">200 000</option>
+          </select>
+        </label>
+        <label>
+          Consultas
+          <input id="queryCount" type="range" min="50" max="700" step="50" value="250">
+          <span id="queryLabel">250</span>
+        </label>
+        <button id="runSearch" type="button">Simular</button>
+      </div>
+      <div id="plotSearch" class="plot"></div>
+      <p id="plotSummary" class="note">Presiona simular para comparar búsqueda en lista y conjunto.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Pausa real. Usar el temporizador y no saltarla si el grupo viene de ejecutar mediciones.">
+      <div class="center">
+        <div>
+          <div class="tag">Descanso - 10 minutos</div>
+          <div class="question">Respirar también es parte del algoritmo.</div>
+          <p class="note">Al volver: listas, conjuntos, diccionarios y Counter.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Presentar listas como buenas para muchas cosas, no como malas. El costo depende de la operación.">
+      <h2>Listas</h2>
+      <div class="split">
+        <pre class="code"><code>datos = [10, 20, 20, 35]
+
+datos[0]       # acceso por índice
+20 in datos    # búsqueda de pertenencia
+datos.append(7)</code></pre>
+        <div class="grid">
+          <div class="card green"><h3>Mantienen orden</h3><p>Representan secuencias.</p></div>
+          <div class="card blue"><h3>Permiten índice</h3><p>Acceso directo a posiciones.</p></div>
+          <div class="card amber"><h3>Pertenencia lineal</h3><p>Buscar puede recorrer muchos elementos.</p></div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Aclarar que set elimina duplicados. Es un cambio real de representación, no solo una aceleración gratis.">
+      <h2>Conjuntos</h2>
+      <div class="split">
+        <pre class="code"><code>datos = [10, 20, 20, 35]
+valores = set(datos)
+
+20 in valores   # pertenencia
+valores         # {10, 20, 35}</code></pre>
+        <div class="grid">
+          <div class="card green"><h3>Buenos para pertenencia</h3><p>Costo promedio cercano a \(O(1)\).</p></div>
+          <div class="card red"><h3>Eliminan duplicados</h3><p>No representan frecuencias.</p></div>
+          <div class="card amber"><h3>Hash, idea intuitiva</h3><p>Preparan los datos para consultar por valor.</p></div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dict como puente natural para conteo y relaciones. Recalcar llaves y valores.">
+      <h2>Diccionarios</h2>
+      <div class="split">
+        <pre class="code"><code>conteos = {}
+
+for dato in datos:
+    if dato not in conteos:
+        conteos[dato] = 0
+    conteos[dato] += 1</code></pre>
+        <div class="card blue">
+          <h3>Pares clave-valor</h3>
+          <div class="formula small">$$\text{clave} \mapsto \text{valor}$$</div>
+          <p>Sirven para frecuencias, relaciones, etiquetas, costos y muchas representaciones matemáticas.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Counter no debe parecer magia: es un diccionario especializado para conteos.">
+      <h2><code>Counter</code></h2>
+      <div class="split">
+        <pre class="code"><code>from collections import Counter
+
+conteos = Counter(datos)
+conteos.most_common(5)</code></pre>
+        <div class="grid">
+          <div class="card green">
+            <h3>Expresa intención</h3>
+            <p>El código dice directamente: quiero contar.</p>
+          </div>
+          <div class="card amber">
+            <h3>No reemplaza entender</h3>
+            <p>Conviene saber qué problema resuelve el diccionario.</p>
+          </div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Resumen antes de Big-O. Pedir que conecten cada fila con una operación.">
+      <h2>Comparación por operación</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Estructura</th>
+            <th>Natural para</th>
+            <th>Sacrificio o cuidado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>list</code></td><td>Orden, índice, recorrido.</td><td>Pertenencia puede ser lineal.</td></tr>
+          <tr><td><code>set</code></td><td>Pertenencia y unicidad.</td><td>No conserva duplicados como frecuencias.</td></tr>
+          <tr><td><code>dict</code></td><td>Clave → valor.</td><td>Hay que elegir buenas claves.</td></tr>
+          <tr><td><code>Counter</code></td><td>Conteo de frecuencias.</td><td>Es especializado; no modela cualquier relación.</td></tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad individual. Que trabajen en notebook y llenen respuestas; no resolver todo desde la presentación.">
+      <h2>Actividad individual: 25 minutos</h2>
+      <div class="grid four">
+        <div class="card blue"><h3>1</h3><p>Búsqueda en lista.</p></div>
+        <div class="card green"><h3>2</h3><p>Búsqueda en set.</p></div>
+        <div class="card amber"><h3>3</h3><p>Conteo con dict.</p></div>
+        <div class="card violet"><h3>4</h3><p>Conteo con Counter.</p></div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Producto:</strong> tabla de tiempos, una gráfica y una conclusión de 4 a 6 líneas.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Big-O como lenguaje para hablar de crecimiento. Evitar formalismo de límites.">
+      <h2>Big-O de forma intuitiva</h2>
+      <div class="card blue">
+        <p class="quote">Big-O describe cómo crece el costo cuando crece el tamaño de los datos.</p>
+      </div>
+      <div class="pills">
+        <span class="pill">no son segundos exactos</span>
+        <span class="pill">ignora detalles pequeños</span>
+        <span class="pill">mira la tendencia</span>
+        <span class="pill">ayuda a comparar escalamiento</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="O(1) no significa cero. Significa aproximadamente constante respecto a n.">
+      <h2>\(O(1)\): aproximadamente constante</h2>
+      <div class="split">
+        <pre class="code"><code>primero = datos[0]
+aparece = objetivo in conjunto
+valor = diccionario[clave]</code></pre>
+        <div class="mini-bars">
+          <div class="mini-bar"><span style="height: 42%;"></span>n = 100</div>
+          <div class="mini-bar"><span style="height: 44%;"></span>n = 1 000</div>
+          <div class="mini-bar"><span style="height: 43%;"></span>n = 10 000</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conectar con buscar en lista. Si duplico n, el peor caso tiende a duplicarse.">
+      <h2>\(O(n)\): proporcional al tamaño</h2>
+      <div class="split">
+        <pre class="code"><code>for dato in datos:
+    if dato == objetivo:
+        return True
+return False</code></pre>
+        <div class="mini-bars">
+          <div class="mini-bar"><span style="height: 24%;"></span>n</div>
+          <div class="mini-bar"><span style="height: 48%;"></span>2n</div>
+          <div class="mini-bar"><span style="height: 96%;"></span>4n</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="O(n^2) prepara futuras clases sin entrar aún a algoritmos avanzados.">
+      <h2>\(O(n^2)\): doble ciclo</h2>
+      <div class="split">
+        <pre class="code"><code>pares = []
+
+for a in datos:
+    for b in datos:
+        pares.append((a, b))</code></pre>
+        <div class="mini-bars">
+          <div class="mini-bar"><span style="height: 18%;"></span>n</div>
+          <div class="mini-bar"><span style="height: 48%;"></span>2n</div>
+          <div class="mini-bar"><span style="height: 96%;"></span>3n</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Pedir que regresen mentalmente a la gráfica de Plotly y digan qué patrón observaron.">
+      <h2>Leer resultados experimentales</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Lista</h3>
+          <p>Si busca recorriendo, el costo crece con los datos.</p>
+        </div>
+        <div class="card green">
+          <h3>Set</h3>
+          <p>La consulta de pertenencia se mantiene muy baja en promedio.</p>
+        </div>
+        <div class="card amber">
+          <h3>Construcción</h3>
+          <p>Crear el set cuesta, pero puede convenir si habrá muchas consultas.</p>
+        </div>
+      </div>
+      <div class="formula small">$$\text{costo total} = \text{preparar estructura} + \text{consultas}$$</div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conectar con su carrera. Que no sientan que esto es solo programación técnica.">
+      <h2>Matemáticas Aplicadas: ¿dónde aparece?</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Simulación</h3>
+          <p>Muchas muestras, muchas consultas, muchos conteos.</p>
+        </div>
+        <div class="card green">
+          <h3>Redes</h3>
+          <p>Relaciones entre nodos, vecinos y pertenencia.</p>
+        </div>
+        <div class="card amber">
+          <h3>Datos reales</h3>
+          <p>Frecuencias, categorías, duplicados y búsqueda.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Diseñar bien la representación</strong> hace que el algoritmo tenga terreno a favor.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Volver al proyecto del curso. Aquí no se trata de hacer un PR gigante, sino de practicar el flujo bien.">
+      <h2>Actividad de proyecto / GitHub</h2>
+      <div class="flow">
+        <div class="card blue"><h3>Issue</h3><p>Elegir una tarea pequeña.</p></div>
+        <div class="card green"><h3>Branch</h3><p>Trabajar fuera de main.</p></div>
+        <div class="card amber"><h3>Commit</h3><p>Guardar un cambio claro.</p></div>
+        <div class="card violet"><h3>PR + review</h3><p>Conversar antes de integrar.</p></div>
+      </div>
+      <pre class="code" style="margin-top: 20px;"><code>git checkout -b clase-02-tu-nombre
+# editar docs/guia_estilo.md o docs/flujo_github.md
+git add docs/
+git commit -m "Documenta flujo básico de GitHub"
+git push origin clase-02-tu-nombre</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Presentar issues sugeridos. Adaptar si el repositorio real ya tiene algunos creados.">
+      <h2>Issues sugeridos</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Documentación</h3>
+          <ul>
+            <li><code>[DOC] Escribir guía de estilo</code></li>
+            <li><code>[DOC] Documentar flujo básico de GitHub</code></li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Proyecto</h3>
+          <ul>
+            <li><code>[TEST] Crear primera prueba de ejemplo</code></li>
+            <li><code>[PROY] Definir estructura inicial de src/</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card red" style="margin-top: 22px;">
+        <p><strong>Regla:</strong> no modificar directamente <code>main</code>.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cerrar con entregables concretos y espacio para dudas.">
+      <h2>Tarea y reflexión</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Notebook</h3>
+          <p>Ejecutar mediciones, gráfica y respuestas.</p>
+        </div>
+        <div class="card green">
+          <h3>Práctica 02</h3>
+          <p>Completar ejercicios y reflexión.</p>
+        </div>
+        <div class="card amber">
+          <h3>GitHub</h3>
+          <p>PR pequeño y una revisión a otra persona.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 22px;">
+        <p><strong>Pregunta de salida:</strong> ¿qué estructura usarías para muchas búsquedas y qué estarías sacrificando?</p>
+      </div>
+      <div class="num"></div>
+    </section>
+  </main>
+
+  <nav class="nav" aria-label="Navegación de diapositivas">
+    <button id="prev" type="button">Anterior</button>
+    <span id="counter" class="counter">1 / 1</span>
+    <button id="next" type="button">Siguiente</button>
+  </nav>
+
+  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+
+  <aside id="notes" aria-live="polite">
+    <strong>Notas del presentador</strong>
+    <div id="notesText" style="margin-top: 8px;"></div>
+  </aside>
+
+  <div id="practiceTimer" aria-label="Temporizador de práctica">
+    <span id="timerDisplay">00:00</span>
+    <button id="timerStartPause" type="button" title="Iniciar o pausar temporizador (T)">Iniciar</button>
+    <button id="timerReset" class="danger" type="button" title="Reiniciar temporizador">Reiniciar</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    const notes = document.getElementById("notes");
+    const notesText = document.getElementById("notesText");
+    const plotConfig = { responsive: true, displaylogo: false, modeBarButtonsToRemove: ["lasso2d", "select2d"] };
+    let cur = 0;
+
+    function refresh() {
+      counter.textContent = `${cur + 1} / ${slides.length}`;
+      bar.style.width = `${100 * (cur + 1) / slides.length}%`;
+
+      slides.forEach((slide, index) => {
+        const num = slide.querySelector(".num");
+        if (num) {
+          num.textContent = `${index + 1} / ${slides.length}`;
+        }
+      });
+
+      notesText.textContent = slides[cur].dataset.note || "Sin notas específicas.";
+
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([slides[cur]]);
+      }
+
+      setTimeout(() => {
+        if (slides[cur].querySelector("#plotSearch")) {
+          updateSearchPlot();
+        }
+      }, 80);
+    }
+
+    function go(index) {
+      if (index < 0 || index >= slides.length || index === cur) {
+        return;
+      }
+      slides[cur].classList.remove("active");
+      cur = index;
+      slides[cur].classList.add("active");
+      refresh();
+    }
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function setupNavigation() {
+      prevButton.addEventListener("click", () => go(cur - 1));
+      nextButton.addEventListener("click", () => go(cur + 1));
+
+      document.querySelectorAll("[data-jump]").forEach(button => {
+        button.addEventListener("click", () => go(Number(button.dataset.jump) - 1));
+      });
+
+      document.addEventListener("keydown", event => {
+        const tag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+
+        if (!isEditing && ["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          go(cur + 1);
+        }
+
+        if (!isEditing && ["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          go(cur - 1);
+        }
+
+        if (!isEditing && event.key.toLowerCase() === "n") {
+          const visible = window.getComputedStyle(notes).display !== "none";
+          notes.style.display = visible ? "none" : "block";
+          refresh();
+        }
+      });
+    }
+
+    function crearDatos(n) {
+      return Array.from({ length: n }, (_, index) => index * 2 + 1);
+    }
+
+    function crearConsultas(datos, cantidad) {
+      const consultas = [];
+      const n = datos.length;
+
+      for (let i = 0; i < cantidad; i += 1) {
+        if (i % 2 === 0) {
+          consultas.push(datos[(i * 7919) % n]);
+        } else {
+          consultas.push(n * 4 + i);
+        }
+      }
+
+      return consultas;
+    }
+
+    function medirBusqueda(estructura, consultas, tipo) {
+      const inicio = performance.now();
+      let encontrados = 0;
+
+      for (const consulta of consultas) {
+        const aparece = tipo === "lista" ? estructura.includes(consulta) : estructura.has(consulta);
+        if (aparece) {
+          encontrados += 1;
+        }
+      }
+
+      return {
+        milisegundos: Math.max(performance.now() - inicio, 0.001),
+        encontrados
+      };
+    }
+
+    function updateSearchPlot() {
+      const plot = byId("plotSearch");
+
+      if (!window.Plotly) {
+        plot.innerHTML = "<p style='padding: 20px;'>Plotly no está disponible.</p>";
+        return;
+      }
+
+      const maxSize = Number(byId("maxSize").value);
+      const queryCount = Number(byId("queryCount").value);
+      const sizes = [1000, 3000, 10000, 30000, 100000, 200000].filter(size => size <= maxSize);
+      const listTimes = [];
+      const setTimes = [];
+      byId("queryLabel").textContent = String(queryCount);
+
+      for (const size of sizes) {
+        const datos = crearDatos(size);
+        const consultas = crearConsultas(datos, queryCount);
+        const conjunto = new Set(datos);
+        listTimes.push(medirBusqueda(datos, consultas, "lista").milisegundos);
+        setTimes.push(medirBusqueda(conjunto, consultas, "set").milisegundos);
+      }
+
+      const data = [
+        {
+          x: sizes,
+          y: listTimes,
+          type: "scatter",
+          mode: "lines+markers",
+          name: "lista: includes",
+          line: { color: "#2563eb", width: 4 },
+          marker: { size: 9 }
+        },
+        {
+          x: sizes,
+          y: setTimes,
+          type: "scatter",
+          mode: "lines+markers",
+          name: "set: has",
+          line: { color: "#0f766e", width: 4 },
+          marker: { size: 9 }
+        }
+      ];
+
+      const layout = {
+        margin: { l: 70, r: 28, t: 20, b: 58 },
+        paper_bgcolor: "white",
+        plot_bgcolor: "white",
+        xaxis: { title: "cantidad de datos", rangemode: "tozero", gridcolor: "#e5e7eb" },
+        yaxis: { title: "milisegundos", type: "log", gridcolor: "#e5e7eb" },
+        legend: { orientation: "h", x: 0, y: 1.14 },
+        font: { family: "Inter, Segoe UI, sans-serif", size: 15, color: "#111827" }
+      };
+
+      Plotly.react("plotSearch", data, layout, plotConfig);
+
+      const last = sizes.length - 1;
+      const ratio = listTimes[last] / Math.max(setTimes[last], 0.001);
+      byId("plotSummary").textContent =
+        `Con ${sizes[last].toLocaleString("es-MX")} datos y ${queryCount} consultas, la lista tardó cerca de ${ratio.toFixed(1)} veces lo del conjunto en esta simulación.`;
+    }
+
+    function setupPlotControls() {
+      byId("maxSize").addEventListener("change", updateSearchPlot);
+      byId("queryCount").addEventListener("input", updateSearchPlot);
+      byId("runSearch").addEventListener("click", updateSearchPlot);
+    }
+
+    const timerDisplay = byId("timerDisplay");
+    const timerStartPause = byId("timerStartPause");
+    const timerReset = byId("timerReset");
+    let timerRunning = false;
+    let timerStartTime = null;
+    let timerElapsedBeforeStart = 0;
+    let timerInterval = null;
+
+    function formatTimer(milliseconds) {
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateTimerDisplay() {
+      const elapsed = timerRunning
+        ? timerElapsedBeforeStart + (Date.now() - timerStartTime)
+        : timerElapsedBeforeStart;
+      timerDisplay.textContent = formatTimer(elapsed);
+    }
+
+    function startTimer() {
+      if (timerRunning) {
+        return;
+      }
+      timerRunning = true;
+      timerStartTime = Date.now();
+      timerStartPause.textContent = "Pausar";
+      timerStartPause.classList.add("active");
+      timerInterval = setInterval(updateTimerDisplay, 250);
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      if (!timerRunning) {
+        return;
+      }
+      timerElapsedBeforeStart += Date.now() - timerStartTime;
+      timerRunning = false;
+      timerStartTime = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerStartPause.textContent = "Continuar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerStartTime = null;
+      timerElapsedBeforeStart = 0;
+      timerInterval = null;
+      timerStartPause.textContent = "Iniciar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function setupTimer() {
+      timerStartPause.addEventListener("click", toggleTimer);
+      timerReset.addEventListener("click", resetTimer);
+
+      document.addEventListener("keydown", event => {
+        const tag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+        if (!isEditing && event.key.toLowerCase() === "t") {
+          toggleTimer();
+        }
+      });
+
+      updateTimerDisplay();
+    }
+
+    window.addEventListener("load", () => {
+      setupNavigation();
+      setupPlotControls();
+      setupTimer();
+      refresh();
+      setTimeout(updateSearchPlot, 600);
+    });
+
+    window.addEventListener("resize", refresh);
+  </script>
+</body>
+</html>
