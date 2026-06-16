@@ -73,25 +73,59 @@ Escribe una reflexión breve:
 3. ¿Cuándo sí preferirías un conjunto?
 4. ¿Qué cambia si necesitas conservar repeticiones?
 
-## Actividad de proyecto / GitHub
+# Actividad de proyecto / GitHub
 
-Elige o crea uno de estos issues:
+El objetivo de esta actividad es practicar el flujo de trabajo que utilizaremos durante todo el curso.
 
-- `[DOC] Escribir guía de estilo`
-- `[DOC] Documentar flujo básico de GitHub`
-- `[TEST] Crear primera prueba de ejemplo`
-- `[PROY] Definir estructura inicial de src/`
+1. Acepta el Issue asignado por el profesor.
+2. Crea una rama con el formato:
 
-Trabajo esperado:
+```text
+clase-02-tu-nombre
+```
 
-1. Crea una rama con el formato `clase-02-tu-nombre`.
-2. Haz un cambio pequeño y claro.
-3. Guarda el cambio con un commit descriptivo.
-4. Abre un pull request.
-5. Pide revisión.
-6. Revisa al menos un pull request de otra persona.
+3. Dentro de:
 
-No modifiques directamente `main`.
+```text
+entregas/clase_02/
+```
+
+crea un archivo llamado:
+
+```text
+tu_nombre.md
+```
+
+4. El archivo debe contener:
+   - Tu nombre.
+   - Una reflexión breve sobre la clase.
+   - Una pregunta relacionada con la sesión.
+
+5. Realiza un commit con un mensaje descriptivo.
+
+6. Publica tu rama y abre un Pull Request hacia `main`.
+
+7. En la descripción del Pull Request incluye:
+
+```text
+Closes #XX
+```
+
+donde `XX` es el número del Issue asignado.
+
+8. Revisa el Pull Request asignado por el script `asignar_revisiones.py` y deja al menos un comentario constructivo.
+
+## Importante
+
+- No trabajes directamente sobre `main`.
+- No modifiques archivos de otros compañeros.
+- Cada alumno debe trabajar únicamente sobre su propio archivo.
+
+El objetivo principal es practicar el flujo:
+
+```text
+Issue → Branch → Commit → Pull Request → Review → Merge
+```
 
 ## Entregables
 
