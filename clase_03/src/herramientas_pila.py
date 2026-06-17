@@ -103,11 +103,19 @@ def parentesis_balanceados_guiada(expresion: str) -> list[dict[str, Any]]:
                 }
             )
         elif simbolo in cierres:
+            for i in range(len(aperturas)):
+                if simbolo == cierres[i]:
+                    if pila[-1] == aperturas[i]:
+                        pila.pop()
+                        comprobacion = "apilar cierre"
+                    else:
+                        comprobacion = "no se apila el cierre"
+                
             eventos.append(
                 {
                     "posicion": posicion,
                     "simbolo": simbolo,
-                    "accion": "TODO: verificar si cierra el tope",
+                    "accion": comprobacion,
                     "pila": pila.copy(),
                 }
             )
