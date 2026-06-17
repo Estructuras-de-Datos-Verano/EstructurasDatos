@@ -90,7 +90,7 @@ def parentesis_balanceados_guiada(expresion: str) -> list[dict[str, Any]]:
     eventos: list[dict[str, Any]] = []
     aperturas = "([{"
     cierres = ")]}"
-
+    pares = {")": "(", "]": "[", "}": "{"}
     for posicion, simbolo in enumerate(expresion):
         if simbolo in aperturas:
             pila.append(simbolo)
@@ -103,11 +103,16 @@ def parentesis_balanceados_guiada(expresion: str) -> list[dict[str, Any]]:
                 }
             )
         elif simbolo in cierres:
+            if pila and pila[-1] == pares[simbolo]:
+                accion = "sacar tope"
+                pila.pop()  # Solo para mostrar el efecto de sacar el tope.
+            else:
+                accion = "error de cierre"
             eventos.append(
                 {
                     "posicion": posicion,
                     "simbolo": simbolo,
-                    "accion": "TODO: verificar si cierra el tope",
+                    "accion": accion,
                     "pila": pila.copy(),
                 }
             )
