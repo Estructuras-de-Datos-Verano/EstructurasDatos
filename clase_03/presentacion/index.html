@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 03 - TDA, interfaz y pilas</title>
+  <style>
+    :root {
+      --bg: #101624;
+      --panel: #fbfcff;
+      --ink: #111827;
+      --muted: #536173;
+      --line: #dbe3ee;
+      --soft: #f4f7fb;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --gold: #d97706;
+      --red: #dc2626;
+      --violet: #7c3aed;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      overflow: hidden;
+      width: min(1380px, 96vw);
+      height: min(820px, 92vh);
+      margin: 4vh auto;
+      padding: 42px 52px 72px;
+      border: 1px solid rgba(255, 255, 255, .64);
+      border-radius: 22px;
+      background: rgba(251, 252, 255, .985);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .30);
+    }
+
+    .slide.active { display: block; }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .97), rgba(244, 247, 251, .93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37, 99, 235, .10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15, 118, 110, .10) 28px);
+    }
+
+    .center {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      text-align: center;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: clamp(48px, 5.8vw, 82px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.06;
+      font-weight: 880;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    p, li {
+      font-size: 22px;
+      line-height: 1.36;
+      color: #334155;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 1.25em;
+    }
+
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .subtitle {
+      max-width: 980px;
+      margin-inline: auto;
+      font-size: clamp(25px, 2.3vw, 36px);
+      color: #334155;
+      line-height: 1.22;
+    }
+
+    .question {
+      max-width: 1140px;
+      font-size: clamp(42px, 5vw, 70px);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .quote {
+      max-width: 1100px;
+      font-size: clamp(38px, 4.6vw, 62px);
+      line-height: 1.1;
+      font-weight: 850;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .split {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243449;
+      font-size: 20px;
+      font-weight: 820;
+    }
+
+    .code {
+      overflow: auto;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: #111827;
+      font-size: 18px;
+      line-height: 1.38;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 20px;
+    }
+
+    .table th, .table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: #0f172a;
+      background: #eaf0f8;
+      font-weight: 850;
+    }
+
+    .table tr:last-child td { border-bottom: 0; }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+      justify-items: stretch;
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 18px 18px 8px;
+      border-bottom: 8px solid #334155;
+    }
+
+    .stack-item {
+      padding: 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 850;
+    }
+
+    .stack-arrow {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .num {
+      position: absolute;
+      right: 32px;
+      bottom: 22px;
+      color: #94a3b8;
+      font-size: 16px;
+      font-weight: 850;
+    }
+
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav button {
+      min-width: 102px;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: rgba(255, 255, 255, .16);
+      font-size: 16px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .nav button:hover { filter: brightness(1.08); }
+
+    .counter {
+      min-width: 84px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .progress {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 25;
+      height: 5px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    #bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+      transition: width .18s ease;
+    }
+
+    #notes {
+      display: none;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 40;
+      width: min(430px, 92vw);
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .93);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .32);
+      backdrop-filter: blur(12px);
+      font-size: 16px;
+      line-height: 1.36;
+    }
+
+    #practiceTimer {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    #timerDisplay {
+      min-width: 74px;
+      text-align: center;
+      font-size: 21px;
+      font-weight: 950;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #practiceTimer button {
+      min-height: 36px;
+      padding: 0 10px;
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: rgba(255, 255, 255, .16);
+      font-size: 14px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    #practiceTimer button.active { background: var(--green); }
+    #practiceTimer button.danger { background: rgba(220, 38, 38, .82); }
+
+    kbd {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0f172a;
+      background: #e2e8f0;
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .slide {
+        width: 96vw;
+        height: auto;
+        min-height: 92vh;
+        padding: 30px 24px 92px;
+        overflow: visible;
+      }
+      .two, .three, .four, .split, .flow { grid-template-columns: 1fr; }
+      .nav { width: 94vw; justify-content: center; }
+      #practiceTimer {
+        right: 10px;
+        transform: scale(.92);
+        transform-origin: top right;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="slide active title-slide" data-note="Abrir con la transición: hasta ahora usamos estructuras; hoy empezamos a diseñarlas.">
+      <div class="center">
+        <div>
+          <div class="tag">Estructuras de datos - Clase 03</div>
+          <h1>Tipos de Datos Abstractos, interfaz y pilas</h1>
+          <p class="subtitle">¿Qué diferencia hay entre usar una estructura de datos y diseñar una estructura de datos?</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dar la ruta de 4 horas. Señalar que el descanso llega después de construir la noción de TDA.">
+      <h2>Ruta de la sesión</h2>
+      <div class="grid four">
+        <div class="card blue">
+          <h3>35 min</h3>
+          <p>Repaso y transición.</p>
+        </div>
+        <div class="card green">
+          <h3>55 min</h3>
+          <p>Tipo de Dato Abstracto.</p>
+        </div>
+        <div class="card amber">
+          <h3>10 min</h3>
+          <p>Descanso.</p>
+        </div>
+        <div class="card violet">
+          <h3>130 min</h3>
+          <p>POO, motivación de pilas, notebook y GitHub.</p>
+        </div>
+      </div>
+      <div class="pills">
+        <span class="pill">Contrato</span>
+        <span class="pill">Interfaz</span>
+        <span class="pill">Implementación</span>
+        <span class="pill">LIFO</span>
+        <span class="pill">Pruebas mínimas</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dejar que respondan antes de formalizar. Es una pregunta de diseño, no de sintaxis.">
+      <div class="center">
+        <p class="question">¿Qué diferencia hay entre usar una estructura y diseñar una estructura?</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Recuperar Clase 02. La tabla debe sentirse familiar y preparar la idea de operación importante.">
+      <h2>Lo que ya sabemos usar</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Estructura</th>
+            <th>Operaciones cómodas</th>
+            <th>Sacrificio típico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>list</code></td>
+            <td>orden, índice, recorrido, agregar al final</td>
+            <td>búsqueda lineal</td>
+          </tr>
+          <tr>
+            <td><code>set</code></td>
+            <td>pertenencia, eliminar duplicados</td>
+            <td>no conserva repeticiones</td>
+          </tr>
+          <tr>
+            <td><code>dict</code></td>
+            <td>buscar por llave, contar, asociar datos</td>
+            <td>hay que elegir buenas llaves</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Elegir estructura sigue dependiendo de la operación que queremos hacer eficiente.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad corta para activar memoria. No buscar consenso perfecto; buscar justificaciones.">
+      <h2>Actividad: elige una herramienta</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Buscar muchas veces</h3>
+          <p>¿Qué usarías si solo importa saber si un valor aparece?</p>
+        </div>
+        <div class="card green">
+          <h3>Conservar orden</h3>
+          <p>¿Qué usarías si la posición original importa?</p>
+        </div>
+        <div class="card amber">
+          <h3>Contar frecuencia</h3>
+          <p>¿Qué usarías si importa cuántas veces aparece cada dato?</p>
+        </div>
+      </div>
+      <p class="note">Tiempo sugerido: 5 minutos. Responder con estructura + operación importante.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Marcar la transición. Diseñar no empieza con código; empieza con promesas.">
+      <h2>Usar contra diseñar</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Usar</h3>
+          <ul>
+            <li>Conozco operaciones disponibles.</li>
+            <li>Confío en su comportamiento.</li>
+            <li>No necesito ver todo por dentro.</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Diseñar</h3>
+          <ul>
+            <li>Decido qué operaciones existen.</li>
+            <li>Defino qué debe ocurrir.</li>
+            <li>Elijo una implementación posible.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Usar ejemplo cotidiano: manejar un coche sin conocer todo el motor. Volver rápido a software.">
+      <h2>Ocultar detalles internos no es trampa</h2>
+      <div class="split">
+        <div>
+          <p class="quote">La abstracción nos deja pensar en comportamiento sin cargar todos los detalles al mismo tiempo.</p>
+        </div>
+        <div class="card violet">
+          <h3>En software</h3>
+          <ul>
+            <li>Usamos métodos públicos.</li>
+            <li>Protegemos estado interno.</li>
+            <li>Cambiamos implementación sin romper el uso.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Entrada formal al bloque 2. Presentar TDA como vocabulario para algo que ya han usado.">
+      <h2>Tipo de Dato Abstracto</h2>
+      <div class="center">
+        <p class="quote">Un TDA es un contrato: dice qué operaciones existen y qué comportamiento se espera.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Insistir en que contrato no significa código final. Significa promesa observable.">
+      <h2>TDA como contrato</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Operaciones</h3>
+          <p>Qué puedo pedirle a la estructura.</p>
+        </div>
+        <div class="card green">
+          <h3>Comportamiento</h3>
+          <p>Qué debe ocurrir cuando uso esas operaciones.</p>
+        </div>
+        <div class="card amber">
+          <h3>Implementación</h3>
+          <p>Cómo se logra por dentro. Puede cambiar.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Hacer que lean la tabla de izquierda a derecha. Lo visible no debe depender de lo oculto.">
+      <h2>Interfaz vs implementación</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Interfaz</th>
+            <th>Implementación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Métodos que se pueden llamar.</td>
+            <td>Representación interna de datos.</td>
+          </tr>
+          <tr>
+            <td>Comportamiento prometido.</td>
+            <td>Algoritmos usados para cumplirlo.</td>
+          </tr>
+          <tr>
+            <td>Debe ser estable.</td>
+            <td>Puede mejorar o cambiar.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Primera aparición fuerte de pila. No hablar todavía de clase ni list. Solo regla LIFO.">
+      <h2>Primer TDA fuerte: pila</h2>
+      <div class="split">
+        <div>
+          <p class="quote">El último elemento en entrar es el primero en salir.</p>
+          <p class="note">LIFO: Last In, First Out.</p>
+        </div>
+        <div class="stack" aria-label="Representación de pila">
+          <div class="stack-arrow">sale primero</div>
+          <div class="stack-item">20</div>
+          <div class="stack-item">10</div>
+          <div class="stack-item">base</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Estas operaciones son la base para Clase 04. No discutir aún costo ni implementación.">
+      <h2>Operaciones de una pila</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3><code>push(elemento)</code></h3>
+          <p>Agrega un elemento al tope.</p>
+        </div>
+        <div class="card green">
+          <h3><code>pop()</code></h3>
+          <p>Elimina y regresa el tope.</p>
+        </div>
+        <div class="card amber">
+          <h3><code>peek()</code></h3>
+          <p>Consulta el tope sin eliminarlo.</p>
+        </div>
+        <div class="card violet">
+          <h3><code>esta_vacia()</code></h3>
+          <p>Indica si no hay elementos.</p>
+        </div>
+        <div class="card red">
+          <h3><code>tamano()</code></h3>
+          <p>Regresa cuántos elementos hay.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="La respuesta esperada es: en ninguna parte. Mantener silencio breve para que lo digan.">
+      <div class="center">
+        <p class="question">¿Dónde dice que una pila debe usar una lista de Python?</p>
+        <p class="subtitle">Respuesta esperada: en ninguna parte.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad del notebook. No hay implementación: solo interfaz observable.">
+      <h2>Ejercicio 1: identificar interfaz</h2>
+      <pre class="code">estructura.agregar(x)
+estructura.quitar()
+estructura.esta_vacia()</pre>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Preguntas</h3>
+          <ul>
+            <li>¿Cuál es la interfaz?</li>
+            <li>¿Qué comportamiento esperamos?</li>
+            <li>¿Qué no sabemos sobre la implementación?</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Tiempo</h3>
+          <p>8 minutos individual, 5 minutos discusión.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Descanso real. Reiniciar temporizador si se está usando.">
+      <div class="center">
+        <div>
+          <div class="tag">Descanso</div>
+          <h1>10 minutos</h1>
+          <p class="subtitle">Volvemos para conectar TDA con POO.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conectar con lo que ya saben de POO. La novedad no es la sintaxis; es el contrato.">
+      <h2>TDA y Programación Orientada a Objetos</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Clase</h3>
+          <p>Puede empaquetar estado y métodos.</p>
+        </div>
+        <div class="card green">
+          <h3>Métodos</h3>
+          <p>Expresan la interfaz pública.</p>
+        </div>
+        <div class="card amber">
+          <h3>Estado interno</h3>
+          <p>Guarda datos que el usuario no manipula directamente.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Este código es uso, no implementación. Pedir que predigan el resultado del pop.">
+      <h2>Ejemplo de uso</h2>
+      <pre class="code">pila.push(10)
+pila.push(20)
+
+valor = pila.pop()
+
+print(valor)  # 20</pre>
+      <p class="note">El uso depende de la interfaz. La implementación queda oculta.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Mencionar nodos solo como posibilidad futura. No desarrollar listas ligadas.">
+      <h2>Implementaciones posibles</h2>
+      <div class="grid three">
+        <div class="card blue">
+          <h3>Con <code>list</code></h3>
+          <p>Buena candidata para Clase 04.</p>
+        </div>
+        <div class="card green">
+          <h3>Con arreglo fijo</h3>
+          <p>Capacidad limitada y control explícito.</p>
+        </div>
+        <div class="card amber">
+          <h3>Con nodos</h3>
+          <p>Idea futura. No la desarrollamos hoy.</p>
+        </div>
+      </div>
+      <p class="note">La interfaz puede ser la misma aunque cambie la implementación.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Frase de anclaje. Les servirá para pruebas, refactor y trabajo colaborativo.">
+      <div class="center">
+        <p class="quote">La interfaz debe ser estable; la implementación puede cambiar.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad de diseño. Cuidar que no empiecen a programar la clase completa.">
+      <h2>Actividad: diseñar la interfaz</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Decidan</h3>
+          <ul>
+            <li>¿Qué métodos son indispensables?</li>
+            <li>¿Qué regresa cada método?</li>
+            <li>¿Qué pasa con una pila vacía?</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>No hacer todavía</h3>
+          <ul>
+            <li>No implementar la clase completa.</li>
+            <li>No hablar de listas ligadas.</li>
+            <li>No mezclar C++.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Tiempo sugerido: 12 minutos.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cambio de bloque: ahora motivación. La pila no es el fin, es herramienta.">
+      <h2>¿Por qué nos importa una pila?</h2>
+      <div class="center">
+        <p class="quote">La pila no es el problema; es una herramienta para resolver muchos problemas.</p>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Ejercicio del notebook. Mostrar LIFO con historial.">
+      <h2>Historial de navegación</h2>
+      <div class="split">
+        <pre class="code">historial = []
+
+visitar("inicio")
+visitar("temario")
+visitar("practica")
+
+regresar()  # vuelve a "temario"</pre>
+        <div class="card blue">
+          <h3>¿Qué se guarda?</h3>
+          <p>Páginas visitadas. La página más reciente es la primera candidata para salir.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Conectar con editores de texto. Última acción se revierte primero.">
+      <h2>Deshacer acciones</h2>
+      <div class="split">
+        <pre class="code">acciones = []
+
+acciones.append("escribir A")
+acciones.append("escribir B")
+acciones.append("borrar B")
+
+acciones.pop()  # deshacer borrar B</pre>
+        <div class="card green">
+          <h3>Preguntas</h3>
+          <ul>
+            <li>¿Qué se guarda en la pila?</li>
+            <li>¿Por qué el último evento se deshace primero?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="No resolver todo en la diapositiva. La función queda incompleta en el notebook.">
+      <h2>Paréntesis balanceados</h2>
+      <pre class="code">def parentesis_balanceados(expresion):
+    pila = []
+
+    for simbolo in expresion:
+        # si abre, apilar
+        # si cierra, comparar con el tope
+        pass
+
+    # al final, la pila debe estar vacía</pre>
+      <div class="pills">
+        <span class="pill">(a+b)</span>
+        <span class="pill">((a+b)</span>
+        <span class="pill">(a+b))</span>
+        <span class="pill">[a+(b*c)]</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Usar el ejemplo para ordenar quién entra y quién termina. No convertir en clase de recursión.">
+      <h2>Pila de llamadas</h2>
+      <pre class="code">def f():
+    g()
+
+def g():
+    h()
+
+def h():
+    print("hola")</pre>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Preguntas</h3>
+          <ul>
+            <li>¿Cuál función fue llamada primero?</li>
+            <li>¿Cuál función termina primero?</li>
+          </ul>
+        </div>
+        <div class="card amber">
+          <h3>Idea</h3>
+          <p>Las llamadas pendientes se comportan como una pila.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Mencionar recursión y DFS como motivación, sin entrar en implementación.">
+      <h2>Recursión y DFS</h2>
+      <div class="grid two">
+        <div class="card violet">
+          <h3>Recursión</h3>
+          <p>Cada llamada espera a que termine otra llamada.</p>
+        </div>
+        <div class="card green">
+          <h3>DFS en grafos</h3>
+          <p>La pila puede guardar nodos pendientes por visitar.</p>
+        </div>
+      </div>
+      <p class="note">Hoy solo nos interesa reconocer el patrón LIFO.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Síntesis del bloque de motivación. Pedir que agreguen un ejemplo propio.">
+      <h2>Patrón común</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Problema</th>
+            <th>Qué guarda la pila</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Historial</td>
+            <td>Páginas visitadas</td>
+          </tr>
+          <tr>
+            <td>Deshacer</td>
+            <td>Acciones realizadas</td>
+          </tr>
+          <tr>
+            <td>Paréntesis</td>
+            <td>Símbolos abiertos</td>
+          </tr>
+          <tr>
+            <td>Funciones</td>
+            <td>Llamadas pendientes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Ruta del notebook. El objetivo es experimentar, no copiar teoría.">
+      <h2>Actividades del notebook</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <ol>
+            <li>Identificar interfaz.</li>
+            <li>Historial de navegación.</li>
+            <li>Deshacer acciones.</li>
+            <li>Paréntesis balanceados.</li>
+          </ol>
+        </div>
+        <div class="card green">
+          <ol start="5">
+            <li>Pila de llamadas.</li>
+            <li>Diseñar interfaz de `Pila`.</li>
+            <li>Pruebas mínimas.</li>
+            <li>Reto opcional.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Hacerlo simple y parecido a Clase 02. Cada quien toca solo su archivo.">
+      <h2>Actividad GitHub</h2>
+      <div class="flow">
+        <div class="card blue"><h3>Issue</h3><p>Tomar o recibir issue.</p></div>
+        <div class="card green"><h3>Branch</h3><p><code>clase-03-tu-nombre</code></p></div>
+        <div class="card amber"><h3>Commit</h3><p>Crear entrega personal.</p></div>
+        <div class="card violet"><h3>PR</h3><p>Vincular con <code>Closes #XX</code>.</p></div>
+        <div class="card red"><h3>Review</h3><p>Usar asignación del script.</p></div>
+      </div>
+      <pre class="code">entregas/clase_03/tu_nombre.md</pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cierre con entregables concretos. Preparar la pregunta de Clase 04.">
+      <h2>Entrega y reflexión</h2>
+      <div class="grid two">
+        <div class="card blue">
+          <h3>Tu archivo debe incluir</h3>
+          <ul>
+            <li>Definición propia de TDA.</li>
+            <li>Interfaz vs implementación.</li>
+            <li>Problema donde usarías una pila.</li>
+            <li>Interfaz propuesta para `Pila`.</li>
+            <li>Una prueba mínima.</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Clase 04</h3>
+          <p>Ya sabemos qué debe hacer una pila. Ahora vamos a decidir cómo implementarla.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+  </main>
+
+  <div id="notes" aria-live="polite"></div>
+
+  <div id="practiceTimer" aria-label="Temporizador">
+    <span id="timerDisplay">00:00</span>
+    <button id="timerStartPause" type="button" title="Iniciar o pausar temporizador (T)">Iniciar</button>
+    <button id="timerReset" class="danger" type="button" title="Reiniciar temporizador">Reiniciar</button>
+  </div>
+
+  <div class="nav" aria-label="Navegación de diapositivas">
+    <button id="prev" type="button">Anterior</button>
+    <span id="counter" class="counter"></span>
+    <button id="next" type="button">Siguiente</button>
+  </div>
+
+  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const notes = document.getElementById("notes");
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    let cur = 0;
+
+    function refresh() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle("active", index === cur);
+        const number = slide.querySelector(".num");
+        if (number) {
+          number.textContent = `${index + 1} / ${slides.length}`;
+        }
+      });
+
+      counter.textContent = `${cur + 1} / ${slides.length}`;
+      bar.style.width = `${((cur + 1) / slides.length) * 100}%`;
+      notes.textContent = slides[cur].dataset.note || "";
+      prev.disabled = cur === 0;
+      next.disabled = cur === slides.length - 1;
+    }
+
+    function go(index) {
+      cur = Math.max(0, Math.min(slides.length - 1, index));
+      refresh();
+    }
+
+    function setupNavigation() {
+      prev.addEventListener("click", () => go(cur - 1));
+      next.addEventListener("click", () => go(cur + 1));
+
+      document.addEventListener("keydown", event => {
+        const tag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+
+        if (!isEditing && ["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          go(cur + 1);
+        }
+
+        if (!isEditing && ["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          go(cur - 1);
+        }
+
+        if (!isEditing && event.key.toLowerCase() === "n") {
+          const visible = window.getComputedStyle(notes).display !== "none";
+          notes.style.display = visible ? "none" : "block";
+          refresh();
+        }
+      });
+    }
+
+    const timerDisplay = document.getElementById("timerDisplay");
+    const timerStartPause = document.getElementById("timerStartPause");
+    const timerReset = document.getElementById("timerReset");
+    let timerRunning = false;
+    let timerStartTime = null;
+    let timerElapsedBeforeStart = 0;
+    let timerInterval = null;
+
+    function formatTimer(milliseconds) {
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateTimerDisplay() {
+      const elapsed = timerRunning
+        ? timerElapsedBeforeStart + (Date.now() - timerStartTime)
+        : timerElapsedBeforeStart;
+      timerDisplay.textContent = formatTimer(elapsed);
+    }
+
+    function startTimer() {
+      if (timerRunning) {
+        return;
+      }
+      timerRunning = true;
+      timerStartTime = Date.now();
+      timerStartPause.textContent = "Pausar";
+      timerStartPause.classList.add("active");
+      timerInterval = setInterval(updateTimerDisplay, 250);
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      if (!timerRunning) {
+        return;
+      }
+      timerElapsedBeforeStart += Date.now() - timerStartTime;
+      timerRunning = false;
+      timerStartTime = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerStartPause.textContent = "Continuar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        pauseTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerStartTime = null;
+      timerElapsedBeforeStart = 0;
+      timerInterval = null;
+      timerStartPause.textContent = "Iniciar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function setupTimer() {
+      timerStartPause.addEventListener("click", toggleTimer);
+      timerReset.addEventListener("click", resetTimer);
+
+      document.addEventListener("keydown", event => {
+        const tag = document.activeElement ? document.activeElement.tagName : "";
+        const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+        if (!isEditing && event.key.toLowerCase() === "t") {
+          toggleTimer();
+        }
+      });
+
+      updateTimerDisplay();
+    }
+
+    window.addEventListener("load", () => {
+      setupNavigation();
+      setupTimer();
+      refresh();
+    });
+
+    window.addEventListener("resize", refresh);
+  </script>
+</body>
+</html>
