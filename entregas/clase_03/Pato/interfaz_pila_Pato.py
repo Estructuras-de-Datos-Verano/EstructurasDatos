@@ -1,6 +1,6 @@
 class Pila:
     def __init__(self):
-        self.pila = []
+        pass
     def apilar(self, elemento):
         pass
     def desapilar(self):

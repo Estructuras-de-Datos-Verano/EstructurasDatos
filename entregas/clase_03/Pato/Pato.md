@@ -25,4 +25,4 @@
 
 ## Pregunta sobre la clase
 
-- ¿Se puede hacer una pila que en vez de utilizar el comportamiento LIFO, haga un comportamiento FILO (First out, Last in)?
+- ¿Se puede hacer una pila que en vez de utilizar el comportamiento LIFO, haga un comportamiento FOLI (First out, Last in)?
