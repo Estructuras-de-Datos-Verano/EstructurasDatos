@@ -1,7 +1,7 @@
 # Actividad de Proyecto clase 03
 
 1. Leonardo Daniel Arenas Serafín
-2. Un TDA es un concepto que te ayuda a definir un grupo de datos que tenga ciertas propiedades y carecterísitcas sin decir explícitamente qué estructura tiene. Te ayuda a definir las reglas del juego sin necesidades de especificar con qué tipo de datos trabajarás.
+2. Un TDA es un concepto que te ayuda a definir un grupo de datos que tenga ciertas propiedades y carecterísitcas sin decir explícitamente qué estructura tiene. Te ayuda a definir las reglas del juego sin necesidad de especificar con qué tipo de datos trabajarás.
 3. La interfaz son las reglas del juego, son los requerimientos que la estructura abstracta te pide que tenga sin especificar cómo es que deben de ser. En cambio la implementación es todo el proceso técnico detrás de los requerimientos de la interfaz, es el algoritmo detrás del cómo es que la estructura está diseñada.
 4. Yo creo que el problema principal en donde se me ocurre usar la pila es en el mecansimo de control+z en los documentos de edición como en Python o en Word, pues precisamente todos los cambios que haces en tu documento se van guardando en algún lugar, para que después al aplicar control+z se desahaga el último camio hecho.
 5. Interfaz para pila: Ir a entregas/clase_03/LEO/interfaz_pila
