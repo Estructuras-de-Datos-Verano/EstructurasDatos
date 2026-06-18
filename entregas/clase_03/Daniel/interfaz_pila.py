@@ -1,18 +1,25 @@
 class Pila:
 
     def __init__(self):
-        self.__items = []  
-    def __init__(self):
-        self.pop()
-    def __init__(self):
-        self.peek()
-    def __init__(self):
-        self.push()
-    def __init__(self):
-        self.lista_vacia()
+        self.pila = []  
 
-    pass
+    def apilar(self, item):
+        self.pila.append(item)
 
+    def desapilar(self):
+        return self.pila.pop()
+    
+    def esta_vacia(self):
+        return len(self.pila) == 0
+    
+    def peek(self):
+        if self.esta_vacia():
+            return None
+        else: 
+            return self.pila[-1]
+
+    def tamano(self):
+        return len(self.pila)
     
 
     

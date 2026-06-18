@@ -1,5 +1,5 @@
 1. José Daniel Molina Carrillo
-2. es un objeto en el que no toma cierta reelevancia hata que lo ocupes es simpplemente apoyo
+2. es un objeto en el que no toma cierta relevancia hata que lo ocupes es simplemente apoyo
 3. la interfaz son las funciones y la implementación es como usas las herramientas
 4. el problema que usaria es si quiero amañar una urna para que siempre me regrese el ultimo objeto que introduje
 5. propongo hacer un pequeño historial de mis ultimas paginas
@@ -27,4 +27,5 @@ print("Historial actual:", mi_historial)
 mi_historial
 """
 
-7. pregunta ¿de forma general, qué lo mas ralacionado a pilas en programación orientada a objetos?
+7. pregunta ¿de forma general, qué es lo mas ralacionado a pilas en programación orientada a objetos?
+    R = Las listas, o en todo caso el definir una clase para las Pilas.
