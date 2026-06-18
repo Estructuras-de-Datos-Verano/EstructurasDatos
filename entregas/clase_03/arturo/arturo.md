@@ -11,3 +11,6 @@
 
 ## Pregunta sobre la clase
     - ¿Existe algun analogo a la pila pero inersa? O sea que en vez de quitar el ultimo agregado, se elimine el primero agregado
+
+    Respuesta: Si, es llamado "Cola" (First In, First Out).
+
