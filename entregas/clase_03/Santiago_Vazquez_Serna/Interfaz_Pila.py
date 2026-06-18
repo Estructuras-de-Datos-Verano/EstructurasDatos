@@ -30,3 +30,19 @@ class Pila:
     def tamano(self):
         "número de elementos actuales"
         return f"La pila tiene {len(self.pila)} elementos"
+
+
+
+#ejemplo de uso 
+pila = Pila()
+pila.push(1)
+pila.push(2)
+pila.push(3)
+print(pila.tamano())  # La pila tiene 3 elementos
+print(pila.peek())    # 3   
+print(pila.pop())     # 3
+print(pila.tamano())  # La pila tiene 2 elementos
+print(pila.esta_vacia())  # False
+print(pila.pop())     # 2
+print(pila.pop())     # 1
+print(pila.esta_vacia())  # True
