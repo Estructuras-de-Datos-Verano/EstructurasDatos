@@ -4,4 +4,5 @@ José Iván Reyna Blanco
 - Diferencia entre interfaz e implementación: La interfaz es una forma de definir objetos con métodos necesarios pero que varían según cada implementación. un ejemplo con POO puede ser las clases abstractas y las que heredan ese polimorfismo. 
 - Un problema donde usarías una pila: Para el inventario de un videojuego realista. Si la forma es una mochila, tiene sentido que la última cosa guardada sea la primera que puedes sacar.
 - Propuesta de interfaz para `Pila`: Yo usaría una clase abstracta para definir a la pila y luego su implementación particular con métodos específicos.
+- Puedes evitar errores con los diferentes metodos abstractos
 - Pregunta: ¿ Cuál es la utilidad detrás de implementar las pilas usando clases abstractas?

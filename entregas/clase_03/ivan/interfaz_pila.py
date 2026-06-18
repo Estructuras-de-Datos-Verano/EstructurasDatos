@@ -1,17 +1,26 @@
 from abc import ABC, abstractmethod
 from typing import Any
 class Pila(ABC):
+
+    def __init__(self) -> None:
+        """Inicializa la pila vacía."""
+        pila = []
+        self.pila = pila
+
     @abstractmethod
     def push(self, elemento: Any) -> None:
         """Agrega un elemento a la pila."""
-        pass
+
+        self.pila.append(elemento)
+
+
     @abstractmethod
-    def pop(self) -> Any:
+    def pop(self, elemento: Any) -> Any:
         """Elimina y regresa el elemento en la cima de la pila.
 
         Si la pila esta vacia, se lanza una excepcion.
         """
-        pass
+        self.pila = self.pila[:-1]
 
     @abstractmethod
     def peek(self) -> Any:
@@ -19,7 +28,8 @@ class Pila(ABC):
 
         Si la pila esta vacia, se lanza una excepcion.
         """
-        pass
+        return self.pila[-1]
+
     @abstractmethod
     def empty(self) -> Bool:
         """Regresa un valor verdadero o falso según el estado de la pila
@@ -28,4 +38,7 @@ class Pila(ABC):
         
         False: Pila no vacía
         """
-        pass
+        if len(self.pila) == 0:
+            return True
+        else:
+            return False
