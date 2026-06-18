@@ -49,3 +49,8 @@ Si hago pop sobre una pila vacía, debe lanzar una excepción (por ejemplo Empty
 Si hago peek sobre una pila vacía, debe lanzar una excepción.
 Si apilo X y luego hago pop, el valor devuelto debe ser X.
 Si apilo A, B, C en ese orden, tres pops consecutivos deben devolver C, B, A.
+
+
+
+
+**ningun cambio, todo bien** 
