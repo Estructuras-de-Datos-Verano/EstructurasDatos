@@ -1,12 +1,15 @@
 class Pila:
     def __init__(self):
-        pass
+        self.pila_l = []
     def apilar(self, elemento):
-        pass
+        self.pila.append(elemento)
     def desapilar(self):
-        pass
+        self.pila = self.pila[:-1]
     def esta_vacia(self):
-        pass
+        if len(self.pila) == 0:
+            return True
+        else:
+            return False
     def peek(self):
-        pass
+        return self.pila[-1]
  # Debe funcionar como en el .md
