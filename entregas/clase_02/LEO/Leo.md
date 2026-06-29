@@ -1,0 +1,5 @@
+# Actividad de proyecto
+
+1. Leonardo Daniel Arenas Serafín
+2. Esta clase me ayudó a desarrollar el concepto de complejidad en algoritmos, ya sea midiendola mediante el tiempo requerido para realizarlo o el número de operaciones necesarias. Considero que este concepto es muy importante, porque a pesar que nosotros los matemáticos estamos familiarizados con trabajar con infinitos, la realidad es que una computadora jamás podrá procesar infinitos, por lo que ponerle un límite y querer optimizar nuestros trabajos para hacerlo lo más eficiente posible es vital para hacerlo funcional.
+3. Acerca de las complejidades de algoritmos. Hemos visto que todos los tipos de complejidades son crecientes (unas más que otras), pero ¿habrá algún tipo de complejidad que sea decreciente? (Dejando de fuera la complejidad constante). Es decir, ¿habrá algún algoritmo que a mayor cantidad de datos, menos costo tiene realizar la función?
