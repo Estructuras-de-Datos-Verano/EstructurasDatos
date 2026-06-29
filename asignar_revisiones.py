@@ -36,7 +36,7 @@ alumnos = [
     "Daniel",
 ]
 
-fecha_clase = "2026-06-17"
+fecha_clase = "2026-06-29"
 
 asignaciones = asignar_revisiones(alumnos, fecha_clase)
 
