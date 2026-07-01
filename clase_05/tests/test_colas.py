@@ -1,5 +1,11 @@
 """Pruebas guiadas para las implementaciones de cola."""
 
+import sys
+from pathlib import Path
+
+# Agregar el directorio src al path para que los imports funcionen
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import pytest
 
 from src.colas import ColaDeque, ColaLista, cargar_cola, vaciar_cola
