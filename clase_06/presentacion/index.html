@@ -483,26 +483,27 @@ Regresar la lista de eliminados</pre>
 
   <section class="slide" data-note="Cambiar el formato de evidencia: ahora reporte argumentado.">
     <h2>Reporte de pytest</h2>
+    <pre class="code">pytest -v
+
+# Si hay problemas de entorno:
+python3 -m pytest -v</pre>
+    <p class="note">Observación: si `pytest` no encuentra el entorno del proyecto, `python3 -m pytest -v` usa explícitamente el intérprete de Python y suele resolver problemas de múltiples instalaciones o del `PATH`.</p>
     <pre class="code">reporte_pytest.md
-├── comando ejecutado
-├── salida de pytest
+├── comando utilizado
+├── salida completa
 ├── interpretación
 ├── número de pruebas
+├── cuántas pasaron
 ├── comportamientos verificados
-└── caso que falta probar</pre>
+└── caso importante no probado</pre>
   </section>
 
   <section class="slide" data-note="No pedir reflexión vaga; pedir contraste técnico.">
-    <h2>Discusión técnica</h2>
-    <ol>
-      <li>Lectura estratégica.</li>
-      <li>Elección de estructura.</li>
-      <li>Diseño del algoritmo.</li>
-      <li>Pruebas.</li>
-      <li>Complejidad.</li>
-      <li>Contraste.</li>
-      <li>Pregunta abierta.</li>
-    </ol>
+    <h2>`notebook.md` ≠ `discusion.md`</h2>
+    <div class="grid two">
+      <div class="card blue"><h3>`notebook.md`</h3><p>Documento de trabajo. Responde las preguntas del notebook en el mismo orden. No contiene código completo.</p></div>
+      <div class="card green"><h3>`discusion.md`</h3><p>Documento técnico. Argumenta decisiones, complejidad, pruebas y contrastes. No repite literalmente el notebook.</p></div>
+    </div>
   </section>
 
   <section class="slide" data-note="Actividad de proyecto con PR. Revisar que no entreguen notebook.">
@@ -550,7 +551,7 @@ Regresar la lista de eliminados</pre>
       <li>Completa pseudocódigo.</li>
       <li>Implementa `orden_eliminacion`.</li>
       <li>Prueba `n = 1`, `n = 2`, `n = 7`.</li>
-      <li>Ejecuta `pytest`.</li>
+      <li>Ejecuta `pytest -v`.</li>
     </ol>
   </section>
 
@@ -560,9 +561,10 @@ Regresar la lista de eliminados</pre>
 └── clase_06/
     └── nombre/
         ├── implementacion.py
+        ├── notebook.md
         ├── discusion.md
         └── reporte_pytest.md</pre>
-    <p class="note">No se entrega notebook.</p>
+    <p class="note">No se entrega el `.ipynb`; se entrega `notebook.md` con respuestas argumentadas.</p>
   </section>
 
   <section class="slide" data-note="Cierre con contraste, no reflexión abierta.">

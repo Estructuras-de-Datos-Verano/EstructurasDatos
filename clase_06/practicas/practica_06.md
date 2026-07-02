@@ -24,10 +24,11 @@ Al terminar esta práctica podrás:
 2. Completa el notebook como guía de trabajo.
 3. Implementa tu solución en `implementacion.py`.
 4. Ejecuta las pruebas públicas.
-5. Escribe `discusion.md`.
-6. Escribe `reporte_pytest.md`.
-7. Abre Pull Request desde una rama propia.
-8. Revisa el PR asignado.
+5. Escribe `notebook.md` con las respuestas guiadas del notebook.
+6. Escribe `discusion.md`.
+7. Escribe `reporte_pytest.md`.
+8. Abre Pull Request desde una rama propia.
+9. Revisa el PR asignado.
 
 No modifiques directamente `main`.
 
@@ -40,6 +41,7 @@ entregas/
 └── clase_06/
     └── nombre/
         ├── implementacion.py
+        ├── notebook.md
         ├── discusion.md
         └── reporte_pytest.md
 ```
@@ -63,6 +65,48 @@ def orden_eliminacion(n: int) -> list[int]:
     ...
 ```
 
+## `notebook.md`
+
+Este archivo no es una copia del notebook.
+
+Es un documento de trabajo. Su objetivo es evidenciar el razonamiento seguido durante la clase.
+
+Debe contener únicamente tus respuestas a las preguntas que aparecen durante el notebook, en el mismo orden. No debe contener código completo.
+
+Estructura sugerida:
+
+```text
+# Notebook - Clase 06
+
+## Lectura estratégica
+
+### ¿Qué está pidiendo el problema?
+
+...
+
+### ¿Qué información debemos recordar?
+
+...
+
+---
+
+## Ingeniería inversa del algoritmo
+
+...
+
+---
+
+## Modelado
+
+...
+
+---
+
+## Pseudocódigo
+
+...
+```
+
 ## `discusion.md`
 
 No lo llames resumen. Debe llamarse exactamente:
@@ -70,6 +114,10 @@ No lo llames resumen. Debe llamarse exactamente:
 ```text
 discusion.md
 ```
+
+Este archivo es un documento técnico. Su objetivo es argumentar decisiones de diseño.
+
+No debe repetir literalmente las respuestas de `notebook.md`. Debe usar esas respuestas como base para construir contraste, análisis y reflexión técnica.
 
 Incluye estas secciones:
 
@@ -115,20 +163,33 @@ Formula una pregunta técnica interesante relacionada con el problema.
 
 Debe contener:
 
-- comando ejecutado;
-- salida de `pytest`;
+- comando utilizado;
+- salida completa obtenida con `pytest -v` o `python3 -m pytest -v`;
 - interpretación;
 - número de pruebas;
+- cuántas pasaron;
 - qué comportamiento verifican;
-- qué caso todavía falta probar.
+- qué caso importante todavía no está siendo probado.
 
 ## Pruebas públicas
 
 Ejecuta desde `clase_06/`:
 
 ```bash
-pytest
+pytest -v
 ```
+
+Observación.
+
+En algunos sistemas operativos o configuraciones de Python, el comando `pytest` puede no encontrar correctamente el entorno del proyecto.
+
+Si esto ocurre, utiliza:
+
+```bash
+python3 -m pytest -v
+```
+
+Este comando ejecuta `pytest` utilizando explícitamente el intérprete de Python y suele resolver problemas relacionados con múltiples instalaciones de Python o con el `PATH`.
 
 Las pruebas públicas están en:
 
@@ -157,9 +218,12 @@ Issues sugeridos:
 
 - [ ] `implementacion.py` define `orden_eliminacion`.
 - [ ] `implementacion.py` no ejecuta `input()` al importar.
-- [ ] Ejecuté `pytest`.
+- [ ] Escribí `notebook.md` con respuestas en el orden del notebook.
+- [ ] `notebook.md` no contiene código completo.
+- [ ] Ejecuté `pytest -v` o `python3 -m pytest -v`.
 - [ ] Escribí `reporte_pytest.md`.
 - [ ] Escribí `discusion.md`.
+- [ ] `discusion.md` no repite literalmente `notebook.md`.
 - [ ] Analicé complejidad.
 - [ ] Propuse una prueba adicional.
 - [ ] Trabajé en una rama propia.
@@ -171,7 +235,7 @@ Issues sugeridos:
 
 | Criterio | Puntos |
 | --- | ---: |
-| Lectura estratégica y modelado | 20 |
+| `notebook.md`: lectura estratégica y modelado | 20 |
 | Elección y justificación de estructura | 20 |
 | Implementación importable | 25 |
 | Pruebas y reporte de pytest | 20 |
