@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 06 - Josephus y modelado</title>
+  <style>
+    :root {
+      --bg: #101624;
+      --panel: #fbfcff;
+      --ink: #111827;
+      --muted: #536173;
+      --line: #dbe3ee;
+      --soft: #f4f7fb;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --gold: #d97706;
+      --red: #dc2626;
+      --violet: #7c3aed;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      overflow: hidden;
+      width: min(1380px, 96vw);
+      height: min(820px, 92vh);
+      margin: 4vh auto;
+      padding: 42px 52px 72px;
+      border: 1px solid rgba(255, 255, 255, .64);
+      border-radius: 22px;
+      background: rgba(251, 252, 255, .985);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .30);
+    }
+    .slide.active { display: block; }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .97), rgba(244, 247, 251, .93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37, 99, 235, .10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15, 118, 110, .10) 28px);
+    }
+
+    .center { display: grid; place-items: center; height: 100%; text-align: center; }
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+    h1 { margin-bottom: 22px; font-size: clamp(48px, 5.8vw, 82px); line-height: 1; font-weight: 900; }
+    h2 { margin-bottom: 24px; font-size: clamp(34px, 4vw, 56px); line-height: 1.06; font-weight: 880; }
+    h3 { margin-bottom: 12px; font-size: 28px; line-height: 1.15; }
+    p, li { font-size: 22px; line-height: 1.36; color: #334155; }
+    ul, ol { margin: 0; padding-left: 1.25em; }
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    a { color: #1d4ed8; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+    .subtitle { max-width: 980px; margin-inline: auto; font-size: clamp(25px, 2.3vw, 36px); color: #334155; line-height: 1.22; }
+    .question { max-width: 1140px; font-size: clamp(42px, 5vw, 70px); line-height: 1.08; font-weight: 900; }
+    .quote { max-width: 1100px; font-size: clamp(38px, 4.6vw, 62px); line-height: 1.1; font-weight: 850; }
+    .note { color: var(--muted); font-size: 19px; line-height: 1.35; }
+
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243449;
+      font-size: 20px;
+      font-weight: 820;
+    }
+    .code {
+      overflow: auto;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: #111827;
+      font-size: 18px;
+      line-height: 1.38;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+    .table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; font-size: 20px; }
+    .table th, .table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .table th { color: #0f172a; background: #eaf0f8; font-weight: 850; }
+    .table tr:last-child td { border-bottom: 0; }
+
+    .circle {
+      position: relative;
+      width: 430px;
+      height: 430px;
+      margin: 0 auto;
+      border: 4px dashed #cbd5e1;
+      border-radius: 50%;
+      background: #f8fafc;
+    }
+    .node {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border: 2px solid #93c5fd;
+      border-radius: 50%;
+      color: #1e3a8a;
+      background: #dbeafe;
+      font-size: 22px;
+      font-weight: 900;
+      transform: translate(-50%, -50%);
+    }
+    .n1 { left: 50%; top: 8%; }
+    .n2 { left: 82%; top: 25%; }
+    .n3 { left: 88%; top: 62%; }
+    .n4 { left: 63%; top: 88%; }
+    .n5 { left: 26%; top: 82%; }
+    .n6 { left: 10%; top: 50%; }
+    .n7 { left: 24%; top: 18%; }
+    .eliminado { border-color: #fca5a5; color: #991b1b; background: #fee2e2; }
+    .salvado { border-color: #86efac; color: #166534; background: #dcfce7; }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: var(--blue);
+      font-weight: 850;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.05); }
+    .num { position: absolute; right: 32px; bottom: 22px; color: #94a3b8; font-size: 16px; font-weight: 850; }
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+    .nav button { min-width: 102px; min-height: 40px; padding: 0 14px; background: rgba(255, 255, 255, .16); font-size: 16px; }
+    .counter { min-width: 84px; text-align: center; font-size: 16px; font-weight: 900; }
+    .progress { position: fixed; inset: auto 0 0; z-index: 25; height: 5px; background: rgba(255, 255, 255, .18); }
+    .bar { width: 0%; height: 100%; background: linear-gradient(90deg, #60a5fa, #34d399, #fbbf24); transition: width .2s ease; }
+    .notes {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 30;
+      display: none;
+      width: min(420px, 38vw);
+      max-height: 46vh;
+      overflow: auto;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 12px;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, .92);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, .35);
+      font-size: 16px;
+      line-height: 1.38;
+    }
+    .notes.visible { display: block; }
+    .timer {
+      position: fixed;
+      left: 18px;
+      top: 18px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, .86);
+      font-weight: 900;
+    }
+    .timer button { min-height: 32px; padding: 0 10px; background: rgba(255, 255, 255, .16); }
+
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .slide { height: auto; min-height: 92vh; padding: 34px 24px 92px; }
+      .two, .three, .four, .split { grid-template-columns: 1fr; }
+      p, li { font-size: 20px; }
+      .circle { width: 320px; height: 320px; }
+      .node { width: 46px; height: 46px; font-size: 18px; }
+      .nav { width: calc(100vw - 20px); justify-content: center; }
+      .nav button { min-width: 72px; }
+      .notes { width: calc(100vw - 36px); max-height: 34vh; }
+      .timer { top: auto; bottom: 76px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide title-slide active" data-note="Abrir marcando el cambio de contrato didáctico: desde hoy los problemas mandan y las estructuras aparecen como herramientas.">
+    <div class="center">
+      <div>
+        <div class="tag">Clase 06 · Semana 02</div>
+        <h1>Problema → estructura → algoritmo</h1>
+        <p class="subtitle">Josephus Problem I como laboratorio de lectura, modelado, colas y pruebas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Insistir en que no se abandona lo aprendido; se cambia el orden de uso.">
+    <h2>Cambio de enfoque</h2>
+    <div class="grid two">
+      <div class="card red"><h3>Antes</h3><p>`Estructura -> Implementación -> Pruebas`</p></div>
+      <div class="card green"><h3>Ahora</h3><p>`Problema -> Modelado -> Estructura -> Algoritmo -> Pruebas -> PR`</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Mostrar agenda y tiempos. Ajustar ritmo si el grupo tarda en la lectura estratégica.">
+    <h2>Ruta de 4 horas</h2>
+    <table class="table">
+      <tbody>
+        <tr><th>Bloque 1</th><td>Lectura estratégica</td><td>35 min</td></tr>
+        <tr><th>Bloque 2</th><td>Modelado</td><td>45 min</td></tr>
+        <tr><th>Bloque 3</th><td>Descubrir la cola</td><td>40 min</td></tr>
+        <tr><th>Descanso</th><td>Pausa breve</td><td>10 min</td></tr>
+        <tr><th>Bloque 4</th><td>Algoritmo e implementación</td><td>60 min</td></tr>
+        <tr><th>Bloque 5</th><td>Pruebas y discusión técnica</td><td>50 min</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="slide" data-note="Conservar referencia al problema original. No resolver todavía.">
+    <h2>Problema central</h2>
+    <div class="card blue">
+      <h3>Josephus Problem I</h3>
+      <p>CSES Problem Set · <a href="https://cses.fi/problemset/task/2162">cses.fi/problemset/task/2162</a></p>
+      <p>Hay `n` niños numerados en círculo. Se elimina uno de cada dos hasta que no queda nadie. Debemos imprimir el orden de eliminación.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Explicar por qué este problema fue elegido, no solo cuál es.">
+    <h2>¿Por qué Josephus?</h2>
+    <div class="grid three">
+      <div class="card green"><h3>Simulación</h3><p>El proceso se puede ejecutar paso a paso.</p></div>
+      <div class="card blue"><h3>Cola natural</h3><p>FIFO aparece por operaciones, no por definición.</p></div>
+      <div class="card amber"><h3>Complejidad</h3><p>`n` llega a `2·10^5`, así que importa la eficiencia.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Regla estricta del primer bloque: no escribir código.">
+    <div class="center">
+      <p class="question">Bloque 1: leer sin programar</p>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Pedir que identifiquen cada parte antes de pasar a modelado.">
+    <h2>Entrada, salida, restricciones</h2>
+    <div class="grid three">
+      <div class="card blue"><h3>Entrada</h3><p>Un entero `n`.</p></div>
+      <div class="card green"><h3>Salida</h3><p>`n` enteros: orden de eliminación.</p></div>
+      <div class="card amber"><h3>Restricción</h3><p>`1 <= n <= 2·10^5`.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Presentar esta sección como identidad permanente del curso.">
+    <h2>Ingeniería inversa del algoritmo</h2>
+    <ol>
+      <li>¿Qué pide exactamente?</li>
+      <li>¿Qué información debo recordar?</li>
+      <li>¿Qué operaciones realizo continuamente?</li>
+      <li>¿Qué estructura implementa esas operaciones?</li>
+      <li>¿Cómo lo haría con papel y lápiz?</li>
+      <li>Solo después: pseudocódigo.</li>
+    </ol>
+  </section>
+
+  <section class="slide" data-note="Forzar una respuesta concreta: la salida es una permutación, no el sobreviviente final.">
+    <h2>1. ¿Qué está pidiendo?</h2>
+    <p class="quote">No pide quién gana. Pide todo el orden de eliminación.</p>
+    <div class="pills">
+      <span class="pill">longitud de salida: n</span>
+      <span class="pill">cada niño aparece una vez</span>
+      <span class="pill">el orden importa</span>
+    </div>
+  </section>
+
+  <section class="slide" data-note="El modelado se centra en vivos y eliminados.">
+    <h2>2. ¿Qué debo recordar?</h2>
+    <div class="grid two">
+      <div class="card green"><h3>Estado vivo</h3><p>Niños que siguen participando y su orden circular.</p></div>
+      <div class="card blue"><h3>Resultado</h3><p>Lista de eliminados en el orden exacto.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="No mencionar deque todavía como respuesta inevitable; solo operaciones.">
+    <h2>3. Operaciones repetidas</h2>
+    <ol>
+      <li>Tomar al siguiente niño.</li>
+      <li>Si se salva, mandarlo al final.</li>
+      <li>Tomar al siguiente niño.</li>
+      <li>Eliminarlo.</li>
+      <li>Guardar el eliminado.</li>
+    </ol>
+  </section>
+
+  <section class="slide" data-note="Usar el círculo para hacer visible el modelo.">
+    <h2>Con papel y lápiz: n = 7</h2>
+    <div class="circle" aria-label="Círculo de siete niños">
+      <div class="node n1">1</div><div class="node n2">2</div><div class="node n3">3</div>
+      <div class="node n4">4</div><div class="node n5">5</div><div class="node n6">6</div><div class="node n7">7</div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Mostrar primer turno: uno se salva, dos se elimina.">
+    <h2>Primer turno</h2>
+    <div class="split">
+      <div class="circle">
+        <div class="node n1 salvado">1</div><div class="node n2 eliminado">2</div><div class="node n3">3</div>
+        <div class="node n4">4</div><div class="node n5">5</div><div class="node n6">6</div><div class="node n7">7</div>
+      </div>
+      <div>
+        <p><strong>1</strong> se salva y regresa al ciclo.</p>
+        <p><strong>2</strong> se elimina.</p>
+        <pre class="code">eliminados = [2]
+vivos = [3, 4, 5, 6, 7, 1]</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Aquí se revela la cola como estructura descubierta.">
+    <h2>Descubrimos la cola</h2>
+    <p class="quote">El frente se procesa; quien se salva vuelve al final.</p>
+    <pre class="code">frente -> se salva -> final
+frente -> se elimina -> respuesta</pre>
+  </section>
+
+  <section class="slide" data-note="Conectar explícitamente con Clase 05.">
+    <h2>¿Por qué no una pila?</h2>
+    <div class="grid two">
+      <div class="card red"><h3>Pila</h3><p>Sale lo último que entró. Rompe el orden circular natural.</p></div>
+      <div class="card green"><h3>Cola</h3><p>Atiende el frente y permite reinsertar al final.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Traducir operaciones del problema a operaciones de estructura.">
+    <h2>Modelo → operaciones</h2>
+    <table class="table">
+      <thead><tr><th>Idea del problema</th><th>Operación de cola</th></tr></thead>
+      <tbody>
+        <tr><td>Siguiente niño</td><td>sacar del frente</td></tr>
+        <tr><td>Niño salvado</td><td>agregar al final</td></tr>
+        <tr><td>Niño eliminado</td><td>guardar en lista de salida</td></tr>
+        <tr><td>Quedan niños</td><td>cola no vacía</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="slide" data-note="Primero en español, sin Python.">
+    <h2>Algoritmo en español</h2>
+    <pre class="code">Crear una cola con 1, 2, ..., n.
+Mientras haya niños:
+    mover al final al niño que se salva
+    eliminar al siguiente niño
+    guardar el eliminado
+Regresar la lista de eliminados</pre>
+  </section>
+
+  <section class="slide" data-note="Marcar que el pseudocódigo debe nacer del texto, no de prueba y error.">
+    <h2>Pseudocódigo</h2>
+    <pre class="code">función orden_eliminacion(n):
+    vivos = cola(1..n)
+    eliminados = []
+
+    mientras vivos no esté vacía:
+        si solo queda uno:
+            eliminarlo
+        si no:
+            mover frente al final
+            eliminar nuevo frente
+
+    regresar eliminados</pre>
+  </section>
+
+  <section class="slide" data-note="Mostrar solo esqueleto, no dar solución final cerrada en diapositiva pública.">
+    <h2>Implementación: archivo base</h2>
+    <pre class="code">def orden_eliminacion(n: int) -> list[int]:
+    validar_n(n)
+
+    # TODO:
+    # crear estructura de vivos
+    # simular turnos
+    # guardar eliminados
+    # regresar respuesta
+
+    raise NotImplementedError</pre>
+  </section>
+
+  <section class="slide" data-note="Los casos borde deben guiar pruebas.">
+    <h2>Casos importantes</h2>
+    <div class="grid four">
+      <div class="card blue"><h3>n = 1</h3><p>Solo sale `1`.</p></div>
+      <div class="card green"><h3>n = 2</h3><p>Sale `2`, luego `1`.</p></div>
+      <div class="card amber"><h3>n = 7</h3><p>Ejemplo oficial.</p></div>
+      <div class="card violet"><h3>n grande</h3><p>La eficiencia importa.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Discusión sencilla de O(n) si usan deque.">
+    <h2>Complejidad</h2>
+    <p>Debemos eliminar `n` niños.</p>
+    <p>Si cada operación de frente/final es eficiente, la simulación completa es lineal.</p>
+    <div class="pills">
+      <span class="pill">Tiempo esperado: O(n)</span>
+      <span class="pill">Memoria: O(n)</span>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Separar función de pruebas. Las pruebas públicas no son garantía total.">
+    <h2>Pruebas públicas y privadas</h2>
+    <div class="grid two">
+      <div class="card blue"><h3>Públicas</h3><p>Retroalimentación visible; casos básicos y ejemplo oficial.</p></div>
+      <div class="card red"><h3>Privadas</h3><p>Casos límite, entradas grandes y errores comunes.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Cambiar el formato de evidencia: ahora reporte argumentado.">
+    <h2>Reporte de pytest</h2>
+    <pre class="code">pytest -v
+
+# Si hay problemas de entorno:
+python3 -m pytest -v</pre>
+    <p class="note">Observación: si `pytest` no encuentra el entorno del proyecto, `python3 -m pytest -v` usa explícitamente el intérprete de Python y suele resolver problemas de múltiples instalaciones o del `PATH`.</p>
+    <pre class="code">reporte_pytest.md
+├── comando utilizado
+├── salida completa
+├── interpretación
+├── número de pruebas
+├── cuántas pasaron
+├── comportamientos verificados
+└── caso importante no probado</pre>
+  </section>
+
+  <section class="slide" data-note="No pedir reflexión vaga; pedir contraste técnico.">
+    <h2>`notebook.md` ≠ `discusion.md`</h2>
+    <div class="grid two">
+      <div class="card blue"><h3>`notebook.md`</h3><p>Documento de trabajo. Responde las preguntas del notebook en el mismo orden. No contiene código completo.</p></div>
+      <div class="card green"><h3>`discusion.md`</h3><p>Documento técnico. Argumenta decisiones, complejidad, pruebas y contrastes. No repite literalmente el notebook.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Actividad de proyecto con PR. Revisar que no entreguen notebook.">
+    <h2>GitHub</h2>
+    <div class="card green">
+      <p>`Issue -> Branch -> Commit -> Pull Request -> Review`</p>
+    </div>
+    <div class="pills">
+      <span class="pill">[CLASE06] Implementar Josephus</span>
+      <span class="pill">[TEST] Pruebas públicas</span>
+      <span class="pill">[DOC] Discusión técnica</span>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Presentar el segundo problema solo como motivación. No resolverlo.">
+    <h2>Problema secundario</h2>
+    <div class="card violet">
+      <h3>Nearest Smaller Values</h3>
+      <p>CSES Problem Set · <a href="https://cses.fi/problemset/task/1645">cses.fi/problemset/task/1645</a></p>
+      <p>Para cada posición, encontrar la posición más cercana a la izquierda con valor menor.</p>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Sembrar la siguiente clase sin adelantar solución completa.">
+    <h2>¿Por qué una cola deja de funcionar?</h2>
+    <div class="grid two">
+      <div class="card amber"><h3>Josephus</h3><p>El orden de atención es circular y FIFO.</p></div>
+      <div class="card red"><h3>Nearest Smaller</h3><p>Necesitamos candidatos útiles de la izquierda y descartar candidatos inútiles.</p></div>
+    </div>
+  </section>
+
+  <section class="slide" data-note="Actividad individual corta, sin código.">
+    <h2>Actividad 1 · 15 minutos</h2>
+    <ol>
+      <li>Escribe entrada, salida y restricción.</li>
+      <li>Describe qué información se mantiene.</li>
+      <li>Simula `n = 7` con papel.</li>
+      <li>Compara tu orden con el ejemplo oficial.</li>
+    </ol>
+  </section>
+
+  <section class="slide" data-note="Actividad de implementación guiada.">
+    <h2>Actividad 2 · 35 minutos</h2>
+    <ol>
+      <li>Completa pseudocódigo.</li>
+      <li>Implementa `orden_eliminacion`.</li>
+      <li>Prueba `n = 1`, `n = 2`, `n = 7`.</li>
+      <li>Ejecuta `pytest -v`.</li>
+    </ol>
+  </section>
+
+  <section class="slide" data-note="Aclarar entrega exacta.">
+    <h2>Entrega</h2>
+    <pre class="code">entregas/
+└── clase_06/
+    └── nombre/
+        ├── implementacion.py
+        ├── notebook.md
+        ├── discusion.md
+        └── reporte_pytest.md</pre>
+    <p class="note">No se entrega el `.ipynb`; se entrega `notebook.md` con respuestas argumentadas.</p>
+  </section>
+
+  <section class="slide" data-note="Cierre con contraste, no reflexión abierta.">
+    <h2>Preguntas de contraste</h2>
+    <ol>
+      <li>Si se elimina cada tercer niño, ¿la cola sigue sirviendo?</li>
+      <li>Si necesitamos siempre el menor vivo, ¿basta la cola?</li>
+      <li>Si insertamos niños en medio del círculo, ¿qué cambia?</li>
+      <li>¿Qué prueba pública falta?</li>
+    </ol>
+  </section>
+
+  <section class="slide" data-note="Cerrar recordando la identidad nueva del curso.">
+    <div class="center">
+      <div>
+        <div class="tag">Idea central</div>
+        <p class="quote">Elegir una estructura de datos es una consecuencia del problema, no el punto de partida.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="timer">
+    <span id="timerText">15:00</span>
+    <button id="timerToggle">T</button>
+    <button id="timerReset">R</button>
+  </div>
+  <div class="notes" id="notesPanel"></div>
+  <div class="nav">
+    <button id="prevBtn">Anterior</button>
+    <span class="counter" id="counter">1 / 32</span>
+    <button id="nextBtn">Siguiente</button>
+  </div>
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const progressBar = document.getElementById("progressBar");
+    const notesPanel = document.getElementById("notesPanel");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let index = 0;
+
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      const progress = slides.length === 1 ? 100 : (index / (slides.length - 1)) * 100;
+      progressBar.style.width = `${progress}%`;
+      notesPanel.textContent = slides[index].dataset.note || "";
+    }
+
+    function go(delta) {
+      index = Math.min(slides.length - 1, Math.max(0, index + delta));
+      updateSlide();
+    }
+
+    prevBtn.addEventListener("click", () => go(-1));
+    nextBtn.addEventListener("click", () => go(1));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === " ") go(1);
+      if (event.key === "ArrowLeft") go(-1);
+      if (event.key.toLowerCase() === "n") notesPanel.classList.toggle("visible");
+      if (event.key.toLowerCase() === "t") toggleTimer();
+    });
+
+    const timerText = document.getElementById("timerText");
+    const timerToggle = document.getElementById("timerToggle");
+    const timerReset = document.getElementById("timerReset");
+    let remaining = 15 * 60;
+    let timerId = null;
+
+    function paintTimer() {
+      const minutes = String(Math.floor(remaining / 60)).padStart(2, "0");
+      const seconds = String(remaining % 60).padStart(2, "0");
+      timerText.textContent = `${minutes}:${seconds}`;
+    }
+
+    function toggleTimer() {
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        return;
+      }
+      timerId = setInterval(() => {
+        remaining = Math.max(0, remaining - 1);
+        paintTimer();
+        if (remaining === 0) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+      }, 1000);
+    }
+
+    timerToggle.addEventListener("click", toggleTimer);
+    timerReset.addEventListener("click", () => {
+      remaining = 15 * 60;
+      paintTimer();
+    });
+
+    updateSlide();
+    paintTimer();
+  </script>
+</body>
+</html>
