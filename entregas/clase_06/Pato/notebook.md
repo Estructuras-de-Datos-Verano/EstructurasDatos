@@ -100,3 +100,16 @@ función orden_eliminacion(n):
 ```
 
 Hay varias formas de escribirlo. Lo importante es que cada operación tenga sentido en el modelo.
+
+## Cierre
+
+Preguntas de contraste para discutir:
+
+1. Si se eliminara cada tercer niño, ¿la cola seguiría siendo natural?
+    * Sí, solo cambiaría la cantidad de veces que hicimos las operacines, pero de primeras me parece un caso casi análogo.
+2. Si necesitáramos consultar siempre el menor número vivo, ¿la cola bastaría?
+    * Sí, podrías nada más verificar cuantos elementos siguen en ella con `tamano()`
+3. Si el círculo cambiara dinámicamente con inserciones en medio, ¿qué parte del modelo se rompería?
+    * Se rompería la implementación de la cola yo creo, porque ya no tendría un comportamiento FIFO, habría niños en medio que ya fueron eliminados, que se repiten y que además se eliminan antes que los que ya estaban.
+4. ¿Qué prueba pública te da más confianza y cuál falta?
+    * La del ejemplo oficial, pero sí creo que faltan los casos para n muy grande y para una n que excede el límite superior.
