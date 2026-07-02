@@ -10,6 +10,7 @@ https://cses.fi/problemset/task/2162
 
 from __future__ import annotations
 
+from collections import deque
 from collections.abc import Iterable
 
 
@@ -41,7 +42,20 @@ def orden_eliminacion(n: int) -> list[int]:
     """
 
     validar_n(n)
-    raise NotImplementedError("Completa orden_eliminacion en tu solución")
+    
+    # Modelo: deque circular con los niños vivos (numerados del 1 al n)
+    ninos = deque(range(1, n + 1))
+    eliminados = []
+    
+    # Simular la eliminación: salvar uno, eliminar el siguiente
+    while ninos:
+        # Salvar uno: mover el primero al final
+        ninos.append(ninos.popleft())
+        # Eliminar el siguiente
+        if ninos:
+            eliminados.append(ninos.popleft())
+    
+    return eliminados
 
 
 def formatear_salida(orden: Iterable[int]) -> str:
