@@ -14,7 +14,7 @@ ColaDeque porque puede acceder a ambos lados.
 
 4. ¿Qué aprendiste al usar `pytest` con dos implementaciones?
 
-
+A hacer varias pruebas según la implementación.
 
 5. ¿Dónde usarías una cola en un problema de Matemáticas Aplicadas?
 
