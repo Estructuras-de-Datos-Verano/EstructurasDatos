@@ -123,33 +123,33 @@ Nombre: Leonrdo Daniel Arenas Serafín
 
 ## Recurso 8
 
-- Tipo:
-- Titulo:
-- Autor/canal:
-- Idioma:
-- Duracion si aplica:
-- Enlace:
-- Tema principal:
-- Nivel:
-- Que explica bien:
-- Que fue confuso:
-- Que ejemplo fue util:
-- Como se relaciona con el curso:
-- Lo recomendarias:
-- Pregunta tecnica:
+- Tipo: Video
+- Titulo: 7 Estructuras de Datos (en menos de 10 minutos)
+- Autor/canal: Programación y más
+- Idioma: Español
+- Duracion si aplica: 8:15
+- Enlace: https://youtu.be/cwRQHcaef5c?si=mZ7C76MwyMXC6SMM
+- Tema principal: Qué es una estructura de datos, cuál es su importancia y cuáles hay
+- Nivel: Intermedio
+- Que explica bien: explica muy bien, muy brevemente y de manera concisa todo sobre estructuras de datos, qué son, qué es la complejidad, para qué son útiles, cuáles hay y cuáles son sus ventajas y desventajas y sus características. 
+- Que fue confuso: Nada
+- Que ejemplo fue util: El ejemplo de los nodos fue muy útil porque te hace visualizar como es que los nodso estan enlazados con flechas que solo van en un sentido
+- Como se relaciona con el curso: Se relaciona porque vienen muchas estructuras que ya hemos estado viendo, pero también vienen otras nuevas que veremos como son las listas enlazadas y los árboles.
+- Lo recomendarias: Totalmente, es un video muy didáctico
+- Pregunta tecnica: Me gustaría saber cuál es la parte técnica de las listas enlazadas y para qué tipo de problemas son útiles
 
 ## Tabla comparativa
 
 | Recurso | Claridad | Ejemplos | Profundidad | Visualizaciones | Lo recomendarias |
 | --- | --- | --- | --- | --- | --- |
-| 1 |  |  |  |  |  |
-| 2 |  |  |  |  |  |
-| 3 |  |  |  |  |  |
-| 4 |  |  |  |  |  |
-| 5 |  |  |  |  |  |
-| 6 |  |  |  |  |  |
-| 7 |  |  |  |  |  |
-| 8 |  |  |  |  |  |
+| 1 | Muy claro en todo, muy bien para ser una introducción | Tiene muchos ejemlos y eso es muy bueno, pero le faltan claridad a dichos ejemplos | Habla muy bien acerca del tema, y para ser una introducción general, me parece que profundiza correctamente | Me parece que es muy bueno que dibuje y que utilice el pizarrón para tener una mayor libertad para visualizar las ideas, pero podría tener mejor caligrafía | Sí, lo recomendaría para gente que todavía no tiene del todo claro cómo es que funciona la complejidad de algoritmos y qué significa que un algoritmo tenga complejidad de orden constante o lineal o cuadrática, etc. |
+| 2 | No es del todo claro, hay falta de explicación en por qué hace lo que hace para obtener la complejidad | Tiene muchos ejemlos y eso es muy bueno, pero le faltan claridad a dichos ejemplos | Aquí ya hay mucho mayor profundidad y aunque hay cosas que no están del todo claras, es bueno que le meta complejidad | Me parece que es muy bueno que dibuje y que utilice el pizarrón para tener una mayor libertad para visualizar las ideas, pero podría tener mejor caligrafía | Sí, pero lo recomendaría para gente que está más interesada en saber bien acerca de la complejidad de algoritmos |
+| 3 | Muy claro y muy bueno | El ejemplo de combinatoria fue excelente, me parece que es justo lo que quería ver | Profundidad en el sentido que este tipo de estrategias son muy útiles y son avanzadas, pero no tiene profundidad en el mero concepto | Me parece que es muy bueno que dibuje y que utilice el pizarrón para tener una mayor libertad para visualizar las ideas, pero podría tener mejor caligrafía | Sí, pues explica el concepto muy bien |
+| 4 | Fue bastante claro al explicar el concepto, pero no para su aplicación | Me parece que el ejemplo abstracto está muy bien, pero si hizo falta un ejemplo concreto | Profundidad en el sentido que este tipo de estrategias son muy útiles y son avanzadas, pero no tiene profundidad en el mero concepto | Me parece que es muy bueno que dibuje y que utilice el pizarrón para tener una mayor libertad para visualizar las ideas, pero podría tener mejor caligrafía | Sí, pues explica con léxico y ejemplos básicos conceptos que creo que son avanzados |
+| 5 | Muy claro | Muy buenos ejemplos para evidenciar los métodos y el funcionamiento técnico | Profundiad acertada, perfecto | Algo aburrido pues todo está en lenguaje de progrmación, pero muy útil para aprender lo técnico | Sí, totlamente, personalmente me parece que las cosas son muy buenas, son muy útiles e intuitivas, por lo que es muy padre trabajar con esto |
+| 6 | Muy claro | Muy buenos ejemplos para evidenciar los métodos y el funcionamiento técnico | Profundiad acertada, perfecto | Algo aburrido pues todo está en lenguaje de progrmación, pero muy útil para aprender lo técnico | Sí, pues me parece que puede llegar a ser bastante útil |
+| 7 | Muy claro | Bien | Profundiad acertada, perfecto | Me parece que es normal, no es nada llamativo que te haga generar más interés, pero tampoco es aburrido | Totalmente, para tener una mucho mayor comprensión en los temas de clase |
+| 8 | Excelentemente claro, muy didáctico | Utiliza ejemplos muy claros, muy bien | Me parece que al ser más didáctic pierde profundiad para no meterse en temas más técnicos, pero igual está bien | Las visualizaciones son excelentes, ayuda muchísimo a que sea mucho más didáctico | Totalmente, es un video muy didáctico |
 
 ## Verificacion de requisitos
 
