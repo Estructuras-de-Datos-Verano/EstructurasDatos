@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 07 - Información útil y pilas monótonas</title>
+  <style>
+    :root {
+      --ink: #111827; --muted: #536173; --line: #dbe3ee; --soft: #f4f7fb;
+      --blue: #2563eb; --green: #0f766e; --gold: #d97706; --red: #dc2626; --violet: #7c3aed;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+    .slide {
+      display: none; position: relative; overflow: hidden;
+      width: min(1380px, 96vw); height: min(820px, 92vh);
+      margin: 4vh auto; padding: 42px 52px 72px;
+      border: 1px solid rgba(255,255,255,.64); border-radius: 22px;
+      background: rgba(251,252,255,.985);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+    }
+    .slide.active { display: block; }
+    .slide::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.97), rgba(244,247,251,.93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37,99,235,.10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15,118,110,.10) 28px);
+    }
+    .center { display: grid; place-items: center; height: 100%; text-align: center; }
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+    h1 { margin-bottom: 22px; font-size: clamp(48px, 5.8vw, 82px); line-height: 1; font-weight: 900; }
+    h2 { margin-bottom: 24px; font-size: clamp(34px, 4vw, 56px); line-height: 1.06; font-weight: 880; }
+    h3 { margin-bottom: 12px; font-size: 28px; line-height: 1.15; }
+    p, li { font-size: 22px; line-height: 1.36; color: #334155; }
+    ul, ol { margin: 0; padding-left: 1.25em; }
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    a { color: #1d4ed8; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 24px; padding: 10px 14px; border: 1px solid #bfdbfe;
+      border-radius: 999px; color: #1d4ed8; background: #eff6ff;
+      font-size: 20px; font-weight: 850;
+    }
+    .subtitle { max-width: 980px; margin-inline: auto; font-size: clamp(25px, 2.3vw, 36px); color: #334155; line-height: 1.22; }
+    .question { max-width: 1140px; font-size: clamp(42px, 5vw, 70px); line-height: 1.08; font-weight: 900; }
+    .quote { max-width: 1100px; font-size: clamp(38px, 4.6vw, 62px); line-height: 1.1; font-weight: 850; }
+    .note { color: var(--muted); font-size: 19px; line-height: 1.35; }
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; }
+    .card {
+      padding: 22px; border: 1px solid var(--line); border-radius: 8px;
+      background: var(--soft); box-shadow: 0 8px 24px rgba(15,23,42,.06);
+    }
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: #f8fafc; color: #243449; font-size: 20px; font-weight: 820; }
+    .code { overflow: auto; margin: 0; padding: 18px; border: 1px solid #cbd5e1; border-radius: 8px; color: #e5e7eb; background: #111827; font-size: 18px; line-height: 1.38; white-space: pre-wrap; tab-size: 2; }
+    .table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 20px; }
+    .table th, .table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .table th { color: #0f172a; background: #eaf0f8; font-weight: 850; }
+    .stack { display: grid; gap: 8px; align-content: end; min-height: 320px; padding: 18px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc; }
+    .stack-item { padding: 14px; border: 1px solid #93c5fd; border-radius: 8px; background: #dbeafe; color: #1e3a8a; font-size: 22px; font-weight: 900; text-align: center; }
+    .stack-item.drop { border-color: #fca5a5; background: #fee2e2; color: #991b1b; }
+    button { border: 0; border-radius: 8px; color: white; background: var(--blue); font-weight: 850; cursor: pointer; }
+    button:hover { filter: brightness(1.05); }
+    .nav { position: fixed; left: 50%; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 10px; transform: translateX(-50%); padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: white; background: rgba(15,23,42,.86); box-shadow: 0 14px 38px rgba(0,0,0,.28); backdrop-filter: blur(12px); }
+    .nav button { min-width: 102px; min-height: 40px; padding: 0 14px; background: rgba(255,255,255,.16); font-size: 16px; }
+    .counter { min-width: 84px; text-align: center; font-size: 16px; font-weight: 900; }
+    .progress { position: fixed; inset: auto 0 0; z-index: 25; height: 5px; background: rgba(255,255,255,.18); }
+    .bar { width: 0%; height: 100%; background: linear-gradient(90deg, #60a5fa, #34d399, #fbbf24); transition: width .2s ease; }
+    .notes { position: fixed; right: 18px; top: 18px; z-index: 30; display: none; width: min(420px, 38vw); max-height: 46vh; overflow: auto; padding: 16px 18px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; color: #e5e7eb; background: rgba(15,23,42,.92); box-shadow: 0 16px 36px rgba(0,0,0,.35); font-size: 16px; line-height: 1.38; }
+    .notes.visible { display: block; }
+    .timer { position: fixed; left: 18px; top: 18px; z-index: 30; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #e5e7eb; background: rgba(15,23,42,.86); font-weight: 900; }
+    .timer button { min-height: 32px; padding: 0 10px; background: rgba(255,255,255,.16); }
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .slide { height: auto; min-height: 92vh; padding: 34px 24px 92px; }
+      .two, .three, .four, .split { grid-template-columns: 1fr; }
+      p, li { font-size: 20px; }
+      .nav { width: calc(100vw - 20px); justify-content: center; }
+      .nav button { min-width: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide title-slide active" data-note="Abrir con la idea central: no memorizar una pila monótona, sino descubrir qué información sigue siendo útil.">
+    <div class="center"><div><div class="tag">Clase 07 · Laboratorio</div><h1>Información útil</h1><p class="subtitle">Descubrir candidatos, descartar ruido y diseñar una estructura monótona.</p></div></div>
+  </section>
+  <section class="slide" data-note="Conectar con Clase 06: seguimos empezando desde el problema.">
+    <h2>Ruta de hoy</h2>
+    <div class="grid three"><div class="card blue"><h3>Problema</h3><p>Nearest Smaller Values.</p></div><div class="card green"><h3>Patrón</h3><p>Conservar candidatos útiles.</p></div><div class="card amber"><h3>Contraste</h3><p>Variantes, contraejemplos y ventanas.</p></div></div>
+  </section>
+  <section class="slide" data-note="Presentar todos los problemas y aclarar cuál se resuelve completo.">
+    <h2>Problemas del laboratorio</h2>
+    <ul>
+      <li><a href="https://cses.fi/problemset/task/1645/">Nearest Smaller Values</a>: problema principal.</li>
+      <li>Nearest Greater Values: variante natural.</li>
+      <li><a href="https://cses.fi/problemset/task/1643/">Maximum Subarray Sum</a>: contraejemplo.</li>
+      <li><a href="https://cses.fi/problemset/task/1076/">Sliding Window Median</a>: vista al futuro.</li>
+    </ul>
+  </section>
+  <section class="slide" data-note="Plantear la pregunta rectora.">
+    <div class="center"><p class="question">¿Qué información anterior sigue siendo útil?</p></div>
+  </section>
+  <section class="slide" data-note="Leer el enunciado sin código.">
+    <h2>Nearest Smaller Values</h2>
+    <div class="card blue"><p>Para cada posición, encontrar la posición más cercana a la izquierda con un valor menor. Si no existe, reportar `0`.</p><p>CSES: <a href="https://cses.fi/problemset/task/1645/">cses.fi/problemset/task/1645/</a></p></div>
+  </section>
+  <section class="slide" data-note="Usar el ejemplo oficial para lectura estratégica.">
+    <h2>Ejemplo oficial</h2>
+    <pre class="code">numeros:   2 5 1 4 8 3 2 5
+respuesta: 0 1 0 3 4 3 3 7</pre>
+    <p class="note">Las posiciones están indexadas desde 1.</p>
+  </section>
+  <section class="slide" data-note="Todas estas respuestas van en notebook.md.">
+    <h2>Lectura estratégica</h2>
+    <ol><li>¿Qué pide exactamente?</li><li>¿Cuál es la entrada?</li><li>¿Cuál es la salida?</li><li>¿Qué significa cercano a la izquierda?</li><li>¿Qué pasa si no existe?</li></ol>
+    <p class="note">Responde en `notebook.md`.</p>
+  </section>
+  <section class="slide" data-note="Presentar la solución ingenua sin descalificarla. Es el punto de partida.">
+    <h2>Primera idea: buscar hacia atrás</h2>
+    <pre class="code">para cada posición i:
+    mirar i-1, i-2, ...
+    detenerse en el primer valor menor
+    si no aparece: responder 0</pre>
+  </section>
+  <section class="slide" data-note="Preguntar complejidad.">
+    <h2>Diagnóstico</h2>
+    <div class="grid two"><div class="card red"><h3>Trabajo repetido</h3><p>Volvemos a mirar valores anteriores muchas veces.</p></div><div class="card amber"><h3>Peor caso</h3><p>La solución ingenua puede acercarse a `O(n²)`.</p></div></div>
+  </section>
+  <section class="slide" data-note="Punto central: descartar candidatos.">
+    <div class="center"><p class="quote">Si un dato anterior ya no puede ser respuesta, no lo cargues para siempre.</p></div>
+  </section>
+  <section class="slide" data-note="Mostrar el razonamiento de candidatos útiles.">
+    <h2>Candidatos útiles</h2>
+    <div class="split"><div><p>Al procesar un valor actual, algunos valores previos quedan dominados.</p><p>Si son mayores o iguales, no serán el menor cercano para futuros valores donde el actual está más cerca.</p></div><pre class="code">candidato = (valor, posición)
+conservar solo lo que puede responder</pre></div>
+  </section>
+  <section class="slide" data-note="Introducir pila sin receta.">
+    <h2>Aparece una pila</h2>
+    <div class="grid two"><div class="card green"><h3>Insertar candidato</h3><p>Agregamos el valor actual.</p></div><div class="card red"><h3>Descartar</h3><p>Quitamos candidatos recientes que ya no sirven.</p></div></div>
+  </section>
+  <section class="slide" data-note="Visual simple de pila.">
+    <h2>Ejemplo visual</h2>
+    <div class="split"><div class="stack"><div class="stack-item">(2, 1)</div><div class="stack-item">(5, 2)</div><div class="stack-item drop">(1, 3)</div></div><div><p>Al llegar `1`, candidatos `5` y `2` no pueden responder para `1` ni para ciertos futuros valores.</p><p class="note">La discusión exacta va en `notebook.md`.</p></div></div>
+  </section>
+  <section class="slide" data-note="Pseudocódigo parcial.">
+    <h2>Pseudocódigo</h2>
+    <pre class="code">pila = []
+para cada (posición, valor):
+    mientras pila no vacía y tope.valor >= valor:
+        desapilar
+    si pila vacía: respuesta = 0
+    si no: respuesta = tope.posición
+    apilar (valor, posición)</pre>
+  </section>
+  <section class="slide" data-note="Enfatizar >=.">
+    <h2>La comparación clave</h2>
+    <p class="quote">Para buscar menor estricto, los valores iguales no sirven.</p>
+    <p>Por eso el descarte usa `mayor o igual`.</p>
+    <p class="note">Explica en `notebook.md` por qué `>` no basta.</p>
+  </section>
+  <section class="slide" data-note="Hablar de invariante.">
+    <h2>Invariante</h2>
+    <div class="card green"><p>Después de procesar cada posición, la pila conserva candidatos útiles en un orden que permite encontrar el menor cercano desde el tope.</p></div>
+    <p class="note">Este invariante debe explicarse en `discusion.md`.</p>
+  </section>
+  <section class="slide" data-note="Complejidad con pila.">
+    <h2>Complejidad</h2>
+    <p>Cada valor entra a la pila una vez y sale como máximo una vez.</p>
+    <div class="pills"><span class="pill">Tiempo: O(n)</span><span class="pill">Memoria: O(n)</span></div>
+  </section>
+  <section class="slide" data-note="Implementación pública no resuelta.">
+    <h2>Implementación</h2>
+    <pre class="code">def valores_menores_cercanos(numeros: list[int]) -> list[int]:
+    \"\"\"Nearest Smaller Values de CSES.\"\"\"
+    # TODO alumno
+    raise NotImplementedError</pre>
+  </section>
+  <section class="slide" data-note="Variante natural.">
+    <h2>Variante: Nearest Greater Values</h2>
+    <ol><li>¿Qué cambia?</li><li>¿Qué comparación se modifica?</li><li>¿Se conserva la misma estructura?</li><li>¿La complejidad cambia?</li></ol>
+  </section>
+  <section class="slide" data-note="Contraejemplo.">
+    <h2>Contraejemplo: Maximum Subarray Sum</h2>
+    <p>CSES: <a href="https://cses.fi/problemset/task/1643/">cses.fi/problemset/task/1643/</a></p>
+    <div class="card amber"><p>No parece pedir candidatos ordenados por cercanía. La información importante se relaciona con acumulados y mejores sumas.</p></div>
+  </section>
+  <section class="slide" data-note="Aprender descartando herramientas.">
+    <div class="center"><p class="question">También se aprende cuando una herramienta no encaja.</p></div>
+  </section>
+  <section class="slide" data-note="Vista a futuro.">
+    <h2>Sliding Window Median</h2>
+    <p>CSES: <a href="https://cses.fi/problemset/task/1076/">cses.fi/problemset/task/1076/</a></p>
+    <div class="grid three"><div class="card blue"><h3>Entra</h3><p>Nuevo dato.</p></div><div class="card red"><h3>Sale</h3><p>Dato viejo.</p></div><div class="card green"><h3>Permanece</h3><p>Datos dentro de la ventana.</p></div></div>
+  </section>
+  <section class="slide" data-note="Diseño de pruebas.">
+    <h2>Pruebas públicas</h2>
+    <ul><li>Ejemplo oficial.</li><li>Arreglo creciente.</li><li>Arreglo decreciente.</li><li>TODO: valores iguales.</li><li>TODO: error `>` vs `>=`.</li><li>TODO: caso límite.</li></ul>
+  </section>
+  <section class="slide" data-note="Comando pytest.">
+    <h2>Ejecutar pruebas</h2>
+    <pre class="code">pytest -v
+
+# si el entorno no encuentra pytest:
+python3 -m pytest -v</pre>
+    <p class="note">La opción `-v` muestra explícitamente qué pruebas se ejecutan.</p>
+  </section>
+  <section class="slide" data-note="Diferenciar entregables.">
+    <h2>`notebook.md` y `discusion.md`</h2>
+    <div class="grid two"><div class="card blue"><h3>`notebook.md`</h3><p>Respuestas del notebook, en orden, sin código completo.</p></div><div class="card green"><h3>`discusion.md`</h3><p>Argumentación técnica: estructura, invariante, pruebas, complejidad y contrastes.</p></div></div>
+  </section>
+  <section class="slide" data-note="Reporte de pytest.">
+    <h2>`reporte_pytest.md`</h2>
+    <pre class="code">comando ejecutado
+salida completa
+interpretación
+cuántas pruebas pasaron
+qué prueba diseñaste
+qué falta probar</pre>
+  </section>
+  <section class="slide" data-note="Actividad GitHub.">
+    <h2>GitHub</h2>
+    <div class="card green"><p>`Issue -> Branch -> Commit -> Pull Request -> Review`</p></div>
+    <div class="pills"><span class="pill">clase-07-tu-nombre</span><span class="pill">revisar invariante</span><span class="pill">comentar prueba propia</span></div>
+  </section>
+  <section class="slide" data-note="Entrega exacta.">
+    <h2>Entrega</h2>
+    <pre class="code">entregas/
+└── clase_07/
+    └── nombre/
+        ├── implementacion.py
+        ├── notebook.md
+        ├── discusion.md
+        └── reporte_pytest.md</pre>
+  </section>
+  <section class="slide" data-note="Ficha de patrón.">
+    <h2>Patrón descubierto</h2>
+    <table class="table"><tbody><tr><th>Pregunta</th><td>¿Estoy recalculando información que ya conocía?</td></tr><tr><th>Conservar</th><td>Candidatos útiles.</td></tr><tr><th>Estructura</th><td>Pila monótona o deque monótona.</td></tr><tr><th>No aplica directo</th><td>Maximum Subarray Sum.</td></tr></tbody></table>
+  </section>
+  <section class="slide" data-note="Cierre.">
+    <div class="center"><div><div class="tag">Cierre</div><p class="quote">Optimizar es aprender qué información dejar ir.</p></div></div>
+  </section>
+  <div class="timer"><span id="timerText">15:00</span><button id="timerToggle">T</button><button id="timerReset">R</button></div>
+  <div class="notes" id="notesPanel"></div>
+  <div class="nav"><button id="prevBtn">Anterior</button><span class="counter" id="counter">1 / 30</span><button id="nextBtn">Siguiente</button></div>
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const progressBar = document.getElementById("progressBar");
+    const notesPanel = document.getElementById("notesPanel");
+    let index = 0;
+    function updateSlide() {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progressBar.style.width = `${slides.length === 1 ? 100 : (index / (slides.length - 1)) * 100}%`;
+      notesPanel.textContent = slides[index].dataset.note || "";
+    }
+    function go(delta) { index = Math.min(slides.length - 1, Math.max(0, index + delta)); updateSlide(); }
+    document.getElementById("prevBtn").addEventListener("click", () => go(-1));
+    document.getElementById("nextBtn").addEventListener("click", () => go(1));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === " ") go(1);
+      if (event.key === "ArrowLeft") go(-1);
+      if (event.key.toLowerCase() === "n") notesPanel.classList.toggle("visible");
+      if (event.key.toLowerCase() === "t") toggleTimer();
+    });
+    let remaining = 15 * 60;
+    let timerId = null;
+    const timerText = document.getElementById("timerText");
+    function paintTimer() {
+      const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+      const s = String(remaining % 60).padStart(2, "0");
+      timerText.textContent = `${m}:${s}`;
+    }
+    function toggleTimer() {
+      if (timerId) { clearInterval(timerId); timerId = null; return; }
+      timerId = setInterval(() => {
+        remaining = Math.max(0, remaining - 1);
+        paintTimer();
+        if (remaining === 0) { clearInterval(timerId); timerId = null; }
+      }, 1000);
+    }
+    document.getElementById("timerToggle").addEventListener("click", toggleTimer);
+    document.getElementById("timerReset").addEventListener("click", () => { remaining = 15 * 60; paintTimer(); });
+    updateSlide(); paintTimer();
+  </script>
+</body>
+</html>
