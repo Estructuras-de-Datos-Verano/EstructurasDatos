@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 09 - Grafos y NetworkX</title>
+  <style>
+    :root {
+      --ink: #111827; --muted: #536173; --line: #dbe3ee; --soft: #f4f7fb;
+      --blue: #2563eb; --green: #0f766e; --gold: #d97706; --red: #dc2626; --violet: #7c3aed;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      overflow: hidden; color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(135deg, #101827 0%, #172033 52%, #07111f 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+    .slide {
+      display: none; position: relative; overflow: hidden;
+      width: min(1380px, 96vw); height: min(820px, 92vh);
+      margin: 4vh auto; padding: 42px 52px 72px;
+      border: 1px solid rgba(255,255,255,.64); border-radius: 22px;
+      background: rgba(251,252,255,.985);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+    }
+    .slide.active { display: block; }
+    .slide::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.97), rgba(244,247,251,.94)),
+        radial-gradient(circle at 24% 28%, rgba(37,99,235,.18), transparent 26%),
+        radial-gradient(circle at 78% 64%, rgba(15,118,110,.16), transparent 30%);
+    }
+    .center { display: grid; place-items: center; height: 100%; text-align: center; }
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+    h1 { margin-bottom: 22px; font-size: clamp(48px, 5.8vw, 82px); line-height: 1; font-weight: 900; }
+    h2 { margin-bottom: 24px; font-size: clamp(34px, 4vw, 56px); line-height: 1.06; font-weight: 880; }
+    h3 { margin-bottom: 12px; font-size: 28px; line-height: 1.15; }
+    p, li { font-size: 22px; line-height: 1.36; color: #334155; }
+    ul, ol { margin: 0; padding-left: 1.25em; }
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    a { color: #1d4ed8; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px;
+      padding: 10px 14px; border: 1px solid #bfdbfe; border-radius: 999px;
+      color: #1d4ed8; background: #eff6ff; font-size: 20px; font-weight: 850;
+    }
+    .subtitle { max-width: 980px; margin-inline: auto; font-size: clamp(25px, 2.3vw, 36px); color: #334155; line-height: 1.22; }
+    .question { max-width: 1140px; font-size: clamp(42px, 5vw, 70px); line-height: 1.08; font-weight: 900; }
+    .quote { max-width: 1100px; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.1; font-weight: 850; }
+    .note { color: var(--muted); font-size: 19px; line-height: 1.35; }
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; }
+    .card { padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); box-shadow: 0 8px 24px rgba(15,23,42,.06); }
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: #f8fafc; color: #243449; font-size: 20px; font-weight: 820; }
+    .code { overflow: auto; margin: 0; padding: 18px; border: 1px solid #cbd5e1; border-radius: 8px; color: #e5e7eb; background: #111827; font-size: 18px; line-height: 1.38; white-space: pre-wrap; tab-size: 2; }
+    .table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 20px; }
+    .table th, .table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .table th { color: #0f172a; background: #eaf0f8; font-weight: 850; }
+    .graph { position: relative; height: 360px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc; }
+    .node { position: absolute; display: grid; place-items: center; width: 58px; height: 58px; border: 3px solid #2563eb; border-radius: 50%; color: #1e3a8a; background: #dbeafe; font-weight: 900; font-size: 22px; }
+    .edge { position: absolute; height: 4px; transform-origin: 0 50%; background: #64748b; border-radius: 999px; }
+    .n1 { left: 12%; top: 42%; } .n2 { left: 34%; top: 18%; } .n3 { left: 58%; top: 42%; } .n4 { left: 78%; top: 18%; } .n5 { left: 39%; top: 68%; }
+    .e1 { left: 17%; top: 48%; width: 260px; transform: rotate(-24deg); } .e2 { left: 39%; top: 25%; width: 270px; transform: rotate(24deg); }
+    .e3 { left: 63%; top: 47%; width: 235px; transform: rotate(-34deg); } .e4 { left: 17%; top: 50%; width: 340px; transform: rotate(22deg); } .e5 { left: 43%; top: 75%; width: 255px; transform: rotate(-30deg); }
+    button { border: 0; border-radius: 8px; color: white; background: var(--blue); font-weight: 850; cursor: pointer; }
+    button:hover { filter: brightness(1.05); }
+    .nav { position: fixed; left: 50%; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 10px; transform: translateX(-50%); padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: white; background: rgba(15,23,42,.86); box-shadow: 0 14px 38px rgba(0,0,0,.28); backdrop-filter: blur(12px); }
+    .nav button { min-width: 102px; min-height: 40px; padding: 0 14px; background: rgba(255,255,255,.16); font-size: 16px; }
+    .counter { min-width: 84px; text-align: center; font-size: 16px; font-weight: 900; }
+    .progress { position: fixed; inset: auto 0 0; z-index: 25; height: 5px; background: rgba(255,255,255,.18); }
+    .bar { width: 0%; height: 100%; background: linear-gradient(90deg, #60a5fa, #34d399, #fbbf24); transition: width .2s ease; }
+    .notes { position: fixed; right: 18px; top: 18px; z-index: 30; display: none; width: min(420px, 38vw); max-height: 46vh; overflow: auto; padding: 16px 18px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; color: #e5e7eb; background: rgba(15,23,42,.92); box-shadow: 0 16px 36px rgba(0,0,0,.35); font-size: 16px; line-height: 1.38; }
+    .notes.visible { display: block; }
+    .timer { position: fixed; left: 18px; top: 18px; z-index: 30; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #e5e7eb; background: rgba(15,23,42,.86); font-weight: 900; }
+    .timer button { min-height: 32px; padding: 0 10px; background: rgba(255,255,255,.16); }
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .slide { height: auto; min-height: 92vh; padding: 34px 24px 92px; }
+      .two, .three, .four, .split { grid-template-columns: 1fr; }
+      p, li { font-size: 20px; }
+      .nav { width: calc(100vw - 20px); justify-content: center; }
+      .nav button { min-width: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide title-slide active" data-note="Abrir con el cambio de modelo: de secuencias a relaciones. No empezar con BFS.">
+    <div class="center"><div><div class="tag">Clase 09 · Grafos</div><h1>Relaciones</h1><p class="subtitle">Modelar conexiones, elegir representaciones y visualizar con NetworkX.</p></div></div>
+  </section>
+  <section class="slide" data-note="Conectar con las clases previas: listas, pilas y colas eran estructuras para ciertos procesos; ahora modelamos relaciones.">
+    <h2>Hasta ahora</h2>
+    <div class="grid three"><div class="card blue"><h3>Secuencias</h3><p>Arreglos, listas, pilas, colas.</p></div><div class="card green"><h3>Operaciones</h3><p>Buscar, insertar, eliminar, contar.</p></div><div class="card amber"><h3>Patrones</h3><p>Simulación e información útil.</p></div></div>
+  </section>
+  <section class="slide" data-note="Presentar la transición conceptual.">
+    <div class="center"><p class="question">¿Qué pasa cuando el problema habla de conexiones?</p></div>
+  </section>
+  <section class="slide" data-note="Dar ejemplos concretos para Matemáticas Aplicadas.">
+    <h2>Relaciones en problemas reales</h2>
+    <ul><li>Personas conectadas por amistad.</li><li>Ciudades conectadas por caminos.</li><li>Habitaciones conectadas por puertas.</li><li>Páginas conectadas por enlaces.</li><li>Tareas conectadas por dependencias.</li></ul>
+  </section>
+  <section class="slide" data-note="Insistir en que grafo no es sinónimo de dibujo.">
+    <h2>Idea central</h2>
+    <p class="quote">Un grafo no es solamente un dibujo.</p>
+    <p>Un grafo es una estructura matemática para representar relaciones. El dibujo es solo una visualización.</p>
+  </section>
+  <section class="slide" data-note="Definición básica.">
+    <h2>¿Qué es un grafo?</h2>
+    <div class="split"><div><p>Un grafo tiene:</p><ul><li>vértices o nodos;</li><li>aristas o conexiones.</li></ul></div><div class="graph"><span class="edge e1"></span><span class="edge e2"></span><span class="edge e3"></span><span class="edge e4"></span><span class="edge e5"></span><span class="node n1">A</span><span class="node n2">B</span><span class="node n3">C</span><span class="node n4">D</span><span class="node n5">E</span></div></div>
+  </section>
+  <section class="slide" data-note="No resolver Building Roads. Solo modelar.">
+    <h2>CSES: Building Roads</h2>
+    <p><a href="https://cses.fi/problemset/task/1666/">cses.fi/problemset/task/1666/</a></p>
+    <div class="card blue"><p>Ciudades y caminos existentes. Queremos conectar componentes que aún están separadas.</p></div>
+  </section>
+  <section class="slide" data-note="Preguntas para notebook.md.">
+    <h2>Modela Building Roads</h2>
+    <ol><li>¿Qué representa un nodo?</li><li>¿Qué representa una arista?</li><li>¿Es dirigido?</li><li>¿Tiene pesos?</li><li>¿Qué pregunta algorítmica aparece?</li></ol>
+    <p class="note">Responde en `notebook.md`.</p>
+  </section>
+  <section class="slide" data-note="No resolver Counting Rooms. Usar cuadrícula como grafo implícito.">
+    <h2>CSES: Counting Rooms</h2>
+    <p><a href="https://cses.fi/problemset/task/1192/">cses.fi/problemset/task/1192/</a></p>
+    <div class="card green"><p>Una cuadrícula puede verse como grafo: cada celda libre es un nodo y las celdas vecinas se conectan.</p></div>
+  </section>
+  <section class="slide" data-note="No adelantar BFS.">
+    <h2>CSES: Labyrinth</h2>
+    <p><a href="https://cses.fi/problemset/task/1193/">cses.fi/problemset/task/1193/</a></p>
+    <div class="card amber"><p>Motiva búsqueda de caminos, pero hoy no resolveremos BFS.</p></div>
+  </section>
+  <section class="slide" data-note="Mensaje Route como red.">
+    <h2>CSES: Message Route</h2>
+    <p><a href="https://cses.fi/problemset/task/1667/">cses.fi/problemset/task/1667/</a></p>
+    <div class="card violet"><p>Computadoras conectadas por enlaces. La pregunta natural es encontrar una ruta.</p></div>
+  </section>
+  <section class="slide" data-note="Actividad breve por parejas.">
+    <h2>Actividad: 12 minutos</h2>
+    <div class="card blue"><p>Elige dos problemas CSES y completa la tabla de modelado en `notebook.md`.</p></div>
+    <div class="pills"><span class="pill">nodo</span><span class="pill">arista</span><span class="pill">dirigido</span><span class="pill">peso</span><span class="pill">pregunta</span></div>
+  </section>
+  <section class="slide" data-note="Conceptos básicos.">
+    <h2>Vocabulario mínimo</h2>
+    <div class="grid three"><div class="card blue"><h3>Vecinos</h3><p>Nodos conectados directamente.</p></div><div class="card green"><h3>Grado</h3><p>Cantidad de vecinos.</p></div><div class="card amber"><h3>Camino</h3><p>Secuencia de aristas.</p></div></div>
+  </section>
+  <section class="slide" data-note="Dirigido vs no dirigido.">
+    <h2>Dirección</h2>
+    <div class="grid two"><div class="card green"><h3>No dirigido</h3><p>Si A se conecta con B, B se conecta con A.</p></div><div class="card violet"><h3>Dirigido</h3><p>La conexión tiene orientación: A → B no implica B → A.</p></div></div>
+  </section>
+  <section class="slide" data-note="Pesos.">
+    <h2>Pesos</h2>
+    <div class="grid two"><div class="card blue"><h3>No ponderado</h3><p>Solo importa si existe conexión.</p></div><div class="card amber"><h3>Ponderado</h3><p>La arista tiene costo: distancia, tiempo, riesgo, capacidad.</p></div></div>
+  </section>
+  <section class="slide" data-note="Denso/disperso para representar.">
+    <h2>Disperso o denso</h2>
+    <p>Un grafo disperso tiene pocas aristas comparado con el máximo posible.</p>
+    <p>Un grafo denso tiene muchas conexiones.</p>
+    <p class="note">Esta distinción influye en la representación.</p>
+  </section>
+  <section class="slide" data-note="Lista de aristas como representación simple.">
+    <h2>Lista de aristas</h2>
+    <pre class="code">aristas = [
+    ("A", "B"),
+    ("A", "C"),
+    ("B", "D"),
+]</pre>
+    <p class="note">Simple para guardar conexiones; menos cómoda para consultar vecinos.</p>
+  </section>
+  <section class="slide" data-note="Lista de adyacencia.">
+    <h2>Lista de adyacencia</h2>
+    <pre class="code">adyacencia = {
+    "A": {"B", "C"},
+    "B": {"A", "D"},
+    "C": {"A"},
+    "D": {"B"},
+}</pre>
+    <p>Natural para grafos dispersos y para consultar vecinos.</p>
+  </section>
+  <section class="slide" data-note="Matriz de adyacencia.">
+    <h2>Matriz de adyacencia</h2>
+    <pre class="code">    A  B  C  D
+A [ 0, 1, 1, 0 ]
+B [ 1, 0, 0, 1 ]
+C [ 1, 0, 0, 0 ]
+D [ 0, 1, 0, 0 ]</pre>
+    <p>Útil cuando consultar si existe una arista debe ser directo.</p>
+  </section>
+  <section class="slide" data-note="Comparación de representaciones.">
+    <h2>Comparación rápida</h2>
+    <table class="table"><tr><th>Aspecto</th><th>Lista</th><th>Matriz</th></tr><tr><td>Memoria</td><td>Mejor en grafos dispersos</td><td>Puede gastar mucho</td></tr><tr><td>Vecinos</td><td>Natural</td><td>Hay que recorrer fila</td></tr><tr><td>Existe arista</td><td>Rápido con sets</td><td>Muy directo</td></tr><tr><td>Grafos densos</td><td>Puede crecer</td><td>Puede ser conveniente</td></tr></table>
+  </section>
+  <section class="slide" data-note="Conectar con POO.">
+    <h2>Interfaz común</h2>
+    <pre class="code">class GrafoAbstracto:
+    def agregar_vertice(self, vertice: str) -> None: ...
+    def agregar_arista(self, origen: str, destino: str) -> None: ...
+    def vecinos(self, vertice: str) -> list[str]: ...
+    def contiene_arista(self, origen: str, destino: str) -> bool: ...</pre>
+  </section>
+  <section class="slide" data-note="Polimorfismo.">
+    <h2>¿Por qué polimorfismo?</h2>
+    <div class="grid two"><div class="card blue"><h3>Misma interfaz</h3><p>El usuario del grafo no necesita saber cómo está guardado.</p></div><div class="card green"><h3>Mismas pruebas</h3><p>Podemos validar varias implementaciones con una sola batería.</p></div></div>
+  </section>
+  <section class="slide" data-note="Implementación 1.">
+    <h2>GrafoListaAdyacencia</h2>
+    <pre class="code">class GrafoListaAdyacencia(GrafoAbstracto):
+    \"\"\"Grafo no dirigido simple usando dict[str, set[str]].\"\"\"
+    def agregar_arista(self, origen, destino):
+        # TODO alumno
+        ...</pre>
+  </section>
+  <section class="slide" data-note="Implementación 2.">
+    <h2>GrafoMatrizAdyacencia</h2>
+    <pre class="code">class GrafoMatrizAdyacencia(GrafoAbstracto):
+    \"\"\"Grafo usando matriz y diccionario vértice -> índice.\"\"\"
+    def agregar_vertice(self, vertice):
+        # crecer matriz
+        ...</pre>
+  </section>
+  <section class="slide" data-note="NetworkX no reemplaza implementación.">
+    <h2>NetworkX</h2>
+    <div class="card violet"><p>NetworkX sirve para crear, analizar y visualizar grafos. No reemplaza nuestra implementación: la complementa.</p></div>
+    <pre class="code">import networkx as nx
+G = nx.Graph()
+G.add_node("A")
+G.add_edge("A", "B")</pre>
+  </section>
+  <section class="slide" data-note="Código visualización.">
+    <h2>Dibujar un grafo</h2>
+    <pre class="code">import matplotlib.pyplot as plt
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=False)
+nx.draw_networkx_labels(G, pos)
+plt.savefig("grafo_visual.png")</pre>
+  </section>
+  <section class="slide" data-note="Layouts.">
+    <h2>Layouts</h2>
+    <div class="grid four"><div class="card blue"><h3>spring</h3><p>Fuerzas.</p></div><div class="card green"><h3>circular</h3><p>Círculo.</p></div><div class="card amber"><h3>shell</h3><p>Capas.</p></div><div class="card violet"><h3>kamada</h3><p>Distancias visuales.</p></div></div>
+    <p class="note">Un layout solo decide dónde dibujar los nodos; no cambia el grafo.</p>
+  </section>
+  <section class="slide" data-note="Conversión.">
+    <h2>De nuestra clase a NetworkX</h2>
+    <pre class="code">def convertir_a_networkx(grafo):
+    G = nx.Graph()
+    for vertice in ...:
+        G.add_node(vertice)
+        for vecino in grafo.vecinos(vertice):
+            G.add_edge(vertice, vecino)
+    return G</pre>
+  </section>
+  <section class="slide" data-note="Pruebas con parametrize.">
+    <h2>Pruebas públicas</h2>
+    <pre class="code">@pytest.fixture(params=[
+    "GrafoListaAdyacencia",
+    "GrafoMatrizAdyacencia",
+])
+def clase_grafo(request):
+    return getattr(modulo, request.param)</pre>
+    <p>Misma prueba, varias implementaciones.</p>
+  </section>
+  <section class="slide" data-note="TODOs de pruebas.">
+    <h2>Pruebas que diseñarás</h2>
+    <ul><li>Arista duplicada no aumenta conteo.</li><li>Ambas implementaciones dan los mismos vecinos.</li><li>Vértice sin vecinos.</li><li>`contiene_arista` en ambos sentidos.</li></ul>
+  </section>
+  <section class="slide" data-note="pytest instructions.">
+    <h2>Ejecutar pruebas</h2>
+    <pre class="code">pytest -v</pre>
+    <p>Si tu entorno no encuentra pytest:</p>
+    <pre class="code">python3 -m pytest -v</pre>
+  </section>
+  <section class="slide" data-note="Entregables.">
+    <h2>Entrega</h2>
+    <pre class="code">entregas/
+└── clase_09/
+    └── nombre/
+        ├── implementacion.py
+        ├── notebook.md
+        ├── discusion.md
+        ├── reporte_pytest.md
+        └── grafo_visual.png</pre>
+  </section>
+  <section class="slide" data-note="Diferenciar documentos.">
+    <h2>Documentos escritos</h2>
+    <div class="grid three"><div class="card blue"><h3>notebook.md</h3><p>Respuestas guiadas del notebook.</p></div><div class="card green"><h3>discusion.md</h3><p>Argumento técnico y contraste.</p></div><div class="card amber"><h3>reporte_pytest.md</h3><p>Salida e interpretación de pruebas.</p></div></div>
+  </section>
+  <section class="slide" data-note="GitHub activity.">
+    <h2>Actividad GitHub</h2>
+    <ol><li>Crear rama `clase-09-tu-nombre`.</li><li>Trabajar en tu carpeta.</li><li>Hacer commits claros.</li><li>Abrir Pull Request.</li><li>Revisar el PR asignado.</li></ol>
+  </section>
+  <section class="slide" data-note="Patrón.">
+    <h2>Patrón descubierto</h2>
+    <div class="card green"><h3>Modelado de relaciones</h3><p>Pregunta que lo activa: ¿el problema habla de conexiones entre objetos?</p></div>
+    <div class="pills"><span class="pill">grafo</span><span class="pill">lista de adyacencia</span><span class="pill">matriz</span><span class="pill">NetworkX</span></div>
+  </section>
+  <section class="slide" data-note="Cierre hacia BFS sin resolverlo.">
+    <div class="center"><div><p class="question">¿Qué algoritmo necesitaremos para recorrer el grafo?</p><p class="subtitle">Próximamente: búsqueda en anchura, sin adelantarla hoy.</p></div></div>
+  </section>
+
+  <div class="timer"><span id="timerText">15:00</span><button id="timerBtn">T</button><button id="resetBtn">↺</button></div>
+  <div id="notes" class="notes"></div>
+  <div class="nav"><button id="prev">←</button><span id="counter" class="counter"></span><button id="next">→</button><button id="notesBtn">Notas</button></div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const bar = document.getElementById('bar');
+    const notes = document.getElementById('notes');
+    let index = 0;
+    function showSlide(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      bar.style.width = `${((index + 1) / slides.length) * 100}%`;
+      notes.textContent = slides[index].dataset.note || '';
+    }
+    document.getElementById('prev').addEventListener('click', () => showSlide(index - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+    document.getElementById('notesBtn').addEventListener('click', () => notes.classList.toggle('visible'));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === ' ') showSlide(index + 1);
+      if (event.key === 'ArrowLeft') showSlide(index - 1);
+      if (event.key.toLowerCase() === 'n') notes.classList.toggle('visible');
+      if (event.key.toLowerCase() === 't') toggleTimer();
+    });
+    let totalSeconds = 15 * 60;
+    let timerId = null;
+    const timerText = document.getElementById('timerText');
+    function renderTimer() {
+      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      timerText.textContent = `${minutes}:${seconds}`;
+    }
+    function toggleTimer() {
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        return;
+      }
+      timerId = setInterval(() => {
+        totalSeconds = Math.max(0, totalSeconds - 1);
+        renderTimer();
+        if (totalSeconds === 0) toggleTimer();
+      }, 1000);
+    }
+    document.getElementById('timerBtn').addEventListener('click', toggleTimer);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      totalSeconds = 15 * 60;
+      renderTimer();
+    });
+    renderTimer();
+    showSlide(0);
+  </script>
+</body>
+</html>
