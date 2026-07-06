@@ -82,7 +82,7 @@ alumnos = [
     "Daniel",
 ]
 
-fecha_clase = "2026-06-16"
+fecha_clase = "2026-07-06"
 
 alumnos_presentes = obtener_alumnos_presentes(alumnos)
 
