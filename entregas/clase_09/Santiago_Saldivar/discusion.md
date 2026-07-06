@@ -1,0 +1,4 @@
+### Discusión
+Las secuencias y las relaciones se distinguen en que las secuencias sólo avanzan en un sentido lineal. Las relaciones pueden ser como redes o árboles, que a veces permites el tránsito en varias direcciones. Los problemas que las usan las requieren porque pueden mapear varios objetos que interactúan entre sí. Se elije esta representiación porque representa muy bien sus conexiones. EL polimorfismo es útil porque podemos hacer cosas abstractas que después apiquen a todas las situaciones que necesitemos. EL Netwrorkx es útil para visualizar las relaciones. Las pruebas fueron útiles, pero lograr que corriera el python fue difícil. DEscubrimos el patrón de las relaciones, que sirve para modelar muchas cosas. 
+
+Pregunta abierta: ¿Qué otros usos tienen?
