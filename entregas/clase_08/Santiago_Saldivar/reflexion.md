@@ -24,7 +24,7 @@ Compara al menos dos recursos.
 
 Cual fue el recurso mas util para ti y por que?
 
-El primero fue más útil, porque profundiza más y tiene implementación. Pero también fue más confuso.
+Los videos de William Fiset. Aprendí mucha información nueva. Explica todo muy claramente.
 
 ## Recurso menos recomendable
 
