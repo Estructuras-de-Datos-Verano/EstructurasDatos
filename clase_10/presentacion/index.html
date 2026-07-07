@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 10 - BFS, DFS y recorridos</title>
+  <style>
+    :root {
+      --ink: #111827; --muted: #536173; --line: #dbe3ee; --soft: #f4f7fb;
+      --blue: #2563eb; --green: #0f766e; --gold: #d97706; --red: #dc2626; --violet: #7c3aed;
+      --orange: #ea580c;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      overflow: hidden; color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 52%, #07111f 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+    .slide {
+      display: none; position: relative; overflow: hidden;
+      width: min(1380px, 96vw); height: min(820px, 92vh);
+      margin: 4vh auto; padding: 42px 52px 72px;
+      border: 1px solid rgba(255,255,255,.64); border-radius: 22px;
+      background: rgba(251,252,255,.985);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+    }
+    .slide.active { display: block; }
+    .slide::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.97), rgba(244,247,251,.94)),
+        radial-gradient(circle at 24% 28%, rgba(37,99,235,.18), transparent 26%),
+        radial-gradient(circle at 78% 64%, rgba(15,118,110,.16), transparent 30%);
+    }
+    .center { display: grid; place-items: center; height: 100%; text-align: center; }
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+    h1 { margin-bottom: 22px; font-size: clamp(48px, 5.8vw, 82px); line-height: 1; font-weight: 900; }
+    h2 { margin-bottom: 24px; font-size: clamp(34px, 4vw, 56px); line-height: 1.06; font-weight: 880; }
+    h3 { margin-bottom: 12px; font-size: 28px; line-height: 1.15; }
+    p, li { font-size: 22px; line-height: 1.36; color: #334155; }
+    ul, ol { margin: 0; padding-left: 1.25em; }
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    a { color: #1d4ed8; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 24px;
+      padding: 10px 14px; border: 1px solid #bfdbfe; border-radius: 999px;
+      color: #1d4ed8; background: #eff6ff; font-size: 20px; font-weight: 850;
+    }
+    .subtitle { max-width: 980px; margin-inline: auto; font-size: clamp(25px, 2.3vw, 36px); color: #334155; line-height: 1.22; }
+    .question { max-width: 1140px; font-size: clamp(42px, 5vw, 70px); line-height: 1.08; font-weight: 900; }
+    .quote { max-width: 1100px; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.1; font-weight: 850; }
+    .note { color: var(--muted); font-size: 19px; line-height: 1.35; }
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; }
+    .card { padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); box-shadow: 0 8px 24px rgba(15,23,42,.06); }
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: #f8fafc; color: #243449; font-size: 20px; font-weight: 820; }
+    .code { overflow: auto; margin: 0; padding: 18px; border: 1px solid #cbd5e1; border-radius: 8px; color: #e5e7eb; background: #111827; font-size: 18px; line-height: 1.38; white-space: pre-wrap; tab-size: 2; }
+    .table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 20px; }
+    .table th, .table td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .table th { color: #0f172a; background: #eaf0f8; font-weight: 850; }
+    .mini-graph { width: 100%; height: 360px; border: 2px dashed #cbd5e1; border-radius: 8px; background: #f8fafc; }
+    .sim { display: grid; grid-template-columns: 1.05fr .95fr; gap: 20px; align-items: stretch; }
+    .sim svg { width: 100%; height: 360px; border: 1px solid var(--line); border-radius: 8px; background: #f8fafc; }
+    .sim-panel { display: grid; gap: 12px; align-content: start; }
+    .sim-row { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: #ffffff; }
+    .sim-row strong { display: block; margin-bottom: 5px; color: #0f172a; }
+    .queue { display: flex; flex-wrap: wrap; gap: 8px; min-height: 42px; }
+    .chip { padding: 7px 10px; border: 1px solid #bfdbfe; border-radius: 8px; background: #eff6ff; color: #1d4ed8; font-weight: 900; }
+    .pseudo { margin: 0; padding-left: 0; list-style: none; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+    .pseudo li { margin: 0; padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 17px; font-family: "SFMono-Regular", Consolas, monospace; }
+    .pseudo li.active-line { background: #fef3c7; color: #92400e; font-weight: 900; }
+    .sim-controls { display: flex; gap: 10px; }
+    button { border: 0; border-radius: 8px; color: white; background: var(--blue); font-weight: 850; cursor: pointer; }
+    button:hover { filter: brightness(1.05); }
+    .sim-controls button { min-height: 38px; padding: 0 12px; }
+    .edge { stroke: #94a3b8; stroke-width: 4; stroke-linecap: round; }
+    .edge.active-edge { stroke: var(--orange); stroke-width: 6; }
+    .node { fill: #e5e7eb; stroke: #94a3b8; stroke-width: 3; }
+    .node.discovered { fill: #dbeafe; stroke: #2563eb; }
+    .node.current { fill: #fee2e2; stroke: #dc2626; }
+    .node.visited { fill: #dcfce7; stroke: #16a34a; }
+    .node-label { font-weight: 900; font-size: 20px; fill: #0f172a; dominant-baseline: middle; text-anchor: middle; }
+    .nav { position: fixed; left: 50%; bottom: 16px; z-index: 20; display: flex; align-items: center; gap: 10px; transform: translateX(-50%); padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; color: white; background: rgba(15,23,42,.86); box-shadow: 0 14px 38px rgba(0,0,0,.28); backdrop-filter: blur(12px); }
+    .nav button { min-width: 102px; min-height: 40px; padding: 0 14px; background: rgba(255,255,255,.16); font-size: 16px; }
+    .counter { min-width: 84px; text-align: center; font-size: 16px; font-weight: 900; }
+    .progress { position: fixed; inset: auto 0 0; z-index: 25; height: 5px; background: rgba(255,255,255,.18); }
+    .bar { width: 0%; height: 100%; background: linear-gradient(90deg, #60a5fa, #34d399, #fbbf24); transition: width .2s ease; }
+    .notes { position: fixed; right: 18px; top: 18px; z-index: 30; display: none; width: min(420px, 38vw); max-height: 46vh; overflow: auto; padding: 16px 18px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; color: #e5e7eb; background: rgba(15,23,42,.92); box-shadow: 0 16px 36px rgba(0,0,0,.35); font-size: 16px; line-height: 1.38; }
+    .notes.visible { display: block; }
+    .timer { position: fixed; left: 18px; top: 18px; z-index: 30; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #e5e7eb; background: rgba(15,23,42,.86); font-weight: 900; }
+    .timer button { min-height: 32px; padding: 0 10px; background: rgba(255,255,255,.16); }
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .slide { height: auto; min-height: 92vh; padding: 34px 24px 92px; }
+      .two, .three, .four, .split, .sim { grid-template-columns: 1fr; }
+      p, li { font-size: 20px; }
+      .nav { width: calc(100vw - 20px); justify-content: center; }
+      .nav button { min-width: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide title-slide active" data-note="Abrir recordando que Clase 09 costó: hoy iremos más lento, con recorridos manuales antes de nombres formales.">
+    <div class="center"><div><div class="tag">Clase 10 · Recorridos</div><h1>BFS y DFS</h1><p class="subtitle">Descubrir cómo recorrer relaciones usando colas, pilas y visualización.</p></div></div>
+  </section>
+  <section class="slide" data-note="Conectar con Clase 09: representar no es recorrer.">
+    <h2>Ya sabemos representar</h2>
+    <div class="grid three"><div class="card blue"><h3>Nodos</h3><p>Objetos del problema.</p></div><div class="card green"><h3>Aristas</h3><p>Relaciones o conexiones.</p></div><div class="card amber"><h3>Visualización</h3><p>Una forma de mirar el grafo.</p></div></div>
+  </section>
+  <section class="slide" data-note="Pregunta guía.">
+    <div class="center"><p class="question">Ya sabemos representar un grafo. Ahora, ¿cómo lo recorremos?</p></div>
+  </section>
+  <section class="slide" data-note="No iniciar con nombres BFS DFS.">
+    <h2>Hoy empezamos sin nombres</h2>
+    <p>Primero recorreremos grafos a mano.</p>
+    <p>Después reconoceremos que dos estrategias tienen nombres clásicos.</p>
+    <div class="pills"><span class="pill">por niveles</span><span class="pill">por profundidad</span><span class="pill">cola</span><span class="pill">pila</span></div>
+  </section>
+  <section class="slide" data-note="Presentar los tres problemas CSES.">
+    <h2>Problemas que motivan recorridos</h2>
+    <ul><li><a href="https://cses.fi/problemset/task/1192/">Counting Rooms</a>: componentes en una cuadrícula.</li><li><a href="https://cses.fi/problemset/task/1193/">Labyrinth</a>: camino en un laberinto.</li><li><a href="https://cses.fi/problemset/task/1667/">Message Route</a>: ruta en red no ponderada.</li></ul>
+  </section>
+  <section class="slide" data-note="Preguntas de modelado antes de algoritmo.">
+    <h2>Antes de recorrer</h2>
+    <ol><li>¿Qué representa un nodo?</li><li>¿Qué representa una arista?</li><li>¿Qué significa visitar un nodo?</li><li>¿Cómo evito visitar lo mismo muchas veces?</li></ol>
+    <p class="note">Responde en `notebook.md`.</p>
+  </section>
+  <section class="slide" data-note="Counting Rooms solo motivación.">
+    <h2>Counting Rooms</h2>
+    <div class="card blue"><p>Una habitación es una componente conectada de celdas libres.</p><p>Para contar habitaciones necesitamos recorrer celdas conectadas.</p></div>
+  </section>
+  <section class="slide" data-note="Labyrinth motivación camino.">
+    <h2>Labyrinth</h2>
+    <div class="card green"><p>Desde una celda inicial queremos llegar a una celda final.</p><p>La pregunta ya no es solo representar: necesitamos explorar.</p></div>
+  </section>
+  <section class="slide" data-note="Message Route como problema más cercano a BFS.">
+    <h2>Message Route</h2>
+    <div class="card violet"><p>En una red no ponderada, una ruta con menos aristas es una ruta más corta.</p><p>Este problema está muy cerca de BFS.</p></div>
+  </section>
+  <section class="slide" data-note="Primer grafo manual.">
+    <h2>Grafo para trabajar a mano</h2>
+    <div class="split"><div><pre class="code">A: B, C
+B: A, D, E
+C: A, F
+D: B
+E: B
+F: C</pre></div><svg class="mini-graph" viewBox="0 0 520 330"><line class="edge" x1="260" y1="45" x2="150" y2="140"/><line class="edge" x1="260" y1="45" x2="370" y2="140"/><line class="edge" x1="150" y1="140" x2="90" y2="260"/><line class="edge" x1="150" y1="140" x2="210" y2="260"/><line class="edge" x1="370" y1="140" x2="430" y2="260"/><circle class="node discovered" cx="260" cy="45" r="24"/><circle class="node" cx="150" cy="140" r="24"/><circle class="node" cx="370" cy="140" r="24"/><circle class="node" cx="90" cy="260" r="24"/><circle class="node" cx="210" cy="260" r="24"/><circle class="node" cx="430" cy="260" r="24"/><text class="node-label" x="260" y="45">A</text><text class="node-label" x="150" y="140">B</text><text class="node-label" x="370" y="140">C</text><text class="node-label" x="90" y="260">D</text><text class="node-label" x="210" y="260">E</text><text class="node-label" x="430" y="260">F</text></svg></div>
+  </section>
+  <section class="slide" data-note="Tabla a llenar.">
+    <h2>Tabla de recorrido</h2>
+    <table class="table"><tr><th>Paso</th><th>Pendientes</th><th>Visitados</th><th>Nodo actual</th></tr><tr><td>0</td><td>A</td><td>-</td><td>-</td></tr><tr><td>1</td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td></tr></table>
+    <p class="note">Completa tablas en `notebook.md`.</p>
+  </section>
+  <section class="slide" data-note="Estrategia por niveles sin nombrar BFS.">
+    <h2>Estrategia A: cercanos primero</h2>
+    <ul><li>Visitar primero los vecinos de A.</li><li>Después los vecinos de esos vecinos.</li><li>Explorar por capas o niveles.</li></ul>
+    <div class="card amber"><p>¿Qué estructura aparece si siempre atendemos el pendiente más antiguo?</p></div>
+  </section>
+  <section class="slide" data-note="Cola.">
+    <div class="center"><div><p class="question">Pendiente más antiguo primero</p><p class="subtitle">Eso es comportamiento de cola: FIFO.</p></div></div>
+  </section>
+  <section class="slide" data-note="Estrategia profundidad sin nombrar DFS.">
+    <h2>Estrategia B: una rama hasta el fondo</h2>
+    <ul><li>Tomar un vecino.</li><li>Seguir avanzando mientras se pueda.</li><li>Regresar cuando no haya más opciones.</li></ul>
+    <div class="card violet"><p>¿Qué estructura aparece si siempre atendemos el pendiente más reciente?</p></div>
+  </section>
+  <section class="slide" data-note="Pila.">
+    <div class="center"><div><p class="question">Pendiente más reciente primero</p><p class="subtitle">Eso es comportamiento de pila: LIFO.</p></div></div>
+  </section>
+  <section class="slide" data-note="Ahora sí presentar nombres.">
+    <h2>Nacen los nombres</h2>
+    <div class="grid two"><div class="card blue"><h3>BFS</h3><p>Breadth-First Search: búsqueda primero por anchura.</p></div><div class="card green"><h3>DFS</h3><p>Depth-First Search: búsqueda primero por profundidad.</p></div></div>
+  </section>
+  <section class="slide" data-note="Explicar BFS.">
+    <h2>Breadth-First Search</h2>
+    <ul><li>Explora primero los nodos más cercanos.</li><li>Usa una cola.</li><li>En grafos no ponderados, encuentra caminos mínimos en número de aristas.</li></ul>
+  </section>
+  <section class="slide" data-note="Explicar DFS.">
+    <h2>Depth-First Search</h2>
+    <ul><li>Explora una rama lo más profundo posible.</li><li>Usa una pila o recursión.</li><li>No garantiza camino mínimo en general.</li></ul>
+  </section>
+  <section class="slide" data-note="Tabla comparativa.">
+    <h2>BFS vs DFS</h2>
+    <table class="table"><tr><th>Estrategia</th><th>Estructura</th><th>Idea</th><th>Uso típico</th></tr><tr><td>BFS</td><td>cola</td><td>por niveles</td><td>distancia mínima en grafos no ponderados</td></tr><tr><td>DFS</td><td>pila/recursión</td><td>profundidad</td><td>componentes, exploración, backtracking</td></tr></table>
+  </section>
+  <section class="slide" data-note="Pseudocódigo BFS.">
+    <h2>Pseudocódigo BFS</h2>
+    <pre class="code">cola = [origen]
+descubiertos = {origen}
+mientras cola no esté vacía:
+    actual = sacar del frente
+    visitar actual
+    para cada vecino:
+        si no fue descubierto:
+            marcar y encolar</pre>
+  </section>
+  <section class="slide" data-note="Pseudocódigo DFS.">
+    <h2>Pseudocódigo DFS</h2>
+    <pre class="code">pila = [origen]
+descubiertos = {origen}
+mientras pila no esté vacía:
+    actual = sacar del tope
+    visitar actual
+    para cada vecino:
+        si no fue descubierto:
+            marcar y apilar</pre>
+  </section>
+  <section class="slide" data-note="Separar algoritmo de visualización.">
+    <h2>Algoritmo → registro → visualización</h2>
+    <div class="grid three"><div class="card blue"><h3>Algoritmo</h3><p>Calcula el recorrido.</p></div><div class="card green"><h3>Registro</h3><p>Guarda estados paso a paso.</p></div><div class="card amber"><h3>Visualización</h3><p>Dibuja esos estados.</p></div></div>
+  </section>
+  <section class="slide" data-note="Estado para animación.">
+    <h2>Estado de ejecución</h2>
+    <pre class="code">{
+  paso: 3,
+  nodo_actual: "B",
+  cola: ["C", "D", "E"],
+  visitados: ["A", "B"],
+  descubiertos: ["A", "B", "C", "D", "E"],
+  aristas_exploradas: [["A", "B"]],
+  linea_pseudocodigo: "visitar actual"
+}</pre>
+  </section>
+  <section class="slide" data-note="Interactividad BFS.">
+    <h2>Interactivo: recorrido por niveles</h2>
+    <div class="sim" id="sim-bfs"></div>
+  </section>
+  <section class="slide" data-note="Interpretación del simulador BFS.">
+    <h2>Lee el estado BFS</h2>
+    <ul><li>La cola muestra el orden de atención.</li><li>Azul significa descubierto o pendiente.</li><li>Rojo es el nodo actual.</li><li>Verde ya fue procesado.</li><li>Naranja marca una arista explorada.</li></ul>
+  </section>
+  <section class="slide" data-note="Interactividad DFS.">
+    <h2>Interactivo: recorrido por profundidad</h2>
+    <div class="sim" id="sim-dfs"></div>
+  </section>
+  <section class="slide" data-note="Interpretación del simulador DFS.">
+    <h2>Lee el estado DFS</h2>
+    <ul><li>La pila muestra el siguiente camino a profundizar.</li><li>El tope de la pila se procesa primero.</li><li>El orden de vecinos influye en el recorrido.</li><li>No asumas que el primer camino encontrado es mínimo.</li></ul>
+  </section>
+  <section class="slide" data-note="Implementación en entrega.">
+    <h2>Funciones a implementar</h2>
+    <pre class="code">def bfs(grafo, origen): ...
+def dfs(grafo, origen): ...
+def registrar_bfs(grafo, origen): ...
+def registrar_dfs(grafo, origen): ...
+def guardar_visualizacion_recorrido(grafo, recorrido, ruta): ...</pre>
+  </section>
+  <section class="slide" data-note="Pruebas.">
+    <h2>Pruebas públicas</h2>
+    <ul><li>BFS y DFS en grafo simple.</li><li>Grafos con ciclo.</li><li>Grafo desconectado.</li><li>Registros con cola y pila.</li><li>TODOs para diseñar pruebas propias.</li></ul>
+  </section>
+  <section class="slide" data-note="pytest.">
+    <h2>Ejecutar pruebas</h2>
+    <pre class="code">pytest -v</pre>
+    <p>Si el entorno no encuentra pytest:</p>
+    <pre class="code">python3 -m pytest -v</pre>
+  </section>
+  <section class="slide" data-note="CSES aplicado.">
+    <h2>¿Cuál usarías?</h2>
+    <div class="grid three"><div class="card blue"><h3>Message Route</h3><p>BFS para ruta mínima en aristas.</p></div><div class="card green"><h3>Counting Rooms</h3><p>BFS o DFS para componentes.</p></div><div class="card amber"><h3>Labyrinth</h3><p>BFS si queremos camino corto.</p></div></div>
+  </section>
+  <section class="slide" data-note="Entregables.">
+    <h2>Entrega</h2>
+    <pre class="code">entregas/
+└── clase_10/
+    └── nombre/
+        ├── implementacion.py
+        ├── notebook.md
+        ├── discusion.md
+        ├── reporte_pytest.md
+        └── recorrido_visual.png</pre>
+  </section>
+  <section class="slide" data-note="Diferenciar documentos.">
+    <h2>Documentos escritos</h2>
+    <div class="grid three"><div class="card blue"><h3>notebook.md</h3><p>Respuestas y recorridos manuales.</p></div><div class="card green"><h3>discusion.md</h3><p>Contraste técnico BFS/DFS.</p></div><div class="card amber"><h3>reporte_pytest.md</h3><p>Salida e interpretación de pruebas.</p></div></div>
+  </section>
+  <section class="slide" data-note="GitHub.">
+    <h2>Actividad GitHub</h2>
+    <ol><li>Crear rama `clase-10-tu-nombre`.</li><li>Trabajar en tu carpeta.</li><li>Hacer commits claros.</li><li>Abrir Pull Request.</li><li>Revisar el PR asignado.</li></ol>
+  </section>
+  <section class="slide" data-note="Patrón.">
+    <h2>Patrón descubierto</h2>
+    <div class="card green"><h3>Recorrido de grafos</h3><p>Preguntas que lo activan: ¿tengo que visitar nodos conectados?, ¿puedo llegar?, ¿quiero distancia mínima en aristas?</p></div>
+    <div class="pills"><span class="pill">BFS</span><span class="pill">DFS</span><span class="pill">cola</span><span class="pill">pila</span></div>
+  </section>
+  <section class="slide" data-note="Cierre.">
+    <div class="center"><div><p class="question">Pilas y colas vuelven como estrategias de exploración.</p><p class="subtitle">El siguiente paso será usar recorridos para resolver problemas más completos.</p></div></div>
+  </section>
+
+  <div class="timer"><span id="timerText">15:00</span><button id="timerBtn">T</button><button id="resetBtn">↺</button></div>
+  <div id="notes" class="notes"></div>
+  <div class="nav"><button id="prev">←</button><span id="counter" class="counter"></span><button id="next">→</button><button id="notesBtn">Notas</button></div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const bar = document.getElementById('bar');
+    const notes = document.getElementById('notes');
+    let index = 0;
+    function showSlide(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      bar.style.width = `${((index + 1) / slides.length) * 100}%`;
+      notes.textContent = slides[index].dataset.note || '';
+    }
+    document.getElementById('prev').addEventListener('click', () => showSlide(index - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+    document.getElementById('notesBtn').addEventListener('click', () => notes.classList.toggle('visible'));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === ' ') showSlide(index + 1);
+      if (event.key === 'ArrowLeft') showSlide(index - 1);
+      if (event.key.toLowerCase() === 'n') notes.classList.toggle('visible');
+      if (event.key.toLowerCase() === 't') toggleTimer();
+    });
+    let totalSeconds = 15 * 60;
+    let timerId = null;
+    const timerText = document.getElementById('timerText');
+    function renderTimer() {
+      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      timerText.textContent = `${minutes}:${seconds}`;
+    }
+    function toggleTimer() {
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        return;
+      }
+      timerId = setInterval(() => {
+        totalSeconds = Math.max(0, totalSeconds - 1);
+        renderTimer();
+        if (totalSeconds === 0) toggleTimer();
+      }, 1000);
+    }
+    document.getElementById('timerBtn').addEventListener('click', toggleTimer);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      totalSeconds = 15 * 60;
+      renderTimer();
+    });
+
+    const nodos = {
+      A: [260, 50], B: [150, 145], C: [370, 145],
+      D: [90, 265], E: [210, 265], F: [430, 265]
+    };
+    const aristas = [["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]];
+    const lineasBfs = [
+      "inicializar cola con origen",
+      "sacar del frente",
+      "visitar nodo actual",
+      "descubrir vecinos no vistos",
+      "encolar nuevos vecinos"
+    ];
+    const lineasDfs = [
+      "inicializar pila con origen",
+      "sacar del tope",
+      "visitar nodo actual",
+      "descubrir vecinos no vistos",
+      "apilar nuevos vecinos"
+    ];
+    const pasosBFS = [
+      {paso:0,nodoActual:null,pendientes:["A"],visitados:[],descubiertos:["A"],aristas:[],linea:0},
+      {paso:1,nodoActual:"A",pendientes:["B","C"],visitados:["A"],descubiertos:["A","B","C"],aristas:[["A","B"],["A","C"]],linea:3},
+      {paso:2,nodoActual:"B",pendientes:["C","D","E"],visitados:["A","B"],descubiertos:["A","B","C","D","E"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"]],linea:4},
+      {paso:3,nodoActual:"C",pendientes:["D","E","F"],visitados:["A","B","C"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:4},
+      {paso:4,nodoActual:"D",pendientes:["E","F"],visitados:["A","B","C","D"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:2},
+      {paso:5,nodoActual:"E",pendientes:["F"],visitados:["A","B","C","D","E"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:2},
+      {paso:6,nodoActual:"F",pendientes:[],visitados:["A","B","C","D","E","F"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:2}
+    ];
+    const pasosDFS = [
+      {paso:0,nodoActual:null,pendientes:["A"],visitados:[],descubiertos:["A"],aristas:[],linea:0},
+      {paso:1,nodoActual:"A",pendientes:["C","B"],visitados:["A"],descubiertos:["A","B","C"],aristas:[["A","B"],["A","C"]],linea:4},
+      {paso:2,nodoActual:"B",pendientes:["C","E","D"],visitados:["A","B"],descubiertos:["A","B","C","D","E"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"]],linea:4},
+      {paso:3,nodoActual:"D",pendientes:["C","E"],visitados:["A","B","D"],descubiertos:["A","B","C","D","E"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"]],linea:2},
+      {paso:4,nodoActual:"E",pendientes:["C"],visitados:["A","B","D","E"],descubiertos:["A","B","C","D","E"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"]],linea:2},
+      {paso:5,nodoActual:"C",pendientes:["F"],visitados:["A","B","D","E","C"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:4},
+      {paso:6,nodoActual:"F",pendientes:[],visitados:["A","B","D","E","C","F"],descubiertos:["A","B","C","D","E","F"],aristas:[["A","B"],["A","C"],["B","D"],["B","E"],["C","F"]],linea:2}
+    ];
+    function edgeKey(a, b) { return [a, b].sort().join("-"); }
+    function crearSimulador(id, pasos, lineas, etiquetaPendientes) {
+      const root = document.getElementById(id);
+      let actual = 0;
+      root.innerHTML = `
+        <div><svg viewBox="0 0 520 330" aria-label="grafo"></svg></div>
+        <div class="sim-panel">
+          <div class="sim-controls"><button data-action="prev">Anterior</button><button data-action="next">Siguiente</button><button data-action="reset">Reiniciar</button></div>
+          <div class="sim-row"><strong>Paso</strong><span data-field="paso"></span></div>
+          <div class="sim-row"><strong>Nodo actual</strong><span data-field="actual"></span></div>
+          <div class="sim-row"><strong>${etiquetaPendientes}</strong><div class="queue" data-field="pendientes"></div></div>
+          <div class="sim-row"><strong>Visitados</strong><div class="queue" data-field="visitados"></div></div>
+          <ol class="pseudo">${lineas.map((linea, i) => `<li data-line="${i}">${linea}</li>`).join("")}</ol>
+        </div>`;
+      const svg = root.querySelector('svg');
+      const fields = {
+        paso: root.querySelector('[data-field="paso"]'),
+        actual: root.querySelector('[data-field="actual"]'),
+        pendientes: root.querySelector('[data-field="pendientes"]'),
+        visitados: root.querySelector('[data-field="visitados"]')
+      };
+      function chips(valores) {
+        if (!valores.length) return '<span class="note">vacío</span>';
+        return valores.map(v => `<span class="chip">${v}</span>`).join('');
+      }
+      function render() {
+        const estado = pasos[actual];
+        const aristasActivas = new Set(estado.aristas.map(([a,b]) => edgeKey(a,b)));
+        svg.innerHTML = aristas.map(([a,b]) => {
+          const [x1,y1] = nodos[a], [x2,y2] = nodos[b];
+          const cls = aristasActivas.has(edgeKey(a,b)) ? 'edge active-edge' : 'edge';
+          return `<line class="${cls}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"></line>`;
+        }).join('') + Object.entries(nodos).map(([n,[x,y]]) => {
+          let cls = 'node';
+          if (estado.visitados.includes(n)) cls = 'node visited';
+          if (estado.descubiertos.includes(n) && !estado.visitados.includes(n)) cls = 'node discovered';
+          if (estado.nodoActual === n) cls = 'node current';
+          return `<circle class="${cls}" cx="${x}" cy="${y}" r="24"></circle><text class="node-label" x="${x}" y="${y}">${n}</text>`;
+        }).join('');
+        fields.paso.textContent = estado.paso;
+        fields.actual.textContent = estado.nodoActual || 'ninguno';
+        fields.pendientes.innerHTML = chips(estado.pendientes);
+        fields.visitados.innerHTML = chips(estado.visitados);
+        root.querySelectorAll('.pseudo li').forEach(li => li.classList.toggle('active-line', Number(li.dataset.line) === estado.linea));
+      }
+      root.querySelector('[data-action="prev"]').addEventListener('click', () => { actual = Math.max(0, actual - 1); render(); });
+      root.querySelector('[data-action="next"]').addEventListener('click', () => { actual = Math.min(pasos.length - 1, actual + 1); render(); });
+      root.querySelector('[data-action="reset"]').addEventListener('click', () => { actual = 0; render(); });
+      render();
+    }
+    crearSimulador('sim-bfs', pasosBFS, lineasBfs, 'Cola');
+    crearSimulador('sim-dfs', pasosDFS, lineasDfs, 'Pila');
+    renderTimer();
+    showSlide(0);
+  </script>
+</body>
+</html>
