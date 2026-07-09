@@ -1,0 +1,45 @@
+    - comando ejecutado cd clase_09 pytest -v;
+    - salida completa: PS C:\Users\josei\OneDrive\Documentos\GitHub\EstructurasDatos\clase_09> pytest -v
+    =================================== test session starts ===================================
+    platform win32 -- Python 3.12.5, pytest-9.1.1, pluggy-1.6.0 -- c:\Users\josei\AppData\Local\Programs\Python\Python312\python.exe
+    cachedir: .pytest_cache
+    rootdir: C:\Users\josei\OneDrive\Documentos\GitHub\EstructurasDatos\clase_09
+    configfile: pytest.ini
+    testpaths: tests
+    plugins: anyio-4.7.0
+    collected 20 items                                                                         
+
+    tests/test_publico_grafos.py::test_existen_clases_requeridas PASSED                  [  5%]
+    tests/test_publico_grafos.py::test_existen_funciones_auxiliares PASSED               [ 10%]
+    tests/test_publico_grafos.py::test_crear_grafo_vacio[GrafoListaAdyacencia] PASSED    [ 15%]
+    tests/test_publico_grafos.py::test_crear_grafo_vacio[GrafoMatrizAdyacencia] PASSED   [ 20%]
+    tests/test_publico_grafos.py::test_agregar_vertice[GrafoListaAdyacencia] PASSED      [ 25%]
+    tests/test_publico_grafos.py::test_agregar_vertice[GrafoMatrizAdyacencia] PASSED     [ 30%]
+    tests/test_publico_grafos.py::test_agregar_arista[GrafoListaAdyacencia] PASSED       [ 35%]
+    tests/test_publico_grafos.py::test_agregar_arista[GrafoMatrizAdyacencia] PASSED      [ 40%]
+    tests/test_publico_grafos.py::test_arista_no_dirigida_aparece_en_ambos_sentidos[GrafoListaAdyacencia] PASSED [ 45%]
+    tests/test_publico_grafos.py::test_arista_no_dirigida_aparece_en_ambos_sentidos[GrafoMatrizAdyacencia] PASSED [ 50%]
+    tests/test_publico_grafos.py::test_vecinos_en_grafo_pequeno[GrafoListaAdyacencia] PASSED [ 55%]
+    tests/test_publico_grafos.py::test_vecinos_en_grafo_pequeno[GrafoMatrizAdyacencia] PASSED [ 60%]
+    tests/test_publico_grafos.py::test_convertir_a_networkx PASSED                       [ 65%]
+    tests/test_publico_grafos.py::test_todo_arista_duplicada_no_aumenta_conteo[GrafoListaAdyacencia] PASSED [ 70%]
+    tests/test_publico_grafos.py::test_todo_arista_duplicada_no_aumenta_conteo[GrafoMatrizAdyacencia] PASSED [ 75%]
+    tests/test_publico_grafos.py::test_todo_mismas_vecindades_en_ambas_implementaciones PASSED [ 80%]
+    tests/test_publico_grafos.py::test_todo_vertice_sin_vecinos[GrafoListaAdyacencia] PASSED [ 85%]
+    tests/test_publico_grafos.py::test_todo_vertice_sin_vecinos[GrafoMatrizAdyacencia] PASSED [ 90%]
+    tests/test_publico_grafos.py::test_todo_contiene_arista[GrafoListaAdyacencia] PASSED [ 95%]
+    tests/test_publico_grafos.py::test_todo_contiene_arista[GrafoMatrizAdyacencia] PASSED [100%]
+
+    =================================== 20 passed in 0.95s ====================================;
+-interpretación: Pytest ejecutó correctamente todas las pruebas y mostró que los comportamientos de las implementaciones son idóneos. No se repiten vértices, ni aristas ni se generan vacías o cuentan doblemente. 
+
+-cuántas pruebas se ejecutaron: 20 pruebas en total.
+
+-cuántas pasaron: Las 20 pasaron con éxito.
+
+-si hubo errores: Cero errores, cero fallos y, lo más importante, cero pruebas saltadas.
+
+-qué comportamiento verifican: Validan que tus grafos (tanto en lista como en matriz) hagan lo básico bien: que añadan vértices, que las aristas vayan en ambos sentidos (no dirigidos), que no cuenten doble si intentas duplicar una arista, y que los vecinos se reporten correctamente.
+
+-qué prueba diseñaste tú: Una que verifica que el grafo de ejemplo de la función tenga exactamente 3 vértices y 2 aristas y otra que verifica que el nodo 'A' esté correctamente conectado a sus vecinos correspondientes que son 'B y 'C.
+-qué caso todavía falta probar: Faltaría probar qué pasa si intentas conectar un vértice consigo mismo (un bucle), o qué ocurre si intentas buscar los vecinos de un vértice que no existe en el grafo.
