@@ -26,6 +26,25 @@ Para validar estas afirmaciones de manera empírica, implementamos pruebas métr
 1.  Evidencia de Altura: Insertar una secuencia ordenada de $n$ elementos genera un conteo exacto de nodos (`cantidad_nodos() == n`) y una medición de `altura() == n`, demostrando experimentalmente la mutación a estructura lineal.
 2.  Evidencia de Búsqueda: La evaluación de consultas en el extremo inferior de árboles degenerados arroja un crecimiento de comparaciones con pendiente constante (lineal), mientras que en árboles con distribución balanceada, el incremento de comparaciones ante variaciones de tamaño de muestra sigue un comportamiento asintótico horizontal (logarítmico).
 
+```
+valores_balanceados = [8, 4, 12, 2, 6, 11, 14]
+valores_degenerados = [1, 2, 3, 4, 5, 6, 8]
+objetivos = [2, 6, 11, 14]
+
+print('Usa estos datos para comparar altura y comparaciones en tu implementación.')
+print('Balanceado:', valores_balanceados)
+print('Degenerado:', valores_degenerados)
+print('Objetivos sugeridos:', objetivos)
+```
+resultado
+```
+Usa estos datos para comparar altura y comparaciones en tu implementación.
+Balanceado: [8, 4, 12, 2, 6, 11, 14]
+Degenerado: [1, 2, 3, 4, 5, 6, 8]
+Objetivos sugeridos: [2, 6, 11, 14]
+
+```
+
 ## 8. Animaciones
 El análisis visual de las animaciones de inserción y búsqueda corrobora el comportamiento analítico del código. Se observa con claridad cómo en un BST balanceado el flujo de ejecución "salta" drásticamente entre niveles descartando volúmenes masivos de datos en milisegundos. En contraposición, las animaciones del modelo degenerado evidencian una marcha secuencial monótona nodo por nodo, acumulando comparaciones idénticas al costo de iterar sobre una lista enlazada tradicional.
 
@@ -34,6 +53,36 @@ Con el fin de garantizar la robustez de la implementación ante escenarios lími
 * Tratamiento de Duplicados: Validar que la reinserción de claves existentes no altere la consistencia del tamaño (`cantidad_nodos`) ni la altura calculada del árbol.
 * Asimetría Inversa: Verificar que la inserción puramente decreciente (que produce un árbol degenerado estrictamente hacia la izquierda) sea reconocida correctamente por el método `es_degenerado()`.
 * Consultas Fallidas Extreman: Medir el conteo de comparaciones cuando se busca un elemento inexistente en la base de un árbol balanceado, asegurando que la cota superior respete el límite de la altura.
+```python
+def test_estudiante_duplicados_no_afectan_degeneracion():
+    arbol = ArbolBinarioBusqueda()
+    for v in [5, 5, 5, 5]:
+        arbol.insertar(v)
+        
+    assert arbol.cantidad_nodos() == 1
+    assert arbol.es_degenerado() is True
+    assert arbol.comparaciones_busqueda(5) == 1
+```
+``` python
+def test_estudiante_degenerado_hacia_la_izquierda():
+    arbol = ArbolBinarioBusqueda()
+    valores = [10, 8, 6, 4]
+    for v in valores:
+        arbol.insertar(v)
+        
+    assert arbol.es_degenerado() is True
+    assert arbol.altura() == 4
+    assert arbol.comparaciones_busqueda(4) == 4
+```
+``` python
+def test_estudiante_busqueda_fallida_en_arbol_balanceado():
+    arbol = ArbolBinarioBusqueda()
+    for v in [8, 4, 12, 2, 6, 10, 14]:
+        arbol.insertar(v)
+        
+    # El 5 no existe. Camino recorrido: 8 -> 4 -> 6 -> None
+    assert arbol.comparaciones_busqueda(5) == 3
+```
 
 ## 10. Revisión técnica del PR
 La metodología de integrar `tests_extra` en el script `evaluar.py` mitiga el sesgo de la prueba propia. Al inyectar la suite de pruebas del estudiante sobre el código fuente de otro desarrollador durante la revisión de un Pull Request, es posible descubrir vulnerabilidades lógicas o fallos de diseño que las pruebas públicas estandarizadas pasan por alto (tales como la gestión de referencias nulas o efectos secundarios en los punteros de los nodos).

@@ -28,6 +28,24 @@ El número de comparaciones en una búsqueda exitosa equivale a la profundidad d
 
 En el peor de los casos (buscar un elemento que no existe o que está en las hojas más profundas), el número máximo de comparaciones posibles está estrictamente acotado por la altura del árbol.
 ## 7. Experimentos
+```
+valores_balanceados = [8, 4, 12, 2, 6, 11, 14]
+valores_degenerados = [1, 2, 3, 4, 5, 6, 8]
+objetivos = [2, 6, 11, 14]
+
+print('Usa estos datos para comparar altura y comparaciones en tu implementación.')
+print('Balanceado:', valores_balanceados)
+print('Degenerado:', valores_degenerados)
+print('Objetivos sugeridos:', objetivos)
+```
+resultado
+```
+Usa estos datos para comparar altura y comparaciones en tu implementación.
+Balanceado: [8, 4, 12, 2, 6, 11, 14]
+Degenerado: [1, 2, 3, 4, 5, 6, 8]
+Objetivos sugeridos: [2, 6, 11, 14]
+
+```
 ### ¿La diferencia de comparaciones crece cuando aumenta el tamaño del árbol degenerado?
 Sí, crece exponencialmente en comparación al balanceado. En un árbol degenerado, añadir $n$ elementos implica que la búsqueda en el peor caso crecerá linealmente (O(n)). Mientras que en el balanceado, al aumentar el tamaño, las comparaciones apenas crecen de forma logarítmica (O(log n)). A mayor escala, la brecha de rendimiento es inmensa.
 ## 8. Animaciones
@@ -38,6 +56,37 @@ En cambio, en el árbol degenerado o la lista, el contador de comparaciones acum
 ## 9. Complejidad
 ### ¿Por qué no basta decir “BST es O(log n)” sin hablar de balance?
 Porque la cota O(log n) es una propiedad del caso ideal o promedio (cuando el árbol está razonablemente balanceado). Si omitimos el estado de balance, estamos ignorando que el peor caso de un BST es una estructura degenerada cuya complejidad real se degrada a O(n), rindiendo exactamente igual que una lista común.
+```python
+def test_estudiante_duplicados_no_afectan_degeneracion():
+    arbol = ArbolBinarioBusqueda()
+    for v in [5, 5, 5, 5]:
+        arbol.insertar(v)
+        
+    assert arbol.cantidad_nodos() == 1
+    assert arbol.es_degenerado() is True
+    assert arbol.comparaciones_busqueda(5) == 1
+```
+``` python
+def test_estudiante_degenerado_hacia_la_izquierda():
+    arbol = ArbolBinarioBusqueda()
+    valores = [10, 8, 6, 4]
+    for v in valores:
+        arbol.insertar(v)
+        
+    assert arbol.es_degenerado() is True
+    assert arbol.altura() == 4
+    assert arbol.comparaciones_busqueda(4) == 4
+```
+``` python
+def test_estudiante_busqueda_fallida_en_arbol_balanceado():
+    arbol = ArbolBinarioBusqueda()
+    for v in [8, 4, 12, 2, 6, 10, 14]:
+        arbol.insertar(v)
+        
+    # El 5 no existe. Camino recorrido: 8 -> 4 -> 6 -> None
+    assert arbol.comparaciones_busqueda(5) == 3
+```
+
 ## 10. Problemas relacionados
 ### Elige uno y explica qué concepto de esta clase practica.
 Balanced Binary Tree: Este problema requiere implementar una función que determine si un árbol binario está balanceado calculando recursivamente la altura de los subárboles izquierdo y derecho de cada nodo. Practica directamente el concepto de altura y la definición matemática de balance (que la diferencia de alturas no sea mayor a 1).
