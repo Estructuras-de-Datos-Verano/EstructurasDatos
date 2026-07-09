@@ -21,6 +21,25 @@
 
     Por otro lado, en mi seguda prueba, corrobore que mis dos funciones, contien y compaacion_busqueda son complementrias: esto porque contiene te dice si el arbol contiene el dato buscado y la otra funcion nos dice cuantas comparaciones necesito para encontrarlo
 ## 10. Revisión técnica del PR
+clase_12\tests\test_publico_bst_balance.py::test_nodo_guarda_valor_y_empieza_sin_hijos PASSED                                                                                                                       [  6%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_vacio PASSED                                                                                                                                       [ 13%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_con_raiz PASSED                                                                                                                                    [ 20%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_balanceado PASSED                                                                                                                                  [ 26%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_degenerado PASSED                                                                                                                                  [ 33%]
+clase_12\tests\test_publico_bst_balance.py::test_inorden_sigue_regresando_valores_ordenados PASSED                                                                                                                  [ 40%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_balanceado PASSED                                                                                                             [ 46%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_degenerado PASSED                                                                                                             [ 53%]
+clase_12\tests\test_publico_bst_balance.py::test_duplicados_no_aumentan_cantidad_de_nodos PASSED                                                                                                                    [ 60%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_balanceada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol balanceado.)                                                                 [ 66%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_degenerada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol degenerado.)                                                                 [ 73%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_insercion_ordenada_altura_maxima SKIPPED (TODO alumno: diseña una prueba de altura máxima por inserción ordenada.)                                            [ 80%]
+clase_12::test_busqueda_en_arbol_balanceado_cuenta_comparaciones_correctas PASSED                                                                                                                                   [ 86%]
+clase_12::test_insercion_ordenada_produce_altura_maxima_y_arbol_degenerado PASSED                                                                                                                                   [ 93%]
+clase_12::test_recorrido_preorden_y_postorden_son_coherentes PASSED                                                                                                                                                 [100%]
+
+============================================================================================= 12 passed, 3 skipped in 0.05s ==============================================================================================
+
+como observación constructiva: te puedo decir que esta bien hecho quiza te falte un poco de concicidad a la hora de responde preguntas pero todo bien.
 
 ## 11. Problemas relacionados
     Hay multiples problemas relacionados pero yo destaco '98. Validate Binary Search Tree'; pues me parece muy interesate agregar un nuevo parametro para validar un BST y ademas da pie a una implementacion mas robusta 
