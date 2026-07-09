@@ -68,7 +68,54 @@ Yo diseñé las siguientes pruebas TODO: test_todo_busqueda_balanceada(), test_t
 
 ## 10. Revisión técnica del PR
 
-...
+Ejecuté pruebas públicas y mis pruebas propias contra esta implementación.
+
+Comando:
+
+```bash
+python3 evaluar.py entregas/clase_12/ana clase_12/tests entregas/clase_12/luis/test_estudiante.py
+```
+
+Salida:
+
+```text
+Ejecutando:
+C:\Users\0255295\Documents\GitHub\EstructurasDatos\.venv\Scripts\python.exe -m pytest -v C:\Users\0255295\Documents\GitHub\EstructurasDatos\clase_12\tests C:\Users\0255295\Documents\GitHub\EstructurasDatos\entregas\clase_12\LEO\test_estudiante.py
+
+============================================================================================================= test session starts ==============================================================================================================
+platform win32 -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\0255295\Documents\GitHub\EstructurasDatos\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\0255295\Documents\GitHub\EstructurasDatos\clase_12
+configfile: pytest.ini
+plugins: anyio-4.14.0
+collected 20 items                                                                                                                                                                                                                              
+
+clase_12\tests\test_publico_bst_balance.py::test_nodo_guarda_valor_y_empieza_sin_hijos PASSED                                                                                                                                             [  5%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_vacio PASSED                                                                                                                                                             [ 10%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_con_raiz PASSED                                                                                                                                                          [ 15%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_balanceado PASSED                                                                                                                                                        [ 20%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_degenerado PASSED                                                                                                                                                        [ 25%]
+clase_12\tests\test_publico_bst_balance.py::test_inorden_sigue_regresando_valores_ordenados PASSED                                                                                                                                        [ 30%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_balanceado PASSED                                                                                                                                   [ 35%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_degenerado PASSED                                                                                                                                   [ 40%]
+clase_12\tests\test_publico_bst_balance.py::test_duplicados_no_aumentan_cantidad_de_nodos PASSED                                                                                                                                          [ 45%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_balanceada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol balanceado.)                                                                                       [ 50%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_degenerada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol degenerado.)                                                                                       [ 55%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_insercion_ordenada_altura_maxima SKIPPED (TODO alumno: diseña una prueba de altura máxima por inserción ordenada.)                                                                  [ 60%]
+clase_12\tests\test_publico_bst_balance.py::test_prueba_altura PASSED                                                                                                                                                                     [ 65%]
+clase_12\tests\test_publico_bst_balance.py::test_prueba_balance PASSED                                                                                                                                                                    [ 70%]
+clase_12::test_todo_busqueda_balanceada PASSED                                                                                                                                                                                            [ 75%]
+clase_12::test_todo_busqueda_degenerada PASSED                                                                                                                                                                                            [ 80%]
+clase_12::test_todo_insercion_ordenada_altura_maxima PASSED                                                                                                                                                                               [ 85%]
+clase_12::test_arbol_balanceado_altura_no_es_num_nodos_LEO PASSED                                                                                                                                                                         [ 90%]
+clase_12::test_busqueda_en_arbol_vacio_es_0_LEO PASSED                                                                                                                                                                                    [ 95%]
+clase_12::test_arbol_vacio_no_es_degenerado_LEO PASSED                                                                                                                                                                                    [100%]
+
+======================================================================================================== 17 passed, 3 skipped in 0.06s =========================================================================================================
+
+```
+
+Observación: Todas las pruebas corren bien (las skipeadas no son relvantes); Me gustaria revisar que pasa con la el metodo 'comparaciones_busqueda' si se le da a buscar un dato que no este en arbol, bien implementado
 
 ## 11. Problemas relacionados
 
