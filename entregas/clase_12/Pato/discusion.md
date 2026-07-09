@@ -38,7 +38,34 @@ def test_es_degenerado():
     assert arbol3.es_degenerado() == True
 ```
 ## 10. Revisión técnica del PR
-- 
+```
+Observación constructiva: Considero que está bien explicado, aunque faltan pruebas en la parte 7 y así, de ahí en fuera está kul.
+====================================================================================== test session starts =======================================================================================
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\0281528\Documents\GitHub\EstructurasDatos\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\0281528\Documents\GitHub\EstructurasDatos\clase_12
+configfile: pytest.ini
+plugins: anyio-4.14.1
+collected 15 items                                                                                                                                                                                
+
+clase_12\tests\test_publico_bst_balance.py::test_nodo_guarda_valor_y_empieza_sin_hijos PASSED                                                                                               [  6%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_vacio PASSED                                                                                                               [ 13%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_con_raiz PASSED                                                                                                            [ 20%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_balanceado PASSED                                                                                                          [ 26%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_degenerado PASSED                                                                                                          [ 33%]
+clase_12\tests\test_publico_bst_balance.py::test_inorden_sigue_regresando_valores_ordenados PASSED                                                                                          [ 40%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_balanceado PASSED                                                                                     [ 46%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_degenerado PASSED                                                                                     [ 53%]
+clase_12\tests\test_publico_bst_balance.py::test_duplicados_no_aumentan_cantidad_de_nodos PASSED                                                                                            [ 60%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_balanceada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol balanceado.)                                         [ 66%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_degenerada SKIPPED (TODO alumno: diseña una prueba de búsqueda en árbol degenerado.)                                         [ 73%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_insercion_ordenada_altura_maxima SKIPPED (TODO alumno: diseña una prueba de altura máxima por inserción ordenada.)                    [ 80%]
+clase_12::test_mi_arbol_vacio_es_degenerado FAILED                                                                                                                                          [ 86%]
+clase_12::test_mi_arbol_balanceado_no_es_degenerado PASSED                                                                                                                                  [ 93%]
+clase_12::test_mi_conteo_comparaciones_fallidas PASSED                                                                                                                                      [100%]
+
+============================================================================================ FAILURES ============================================================================================
+```
 ## 11. Problemas relacionados
 - Subordinates
 - Company Queries I
