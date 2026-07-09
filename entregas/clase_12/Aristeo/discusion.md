@@ -38,6 +38,51 @@ Con el fin de garantizar la robustez de la implementación ante escenarios lími
 ## 10. Revisión técnica del PR
 La metodología de integrar `tests_extra` en el script `evaluar.py` mitiga el sesgo de la prueba propia. Al inyectar la suite de pruebas del estudiante sobre el código fuente de otro desarrollador durante la revisión de un Pull Request, es posible descubrir vulnerabilidades lógicas o fallos de diseño que las pruebas públicas estandarizadas pasan por alto (tales como la gestión de referencias nulas o efectos secundarios en los punteros de los nodos).
 
+Ejecutando:
+C:\Users\0286761\AppData\Local\Programs\Python\Python314\python.exe -m pytest -v C:\Users\0286761\Documents\GitHub\EstructurasDatos\clase_12\tests C:\Users\0286761\Documents\GitHub\EstructurasDatos\entregas\clase_12\max\test_estudiante.py
+
+Comando:
+
+```bash
+python3 evaluar.py entregas/clase_12/Aristeo clase_12/tests entregas/clase_12/max/test_estudiante.py
+```
+
+Ejecuté pruebas públicas y mis pruebas propias contra esta implementación.
+
+
+Salida:
+
+```text
+========================================== test session starts ==========================================
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\0286761\AppData\Local\Programs\Python\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\0286761\Documents\GitHub\EstructurasDatos\clase_12
+configfile: pytest.ini
+collected 15 items                                                                                       
+
+clase_12\tests\test_publico_bst_balance.py::test_nodo_guarda_valor_y_empieza_sin_hijos PASSED      [  6%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_vacio PASSED                      [ 13%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_con_raiz PASSED                   [ 20%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_balanceado PASSED                 [ 26%]
+clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_degenerado PASSED                 [ 33%]
+clase_12\tests\test_publico_bst_balance.py::test_inorden_sigue_regresando_valores_ordenados PASSED [ 40%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_balanceado PASSED [46%]
+clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_degenerado PASSED [53%]
+clase_12\tests\test_publico_bst_balance.py::test_duplicados_no_aumentan_cantidad_de_nodos PASSED   [ 60%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_balanceada SKIPPED (TODO alumno...) [ 66%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_degenerada SKIPPED (TODO alumno...) [ 73%]
+clase_12\tests\test_publico_bst_balance.py::test_todo_insercion_ordenada_altura_maxima SKIPPED     [ 80%]
+clase_12::test_max1 PASSED                                                                         [ 86%]
+clase_12::test_max2 PASSED                                                                         [ 93%]
+clase_12::test_max3 PASSED                                                                         [100%]
+
+===================================== 12 passed, 3 skipped in 0.04s =====================================
+```
+
+Observación:
+
+En el analizis de las pruebas se alcanza a ver que la implementación de los arboles en cuestión es correcta, las pruebas que se saltaron es normal ya que por la forma en la que se guardo el reporte_publico los TODO no se guardaron, pero observo en tu reporte que si las pasaron, así que todo esta bien.
+
 ## 11. Problemas relacionados
 El dominio conceptual de la altura, balance e invariantes habilita la resolución de problemas avanzados en plataformas como LeetCode:
 * LeetCode 110 (Balanced Binary Tree): Exige calcular recursivamente las alturas de subárboles para verificar que las diferencias de nivel no superen la unidad en ningún punto.
