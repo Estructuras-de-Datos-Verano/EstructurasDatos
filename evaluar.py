@@ -1,10 +1,20 @@
-"""Ejecuta pruebas públicas sobre una entrega del curso.
+"""Ejecuta pruebas públicas y opcionales sobre una entrega del curso.
 
-Uso:
+Uso general:
 
-    python3 evaluar.py entregas/clase_11/nombre clase_11/tests
+    python3 evaluar.py <carpeta_entrega> <tests_publicos> [tests_extra]
 
-El script agrega temporalmente la carpeta de entrega al ``PYTHONPATH`` para
+Ejemplo macOS / Linux:
+
+    python3 evaluar.py entregas/clase_12/max clase_12/tests
+    python3 evaluar.py entregas/clase_12/max clase_12/tests entregas/clase_12/leo/test_estudiante.py
+
+Ejemplo Windows PowerShell:
+
+    py evaluar.py entregas/clase_12/max clase_12/tests
+    python evaluar.py entregas/clase_12/max clase_12/tests
+
+El script agrega temporalmente la carpeta de entrega al entorno de Python para
 que los tests puedan importar directamente ``implementacion.py``.
 """
 
@@ -16,25 +26,36 @@ import sys
 from pathlib import Path
 
 
+def _validar_ruta_tests(ruta: Path, nombre: str) -> bool:
+    """Regresa True si ``ruta`` existe como archivo o carpeta de pruebas."""
+
+    if ruta.exists():
+        return True
+    print(f"No existe {nombre}: {ruta}")
+    return False
+
+
 def main() -> int:
     """Punto de entrada del evaluador."""
 
-    if len(sys.argv) != 3:
-        print("Uso: python3 evaluar.py <carpeta_entrega> <carpeta_tests>")
+    if len(sys.argv) not in (3, 4):
+        print("Uso: python3 evaluar.py <carpeta_entrega> <tests_publicos> [tests_extra]")
         return 2
 
     carpeta_entrega = Path(sys.argv[1]).resolve()
-    carpeta_tests = Path(sys.argv[2]).resolve()
+    tests_publicos = Path(sys.argv[2]).resolve()
+    tests_extra = Path(sys.argv[3]).resolve() if len(sys.argv) == 4 else None
     implementacion = carpeta_entrega / "implementacion.py"
 
     if not carpeta_entrega.exists() or not carpeta_entrega.is_dir():
         print(f"No existe la carpeta de entrega: {carpeta_entrega}")
         return 2
-    if not carpeta_tests.exists() or not carpeta_tests.is_dir():
-        print(f"No existe la carpeta de tests: {carpeta_tests}")
-        return 2
     if not implementacion.exists():
         print(f"No se encontró implementacion.py en: {carpeta_entrega}")
+        return 2
+    if not _validar_ruta_tests(tests_publicos, "la carpeta de tests públicos"):
+        return 2
+    if tests_extra is not None and not _validar_ruta_tests(tests_extra, "tests_extra"):
         return 2
 
     env = os.environ.copy()
@@ -44,7 +65,11 @@ def main() -> int:
     env["PYTHONPATH"] = os.pathsep.join(rutas)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
 
-    comando = [sys.executable, "-m", "pytest", "-v", str(carpeta_tests)]
+    objetivos = [str(tests_publicos)]
+    if tests_extra is not None:
+        objetivos.append(str(tests_extra))
+
+    comando = [sys.executable, "-m", "pytest", "-v", *objetivos]
     print("Ejecutando:", flush=True)
     print(" ".join(comando), flush=True)
     print(flush=True)
