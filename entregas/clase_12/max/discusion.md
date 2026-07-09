@@ -84,7 +84,63 @@ Mis pruebas intentan endorcarse principalmente en que la creación de los arbole
 
 ## 10. Revisión técnica del PR
 
+### Ejecuté pruebas públicas y mis pruebas propias contra esta implementación.
 
+#### Comando: 
+py evaluar.py entregas/clase_12/max clase_12/tests entregas/clase_12/LEO/test_estudiante.py
+
+#### Salida:
+
+            Ejecutando:
+            C:\Users\0254049\AppData\Local\Programs\Python\Python313\python.exe -m pytest -v C:\Users\0254049\Documents\GitHub\EstructurasDatos\clase_12\tests C:\Users\0254049\Documents\GitHub\EstructurasDatos\entregas\clase_12\LEO\test_estudiante.py
+
+            ============================================= test session starts =============================================
+            platform win32 -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\0254049\AppData\Local\Programs\Python\Python313\python.exe
+            cachedir: .pytest_cache
+            rootdir: C:\Users\0254049\Documents\GitHub\EstructurasDatos\clase_12
+            configfile: pytest.ini
+            collected 18 items                                                                                             
+
+            clase_12\tests\test_publico_bst_balance.py::test_nodo_guarda_valor_y_empieza_sin_hijos PASSED            [  5%]
+            clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_vacio PASSED                            [ 11%]
+            clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_con_raiz PASSED                         [ 16%]
+            clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_balanceado PASSED                       [ 22%]
+            clase_12\tests\test_publico_bst_balance.py::test_altura_de_arbol_degenerado PASSED                       [ 27%]
+            clase_12\tests\test_publico_bst_balance.py::test_inorden_sigue_regresando_valores_ordenados PASSED       [ 33%]
+            clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_balanceado PASSED  [ 38%]
+            clase_12\tests\test_publico_bst_balance.py::test_busqueda_con_conteo_de_comparaciones_degenerado PASSED  [ 44%]
+            clase_12\tests\test_publico_bst_balance.py::test_duplicados_no_aumentan_cantidad_de_nodos PASSED         [ 50%]
+            clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_balanceada SKIPPED (TODO alumno: dise...) [ 55%]
+            clase_12\tests\test_publico_bst_balance.py::test_todo_busqueda_degenerada SKIPPED (TODO alumno: dise...) [ 61%]
+            clase_12\tests\test_publico_bst_balance.py::test_todo_insercion_ordenada_altura_maxima SKIPPED (TODO...) [ 66%]
+            clase_12::test_todo_busqueda_balanceada PASSED                                                           [ 72%]
+            clase_12::test_todo_busqueda_degenerada PASSED                                                           [ 77%]
+            clase_12::test_todo_insercion_ordenada_altura_maxima PASSED                                              [ 83%]
+            clase_12::test_arbol_balanceado_altura_no_es_num_nodos_LEO PASSED                                        [ 88%]
+            clase_12::test_busqueda_en_arbol_vacio_es_0_LEO PASSED                                                   [ 94%]
+            clase_12::test_arbol_vacio_no_es_degenerado_LEO FAILED                                                   [100%]
+
+            ================================================== FAILURES ===================================================
+            ____________________________________ test_arbol_vacio_no_es_degenerado_LEO ____________________________________
+
+                def test_arbol_vacio_no_es_degenerado_LEO():
+                    """
+                    Test en el que queremos verificar que un árbol vacío no es degenerado
+                    """
+                
+                    arbol = ArbolBinarioBusqueda()
+            >       assert not arbol.es_degenerado()
+            E       assert not True
+            E        +  where True = es_degenerado()
+            E        +    where es_degenerado = <implementacion.ArbolBinarioBusqueda object at 0x000001F2DF21D9B0>.es_degenerado
+
+            entregas\clase_12\LEO\test_estudiante.py:70: AssertionError
+            =========================================== short test summary info ===========================================
+            FAILED clase_12::test_arbol_vacio_no_es_degenerado_LEO - assert not True
+            =================================== 1 failed, 14 passed, 3 skipped in 0.09s ===================================
+
+#### Observación:
+Todas las pruebas públicas pasaron sin ningun problema, sin embargo al correr mis pruebas propias, hubo un error en el siguiente test: test_arbol_vacio_no_es_degenerado_LEO(). Esto se debe a que mi compañero olvidó agregar en su implementación que si un árbol es vacío, no es degenerado. Pero fuera de este pequeño detalle, todo está perfecto.
 
 ## 11. Problemas relacionados
 
