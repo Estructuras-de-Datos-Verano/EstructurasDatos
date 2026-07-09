@@ -10,7 +10,7 @@ Que la lista no mantiene un orden y tiene repetición, entonces al introducir un
 
 Elige uno de estos problemas y explica qué concepto de la clase parece practicar.
 
-Problema: 
+Problema: [Subordinates](https://cses.fi/problemset/task/1674/): árboles y jerarquías.
 Concepto: 
 
 ## 3. Conceptos básicos
