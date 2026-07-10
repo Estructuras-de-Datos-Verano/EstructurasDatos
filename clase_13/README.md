@@ -40,7 +40,12 @@ clase_13/
 │       ├── avl_ll_rotacion_derecha.gif
 │       ├── avl_rr_rotacion_izquierda.gif
 │       ├── avl_lr_rotacion_doble.gif
-│       └── avl_rl_rotacion_doble.gif
+│       ├── avl_rl_rotacion_doble.gif
+│       ├── avl_{ll,rr,lr,rl}_nivel_2_local.gif
+│       ├── avl_{ll,rr,lr,rl}_nivel_3_evolucion.gif
+│       ├── avl_sin_rotacion.gif
+│       ├── avl_multiples_rotaciones.gif
+│       └── bst_vs_avl.gif
 ├── practicas/
 │   ├── practica_13.md
 │   ├── guia_markdown.md
@@ -80,7 +85,8 @@ Abre directamente:
 presentacion/index.html
 ```
 
-La presentación es autocontenida e incluye los GIFs de rotaciones.
+La presentación funciona sin internet y referencia los GIFs locales de
+`notebooks/gifs/`.
 
 ## Notebook
 
