@@ -7,3 +7,4 @@
       
 7 y 8. Revisión técnicaRecibida: Feedback del compañero sobre el orden al actualizar alturas y legibilidad del código.Realizada: Revisión del repositorio del compañero, aportando observaciones claras y constructivas para optimizar sus factores de balance.
 9. pregunta 
+¿es para ti reelevante saber las diferencias entre RR, LL, LR, y RL
