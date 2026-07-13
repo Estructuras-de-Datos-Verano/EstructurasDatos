@@ -37,7 +37,9 @@ Los tests en test_estudiante.py validaron el comportamiento de los bucles en esc
 
 ## Revisión técnica.
 
+SANTIAGO SALDIVAR
 
+Todas las pruebas pasaron. Está muy bien implementado. Todo el código funciona y es claro.
 
 ## Relación con Dijkstra.
 
