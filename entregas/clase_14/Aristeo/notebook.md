@@ -50,5 +50,19 @@
 ...
 ## 16. Complejidad
 ### ¿Por qué sift-up y sift-down son logarítmicos?
-
-
+...
+## 17. Last Stone Weight
+### ¿Cuál es la operación dominante y el resultado del ejemplo?
+## 18. Pruebas
+### Diseña, sin escribir todavía el código completo, una entrada que obligue a `_bajar` a elegir el hijo derecho y explica qué afirmaciones comprobarías.
+...
+### ¿Qué error específico detecta una extracción con varios descensos?
+...
+## 19. Revisión técnica
+### ¿Qué debe incluir `revision_nombre_revisor.md`?
+...
+## 20. Preparación para Dijkstra
+### ¿Qué guardaría la prioridad en Dijkstra?
+...
+## 21. Cierre
+### ¿Qué criterio usarás para elegir una estructura en un problema nuevo?
