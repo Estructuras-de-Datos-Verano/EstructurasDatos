@@ -43,5 +43,12 @@
 ### ¿Por qué debemos elegir el hijo menor?
 ## 14. Visualizaciones ipywidgets
 ### ¿Qué relación observas entre la celda del arreglo y el nodo resaltado?
+## 15. Comparación BST, AVL y heap
+### ¿Qué estructura elegirías para cada escenario y qué operación justifica tu decisión?
+...
+### ¿Qué elegirías para búsquedas arbitrarias y qué para extraer mínimos?
+...
+## 16. Complejidad
+### ¿Por qué sift-up y sift-down son logarítmicos?
 
 
