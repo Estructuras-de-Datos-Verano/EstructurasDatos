@@ -118,8 +118,7 @@ class HeapMin:
 
     def _subir(self, indice: int) -> None:
         """Desplaza hacia arriba el nodo ubicado en ``indice``."""
-        if indice == 0:
-            raise IndexError("No se puede subir la raíz")
+
         while indice > 0:
             if self.datos[indice] < self.datos[self._indice_padre(indice)]:
                 a = self.datos[indice]
@@ -133,8 +132,6 @@ class HeapMin:
     def _bajar(self, indice: int) -> None:
         """Desplaza hacia abajo el nodo ubicado en ``indice``."""
 
-        if indice == len(self.datos) - 1:
-            raise IndexError("No se puede bajar el último nodo")
         while indice < len(self.datos) - 1:
             if self._indice_izquierdo(indice) < len(self.datos) and self._indice_derecho(indice) < len(self.datos):
             
@@ -145,27 +142,27 @@ class HeapMin:
                         self.datos[indice] = b
                         self.datos[self._indice_izquierdo(indice)] = a
                         indice = self._indice_izquierdo(indice)
-                    if self.datos[self._indice_izquierdo(indice)] < self.datos[self._indice_derecho(indice)]:
+                    elif self.datos[self._indice_izquierdo(indice)] < self.datos[self._indice_derecho(indice)]:
                         a = self.datos[indice]
                         b = self.datos[self._indice_izquierdo(indice)]
                         self.datos[indice] = b 
                         self.datos[self._indice_izquierdo(indice)] = a
                         indice = self._indice_izquierdo(indice)
-                    if self.datos[self._indice_izquierdo(indice)] > self.datos[self._indice_derecho(indice)]:
+                    elif self.datos[self._indice_izquierdo(indice)] > self.datos[self._indice_derecho(indice)]:
                         a = self.datos[indice]
                         b = self.datos[self._indice_derecho(indice)]
                         self.datos[indice] = b
                         self.datos[self._indice_derecho(indice)] = a
                         indice = self._indice_derecho(indice)
 
-                if self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and not self.datos[indice] > self.datos[self._indice_derecho(indice)]:
+                elif self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and not self.datos[indice] > self.datos[self._indice_derecho(indice)]:
                     a = self.datos[indice]
                     b = self.datos[self._indice_izquierdo(indice)]
                     self.datos[indice] = b
-                    self.datos[self._indice_izquierdo(indice)]
+                    self.datos[self._indice_izquierdo(indice)] = a
                     indice = self._indice_izquierdo(indice)      
 
-                if not self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_derecho(indice)]:
+                elif not self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_derecho(indice)]:
                     a = self.datos[indice]
                     b = self.datos[self._indice_derecho(indice)]
                     self.datos[indice] = b
@@ -174,7 +171,7 @@ class HeapMin:
                 else:
                     return
                 
-            if self._indice_izquierdo(indice) < len(self.datos) and self._indice_derecho(indice) >= len(self.datos):
+            elif self._indice_izquierdo(indice) < len(self.datos) and self._indice_derecho(indice) >= len(self.datos):
                 if self.datos[indice] > self.datos[self._indice_izquierdo(indice)]:
                     a = self.datos[indice]
                     b = self.datos[self._indice_izquierdo(indice)]
@@ -183,6 +180,8 @@ class HeapMin:
                     indice = self._indice_izquierdo(indice)
                 else:
                     return
+            else:
+                return
                 
 
     def _indice_padre(self, indice: int) -> int:
