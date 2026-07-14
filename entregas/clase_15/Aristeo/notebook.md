@@ -1,23 +1,27 @@
 # Notebook Aristeo
 ## 1. Por qué BFS ya no basta
 ### ¿Qué camino elegiría una estrategia que solo compara niveles y cuál debería elegir si optimizamos costo total?
-...
+Iría directo de A a D.
 ### ¿Por qué contar aristas ya no es suficiente en un grafo ponderado?
-...
+Porque una ruta con mayor cantidad de aristas individuales puede tener un peso menor que una ruta directa masiva.
 ## 2. Recordatorio de BFS
 ### ¿En qué condición BFS sí garantiza caminos de costo mínimo?
-...
+Cuando todas las aristas poseen exactamente el mismo peso.
 ## 3. Red de ciudades conductora
+## enumera al menos dos caminos de A a E y suma sus pesos. No decidas todavía cuál usará el algoritmo.
+1. A → B → E = 4 + 7 = 11
+2. A → C → B → D → E = 1 + 2 + 1 + 3 = 7
 ### ¿Qué representan nodos, aristas y pesos en esta red?
-...
+Los nodos representan ciudades, las aristas representan carreteras dirigidas disponibles entre ellas, y los pesos simbolizan el tiempo de viaje en minutos.
+## 4. Distancias tentativas
 ### ¿Qué significa infinito en la tabla de distancias?
-...
+Una distancia tentativa inicial que indica que el nodo aún no ha sido alcanzado o descubierto por ningún camino desde el origen.
 ## 5. Relajación
 ### ¿Qué tres valores comparamos al relajar una arista?
-...
+La distancia acumulada actual del nodo origen, el peso de la arista que los conecta, y la distancia acumulada actualmente registrada en el nodo destino.
 ## 6. Mejoras sucesivas
 ### ¿Por qué actualizar una distancia no obliga a borrar inmediatamente su entrada anterior del heap?
-...
+Porque borrar un elemento en una posición arbitraria dentro de un min-heap es una operación costosa.
 ## 7. Descubrimiento de la cola de prioridad
 ### ¿Qué componente del par funciona como prioridad y cuál como elemento?
 ...
