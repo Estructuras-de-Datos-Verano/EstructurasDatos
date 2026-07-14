@@ -1,0 +1,6 @@
+pytest
+ipywidgets
+matplotlib
+jupyter
+ipykernel
+

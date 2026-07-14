@@ -1,0 +1,8439 @@
+{
+  "bfs_falla": {
+    "nombre": "Por qué BFS ya no basta",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "D",
+          10
+        ],
+        [
+          "B",
+          1
+        ]
+      ],
+      "B": [
+        [
+          "D",
+          1
+        ]
+      ],
+      "D": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → D",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "D"
+        ],
+        "peso": 10.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 10 = 10 < ∞",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "D"
+        ],
+        "peso": 10.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 10",
+        "decision": "predecesor[D] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "0 + 1 = 1 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 1",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 6,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (1, B)",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "1 == distancia[B] = 1",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 7,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → D",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "1 + 1 = 2 < 10",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 8,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 2.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            2.0,
+            "D"
+          ],
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 2",
+        "decision": "predecesor[D] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 9,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (2, D)",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 2.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 2.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ]
+        ],
+        "comparacion": "2 == distancia[D] = 2",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 3,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 10,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (10, D)",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 10.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 2.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "10 != distancia[D] = 2",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 4,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 11,
+        "titulo": "Por qué BFS ya no basta",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "D": 2.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 4,
+        "relajaciones": 3,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.2
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  },
+  "recorrido_minimo": {
+    "nombre": "Recorrido manual mínimo",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "B",
+          1
+        ],
+        [
+          "C",
+          4
+        ]
+      ],
+      "B": [
+        [
+          "C",
+          2
+        ]
+      ],
+      "C": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 1 = 1 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": null
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 1",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → C",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 4.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": null
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "B"
+          ]
+        ],
+        "comparacion": "0 + 4 = 4 < ∞",
+        "decision": "Mejorar distancia[C]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar C e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 4.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A"
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "B"
+          ],
+          [
+            4.0,
+            "C"
+          ]
+        ],
+        "comparacion": "nueva distancia[C] = 4",
+        "decision": "predecesor[C] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 6,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (1, B)",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "C"
+          ]
+        ],
+        "comparacion": "1 == distancia[B] = 1",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 7,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → C",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "B",
+          "C"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "C"
+          ]
+        ],
+        "comparacion": "1 + 2 = 3 < 4",
+        "decision": "Mejorar distancia[C]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 8,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar C e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "B",
+          "C"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 3.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "B"
+        },
+        "cola_prioridad": [
+          [
+            3.0,
+            "C"
+          ],
+          [
+            4.0,
+            "C"
+          ]
+        ],
+        "comparacion": "nueva distancia[C] = 3",
+        "decision": "predecesor[C] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 9,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (3, C)",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 3.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 3.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "B"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "C"
+          ]
+        ],
+        "comparacion": "3 == distancia[C] = 3",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 3,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 10,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (4, C)",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 4.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 3.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "4 != distancia[C] = 3",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 4,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 11,
+        "titulo": "Recorrido manual mínimo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "B",
+          "C"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 1.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 4.0
+          },
+          {
+            "origen": "B",
+            "destino": "C",
+            "peso": 2.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 1.0,
+          "C": 3.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 4,
+        "relajaciones": 3,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.1,
+            0.5
+          ],
+          "B": [
+            0.5,
+            0.75
+          ],
+          "C": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  },
+  "ciudades": {
+    "nombre": "Red de ciudades — recorrido completo",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "B",
+          4
+        ],
+        [
+          "C",
+          1
+        ]
+      ],
+      "B": [
+        [
+          "D",
+          1
+        ],
+        [
+          "E",
+          7
+        ]
+      ],
+      "C": [
+        [
+          "B",
+          2
+        ],
+        [
+          "D",
+          5
+        ]
+      ],
+      "D": [
+        [
+          "E",
+          3
+        ]
+      ],
+      "E": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 4.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 4 = 4 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 4.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 4.0,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 4",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → C",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 4.0,
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": null,
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "0 + 1 = 1 < ∞",
+        "decision": "Mejorar distancia[C]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar C e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 4.0,
+          "C": 1.0,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A",
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "C"
+          ],
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[C] = 1",
+        "decision": "predecesor[C] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 6,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (1, C)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 4.0,
+          "C": 1.0,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A",
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "1 == distancia[C] = 1",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 7,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar C → B",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 4.0,
+          "C": 1.0,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "C": "A",
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "1 + 2 = 3 < 4",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 8,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            3.0,
+            "B"
+          ],
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 3",
+        "decision": "predecesor[B] = C",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 9,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar C → D",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "D"
+        ],
+        "peso": 5.0,
+        "candidata": 6.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": null,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": null,
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            3.0,
+            "B"
+          ],
+          [
+            4.0,
+            "B"
+          ]
+        ],
+        "comparacion": "1 + 5 = 6 < ∞",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 10,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "D"
+        ],
+        "peso": 5.0,
+        "candidata": 6.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 6.0,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "C",
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            3.0,
+            "B"
+          ],
+          [
+            4.0,
+            "B"
+          ],
+          [
+            6.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 6",
+        "decision": "predecesor[D] = C",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 11,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (3, B)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 3.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 6.0,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "C",
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ],
+          [
+            6.0,
+            "D"
+          ]
+        ],
+        "comparacion": "3 == distancia[B] = 3",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 3,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 12,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → D",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 6.0,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "C",
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ],
+          [
+            6.0,
+            "D"
+          ]
+        ],
+        "comparacion": "3 + 1 = 4 < 6",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 3,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 13,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ],
+          [
+            4.0,
+            "D"
+          ],
+          [
+            6.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 4",
+        "decision": "predecesor[D] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 3,
+        "relajaciones": 5,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 14,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → E",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "E"
+        ],
+        "peso": 7.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": null
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ],
+          [
+            4.0,
+            "D"
+          ],
+          [
+            6.0,
+            "D"
+          ]
+        ],
+        "comparacion": "3 + 7 = 10 < ∞",
+        "decision": "Mejorar distancia[E]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 3,
+        "relajaciones": 5,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 15,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar E e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "E",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "E"
+        ],
+        "peso": 7.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "B"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "B"
+          ],
+          [
+            4.0,
+            "D"
+          ],
+          [
+            6.0,
+            "D"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "nueva distancia[E] = 10",
+        "decision": "predecesor[E] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 3,
+        "relajaciones": 6,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 16,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (4, B)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 4.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "B"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "D"
+          ],
+          [
+            6.0,
+            "D"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "4 != distancia[B] = 3",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 4,
+        "relajaciones": 6,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 17,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (4, D)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 4.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "B"
+        },
+        "cola_prioridad": [
+          [
+            6.0,
+            "D"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "4 == distancia[D] = 4",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 5,
+        "relajaciones": 6,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 18,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar D → E",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 4.0,
+        "arista_actual": [
+          "D",
+          "E"
+        ],
+        "peso": 3.0,
+        "candidata": 7.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "B"
+        },
+        "cola_prioridad": [
+          [
+            6.0,
+            "D"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "4 + 3 = 7 < 10",
+        "decision": "Mejorar distancia[E]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 5,
+        "relajaciones": 6,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 19,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar E e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "E",
+        "distancia_extraida": 4.0,
+        "arista_actual": [
+          "D",
+          "E"
+        ],
+        "peso": 3.0,
+        "candidata": 7.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 7.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "D"
+        },
+        "cola_prioridad": [
+          [
+            6.0,
+            "D"
+          ],
+          [
+            7.0,
+            "E"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "nueva distancia[E] = 7",
+        "decision": "predecesor[E] = D",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 5,
+        "relajaciones": 7,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 20,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (6, D)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 6.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 7.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "D"
+        },
+        "cola_prioridad": [
+          [
+            7.0,
+            "E"
+          ],
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "6 != distancia[D] = 4",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 6,
+        "relajaciones": 7,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 21,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (7, E)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "E",
+        "distancia_extraida": 7.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 7.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "D"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "E"
+          ]
+        ],
+        "comparacion": "7 == distancia[E] = 7",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 7,
+        "relajaciones": 7,
+        "obsoletas": 2,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 22,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (10, E)",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": "E",
+        "distancia_extraida": 10.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 7.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "D"
+        },
+        "cola_prioridad": [],
+        "comparacion": "10 != distancia[E] = 7",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 8,
+        "relajaciones": 7,
+        "obsoletas": 2,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 23,
+        "titulo": "Red de ciudades — recorrido completo",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 4.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          },
+          {
+            "origen": "B",
+            "destino": "E",
+            "peso": 7.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 5.0
+          },
+          {
+            "origen": "D",
+            "destino": "E",
+            "peso": 3.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 3.0,
+          "C": 1.0,
+          "D": 4.0,
+          "E": 7.0
+        },
+        "predecesores": {
+          "A": null,
+          "B": "C",
+          "C": "A",
+          "D": "B",
+          "E": "D"
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 8,
+        "relajaciones": 7,
+        "obsoletas": 3,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.32,
+            0.18
+          ],
+          "B": [
+            0.38,
+            0.78
+          ],
+          "D": [
+            0.68,
+            0.48
+          ],
+          "E": [
+            0.92,
+            0.48
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  },
+  "mejoras_multiples": {
+    "nombre": "Una distancia mejora varias veces",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "B",
+          9
+        ],
+        [
+          "C",
+          2
+        ],
+        [
+          "D",
+          20
+        ]
+      ],
+      "C": [
+        [
+          "B",
+          3
+        ],
+        [
+          "D",
+          8
+        ]
+      ],
+      "B": [
+        [
+          "D",
+          1
+        ]
+      ],
+      "D": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 9.0,
+        "candidata": 9.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 9 = 9 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 9.0,
+        "candidata": 9.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": 9.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 9",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → C",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 2.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": 9.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ]
+        ],
+        "comparacion": "0 + 2 = 2 < ∞",
+        "decision": "Mejorar distancia[C]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar C e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 2.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 9.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            2.0,
+            "C"
+          ],
+          [
+            9.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[C] = 2",
+        "decision": "predecesor[C] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 6,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → D",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "D"
+        ],
+        "peso": 20.0,
+        "candidata": 20.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 9.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            2.0,
+            "C"
+          ],
+          [
+            9.0,
+            "B"
+          ]
+        ],
+        "comparacion": "0 + 20 = 20 < ∞",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 7,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "D"
+        ],
+        "peso": 20.0,
+        "candidata": 20.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 9.0,
+          "D": 20.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            2.0,
+            "C"
+          ],
+          [
+            9.0,
+            "B"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 20",
+        "decision": "predecesor[D] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 8,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (2, C)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 2.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 9.0,
+          "D": 20.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "2 == distancia[C] = 2",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 9,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar C → B",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 2.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 3.0,
+        "candidata": 5.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 9.0,
+          "D": 20.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "2 + 3 = 5 < 9",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 10,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 2.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 3.0,
+        "candidata": 5.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 20.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            5.0,
+            "B"
+          ],
+          [
+            9.0,
+            "B"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 5",
+        "decision": "predecesor[B] = C",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 11,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar C → D",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 2.0,
+        "arista_actual": [
+          "C",
+          "D"
+        ],
+        "peso": 8.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 20.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "A"
+        },
+        "cola_prioridad": [
+          [
+            5.0,
+            "B"
+          ],
+          [
+            9.0,
+            "B"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "2 + 8 = 10 < 20",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 12,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 2.0,
+        "arista_actual": [
+          "C",
+          "D"
+        ],
+        "peso": 8.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "C"
+        },
+        "cola_prioridad": [
+          [
+            5.0,
+            "B"
+          ],
+          [
+            9.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 10",
+        "decision": "predecesor[D] = C",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 5,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 13,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (5, B)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 5.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "C"
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "5 == distancia[B] = 5",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 3,
+        "relajaciones": 5,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 14,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → D",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 5.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 6.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 10.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "C"
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "5 + 1 = 6 < 10",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 3,
+        "relajaciones": 5,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 15,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 5.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 6.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            6.0,
+            "D"
+          ],
+          [
+            9.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 6",
+        "decision": "predecesor[D] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 3,
+        "relajaciones": 6,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 16,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (6, D)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 6.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            9.0,
+            "B"
+          ],
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "6 == distancia[D] = 6",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 4,
+        "relajaciones": 6,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 17,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (9, B)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 9.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "D"
+          ],
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "9 != distancia[B] = 5",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 5,
+        "relajaciones": 6,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 18,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (10, D)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 10.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            20.0,
+            "D"
+          ]
+        ],
+        "comparacion": "10 != distancia[D] = 6",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 6,
+        "relajaciones": 6,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 19,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (20, D)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 20.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "20 != distancia[D] = 6",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 7,
+        "relajaciones": 6,
+        "obsoletas": 2,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 20,
+        "titulo": "Una distancia mejora varias veces",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 9.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 2.0
+          },
+          {
+            "origen": "A",
+            "destino": "D",
+            "peso": 20.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 3.0
+          },
+          {
+            "origen": "C",
+            "destino": "D",
+            "peso": 8.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 2.0,
+          "B": 5.0,
+          "D": 6.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 7,
+        "relajaciones": 6,
+        "obsoletas": 3,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.35,
+            0.18
+          ],
+          "B": [
+            0.42,
+            0.78
+          ],
+          "D": [
+            0.88,
+            0.5
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  },
+  "entradas_obsoletas": {
+    "nombre": "Entradas obsoletas en el heap",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "B",
+          10
+        ],
+        [
+          "C",
+          1
+        ]
+      ],
+      "C": [
+        [
+          "B",
+          2
+        ]
+      ],
+      "B": [
+        [
+          "D",
+          1
+        ]
+      ],
+      "D": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 10.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": null,
+          "D": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 10 = 10 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 10.0,
+        "candidata": 10.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": 10.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 10",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → C",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "C": null,
+          "B": 10.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": null,
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "0 + 1 = 1 < ∞",
+        "decision": "Mejorar distancia[C]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar C e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "C"
+        ],
+        "peso": 1.0,
+        "candidata": 1.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 10.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            1.0,
+            "C"
+          ],
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[C] = 1",
+        "decision": "predecesor[C] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 6,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (1, C)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 10.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "1 == distancia[C] = 1",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 7,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar C → B",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "C",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 10.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "A",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "1 + 2 = 3 < 10",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 2,
+        "relajaciones": 2,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 8,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 1.0,
+        "arista_actual": [
+          "C",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 3.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            3.0,
+            "B"
+          ],
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 3",
+        "decision": "predecesor[B] = C",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 2,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 9,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (3, B)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 3.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "3 == distancia[B] = 3",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 3,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 10,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar B → D",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": null
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": null
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "3 + 1 = 4 < ∞",
+        "decision": "Mejorar distancia[D]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 3,
+        "relajaciones": 3,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 11,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar D e insertar en el heap",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 3.0,
+        "arista_actual": [
+          "B",
+          "D"
+        ],
+        "peso": 1.0,
+        "candidata": 4.0,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            4.0,
+            "D"
+          ],
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[D] = 4",
+        "decision": "predecesor[D] = B",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 3,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 12,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (4, D)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "D",
+        "distancia_extraida": 4.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [
+          [
+            10.0,
+            "B"
+          ]
+        ],
+        "comparacion": "4 == distancia[D] = 4",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 4,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 13,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (10, B)",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 10.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "10 != distancia[B] = 3",
+        "decision": "Ignorar entrada obsoleta",
+        "entrada_obsoleta": true,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Existe una entrada más reciente con mejor distancia.",
+        "respuesta_reto": "ignorar entrada obsoleta",
+        "extracciones": 5,
+        "relajaciones": 4,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 14,
+        "titulo": "Entradas obsoletas en el heap",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 10.0
+          },
+          {
+            "origen": "A",
+            "destino": "C",
+            "peso": 1.0
+          },
+          {
+            "origen": "C",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "B",
+            "destino": "D",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "C": 1.0,
+          "B": 3.0,
+          "D": 4.0
+        },
+        "predecesores": {
+          "A": null,
+          "C": "A",
+          "B": "C",
+          "D": "B"
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 5,
+        "relajaciones": 4,
+        "obsoletas": 1,
+        "posiciones": {
+          "A": [
+            0.08,
+            0.5
+          ],
+          "C": [
+            0.38,
+            0.2
+          ],
+          "B": [
+            0.48,
+            0.8
+          ],
+          "D": [
+            0.9,
+            0.5
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  },
+  "inalcanzable": {
+    "nombre": "Nodo inalcanzable",
+    "origen": "A",
+    "grafo": {
+      "A": [
+        [
+          "B",
+          2
+        ]
+      ],
+      "B": [],
+      "X": [
+        [
+          "Y",
+          1
+        ]
+      ],
+      "Y": []
+    },
+    "estados": [
+      {
+        "paso": 0,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Inicializar distancias",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [
+          [
+            0.0,
+            "A"
+          ]
+        ],
+        "comparacion": "origen = 0; demás = ∞",
+        "decision": "Insertar (0, A)",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "distancia[origen] = 0",
+        "mensaje": "Infinito significa que todavía no conocemos un camino.",
+        "respuesta_reto": "extraer el mínimo",
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 1,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (0, A)",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 == distancia[A] = 0",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 2,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Relajar A → B",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "A",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": null,
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "0 + 2 = 2 < ∞",
+        "decision": "Mejorar distancia[B]",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si candidata < distancia[vecino]:",
+        "mensaje": "Relajar es intentar mejorar usando una arista; no cambia su peso.",
+        "respuesta_reto": "actualizar distancia",
+        "extracciones": 1,
+        "relajaciones": 0,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 3,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Actualizar B e insertar en el heap",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 0.0,
+        "arista_actual": [
+          "A",
+          "B"
+        ],
+        "peso": 2.0,
+        "candidata": 2.0,
+        "distancias": {
+          "A": 0.0,
+          "B": 2.0,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [
+          [
+            2.0,
+            "B"
+          ]
+        ],
+        "comparacion": "nueva distancia[B] = 2",
+        "decision": "predecesor[B] = A",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "insertar (candidata, vecino)",
+        "mensaje": "No borramos la entrada anterior: si sale después, será detectada como obsoleta.",
+        "respuesta_reto": "extraer el mínimo",
+        "extracciones": 1,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 4,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Extraer (2, B)",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": "B",
+        "distancia_extraida": 2.0,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 2.0,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "2 == distancia[B] = 2",
+        "decision": "Relajar aristas salientes",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "si extraída != distancia[actual]: continuar",
+        "mensaje": "Al tener la menor prioridad pendiente, revisamos sus vecinos.",
+        "respuesta_reto": "relajar vecinos",
+        "extracciones": 2,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      },
+      {
+        "paso": 5,
+        "titulo": "Nodo inalcanzable",
+        "objetivo": "Mejorar distancias y procesar primero la menor conocida.",
+        "accion": "Finalizar Dijkstra",
+        "nodos": [
+          "A",
+          "B",
+          "X",
+          "Y"
+        ],
+        "aristas": [
+          {
+            "origen": "A",
+            "destino": "B",
+            "peso": 2.0
+          },
+          {
+            "origen": "X",
+            "destino": "Y",
+            "peso": 1.0
+          }
+        ],
+        "nodo_actual": null,
+        "distancia_extraida": null,
+        "arista_actual": null,
+        "peso": null,
+        "candidata": null,
+        "distancias": {
+          "A": 0.0,
+          "B": 2.0,
+          "X": null,
+          "Y": null
+        },
+        "predecesores": {
+          "A": null,
+          "B": "A",
+          "X": null,
+          "Y": null
+        },
+        "cola_prioridad": [],
+        "comparacion": "La cola de prioridad está vacía",
+        "decision": "Devolver distancias y predecesores",
+        "entrada_obsoleta": false,
+        "linea_pseudocodigo": "return distancias, predecesores",
+        "mensaje": "Los nodos inalcanzables conservan ∞.",
+        "respuesta_reto": "detener",
+        "extracciones": 2,
+        "relajaciones": 1,
+        "obsoletas": 0,
+        "posiciones": {
+          "A": [
+            0.12,
+            0.7
+          ],
+          "B": [
+            0.42,
+            0.7
+          ],
+          "X": [
+            0.58,
+            0.25
+          ],
+          "Y": [
+            0.88,
+            0.25
+          ]
+        },
+        "origen": "A"
+      }
+    ]
+  }
+}
