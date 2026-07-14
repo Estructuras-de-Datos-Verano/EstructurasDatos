@@ -9,14 +9,16 @@ El proceso exige una inspección lineal exhaustiva cada vez, lo que repite un ga
 ### ¿Cuándo sería incorrecto usar una cola FIFO?
 Falla cuando el orden de salida no debe depender de quién llegó primero, sino del nivel de urgencia o relevancia del elemento.
 ## 4. Descubrimiento manual
+
 | Inserción | Arreglo después de sift-up | Intercambios | Mínimo |
 | ---: | --- | ---: | ---: |
-| 7 | | | |
-| 3 | | | |
-| 9 | | | |
-| 1 | | | |
-| 6 | | | |
-| 5 | | | |
+| 7 | [7] | 0 | 7 |
+| 3 | [3, 7] | 1 | 3 |
+| 9 | [3, 7, 9] | 0 | 3 |
+| 1 | [1, 3, 9, 7] | 2 | 1 |
+| 6 | [1, 3, 9, 7, 6] | 0 | 1 |
+| 5 | [1, 3, 5, 7, 6, 9] | 1 | 1 |
+
 ### ¿Qué permanece estable después de insertar un valor?
 La mayoría de las conexiones no cambian, la reorganización solo afecta de manera lineal a la ruta que va desde el nuevo nodo hasta la raíz.
 ## 5. Qué es un heap

@@ -13,6 +13,8 @@ La simetría de un árbol completo facilita su traducción a una lista secuencia
 Este ajuste se activa al colocar un nuevo dato al extremo final del arreglo. El elemento asciende de nivel mediante comparaciones sucesivas con su predecesor, deteniéndose al topar con un valor menor o igual, o al alcanzar la posición inicial.
 ## Sift-down
 Para remover el mínimo sin alterar la silueta del árbol, se traslada el último componente a la cima y se le guía hacia abajo. Es indispensable cambiarlo por el menor de sus hijos para evitar corromper la lógica de orden en la rama contigua.
+## Complejidad
+Construir el heap desde cero toma un tiempo eficiente de complejidad constante. Por otro lado, cada turno del juego realiza operaciones de extracción e inserción que complejidad logaritmica, lo que nos da un tiempo total impecable de complejidad logaritmica en lugar de tardar demasiado.
 ## Last Stone Weight
 Este escenario requiere recuperar de forma constante los dos pesos más altos. La estrategia ideal consiste en emular un Max-Heap utilizando la estructura original de mínimos, invirtiendo el signo numérico de los elementos al ingresarlos y retirarlos.
 ## Pruebas propias
@@ -21,4 +23,5 @@ Las verificaciones de control evaluaron el flujo de los ciclos en situaciones cr
 
 ## Relación con Dijkstra
 Dijkstra depende de la selección recurrente del nodo con el menor costo acumulado. Al almacenar pares de datos (distancia, vértice), el heap provee lecturas inmediatas O(1) y retiros en O(log n), impidiendo que el rendimiento caiga al procesar redes complejas.
-## Pregunta abierta
+## Pregunta abierta: ¿qué operación haría preferible otra estructura?
+Una operación dentro de una estructura tipo cola, es decir, tipo FIFO.
