@@ -33,6 +33,7 @@ class HeapMin:
             self.datos[0] = ultimo_valor
             self._bajar(0)
             
+            
         return min_valor
     
     def construir_heap(self, valores: Iterable[int]) -> None:

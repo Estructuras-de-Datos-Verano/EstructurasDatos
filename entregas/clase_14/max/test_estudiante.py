@@ -20,3 +20,4 @@ def test_max2():
 def test_max3():
     piedras_extremas = [1000, 1000, 500, 500, 1, 1, 45, 45]
     assert ultima_piedra(piedras_extremas) == 0
+

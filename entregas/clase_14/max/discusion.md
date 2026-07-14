@@ -51,3 +51,4 @@ El algoritmo de Dijkstra usa este mismo concepto para calcular rutas cortas: nec
 ## Pregunta abierta: ¿qué operación haría preferible otra estructura?
 
 Las operaciones de tipo FIFO no necesitan de este tipo de estructuras, de echo todo lo contrario.
+

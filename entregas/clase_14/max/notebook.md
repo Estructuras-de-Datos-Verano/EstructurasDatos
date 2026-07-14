@@ -144,6 +144,7 @@ devolver el peso restante o 0
 
 ## Sección 18 (Pruebas)
 
+
 ¿Qué error específico detecta una extracción con varios descensos?
 
 El error en especifico que se detecta en una extracción con varios descendsos es que se puede sacar algo que no sea la raíz, por la maneraen lo queesta definido esto, por lo que hay que tener mucho cuidado a la hora de hacerlo.
