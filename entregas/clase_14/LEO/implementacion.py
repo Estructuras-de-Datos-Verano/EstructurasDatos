@@ -113,9 +113,8 @@ class HeapMin:
         heap = HeapMin()
         for valor in valores:
             heap.insertar(valor)
-        self.datos = heap
+        self.datos = heap.datos
 
-        raise NotImplementedError
 
     def _subir(self, indice: int) -> None:
         """Desplaza hacia arriba el nodo ubicado en ``indice``."""
@@ -126,7 +125,7 @@ class HeapMin:
                 a = self.datos[indice]
                 b = self.datos[self._indice_padre(indice)]
                 self.datos[indice] = b
-                self._indice_padre[indice] = a
+                self.datos[self._indice_padre(indice)] = a
                 indice = self._indice_padre(indice)
             else:
                 return
@@ -137,39 +136,54 @@ class HeapMin:
         if indice == len(self.datos) - 1:
             raise IndexError("No se puede bajar el último nodo")
         while indice < len(self.datos) - 1:
-            if self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_izquierdo(indice)]:
-                if self.datos[self._indice_izquierdo(indice)] == self.datos[self._indice_derecho(indice)]:
+            if self._indice_izquierdo(indice) < len(self.datos) and self._indice_derecho(indice) < len(self.datos):
+            
+                if self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_derecho(indice)]:
+                    if self.datos[self._indice_izquierdo(indice)] == self.datos[self._indice_derecho(indice)]:
+                        a = self.datos[indice]
+                        b = self.datos[self._indice_izquierdo(indice)]
+                        self.datos[indice] = b
+                        self.datos[self._indice_izquierdo(indice)] = a
+                        indice = self._indice_izquierdo(indice)
+                    if self.datos[self._indice_izquierdo(indice)] < self.datos[self._indice_derecho(indice)]:
+                        a = self.datos[indice]
+                        b = self.datos[self._indice_izquierdo(indice)]
+                        self.datos[indice] = b 
+                        self.datos[self._indice_izquierdo(indice)] = a
+                        indice = self._indice_izquierdo(indice)
+                    if self.datos[self._indice_izquierdo(indice)] > self.datos[self._indice_derecho(indice)]:
+                        a = self.datos[indice]
+                        b = self.datos[self._indice_derecho(indice)]
+                        self.datos[indice] = b
+                        self.datos[self._indice_derecho(indice)] = a
+                        indice = self._indice_derecho(indice)
+
+                if self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and not self.datos[indice] > self.datos[self._indice_derecho(indice)]:
                     a = self.datos[indice]
                     b = self.datos[self._indice_izquierdo(indice)]
                     self.datos[indice] = b
-                    self._indice_izquierdo[indice] = a
-                    indice = self._indice_izquierdo(indice)
-                if self.datos[self._indice_izquierdo(indice)] < self.datos[self._indice_derecho(indice)]:
-                    a = self.datos[indice]
-                    b = self.datos[self._indice_izquierdo(indice)]
-                    self.datos[indice] = b
-                    self._indice_izquierdo[indice] = a
-                    indice = self._indice_izquierdo(indice)
-                if self.datos[self._indice_izquierdo(indice)] > self.datos[self._indice_derecho(indice)]:
+                    self.datos[self._indice_izquierdo(indice)]
+                    indice = self._indice_izquierdo(indice)      
+
+                if not self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_derecho(indice)]:
                     a = self.datos[indice]
                     b = self.datos[self._indice_derecho(indice)]
                     self.datos[indice] = b
-                    self._indice_derecho[indice] = a
+                    self.datos[self._indice_derecho(indice)] = a
                     indice = self._indice_derecho(indice)
-            if self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and not self.datos[indice] > self.datos[self._indice_izquierdo(indice)]:
-                a = self.datos[indice]
-                b = self.datos[self._indice_izquierdo(indice)]
-                self.datos[indice] = b
-                self._indice_izquierdo[indice] = a
-                indice = self._indice_izquierdo(indice)      
-            if not self.datos[indice] > self.datos[self._indice_izquierdo(indice)] and self.datos[indice] > self.datos[self._indice_izquierdo(indice)]:
-                a = self.datos[indice]
-                b = self.datos[self._indice_derecho(indice)]
-                self.datos[indice] = b
-                self._indice_derecho[indice] = a
-                indice = self._indice_derecho(indice)
-            else:
-                return
+                else:
+                    return
+                
+            if self._indice_izquierdo(indice) < len(self.datos) and self._indice_derecho(indice) >= len(self.datos):
+                if self.datos[indice] > self.datos[self._indice_izquierdo(indice)]:
+                    a = self.datos[indice]
+                    b = self.datos[self._indice_izquierdo(indice)]
+                    self.datos[indice] = b
+                    self.datos[self._indice_izquierdo(indice)] = a
+                    indice = self._indice_izquierdo(indice)
+                else:
+                    return
+                
 
     def _indice_padre(self, indice: int) -> int:
         """Calcula el índice del padre; la raíz no tiene padre."""
@@ -191,11 +205,15 @@ class HeapMin:
         """Comprueba que todo padre sea menor o igual que sus hijos."""
 
         for i in range(len(self.datos)):
-            if i == 0:
-                if self.datos[0] > self.datos[1] or self.datos[0] > self.datos[2]:
-                    return False
-            if self.datos[self._indice_padre(i)] > self.datos[self._indice_izquierdo(i)] or self.datos[self._indice_padre(i)] > self.datos[self._indice_derecho(i)]:
-                return False 
+            izquierdo = self._indice_izquierdo(i)
+            derecho = self._indice_derecho(i)
+
+            if izquierdo < len(self.datos) and self.datos[i] > self.datos[izquierdo]:
+                return False
+
+            if derecho < len(self.datos) and self.datos[i] > self.datos[derecho]:
+                return False
+
         return True
 
 
@@ -217,7 +235,7 @@ def ultima_piedra(piedras: list[int]) -> int:
     Diseña primero el pseudocódigo en ``notebook.md``. Después completa esta
     función dentro de tu ``implementacion.py``.
     """
-    if not isinstance(piedras, list[int]):
+    if not isinstance(piedras, list):
         raise TypeError("Piedras debe ser una lista de enteros")
     for piedra in piedras:
         if piedra < 0:
@@ -226,12 +244,12 @@ def ultima_piedra(piedras: list[int]) -> int:
     for piedra in piedras:
         pesos.append(-piedra)
     heap = HeapMin(pesos)
-    while heap.tamano > 1:
+    while heap.tamano() > 1:
         a = heap.extraer_min()
         b = heap.extraer_min()
         if not a == b:
-            heap.insertar(abs(a-b))
+            heap.insertar(-abs(a-b))
     if heap.esta_vacio():
         return 0
     else:
-        return heap.minimo()
+        return -heap.minimo()
