@@ -83,3 +83,4 @@ def ultima_piedra(piedras: list[int]) -> int:
             heapq.heappush(max_heap, -(primera - segunda))
             
     return -max_heap[0] if max_heap else 0
+

@@ -58,4 +58,4 @@ clase_14::test_heap_con_muchos_duplicados <- ..\entregas\clase_14\Aristeo\test_e
 - test_heap_con_muchos_duplicados
 - test_extraccion_desciende_multiples_niveles
 - test_ultima_piedra_caso_complejo
-
+.
