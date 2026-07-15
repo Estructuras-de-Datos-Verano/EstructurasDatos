@@ -1,0 +1,2908 @@
+{
+  "encolar": [
+    {
+      "paso": 0,
+      "titulo": "ENCOLAR — LISTA SIMPLE",
+      "objetivo": "Agregar al final en O(1)",
+      "operacion": "encolar('C')",
+      "tipo": "lista",
+      "accion": "Estado inicial",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "B",
+      "tamano": 2,
+      "actual": null,
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "La cola no está vacía",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "frente apunta a A y final a B.",
+      "respuesta_reto": "Crear C y enlazar B → C."
+    },
+    {
+      "paso": 1,
+      "titulo": "ENCOLAR — LISTA SIMPLE",
+      "objetivo": "Agregar al final en O(1)",
+      "operacion": "encolar('C')",
+      "tipo": "lista",
+      "accion": "Crear el nodo C",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": null
+        },
+        {
+          "valor": "C",
+          "anterior": null,
+          "siguiente": null,
+          "nuevo": true
+        }
+      ],
+      "inicio": "A",
+      "final": "B",
+      "tamano": 2,
+      "actual": "C",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "Todavía está separado",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nodo nuevo nace sin sucesor.",
+      "respuesta_reto": "Cambiar siguiente del final anterior."
+    },
+    {
+      "paso": 2,
+      "titulo": "ENCOLAR — LISTA SIMPLE",
+      "objetivo": "Agregar al final en O(1)",
+      "operacion": "encolar('C')",
+      "tipo": "lista",
+      "accion": "Enlazar B → C y mover final",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": null,
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "C",
+      "tamano": 3,
+      "actual": "C",
+      "retirado": null,
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "No se recorre la lista",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Solo cambian un enlace, final y el tamaño.",
+      "respuesta_reto": "La operación termina: frente sigue en A."
+    }
+  ],
+  "desencolar": [
+    {
+      "paso": 0,
+      "titulo": "DESENCOLAR — LISTA SIMPLE",
+      "objetivo": "Retirar el frente en O(1)",
+      "operacion": "desencolar()",
+      "tipo": "lista",
+      "accion": "Estado inicial",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": null,
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "C",
+      "tamano": 3,
+      "actual": "A",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "A es el frente",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Se guarda A antes de mover la referencia.",
+      "respuesta_reto": "Mover frente al sucesor B."
+    },
+    {
+      "paso": 1,
+      "titulo": "DESENCOLAR — LISTA SIMPLE",
+      "objetivo": "Retirar el frente en O(1)",
+      "operacion": "desencolar()",
+      "tipo": "lista",
+      "accion": "Mover frente y separar A",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": null,
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": "B",
+      "retirado": "A",
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "La cola aún tiene elementos",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "A.siguiente queda en None; no conserva la cadena.",
+      "respuesta_reto": "Conservar final en C."
+    },
+    {
+      "paso": 2,
+      "titulo": "DESENCOLAR — LISTA SIMPLE",
+      "objetivo": "Retirar el frente en O(1)",
+      "operacion": "desencolar()",
+      "tipo": "lista",
+      "accion": "Devolver A",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": null,
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": null,
+      "retirado": "A",
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "Invariante restaurado",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Nodo retirado desconectado: True.",
+      "respuesta_reto": "Resultado: A; tamaño: 2."
+    }
+  ],
+  "agregar_inicio": [
+    {
+      "paso": 0,
+      "titulo": "AGREGAR AL INICIO — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo izquierdo",
+      "operacion": "agregar_inicio('A')",
+      "tipo": "lista",
+      "accion": "Estado inicial",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": null,
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "La deque no está vacía",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Cada nodo conoce anterior y siguiente.",
+      "respuesta_reto": "Crear A junto al extremo correspondiente."
+    },
+    {
+      "paso": 1,
+      "titulo": "AGREGAR AL INICIO — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo izquierdo",
+      "operacion": "agregar_inicio('A')",
+      "tipo": "lista",
+      "accion": "Crear el nodo A",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        },
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": null,
+          "nuevo": true
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": "A",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "Aún no pertenece a la cadena",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nuevo nodo comienza desconectado.",
+      "respuesta_reto": "Enlazar en ambos sentidos."
+    },
+    {
+      "paso": 2,
+      "titulo": "AGREGAR AL INICIO — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo izquierdo",
+      "operacion": "agregar_inicio('A')",
+      "tipo": "lista",
+      "accion": "Actualizar enlaces y extremo",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": "A",
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "C",
+      "tamano": 3,
+      "actual": "A",
+      "retirado": null,
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "El otro extremo permanece",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "La cadena bidireccional y el tamaño vuelven a coincidir.",
+      "respuesta_reto": "Operación completa en O(1)."
+    }
+  ],
+  "agregar_final": [
+    {
+      "paso": 0,
+      "titulo": "AGREGAR AL FINAL — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo derecho",
+      "operacion": "agregar_final('D')",
+      "tipo": "lista",
+      "accion": "Estado inicial",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": null,
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "La deque no está vacía",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Cada nodo conoce anterior y siguiente.",
+      "respuesta_reto": "Crear D junto al extremo correspondiente."
+    },
+    {
+      "paso": 1,
+      "titulo": "AGREGAR AL FINAL — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo derecho",
+      "operacion": "agregar_final('D')",
+      "tipo": "lista",
+      "accion": "Crear el nodo D",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        },
+        {
+          "valor": "D",
+          "anterior": null,
+          "siguiente": null,
+          "nuevo": true
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": "D",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "Aún no pertenece a la cadena",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nuevo nodo comienza desconectado.",
+      "respuesta_reto": "Enlazar en ambos sentidos."
+    },
+    {
+      "paso": 2,
+      "titulo": "AGREGAR AL FINAL — LISTA DOBLE",
+      "objetivo": "Actualizar dos enlaces del extremo derecho",
+      "operacion": "agregar_final('D')",
+      "tipo": "lista",
+      "accion": "Actualizar enlaces y extremo",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": "D"
+        },
+        {
+          "valor": "D",
+          "anterior": "C",
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "D",
+      "tamano": 3,
+      "actual": "D",
+      "retirado": null,
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "El otro extremo permanece",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "La cadena bidireccional y el tamaño vuelven a coincidir.",
+      "respuesta_reto": "Operación completa en O(1)."
+    }
+  ],
+  "quitar_inicio": [
+    {
+      "paso": 0,
+      "titulo": "QUITAR DEL INICIO — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_inicio()",
+      "tipo": "lista",
+      "accion": "Guardar el extremo",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": "A",
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "C",
+      "tamano": 3,
+      "actual": "A",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "Se retirará A",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Antes de cambiar enlaces se conserva el valor.",
+      "respuesta_reto": "Mover el extremo hacia el nodo vecino."
+    },
+    {
+      "paso": 1,
+      "titulo": "QUITAR DEL INICIO — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_inicio()",
+      "tipo": "lista",
+      "accion": "Mover extremo y desconectar",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": null,
+      "retirado": "A",
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "El nuevo extremo apunta hacia None",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nodo retirado pierde anterior y siguiente.",
+      "respuesta_reto": "Disminuir tamaño y devolver el valor."
+    },
+    {
+      "paso": 2,
+      "titulo": "QUITAR DEL INICIO — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_inicio()",
+      "tipo": "lista",
+      "accion": "Devolver A",
+      "nodos": [
+        {
+          "valor": "B",
+          "anterior": null,
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "B",
+      "final": "C",
+      "tamano": 2,
+      "actual": null,
+      "retirado": "A",
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "Invariante restaurado",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nodo retirado quedó totalmente separado: True.",
+      "respuesta_reto": "Resultado: A; tamaño: 2."
+    }
+  ],
+  "quitar_final": [
+    {
+      "paso": 0,
+      "titulo": "QUITAR DEL FINAL — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_final()",
+      "tipo": "lista",
+      "accion": "Guardar el extremo",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": "A",
+          "siguiente": "C"
+        },
+        {
+          "valor": "C",
+          "anterior": "B",
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "C",
+      "tamano": 3,
+      "actual": "C",
+      "retirado": null,
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "Se retirará C",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "Antes de cambiar enlaces se conserva el valor.",
+      "respuesta_reto": "Mover el extremo hacia el nodo vecino."
+    },
+    {
+      "paso": 1,
+      "titulo": "QUITAR DEL FINAL — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_final()",
+      "tipo": "lista",
+      "accion": "Mover extremo y desconectar",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": "A",
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "B",
+      "tamano": 2,
+      "actual": null,
+      "retirado": "C",
+      "comparacion": "¿La estructura está vacía?",
+      "decision": "El nuevo extremo apunta hacia None",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nodo retirado pierde anterior y siguiente.",
+      "respuesta_reto": "Disminuir tamaño y devolver el valor."
+    },
+    {
+      "paso": 2,
+      "titulo": "QUITAR DEL FINAL — LISTA DOBLE",
+      "objetivo": "Retirar sin dejar referencias residuales",
+      "operacion": "quitar_final()",
+      "tipo": "lista",
+      "accion": "Devolver C",
+      "nodos": [
+        {
+          "valor": "A",
+          "anterior": null,
+          "siguiente": "B"
+        },
+        {
+          "valor": "B",
+          "anterior": "A",
+          "siguiente": null
+        }
+      ],
+      "inicio": "A",
+      "final": "B",
+      "tamano": 2,
+      "actual": null,
+      "retirado": "C",
+      "comparacion": "Actualizar únicamente los enlaces afectados",
+      "decision": "Invariante restaurado",
+      "invariante": "Los extremos y el tamaño describen exactamente la cadena visible.",
+      "mensaje": "El nodo retirado quedó totalmente separado: True.",
+      "respuesta_reto": "Resultado: C; tamaño: 2."
+    }
+  ],
+  "bfs": [
+    {
+      "paso": 0,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Encolar el origen A y marcarlo descubierto",
+      "actual": null,
+      "arista": null,
+      "pendientes": [
+        "A"
+      ],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['A']",
+      "respuesta_reto": "Desencolar A."
+    },
+    {
+      "paso": 1,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar A",
+      "actual": "A",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "Revisar B."
+    },
+    {
+      "paso": 2,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Descubrir y encolar B",
+      "actual": "A",
+      "arista": [
+        "A",
+        "B"
+      ],
+      "pendientes": [
+        "B"
+      ],
+      "descubiertos": [
+        "A",
+        "B"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "No estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['B']",
+      "respuesta_reto": "B ya no podrá volver a encolarse."
+    },
+    {
+      "paso": 3,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Descubrir y encolar C",
+      "actual": "A",
+      "arista": [
+        "A",
+        "C"
+      ],
+      "pendientes": [
+        "B",
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "No estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['B', 'C']",
+      "respuesta_reto": "C ya no podrá volver a encolarse."
+    },
+    {
+      "paso": 4,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar A",
+      "actual": "A",
+      "arista": null,
+      "pendientes": [
+        "B",
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['B', 'C']",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 5,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar B",
+      "actual": "B",
+      "arista": null,
+      "pendientes": [
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['C']",
+      "respuesta_reto": "Revisar A."
+    },
+    {
+      "paso": 6,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir A",
+      "actual": "B",
+      "arista": [
+        "B",
+        "A"
+      ],
+      "pendientes": [
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['C']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 7,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Descubrir y encolar D",
+      "actual": "B",
+      "arista": [
+        "B",
+        "D"
+      ],
+      "pendientes": [
+        "C",
+        "D"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": null,
+        "F": null
+      },
+      "distancias": null,
+      "decision": "No estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['C', 'D']",
+      "respuesta_reto": "D ya no podrá volver a encolarse."
+    },
+    {
+      "paso": 8,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Descubrir y encolar E",
+      "actual": "B",
+      "arista": [
+        "B",
+        "E"
+      ],
+      "pendientes": [
+        "C",
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "No estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['C', 'D', 'E']",
+      "respuesta_reto": "E ya no podrá volver a encolarse."
+    },
+    {
+      "paso": 9,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar B",
+      "actual": "B",
+      "arista": null,
+      "pendientes": [
+        "C",
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['C', 'D', 'E']",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 10,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar C",
+      "actual": "C",
+      "arista": null,
+      "pendientes": [
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['D', 'E']",
+      "respuesta_reto": "Revisar A."
+    },
+    {
+      "paso": 11,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir A",
+      "actual": "C",
+      "arista": [
+        "C",
+        "A"
+      ],
+      "pendientes": [
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['D', 'E']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 12,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir E",
+      "actual": "C",
+      "arista": [
+        "C",
+        "E"
+      ],
+      "pendientes": [
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['D', 'E']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 13,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar C",
+      "actual": "C",
+      "arista": null,
+      "pendientes": [
+        "D",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['D', 'E']",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 14,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar D",
+      "actual": "D",
+      "arista": null,
+      "pendientes": [
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['E']",
+      "respuesta_reto": "Revisar B."
+    },
+    {
+      "paso": 15,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir B",
+      "actual": "D",
+      "arista": [
+        "D",
+        "B"
+      ],
+      "pendientes": [
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['E']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 16,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Descubrir y encolar F",
+      "actual": "D",
+      "arista": [
+        "D",
+        "F"
+      ],
+      "pendientes": [
+        "E",
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "No estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['E', 'F']",
+      "respuesta_reto": "F ya no podrá volver a encolarse."
+    },
+    {
+      "paso": 17,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar D",
+      "actual": "D",
+      "arista": null,
+      "pendientes": [
+        "E",
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['E', 'F']",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 18,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar E",
+      "actual": "E",
+      "arista": null,
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['F']",
+      "respuesta_reto": "Revisar B."
+    },
+    {
+      "paso": 19,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir B",
+      "actual": "E",
+      "arista": [
+        "E",
+        "B"
+      ],
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['F']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 20,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir C",
+      "actual": "E",
+      "arista": [
+        "E",
+        "C"
+      ],
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['F']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 21,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir F",
+      "actual": "E",
+      "arista": [
+        "E",
+        "F"
+      ],
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['F']",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 22,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar E",
+      "actual": "E",
+      "arista": null,
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): ['F']",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 23,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Desencolar F",
+      "actual": "F",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Procesar sus vecinos en el orden dado",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "Revisar D."
+    },
+    {
+      "paso": 24,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir D",
+      "actual": "F",
+      "arista": [
+        "F",
+        "D"
+      ],
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 25,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Omitir E",
+      "actual": "F",
+      "arista": [
+        "F",
+        "E"
+      ],
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Ya estaba descubierto",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "La cola no cambia."
+    },
+    {
+      "paso": 26,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Finalizar F",
+      "actual": "F",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "Continuar con el frente",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "Observa que la cola conserva el orden por capas."
+    },
+    {
+      "paso": 27,
+      "titulo": "BFS — PRIORIDAD POR CAPAS",
+      "objetivo": "Visitar primero los vértices con menos aristas desde A",
+      "tipo": "bfs",
+      "accion": "Recorrido terminado",
+      "actual": null,
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": null,
+      "decision": "La cola está vacía",
+      "invariante": "Un vértice se marca al encolarlo; nunca entra dos veces.",
+      "mensaje": "Cola de izquierda (frente) a derecha (final): []",
+      "respuesta_reto": "Reconstruir F ← D ← B ← A."
+    }
+  ],
+  "cero_uno_bfs": [
+    {
+      "paso": 0,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Agregar A al inicio con distancia 0",
+      "actual": null,
+      "arista": null,
+      "pendientes": [
+        "A"
+      ],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": "∞",
+        "C": "∞",
+        "D": "∞",
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['A']",
+      "respuesta_reto": "Quitar A del inicio."
+    },
+    {
+      "paso": 1,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar A del inicio",
+      "actual": "A",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": "∞",
+        "C": "∞",
+        "D": "∞",
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 2,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar B: ∞ → 0; agregar al inicio",
+      "actual": "A",
+      "arista": [
+        "A",
+        "B",
+        0
+      ],
+      "pendientes": [
+        "B"
+      ],
+      "descubiertos": [
+        "A",
+        "B"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": null,
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": "∞",
+        "D": "∞",
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "0 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['B']",
+      "respuesta_reto": "Peso 0: usar el inicio."
+    },
+    {
+      "paso": 3,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar C: ∞ → 1; agregar al final",
+      "actual": "A",
+      "arista": [
+        "A",
+        "C",
+        1
+      ],
+      "pendientes": [
+        "B",
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": "∞",
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "1 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['B', 'C']",
+      "respuesta_reto": "Peso 1: usar el final."
+    },
+    {
+      "paso": 4,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar B del inicio",
+      "actual": "B",
+      "arista": null,
+      "pendientes": [
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": null,
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": "∞",
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['C']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 5,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar D: ∞ → 0; agregar al inicio",
+      "actual": "B",
+      "arista": [
+        "B",
+        "D",
+        0
+      ],
+      "pendientes": [
+        "D",
+        "C"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": "∞",
+        "F": "∞"
+      },
+      "decision": "0 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['D', 'C']",
+      "respuesta_reto": "Peso 0: usar el inicio."
+    },
+    {
+      "paso": 6,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar E: ∞ → 1; agregar al final",
+      "actual": "B",
+      "arista": [
+        "B",
+        "E",
+        1
+      ],
+      "pendientes": [
+        "D",
+        "C",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": "∞"
+      },
+      "decision": "1 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['D', 'C', 'E']",
+      "respuesta_reto": "Peso 1: usar el final."
+    },
+    {
+      "paso": 7,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar D del inicio",
+      "actual": "D",
+      "arista": null,
+      "pendientes": [
+        "C",
+        "E"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['C', 'E']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 8,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar F: ∞ → 1; agregar al final",
+      "actual": "D",
+      "arista": [
+        "D",
+        "F",
+        1
+      ],
+      "pendientes": [
+        "C",
+        "E",
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "1 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['C', 'E', 'F']",
+      "respuesta_reto": "Peso 1: usar el final."
+    },
+    {
+      "paso": 9,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar C del inicio",
+      "actual": "C",
+      "arista": null,
+      "pendientes": [
+        "E",
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "Usar distancia actual 1",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['E', 'F']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 10,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "No mejorar D",
+      "actual": "C",
+      "arista": [
+        "C",
+        "D",
+        0
+      ],
+      "pendientes": [
+        "E",
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "1 no es menor",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['E', 'F']",
+      "respuesta_reto": "Distancia y deque permanecen."
+    },
+    {
+      "paso": 11,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar E del inicio",
+      "actual": "E",
+      "arista": null,
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "Usar distancia actual 1",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['F']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 12,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "No mejorar F",
+      "actual": "E",
+      "arista": [
+        "E",
+        "F",
+        0
+      ],
+      "pendientes": [
+        "F"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "1 no es menor",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['F']",
+      "respuesta_reto": "Distancia y deque permanecen."
+    },
+    {
+      "paso": 13,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar F del inicio",
+      "actual": "F",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D",
+        "C",
+        "E"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "Usar distancia actual 1",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 14,
+      "titulo": "0-1 BFS — DOS PRIORIDADES",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Proceso terminado",
+      "actual": null,
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "D",
+        "C",
+        "E",
+        "F"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "A",
+        "D": "B",
+        "E": "B",
+        "F": "D"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 1,
+        "F": 1
+      },
+      "decision": "La deque está vacía",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Reconstruir el camino con los predecesores finales."
+    }
+  ],
+  "cero_uno_mejora": [
+    {
+      "paso": 0,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Agregar A al inicio con distancia 0",
+      "actual": null,
+      "arista": null,
+      "pendientes": [
+        "A"
+      ],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "X": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": "∞",
+        "C": "∞",
+        "X": "∞",
+        "F": "∞"
+      },
+      "decision": "",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['A']",
+      "respuesta_reto": "Quitar A del inicio."
+    },
+    {
+      "paso": 1,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar A del inicio",
+      "actual": "A",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "X": null,
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": "∞",
+        "C": "∞",
+        "X": "∞",
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 2,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar X: ∞ → 1; agregar al final",
+      "actual": "A",
+      "arista": [
+        "A",
+        "X",
+        1
+      ],
+      "pendientes": [
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "X"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": null,
+        "C": null,
+        "X": "A",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": "∞",
+        "C": "∞",
+        "X": 1,
+        "F": "∞"
+      },
+      "decision": "1 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X']",
+      "respuesta_reto": "Peso 1: usar el final."
+    },
+    {
+      "paso": 3,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar B: ∞ → 0; agregar al inicio",
+      "actual": "A",
+      "arista": [
+        "A",
+        "B",
+        0
+      ],
+      "pendientes": [
+        "B",
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "X"
+      ],
+      "procesados": [],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": null,
+        "X": "A",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": "∞",
+        "X": 1,
+        "F": "∞"
+      },
+      "decision": "0 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['B', 'X']",
+      "respuesta_reto": "Peso 0: usar el inicio."
+    },
+    {
+      "paso": 4,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar B del inicio",
+      "actual": "B",
+      "arista": null,
+      "pendientes": [
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "X"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": null,
+        "X": "A",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": "∞",
+        "X": 1,
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 5,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar C: ∞ → 0; agregar al inicio",
+      "actual": "B",
+      "arista": [
+        "B",
+        "C",
+        0
+      ],
+      "pendientes": [
+        "C",
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "X"
+      ],
+      "procesados": [
+        "A"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "A",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 1,
+        "F": "∞"
+      },
+      "decision": "0 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['C', 'X']",
+      "respuesta_reto": "Peso 0: usar el inicio."
+    },
+    {
+      "paso": 6,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar C del inicio",
+      "actual": "C",
+      "arista": null,
+      "pendientes": [
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "A",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 1,
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 7,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar X: 1 → 0; agregar al inicio",
+      "actual": "C",
+      "arista": [
+        "C",
+        "X",
+        0
+      ],
+      "pendientes": [
+        "X",
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": "∞"
+      },
+      "decision": "0 < 1",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X', 'X']",
+      "respuesta_reto": "El predecesor cambia por una mejora posterior."
+    },
+    {
+      "paso": 8,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar X del inicio",
+      "actual": "X",
+      "arista": null,
+      "pendientes": [
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": null
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": "∞"
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 9,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Mejorar F: ∞ → 0; agregar al inicio",
+      "actual": "X",
+      "arista": [
+        "X",
+        "F",
+        0
+      ],
+      "pendientes": [
+        "F",
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": "X"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": 0
+      },
+      "decision": "0 < ∞",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['F', 'X']",
+      "respuesta_reto": "Peso 0: usar el inicio."
+    },
+    {
+      "paso": 10,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar F del inicio",
+      "actual": "F",
+      "arista": null,
+      "pendientes": [
+        "X"
+      ],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "X"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": "X"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": 0
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: ['X']",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 11,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Quitar X del inicio",
+      "actual": "X",
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "X",
+        "F"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": "X"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": 0
+      },
+      "decision": "Usar distancia actual 0",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Evaluar la siguiente arista."
+    },
+    {
+      "paso": 12,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "No mejorar F",
+      "actual": "X",
+      "arista": [
+        "X",
+        "F",
+        0
+      ],
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "X",
+        "F"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": "X"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": 0
+      },
+      "decision": "0 no es menor",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Distancia y deque permanecen."
+    },
+    {
+      "paso": 13,
+      "titulo": "0-1 BFS — MEJORA POSTERIOR",
+      "objetivo": "Mantener primero las rutas candidatas de costo acumulado menor",
+      "tipo": "01",
+      "accion": "Proceso terminado",
+      "actual": null,
+      "arista": null,
+      "pendientes": [],
+      "descubiertos": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "X"
+      ],
+      "procesados": [
+        "A",
+        "B",
+        "C",
+        "X",
+        "F",
+        "X"
+      ],
+      "predecesores": {
+        "A": null,
+        "B": "A",
+        "C": "B",
+        "X": "C",
+        "F": "X"
+      },
+      "distancias": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "X": 0,
+        "F": 0
+      },
+      "decision": "La deque está vacía",
+      "invariante": "Peso 0 → inicio; peso 1 → final; solo una mejora actualiza distancia y predecesor.",
+      "mensaje": "Deque de inicio a final: []",
+      "respuesta_reto": "Reconstruir el camino con los predecesores finales."
+    }
+  ]
+}
