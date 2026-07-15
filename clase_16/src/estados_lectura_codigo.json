@@ -1,0 +1,952 @@
+[
+  {
+    "titulo": "1. El módulo declara su contrato",
+    "funcion": "módulo",
+    "objetivo": "Reconocer dependencias, tipos y nivel de abstracción antes de leer el bucle.",
+    "contrato": "Los pesos son int o float; el grafo acepta Mapping y Sequence, no solo dict y list.",
+    "invariante": "La interfaz pública trabaja con nodos str y aristas ponderadas.",
+    "riesgo": "Leer tipos como documentación decorativa y después aceptar representaciones incompatibles.",
+    "prueba": "Usar UserDict y tuplas como colecciones válidas.",
+    "pregunta": "¿Qué flexibilidad ofrecen Mapping y Sequence frente a dict y list?",
+    "paso": 0,
+    "codigo": [
+      {
+        "numero": 3,
+        "texto": "from __future__ import annotations"
+      },
+      {
+        "numero": 4,
+        "texto": ""
+      },
+      {
+        "numero": 5,
+        "texto": "import heapq"
+      },
+      {
+        "numero": 6,
+        "texto": "import math"
+      },
+      {
+        "numero": 7,
+        "texto": "from collections.abc import Mapping, Sequence"
+      },
+      {
+        "numero": 8,
+        "texto": ""
+      },
+      {
+        "numero": 9,
+        "texto": "Peso = int | float"
+      },
+      {
+        "numero": 10,
+        "texto": "GrafoPonderado = Mapping[str, Sequence[tuple[str, Peso]]]"
+      },
+      {
+        "numero": 11,
+        "texto": ""
+      },
+      {
+        "numero": 12,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      3,
+      12
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "2. Normalizar separa responsabilidades",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Leer primero la firma y el docstring como promesa verificable.",
+    "contrato": "Devuelve una copia normalizada y documenta TypeError frente a ValueError.",
+    "invariante": "Dijkstra recibe después una representación interna uniforme.",
+    "riesgo": "Mezclar validación con relajación vuelve el bucle difícil de probar.",
+    "prueba": "Verificar retorno, excepciones y ausencia de listas compartidas.",
+    "pregunta": "¿Por qué conviene validar antes de iniciar el algoritmo?",
+    "paso": 1,
+    "codigo": [
+      {
+        "numero": 13,
+        "texto": "def _normalizar_grafo(grafo: GrafoPonderado) -> dict[str, list[tuple[str, float]]]:"
+      },
+      {
+        "numero": 14,
+        "texto": "    \"\"\"Copia y valida una lista de adyacencia ponderada."
+      },
+      {
+        "numero": 15,
+        "texto": ""
+      },
+      {
+        "numero": 16,
+        "texto": "    Parameters"
+      },
+      {
+        "numero": 17,
+        "texto": "    ----------"
+      },
+      {
+        "numero": 18,
+        "texto": "    grafo : GrafoPonderado"
+      },
+      {
+        "numero": 19,
+        "texto": "        Mapa de nodo a pares ``(vecino, peso)``. Los vecinos que no aparezcan"
+      },
+      {
+        "numero": 20,
+        "texto": "        como clave se agregan con lista vacía."
+      },
+      {
+        "numero": 21,
+        "texto": ""
+      },
+      {
+        "numero": 22,
+        "texto": "    Returns"
+      },
+      {
+        "numero": 23,
+        "texto": "    -------"
+      },
+      {
+        "numero": 24,
+        "texto": "    dict[str, list[tuple[str, float]]]"
+      },
+      {
+        "numero": 25,
+        "texto": "        Copia normalizada sin compartir listas con la entrada."
+      },
+      {
+        "numero": 26,
+        "texto": ""
+      },
+      {
+        "numero": 27,
+        "texto": "    Raises"
+      },
+      {
+        "numero": 28,
+        "texto": "    ------"
+      },
+      {
+        "numero": 29,
+        "texto": "    TypeError"
+      },
+      {
+        "numero": 30,
+        "texto": "        Si nodos, vecinos o pesos no tienen el tipo esperado."
+      },
+      {
+        "numero": 31,
+        "texto": "    ValueError"
+      },
+      {
+        "numero": 32,
+        "texto": "        Si aparece un peso negativo o no finito."
+      },
+      {
+        "numero": 33,
+        "texto": "    \"\"\""
+      },
+      {
+        "numero": 34,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      13,
+      34
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "3. Validar el contenedor exterior",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Fallar pronto con un error que identifica la frontera rota.",
+    "contrato": "El grafo debe ofrecer items clave–adyacencias.",
+    "invariante": "Después de esta línea, es seguro iterar grafo.items().",
+    "riesgo": "Permitir que un AttributeError accidental sea la interfaz de errores.",
+    "prueba": "Pasar una lista y exigir TypeError con mensaje útil.",
+    "pregunta": "¿Qué gana quien llama a la función con este error temprano?",
+    "paso": 2,
+    "codigo": [
+      {
+        "numero": 35,
+        "texto": "    if not isinstance(grafo, Mapping):"
+      },
+      {
+        "numero": 36,
+        "texto": "        raise TypeError(\"grafo debe ser un mapeo de listas de adyacencia\")"
+      }
+    ],
+    "lineas": [
+      35,
+      36
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "4. Copia defensiva y nodos explícitos",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Crear una representación nueva sin mutar ni compartir listas.",
+    "contrato": "Cada clave debe ser str y aparece en el resultado aunque no tenga aristas.",
+    "invariante": "resultado[nodo] existe antes de procesar sus vecinos.",
+    "riesgo": "Modificar la entrada o aceptar claves de tipos que luego no pueden desempatarse en heapq.",
+    "prueba": "Comparar el grafo antes/después y rechazar una clave entera.",
+    "pregunta": "¿Qué comportamiento observable demostraría que no compartimos listas?",
+    "paso": 3,
+    "codigo": [
+      {
+        "numero": 37,
+        "texto": "    resultado: dict[str, list[tuple[str, float]]] = {}"
+      },
+      {
+        "numero": 38,
+        "texto": "    for nodo, aristas in grafo.items():"
+      },
+      {
+        "numero": 39,
+        "texto": "        if not isinstance(nodo, str):"
+      },
+      {
+        "numero": 40,
+        "texto": "            raise TypeError(\"cada nodo debe ser str\")"
+      },
+      {
+        "numero": 41,
+        "texto": "        resultado.setdefault(nodo, [])"
+      }
+    ],
+    "lineas": [
+      37,
+      41
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "5. Validar la forma de cada arista",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Comprobar estructura antes de desempaquetar.",
+    "contrato": "Cada arista es una tupla o lista de exactamente dos elementos.",
+    "invariante": "Tras la comprobación, vecino y peso pueden asignarse sin ambigüedad.",
+    "riesgo": "Un ValueError de desempaquetado no explica el contrato del grafo.",
+    "prueba": "Probar aristas con uno y tres elementos.",
+    "pregunta": "¿Por qué el tipo de excepción forma parte de la API?",
+    "paso": 4,
+    "codigo": [
+      {
+        "numero": 42,
+        "texto": "        for arista in aristas:"
+      },
+      {
+        "numero": 43,
+        "texto": "            if not isinstance(arista, (tuple, list)) or len(arista) != 2:"
+      },
+      {
+        "numero": 44,
+        "texto": "                raise TypeError(\"cada arista debe ser un par (vecino, peso)\")"
+      }
+    ],
+    "lineas": [
+      42,
+      44
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "6. Validar vecino y peso",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Distinguir errores de tipo de errores de dominio.",
+    "contrato": "El vecino es str; el peso es numérico y bool no cuenta como peso.",
+    "invariante": "math.isfinite recibirá un número real admitido.",
+    "riesgo": "En Python, isinstance(True, int) es True; aceptarlo crea pesos semánticamente falsos.",
+    "prueba": "Parametrizar True, '3', None y un vecino entero.",
+    "pregunta": "¿Por qué se comprueba bool antes que int o float?",
+    "paso": 5,
+    "codigo": [
+      {
+        "numero": 45,
+        "texto": "            vecino, peso = arista"
+      },
+      {
+        "numero": 46,
+        "texto": "            if not isinstance(vecino, str):"
+      },
+      {
+        "numero": 47,
+        "texto": "                raise TypeError(\"cada vecino debe ser str\")"
+      },
+      {
+        "numero": 48,
+        "texto": "            if isinstance(peso, bool) or not isinstance(peso, (int, float)):"
+      },
+      {
+        "numero": 49,
+        "texto": "                raise TypeError(\"cada peso debe ser numérico\")"
+      }
+    ],
+    "lineas": [
+      45,
+      49
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "7. Validar el dominio matemático",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Proteger las premisas sobre las que se demuestra Dijkstra.",
+    "contrato": "Se rechazan NaN, infinitos y pesos negativos.",
+    "invariante": "Toda arista interna tiene peso finito y no negativo.",
+    "riesgo": "NaN hace que las comparaciones sean falsas; un negativo rompe la decisión codiciosa.",
+    "prueba": "Parametrizar -1, inf, -inf y nan.",
+    "pregunta": "¿Qué entrada viola el algoritmo y cuál viola la representación?",
+    "paso": 6,
+    "codigo": [
+      {
+        "numero": 50,
+        "texto": "            if not math.isfinite(peso):"
+      },
+      {
+        "numero": 51,
+        "texto": "                raise ValueError(\"cada peso debe ser finito\")"
+      },
+      {
+        "numero": 52,
+        "texto": "            if peso < 0:"
+      },
+      {
+        "numero": 53,
+        "texto": "                raise ValueError(\"Dijkstra requiere pesos no negativos\")"
+      }
+    ],
+    "lineas": [
+      50,
+      53
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "8. Completar vecinos implícitos",
+    "funcion": "_normalizar_grafo",
+    "objetivo": "Hacer total la tabla de nodos antes de inicializar distancias.",
+    "contrato": "Un nodo que aparece solo como vecino se agrega con lista vacía.",
+    "invariante": "Cada vecino de una arista también es clave del grafo normalizado.",
+    "riesgo": "Sin setdefault, distancias[vecino] o normalizado[vecino] puede fallar.",
+    "prueba": "Usar {'A': [('B', 2)]} sin clave B.",
+    "pregunta": "¿Por qué agregar B no significa mutar el grafo original?",
+    "paso": 7,
+    "codigo": [
+      {
+        "numero": 54,
+        "texto": "            resultado[nodo].append((vecino, float(peso)))"
+      },
+      {
+        "numero": 55,
+        "texto": "            resultado.setdefault(vecino, [])"
+      },
+      {
+        "numero": 56,
+        "texto": "    return resultado"
+      }
+    ],
+    "lineas": [
+      54,
+      56
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "9. La función principal declara resultados",
+    "funcion": "dijkstra",
+    "objetivo": "Separar qué devuelve el algoritmo de cómo lo calcula.",
+    "contrato": "Devuelve distancias y predecesores; documenta inalcanzables y errores.",
+    "invariante": "La salida permitirá tanto consultar costos como reconstruir rutas.",
+    "riesgo": "Devolver solo caminos mezcla cálculo global con una consulta particular.",
+    "prueba": "Comprobar ambos diccionarios, no solo un costo final.",
+    "pregunta": "¿Por qué el mapa de predecesores no es información redundante?",
+    "paso": 8,
+    "codigo": [
+      {
+        "numero": 59,
+        "texto": "def dijkstra("
+      },
+      {
+        "numero": 60,
+        "texto": "    grafo: GrafoPonderado,"
+      },
+      {
+        "numero": 61,
+        "texto": "    origen: str,"
+      },
+      {
+        "numero": 62,
+        "texto": ") -> tuple[dict[str, float], dict[str, str | None]]:"
+      },
+      {
+        "numero": 63,
+        "texto": "    \"\"\"Calcula distancias mínimas y predecesores desde ``origen``."
+      },
+      {
+        "numero": 64,
+        "texto": ""
+      },
+      {
+        "numero": 65,
+        "texto": "    Utiliza un min-heap de pares ``(distancia, nodo)``. Cuando una distancia"
+      },
+      {
+        "numero": 66,
+        "texto": "    mejora se inserta un nuevo par; las entradas antiguas se ignoran al salir."
+      },
+      {
+        "numero": 67,
+        "texto": ""
+      },
+      {
+        "numero": 68,
+        "texto": "    Parameters"
+      },
+      {
+        "numero": 69,
+        "texto": "    ----------"
+      },
+      {
+        "numero": 70,
+        "texto": "    grafo : GrafoPonderado"
+      },
+      {
+        "numero": 71,
+        "texto": "        Lista de adyacencia dirigida con pesos no negativos."
+      },
+      {
+        "numero": 72,
+        "texto": "    origen : str"
+      },
+      {
+        "numero": 73,
+        "texto": "        Nodo desde el que se calculan los caminos."
+      },
+      {
+        "numero": 74,
+        "texto": ""
+      },
+      {
+        "numero": 75,
+        "texto": "    Returns"
+      },
+      {
+        "numero": 76,
+        "texto": "    -------"
+      },
+      {
+        "numero": 77,
+        "texto": "    tuple[dict[str, float], dict[str, str | None]]"
+      },
+      {
+        "numero": 78,
+        "texto": "        Distancia mínima y predecesor de cada nodo. Los inalcanzables conservan"
+      },
+      {
+        "numero": 79,
+        "texto": "        ``math.inf`` y predecesor ``None``."
+      },
+      {
+        "numero": 80,
+        "texto": ""
+      },
+      {
+        "numero": 81,
+        "texto": "    Raises"
+      },
+      {
+        "numero": 82,
+        "texto": "    ------"
+      },
+      {
+        "numero": 83,
+        "texto": "    KeyError"
+      },
+      {
+        "numero": 84,
+        "texto": "        Si ``origen`` no pertenece al grafo normalizado."
+      },
+      {
+        "numero": 85,
+        "texto": "    TypeError, ValueError"
+      },
+      {
+        "numero": 86,
+        "texto": "        Si la representación o algún peso no es válido."
+      },
+      {
+        "numero": 87,
+        "texto": ""
+      },
+      {
+        "numero": 88,
+        "texto": "    Examples"
+      },
+      {
+        "numero": 89,
+        "texto": "    --------"
+      },
+      {
+        "numero": 90,
+        "texto": "    >>> grafo = {\"A\": [(\"B\", 4), (\"C\", 1)], \"C\": [(\"B\", 2)], \"B\": []}"
+      },
+      {
+        "numero": 91,
+        "texto": "    >>> distancias, predecesores = dijkstra(grafo, \"A\")"
+      },
+      {
+        "numero": 92,
+        "texto": "    >>> distancias[\"B\"]"
+      },
+      {
+        "numero": 93,
+        "texto": "    3.0"
+      },
+      {
+        "numero": 94,
+        "texto": "    >>> predecesores[\"B\"]"
+      },
+      {
+        "numero": 95,
+        "texto": "    'C'"
+      },
+      {
+        "numero": 96,
+        "texto": "    \"\"\""
+      },
+      {
+        "numero": 97,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      59,
+      97
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "10. Validar origen después de normalizar",
+    "funcion": "dijkstra",
+    "objetivo": "Aplicar primero la política única de nodos del módulo.",
+    "contrato": "Un origen ausente produce KeyError explícito.",
+    "invariante": "El origen pertenece al conjunto completo de nodos internos.",
+    "riesgo": "Inicializarlo silenciosamente podría aceptar un error de escritura.",
+    "prueba": "Solicitar origen X en un grafo con solo A.",
+    "pregunta": "¿Por qué KeyError comunica mejor este caso que devolver diccionarios vacíos?",
+    "paso": 9,
+    "codigo": [
+      {
+        "numero": 98,
+        "texto": "    normalizado = _normalizar_grafo(grafo)"
+      },
+      {
+        "numero": 99,
+        "texto": "    if origen not in normalizado:"
+      },
+      {
+        "numero": 100,
+        "texto": "        raise KeyError(f\"el origen {origen!r} no pertenece al grafo\")"
+      }
+    ],
+    "lineas": [
+      98,
+      100
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "11. Estado inicial coherente",
+    "funcion": "dijkstra",
+    "objetivo": "Construir tablas totales antes de entrar al ciclo.",
+    "contrato": "Origen 0, demás infinito, predecesores None y heap con una candidatura.",
+    "invariante": "Toda clave normalizada existe en ambas tablas.",
+    "riesgo": "Crear claves bajo demanda dificulta distinguir inalcanzable de inexistente.",
+    "prueba": "Grafo con componente desconectada y origen aislado.",
+    "pregunta": "¿Qué significa infinito aquí y qué no significa?",
+    "paso": 10,
+    "codigo": [
+      {
+        "numero": 101,
+        "texto": "    distancias = {nodo: math.inf for nodo in normalizado}"
+      },
+      {
+        "numero": 102,
+        "texto": "    predecesores: dict[str, str | None] = {nodo: None for nodo in normalizado}"
+      },
+      {
+        "numero": 103,
+        "texto": "    distancias[origen] = 0.0"
+      },
+      {
+        "numero": 104,
+        "texto": "    pendientes: list[tuple[float, str]] = [(0.0, origen)]"
+      }
+    ],
+    "lineas": [
+      101,
+      104
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "12. Extraer no implica procesar",
+    "funcion": "dijkstra",
+    "objetivo": "Leer el guard clause que descarta historia obsoleta.",
+    "contrato": "Solo una candidatura igual a la distancia vigente relaja vecinos.",
+    "invariante": "distancia_extraida == distancias[actual] al entrar al for.",
+    "riesgo": "Relajar una entrada vieja añade trabajo y borra la justificación local del ciclo.",
+    "prueba": "Ruta directa costosa que luego mejora por un nodo intermedio.",
+    "pregunta": "¿Qué condición convierte una entrada válida en obsoleta?",
+    "paso": 11,
+    "codigo": [
+      {
+        "numero": 105,
+        "texto": "    while pendientes:"
+      },
+      {
+        "numero": 106,
+        "texto": "        distancia_extraida, actual = heapq.heappop(pendientes)"
+      },
+      {
+        "numero": 107,
+        "texto": "        if distancia_extraida != distancias[actual]:"
+      },
+      {
+        "numero": 108,
+        "texto": "            continue"
+      }
+    ],
+    "lineas": [
+      105,
+      108
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "13. Relajación: el núcleo pequeño",
+    "funcion": "dijkstra",
+    "objetivo": "Relacionar cada línea con candidata, comparación, actualización y nueva prioridad.",
+    "contrato": "Solo una mejora estricta cambia distancia y predecesor.",
+    "invariante": "distancias contiene el menor costo descubierto hasta el momento.",
+    "riesgo": "Actualizar distancia sin predecesor produce costos correctos y rutas incorrectas.",
+    "prueba": "Asegurar costo y secuencia en una distancia que mejora dos veces.",
+    "pregunta": "¿Por qué se inserta otra tupla en vez de editar la existente?",
+    "paso": 12,
+    "codigo": [
+      {
+        "numero": 109,
+        "texto": "        for vecino, peso in normalizado[actual]:"
+      },
+      {
+        "numero": 110,
+        "texto": "            candidata = distancia_extraida + peso"
+      },
+      {
+        "numero": 111,
+        "texto": "            if candidata < distancias[vecino]:"
+      },
+      {
+        "numero": 112,
+        "texto": "                distancias[vecino] = candidata"
+      },
+      {
+        "numero": 113,
+        "texto": "                predecesores[vecino] = actual"
+      },
+      {
+        "numero": 114,
+        "texto": "                heapq.heappush(pendientes, (candidata, vecino))"
+      }
+    ],
+    "lineas": [
+      109,
+      114
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "14. Devolver dos productos coherentes",
+    "funcion": "dijkstra",
+    "objetivo": "Ver la salida como evidencia del cálculo, no como detalle interno.",
+    "contrato": "Ambos mapas tienen el mismo conjunto total de nodos.",
+    "invariante": "Cada predecesor no nulo justifica la distancia guardada.",
+    "riesgo": "Pruebas que verifican solo distancias pueden ocultar reconstrucción defectuosa.",
+    "prueba": "Comparar claves y reconstruir al menos un destino.",
+    "pregunta": "¿Qué relación debe existir entre un predecesor y la distancia?",
+    "paso": 13,
+    "codigo": [
+      {
+        "numero": 115,
+        "texto": "    return distancias, predecesores"
+      },
+      {
+        "numero": 116,
+        "texto": ""
+      },
+      {
+        "numero": 117,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      115,
+      117
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "15. Reconstrucción tiene su propio contrato",
+    "funcion": "reconstruir_camino",
+    "objetivo": "Tratar reconstrucción como función testeable e independiente.",
+    "contrato": "Claves ausentes son error; inalcanzable es lista vacía; ciclo es estado inválido.",
+    "invariante": "La cadena consultada debe terminar en origen o None.",
+    "riesgo": "Confundir destino ausente con destino presente pero inalcanzable.",
+    "prueba": "Cubrir ambas situaciones por separado.",
+    "pregunta": "¿Por qué [] no debe representar también una clave inexistente?",
+    "paso": 14,
+    "codigo": [
+      {
+        "numero": 118,
+        "texto": "def reconstruir_camino("
+      },
+      {
+        "numero": 119,
+        "texto": "    predecesores: Mapping[str, str | None],"
+      },
+      {
+        "numero": 120,
+        "texto": "    origen: str,"
+      },
+      {
+        "numero": 121,
+        "texto": "    destino: str,"
+      },
+      {
+        "numero": 122,
+        "texto": ") -> list[str]:"
+      },
+      {
+        "numero": 123,
+        "texto": "    \"\"\"Reconstruye un camino siguiendo predecesores desde el destino."
+      },
+      {
+        "numero": 124,
+        "texto": ""
+      },
+      {
+        "numero": 125,
+        "texto": "    Devuelve una lista vacía cuando ``destino`` es inalcanzable desde"
+      },
+      {
+        "numero": 126,
+        "texto": "    ``origen``. Un ciclo se rechaza porque no representa un árbol válido de"
+      },
+      {
+        "numero": 127,
+        "texto": "    predecesores."
+      },
+      {
+        "numero": 128,
+        "texto": ""
+      },
+      {
+        "numero": 129,
+        "texto": "    Raises"
+      },
+      {
+        "numero": 130,
+        "texto": "    ------"
+      },
+      {
+        "numero": 131,
+        "texto": "    KeyError"
+      },
+      {
+        "numero": 132,
+        "texto": "        Si origen o destino no aparece en ``predecesores``."
+      },
+      {
+        "numero": 133,
+        "texto": "    ValueError"
+      },
+      {
+        "numero": 134,
+        "texto": "        Si el mapa contiene un ciclo en la cadena consultada."
+      },
+      {
+        "numero": 135,
+        "texto": "    \"\"\""
+      },
+      {
+        "numero": 136,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      118,
+      136
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "16. Seguir hacia atrás con defensa de ciclo",
+    "funcion": "reconstruir_camino",
+    "objetivo": "Justificar acumulación, conjunto vistos e inversión final.",
+    "contrato": "El camino se devuelve origen→destino o vacío si llega a None.",
+    "invariante": "Cada nodo se procesa como máximo una vez en una cadena válida.",
+    "riesgo": "Un mapa corrupto puede crear un ciclo infinito sin vistos.",
+    "prueba": "A↔B debe producir ValueError, no colgar la ejecución.",
+    "pregunta": "¿Por qué invertimos solo al alcanzar el origen?",
+    "paso": 15,
+    "codigo": [
+      {
+        "numero": 137,
+        "texto": "    if origen not in predecesores or destino not in predecesores:"
+      },
+      {
+        "numero": 138,
+        "texto": "        raise KeyError(\"origen y destino deben aparecer en predecesores\")"
+      },
+      {
+        "numero": 139,
+        "texto": "    camino: list[str] = []"
+      },
+      {
+        "numero": 140,
+        "texto": "    actual: str | None = destino"
+      },
+      {
+        "numero": 141,
+        "texto": "    vistos: set[str] = set()"
+      },
+      {
+        "numero": 142,
+        "texto": "    while actual is not None:"
+      },
+      {
+        "numero": 143,
+        "texto": "        if actual in vistos:"
+      },
+      {
+        "numero": 144,
+        "texto": "            raise ValueError(\"el mapa de predecesores contiene un ciclo\")"
+      },
+      {
+        "numero": 145,
+        "texto": "        vistos.add(actual)"
+      },
+      {
+        "numero": 146,
+        "texto": "        camino.append(actual)"
+      },
+      {
+        "numero": 147,
+        "texto": "        if actual == origen:"
+      },
+      {
+        "numero": 148,
+        "texto": "            return list(reversed(camino))"
+      },
+      {
+        "numero": 149,
+        "texto": "        actual = predecesores[actual]"
+      },
+      {
+        "numero": 150,
+        "texto": "    return []"
+      }
+    ],
+    "lineas": [
+      137,
+      150
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  },
+  {
+    "titulo": "17. Una función coordinadora pequeña",
+    "funcion": "camino_minimo",
+    "objetivo": "Combinar funciones ya probadas sin duplicar el algoritmo.",
+    "contrato": "Destino ausente es error; inalcanzable devuelve (inf, []).",
+    "invariante": "El costo y el camino provienen de la misma ejecución.",
+    "riesgo": "Reimplementar Dijkstra aquí crea dos fuentes de verdad.",
+    "prueba": "Origen=destino, destino ausente e inalcanzable.",
+    "pregunta": "¿Qué hace esta función y qué decide delegar?",
+    "paso": 16,
+    "codigo": [
+      {
+        "numero": 153,
+        "texto": "def camino_minimo("
+      },
+      {
+        "numero": 154,
+        "texto": "    grafo: GrafoPonderado,"
+      },
+      {
+        "numero": 155,
+        "texto": "    origen: str,"
+      },
+      {
+        "numero": 156,
+        "texto": "    destino: str,"
+      },
+      {
+        "numero": 157,
+        "texto": ") -> tuple[float, list[str]]:"
+      },
+      {
+        "numero": 158,
+        "texto": "    \"\"\"Devuelve el costo y la secuencia de un camino mínimo."
+      },
+      {
+        "numero": 159,
+        "texto": ""
+      },
+      {
+        "numero": 160,
+        "texto": "    Para un destino inalcanzable devuelve ``(math.inf, [])``."
+      },
+      {
+        "numero": 161,
+        "texto": "    \"\"\""
+      },
+      {
+        "numero": 162,
+        "texto": ""
+      },
+      {
+        "numero": 163,
+        "texto": "    distancias, predecesores = dijkstra(grafo, origen)"
+      },
+      {
+        "numero": 164,
+        "texto": "    if destino not in distancias:"
+      },
+      {
+        "numero": 165,
+        "texto": "        raise KeyError(f\"el destino {destino!r} no pertenece al grafo\")"
+      },
+      {
+        "numero": 166,
+        "texto": "    return distancias[destino], reconstruir_camino(predecesores, origen, destino)"
+      },
+      {
+        "numero": 167,
+        "texto": ""
+      }
+    ],
+    "lineas": [
+      153,
+      167
+    ],
+    "decision": "Relaciona contrato → invariante → riesgo → prueba antes de continuar."
+  }
+]
