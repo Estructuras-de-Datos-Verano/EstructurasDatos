@@ -1,5 +1,4 @@
 # Discusión Teórica — Práctica 15
-
 ### 1. Diferencia entre distancia por aristas y por pesos
 La distancia por aristas mide únicamente la cantidad de pasos entre nodos interconectados.
 La distancia por pesos calcula la suma algebraica total de los valores, básicamente es el coste real de recorrer la distancia.

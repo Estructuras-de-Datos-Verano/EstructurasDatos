@@ -49,3 +49,4 @@ def test_ruta_indirecta_supera_directa_costosa():
     costo, camino = camino_minimo(grafo, "A", "D")
     assert costo == 30
     assert camino == ["A", "B", "C", "D"]
+    

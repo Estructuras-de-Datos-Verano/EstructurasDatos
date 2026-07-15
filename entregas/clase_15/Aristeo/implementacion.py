@@ -1,6 +1,7 @@
 import heapq
 import math
 
+
 def dijkstra(
     grafo: dict[str, list[tuple[str, float]]],
     origen: str,
