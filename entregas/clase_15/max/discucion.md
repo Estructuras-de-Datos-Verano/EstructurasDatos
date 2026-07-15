@@ -85,4 +85,4 @@ clase_15::test_max3 <- ..\entregas\clase_15\max\test_estudiante.py PASSED [100%]
 
 ## 11. Hallazgo de la revisión técnica.
 
-
+Hubo una prueba que no pasó por la diferencia de código. Aun con eso, muy buen trabajo y aprendizaje.
