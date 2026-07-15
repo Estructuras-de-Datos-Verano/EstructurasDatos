@@ -1,5 +1,4 @@
-# Respuestas a la Clase 16: Implementación robusta de Dijkstra
-
+# Respuestas a la Clase 16: Implementación robusta de Dijkstra - Gustavo Torres
 ## Pregunta inicial
 **¿Cómo se convierte en una implementación confiable, reutilizable y testeable?**
 Para que una idea matemática abstracta se convierta en software confiable, necesito establecer contratos estrictos desde el inicio. Debo validar los dominios de entrada (manejando nodos desconectados o pesos inválidos), hacer copias defensivas para no mutar los datos originales y aislar las responsabilidades (cálculo vs. reconstrucción) para poder testear cada parte de forma independiente.

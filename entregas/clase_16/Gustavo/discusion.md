@@ -1,4 +1,4 @@
-# Discusión - Práctica 16
+# Discusión - Práctica 16 - Gustavo Torres
 
 **1. Diferencia entre algoritmo correcto y función robusta.**
 Un algoritmo correcto es la prueba matemática de que la lógica funciona (por ejemplo, demostrar que la estrategia greedy de Dijkstra minimiza el camino). Una función robusta es el software que encapsula esa idea para que sobreviva en el mundo real, manejando entradas incorrectas, protegiendo las referencias de memoria y garantizando que las fallas sean controladas.

@@ -1,5 +1,5 @@
 import pytest
-from implementacion import dijkstra
+from entregas.clase_16.Gustavo.implementacion import dijkstra
 
 # 1. Prueba para grafo que no sea Mapping
 def test_rechaza_grafo_no_mapping():
