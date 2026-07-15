@@ -63,13 +63,11 @@ Esta simultaneidad mantiene la coherencia absoluta entre el estado de las tablas
 
 ## 13. Coordinación sin duplicación
 ### ¿Qué responsabilidades delega camino_minimo?
-`camino_minimo` opera únicamente como un director de orquesta (patrón de diseño de coordinación). No calcula distancias ni desenreda el mapa de rutas por sí mismo. Delega el cálculo del árbol de expansión a `dijkstra` y la confección de la secuencia ordenada de nodos a `reconstruir_camino`. Su único trabajo propio es validar la existencia del destino solicitado y emparejar los resultados de costo y trayectoria en una tupla final.
-
----
+No tiene, creo
 
 ## 14. Del contrato a una matriz de pruebas
 ### ¿Qué dimensión del contrato no se verifica al probar únicamente el costo final?
-Probar únicamente el costo final asume que el camino intermedio recorrido es estructuralmente válido, lo cual es propenso a errores silenciosos. No verifica el cumplimiento de las restricciones de tipos y dominios (como rechazar strings o booleanos en pesos mediante `TypeError` o capturar valores negativos con `ValueError`). Tampoco comprueba que la función respete la inmutabilidad de los datos de entrada o que sea capaz de lidiar de forma segura con mapas de predecesores corruptos que posean dependencias circulares complejas.
+No verifica el cumplimiento de las restricciones de tipos y dominios, como rechazar strings o booleanos en pesos mediante `TypeError` o capturar valores negativos con `ValueError`.
 
 | Contrato | Entrada mínima | Observado (en código frágil) | Esperado (en código robusto) | Test propuesto |
 | --- | --- | --- | --- | --- |
@@ -79,42 +77,30 @@ Probar únicamente el costo final asume que el camino intermedio recorrido es es
 | **Entrada obsoleta** | `grafo = {"A": [("B", 10), ("C", 1)],`<br>`"C": [("B", 1)], "B": []}` | Extrae y procesa el nodo "B" múltiples veces del heap, desperdiciando ciclos de CPU. | La cláusula de salvaguarda intercepta la entrada obsoleta y la descarta mediante un `continue`. | `test_entrada_obsoleta_heap` |
 | **Representación** | `grafo = {"A": [("B", float("nan"))]}`<br>`origen = "A"` | El heap se corrompe silenciosamente debido a que las comparaciones lógicas con `NaN` fallan. | Lanza un `ValueError` descriptivo que exige que todos los pesos sean números `"finitos"`. | `test_rechaza_peso_no_finito` |
 
----
-
 ## 15. Auditoría de una implementación frágil
 ### ¿Qué tres fallos reproducibles encuentras en dijkstra_para_revisar?
 1. **Ausencia de Normalización y Fallo de Vecinos Implícitos:** No realiza copias de seguridad de las adyacencias ni agrega los nodos sumideros como claves vacías, provocando un colapso por `KeyError` si un destino no es explícitamente una clave del diccionario.
-2. **Falta de Validación de Fronteras Numéricas:** No inspecciona los pesos de las aristas, lo que permite la libre introducción de costos negativos (violación matemática de Dijkstra) y valores `NaN` o `infinito` que corrompen la cola de prioridad de forma silenciosa.
+2. **Falta de Validación de Fronteras Numéricas:** No inspecciona los pesos de las aristas, lo que permite la libre introducción de costos negativos y valores `NaN` o `infinito` que corrompen la cola de prioridad de forma silenciosa.
 3. **Omisión del Filtro de Invariante de Heap:** No incluye la instrucción de control post-extracción para descartar de forma perezosa los nodos repetidos con distancias obsoletas, penalizando severamente el rendimiento asintótico del algoritmo.
-
----
 
 ## 16. Clínica de depuración
 ### ¿Qué información mínima debe contener un reporte de fallo útil?
-Un reporte técnico de fallos verdaderamente accionable debe estructurarse con cinco elementos inequívocos: el comando exacto de ejecución en la terminal, los datos precisos de entrada que dispararon la anomalía, el comportamiento esperado (basado en el contrato), el comportamiento observado experimentalmente (incluyendo trazas completas de error) y la ubicación o módulo probable del defecto.
-
----
+Comando, entrada, esperado, observado y error.
 
 ## 17. Revisión profesional de código
 ### ¿Qué hace que un comentario de revisión sea accionable y verificable?
-Lo hace su objetividad y fundamentación técnica. Un comentario profesional no emite juicios de valor abstractos; en su lugar, describe con precisión la fortaleza o debilidad detectada, cita textualmente el fragmento de código involucrado, argumenta el riesgo basándose en contratos de software y provee una entrada reproducible mínima junto con la recomendación exacta para solucionar el defecto.
-
----
+Que describa errores, fortalezas, acciones y cambios, así como el como afectan.
 
 ## 18. Complejidad sin perder robustez
 ### ¿La normalización cambia la complejidad asintótica de Dijkstra?
-No. La fase de normalización e inspección del grafo requiere recorrer de manera secuencial todos los vértices ($V$) y todas las aristas ($E$), lo cual toma una complejidad lineal de $O(V + E)$ tanto en tiempo como en espacio. Dado que la ejecución principal de Dijkstra acoplada a un Min-Heap posee una complejidad dominante y superior de $O((V + E) \log V)$, el costo de la robustez se absorbe de forma asintótica y **no altera** la complejidad general del algoritmo.
-
----
+Se sigue acercando a una complejidad logaritmica.
 
 ## 19. Cuatro algoritmos, cuatro operaciones dominantes
 ### ¿Qué estructura auxiliar se deriva de la operación dominante en cada algoritmo del cierre?
-* **BFS (Búsqueda en Anchura):** Exploración por niveles estrictos de vecindad $\rightarrow$ **Cola FIFO** (`collections.deque`).
-* **Dijkstra:** Extracción sistemática del nodo con la menor distancia tentativa acumulada $\rightarrow$ **Cola de Prioridad / Min-Heap** (`heapq`).
-* **Kruskal:** Ordenamiento global de costos e integración ágil de componentes conexas sin ciclos $\rightarrow$ **Estructura de Conjuntos Disjuntos** (Union-Find).
-* **Ordenamiento Topológico:** Identificación y remoción de nodos con grado de dependencia cero $\rightarrow$ **Diccionario/Arreglo de grados de entrada** + **Cola de procesamiento**.
-
----
+* **BFS (Búsqueda en Anchura):** Exploración por niveles estrictos de vecindad -> **Cola FIFO** (`collections.deque`).
+* **Dijkstra:** Extracción sistemática del nodo con la menor distancia tentativa acumulada -> **Cola de Prioridad / Min-Heap** (heapq).
+* **Kruskal:** Ordenamiento global de costos e integración ágil de componentes conexas sin ciclos -> **Estructura de Conjuntos Disjuntos** (Union-Find).
+* **Ordenamiento Topológico:** Identificación y remoción de nodos con grado de dependencia cero -> **Diccionario/Arreglo de grados de entrada** + **Cola de procesamiento**.
 
 ## 20. Cierre
 ### ¿Qué cadena de lectura convierte una implementación en evidencia de confiabilidad?
