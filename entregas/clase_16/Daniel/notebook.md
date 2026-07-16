@@ -66,3 +66,14 @@ Ya entendemos la idea de Dijkstra. ¿Cómo se convierte en una implementación c
 
 ¿Qué cadena de lectura convierte una implementación en evidencia de confiabilidad? 
 - Leer en orden: lo que promete , cómo se protege , cómo calcula  y cómo se defiende con pruebas.  
+
+
+Lee `src/dijkstra_para_revisar.py`. Documenta al menos cinco hallazgos:
+
+| Contrato | Entrada mínima | Observado | Esperado | Test propuesto |
+| --- | --- | --- | --- | --- |
+| peso no negativo  | grafo = {"A": [("B", -5)]}, origen = "A" |Ejecuta la relajación y acepta el costo de -5.0.   | Lanza ValueError debido a que viola el dominio del problema de Dijkstra.  |test_peso_negativo_lanza_value_error (se parametriza con pesos menores que 0).   |
+| vecino implícito |grafo = {"A": [("B", 2.0)]}, origen = "A" |Lanza KeyError en distancias[vecino] o al intentar leer grafo[actual] porque "B" no es clave inicial. |Agrega "B" a la copia interna del grafo con lista de adyacencia vacía y completa sus distancias. |test_vecino_implicito_no_falla (verifica que "B" sea alcanzable con distancia 2.0).   |
+| origen válido |grafo = {"A": []}, origen = "X" |Lanza KeyError: 'X' al inicializar distancias[origen] en el diccionario de inicio |Lanza KeyError explícito e informativo que indique que el nodo origen no existe en el grafo.   |test_origen_inexistente_lanza_key_error (intenta iniciar desde una clave fuera del grafo). |
+| entrada obsoleta | grafo = {"A": [("B", 10), ("C", 2)], "C": [("B", 1)]}, origen = "A"| Procesa el bucle de "B" dos veces (una con distancia 10 y otra con la óptima 3) al carecer de guard clause.| Filtra la entrada obsoleta en el while usando if distancia != distancias[actual]: continue.  | |
+| representación |grafo = {"A": [("B", True)]}, origen = "A" |Acepta True como distancia de 1.0 porque en Python bool es subclase de int |Lanza TypeError al validar explícitamente que el peso no sea de tipo bool.   |test_descarte_entrada_obsoleta (comprueba que el número de iteraciones en el bucle no se duplique).   |

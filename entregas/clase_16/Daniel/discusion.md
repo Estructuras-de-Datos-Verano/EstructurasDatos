@@ -1,0 +1,13 @@
+
+1. Algoritmo correcto vs. Función robustaAlgoritmo correcto: Resuelve el problema matemático asumiendo condiciones ideales y datos perfectos.  Función robusta: Es software real; valida la frontera, maneja datos corruptos y lanza excepciones claras ante fallos. 
+2. Razón de separar la normalizaciónLimpieza centralizada: Concentra las validaciones y copias en _normalizar_grafo. Así, el bucle de Dijkstra queda limpio, simple y enfocado solo en el cálculo. 
+3. Mapping/Sequence frente a dict/listAbstracción vs. Rigidez: Mapping y Sequence permiten al usuario pasar cualquier estructura compatible (como tuplas o diccionarios personalizados). Exigir dict o list limita innecesariamente la reutilización.
+4. TypeError frente a ValueErrorTypeError: El dato tiene un tipo incorrecto (ej. un string en vez de un número).  ValueError: El tipo es correcto pero su valor viola el dominio (ej. un número negativo o NaN). 
+5. Bool, NaN e infinitoBool: En Python hereda de int (un True se procesaría silenciosamente como peso 1.0).  NaN: Rompe las comparaciones lógicas y desordena el heap.  Infinito: Se reserva para el estado interno (nodo inalcanzable) y no debe aceptarse como peso de entrada.
+6. Copia defensivaEvitar efectos secundarios: Duplica la estructura de entrada para que las modificaciones internas (como agregar vecinos implícitos) no alteren el grafo original del usuario.
+7. Vecino implícitoEvitar caídas: Si un nodo destino no tiene aristas salientes, no suele ser clave en el grafo de entrada. Normalizarlo con una lista vacía previene un KeyError al procesarlo. 
+8. Invariante de entradas obsoletasDescarte perezoso: Como heapq no permite actualizar elementos internamente, dejamos las distancias viejas en el heap y las descartamos en el while si distancia_extraida != distancias[actual].  
+9. Responsabilidades de reconstrucciónDesacoplamiento: reconstruir_camino solo debe seguir predecesores hacia atrás. Su tarea es identificar destinos inalcanzables, ciclos infinitos o nodos inexistentes de forma aislada al grafo. 
+10. Matriz contrato–riesgo–pruebaDiseño seguro: Identifica qué promete la función (contrato), qué entrada podría romperlo (riesgo) y automatiza un caso mínimo para asegurar que falle de forma controlada (prueba).  
+11. Complejidad de normalización y DijkstraCosto despreciable: Normalizar toma O(V+E) y Dijkstra toma O((V+E) log V). Al ser una fase lineal previa, la normalización no altera la complejidad asintótica del algoritmo. 
+12. Operación dominante y estructura claveBFS: Orden de descubrimiento a Cola FIFO.  Dijkstra: Extraer costo mínimo acumulado a Min-heap.  Kruskal: Unir componentes sin ciclos a Union-Find.  Topológico: Retirar nodos con grado de entrada cero a Grados de entrada + Cola.  
