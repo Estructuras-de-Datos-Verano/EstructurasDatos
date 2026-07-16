@@ -1,0 +1,32 @@
+- comando ejecutado: pytest -v ;
+- salida completa: PS C:\Users\0286945\Documents\GitHub\EstructurasDatos\clase_10> pytest -v
+============================================================= test session starts ==============================================================
+platform win32 -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\0286945\Documents\GitHub\EstructurasDatos\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\0286945\Documents\GitHub\EstructurasDatos\clase_10
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.14.0
+collected 12 items                                                                                                                              
+
+tests/test_publico_recorridos.py::test_existen_funciones_requeridas PASSED                                                                [  8%]
+tests/test_publico_recorridos.py::test_bfs_en_grafo_simple PASSED                                                                         [ 16%]
+tests/test_publico_recorridos.py::test_dfs_en_grafo_simple PASSED                                                                         [ 25%]
+tests/test_publico_recorridos.py::test_bfs_en_grafo_con_ciclo PASSED                                                                      [ 33%]
+tests/test_publico_recorridos.py::test_dfs_en_grafo_con_ciclo PASSED                                                                      [ 41%]
+tests/test_publico_recorridos.py::test_grafo_desconectado_solo_visita_componente_del_origen PASSED                                        [ 50%]
+tests/test_publico_recorridos.py::test_registro_bfs_contiene_cola PASSED                                                                  [ 58%]
+tests/test_publico_recorridos.py::test_registro_dfs_contiene_pila PASSED                                                                  [ 66%]
+tests/test_publico_recorridos.py::test_bfs_encuentra_camino_en_red_no_ponderada PASSED                                                    [ 75%]
+tests/test_publico_recorridos.py::test_todo_bfs_y_dfs_ordenes_distintos PASSED                                                            [ 83%]
+tests/test_publico_recorridos.py::test_todo_nodo_aislado PASSED                                                                           [ 91%]
+tests/test_publico_recorridos.py::test_todo_no_visita_repetidos PASSED                                                                    [100%]
+
+============================================================== 12 passed in 0.03s ==============================================================;
+- interpretación: Se ejecutaron correctamente y verificaron que los algoritmos recorren correctamente el grafo en cualquier escenario;
+- cuántas pruebas se ejecutaron: 12;
+- cuántas pasaron: 12;
+- si hubo errores: No;
+- qué comportamiento verifican: bfs y dfs con nodos repetidos como vecinos, que solo visite el origen en desconectado, que el registo tenga cola y pila, etc;
+- qué prueba diseñaste tú: una que verifica que esté en los resultados de vecinos un nodo que no es llave y otra verifica que los resultados sean correctos en dfs;
+- qué caso todavía falta proba: quizás un caso con llaves de nodo repetidas
