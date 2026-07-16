@@ -1,0 +1,7645 @@
+{
+  "cadena_simple": [
+    {
+      "paso": 0,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [
+        "A"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Desencolar A",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Agregar A al orden",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Actualizar arista A → B",
+      "nodo_actual": "A",
+      "vecino_actual": "B",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "B llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Desencolar B",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Agregar B al orden",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Actualizar arista B → C",
+      "nodo_actual": "B",
+      "vecino_actual": "C",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "C llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Desencolar C",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Agregar C al orden",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 10,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Actualizar arista C → D",
+      "nodo_actual": "C",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [
+        "D"
+      ],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "D llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 11,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Desencolar D",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 12,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Agregar D al orden",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 13,
+      "titulo": "Cadena simple — orden único",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1,
+          0
+        ],
+        "C": [
+          2,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "varias_fuentes": [
+    {
+      "paso": 0,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 2,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 2,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [
+        "A",
+        "B"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Desencolar A",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 2,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Agregar A al orden",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 2,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Actualizar arista A → C",
+      "nodo_actual": "A",
+      "vecino_actual": "C",
+      "grados": {
+        "A": 0,
+        "C": 1,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 2,
+      "grado_nuevo": 1,
+      "decision": "C conserva 1 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Desencolar B",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 1,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "B",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Agregar B al orden",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 1,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Actualizar arista B → C",
+      "nodo_actual": "B",
+      "vecino_actual": "C",
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "C llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Desencolar C",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Agregar C al orden",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 10,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Actualizar arista C → D",
+      "nodo_actual": "C",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 0
+      },
+      "cola": [
+        "D"
+      ],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "D llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 11,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Desencolar D",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 12,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Agregar D al orden",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 13,
+      "titulo": "Varias fuentes — A y B disponibles",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "C": 0,
+        "B": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "A": [
+          "C"
+        ],
+        "C": [
+          "D"
+        ],
+        "B": [
+          "C"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          0,
+          -1
+        ],
+        "C": [
+          1.5,
+          0
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "ordenes_multiples": [
+    {
+      "paso": 0,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 3,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 3,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "A",
+        "B",
+        "C"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Desencolar A",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 3,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "B",
+        "C"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Agregar A al orden",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 3,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "B",
+        "C"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Actualizar arista A → D",
+      "nodo_actual": "A",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "D": 2,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "B",
+        "C"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 3,
+      "grado_nuevo": 2,
+      "decision": "D conserva 2 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Desencolar B",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 2,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "B",
+        "C"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Agregar B al orden",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 2,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "C"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Actualizar arista B → D",
+      "nodo_actual": "B",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "D": 1,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": 2,
+      "grado_nuevo": 1,
+      "decision": "D conserva 1 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "C"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Desencolar C",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 1,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "C"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Agregar C al orden",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 1,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 10,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Actualizar arista C → D",
+      "nodo_actual": "C",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "D": 0,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [
+        "D"
+      ],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "D llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 11,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Desencolar D",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 0,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 12,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Agregar D al orden",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 0,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 13,
+      "titulo": "Varios órdenes topológicos válidos",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "D": 0,
+        "B": 0,
+        "C": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "A": [
+          "D"
+        ],
+        "D": [],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1.2
+        ],
+        "B": [
+          0,
+          0
+        ],
+        "C": [
+          0,
+          -1.2
+        ],
+        "D": [
+          2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "ciclo_simple": [
+    {
+      "paso": 0,
+      "titulo": "Ciclo simple — cola inicial vacía",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          1.7,
+          1
+        ],
+        "C": [
+          0.85,
+          -0.5
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Ciclo simple — cola inicial vacía",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          1.7,
+          1
+        ],
+        "C": [
+          0.85,
+          -0.5
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Ciclo simple — cola inicial vacía",
+      "accion": "Ciclo detectado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Quedan nodos sin procesar y ninguno tiene grado cero.",
+      "ciclo_detectado": true,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 8,
+      "mensaje": "Un orden parcial no es una solución para el grafo completo.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "A": [
+          0,
+          1
+        ],
+        "B": [
+          1.7,
+          1
+        ],
+        "C": [
+          0.85,
+          -0.5
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "componente_mixta": [
+    {
+      "paso": 0,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 1,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 1,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [
+        "D"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Desencolar D",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 1,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D",
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Agregar D al orden",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 1,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Actualizar arista D → E",
+      "nodo_actual": "D",
+      "vecino_actual": "E",
+      "grados": {
+        "D": 0,
+        "E": 0,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [
+        "E"
+      ],
+      "orden_parcial": [
+        "D"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "E llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Desencolar E",
+      "nodo_actual": "E",
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 0,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Agregar E al orden",
+      "nodo_actual": "E",
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 0,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "D",
+        "E"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Componente acíclica y componente cíclica",
+      "accion": "Ciclo detectado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "D": 0,
+        "E": 0,
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "D",
+        "E"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Quedan nodos sin procesar y ninguno tiene grado cero.",
+      "ciclo_detectado": true,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C"
+      ],
+      "linea_activa": 8,
+      "mensaje": "Un orden parcial no es una solución para el grafo completo.",
+      "grafo": {
+        "D": [
+          "E"
+        ],
+        "E": [],
+        "A": [
+          "B"
+        ],
+        "B": [
+          "C"
+        ],
+        "C": [
+          "A"
+        ]
+      },
+      "posiciones": {
+        "D": [
+          0,
+          1.6
+        ],
+        "E": [
+          2,
+          1.6
+        ],
+        "A": [
+          0,
+          -0.2
+        ],
+        "B": [
+          2,
+          -0.2
+        ],
+        "C": [
+          1,
+          -1.6
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "nodo_aislado": [
+    {
+      "paso": 0,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "Z": 0
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "Z"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "Z": 0
+      },
+      "cola": [
+        "A",
+        "Z"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "Z"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Desencolar A",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "Z": 0
+      },
+      "cola": [
+        "Z"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "Z"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Agregar A al orden",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "Z": 0
+      },
+      "cola": [
+        "Z"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "Z"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Actualizar arista A → B",
+      "nodo_actual": "A",
+      "vecino_actual": "B",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [
+        "Z",
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "B llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "Z"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Desencolar Z",
+      "nodo_actual": "Z",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "Z"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Agregar Z al orden",
+      "nodo_actual": "Z",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A",
+        "Z"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Desencolar B",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "Z"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Agregar B al orden",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "Z",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Nodo aislado — también está disponible",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "Z": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "Z",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "A": [
+          "B"
+        ],
+        "B": [],
+        "Z": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0.8
+        ],
+        "B": [
+          2,
+          0.8
+        ],
+        "Z": [
+          1,
+          -1
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "duplicados": [
+    {
+      "paso": 0,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 2
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 2
+      },
+      "cola": [
+        "A"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Desencolar A",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 2
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Agregar A al orden",
+      "nodo_actual": "A",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 1,
+        "C": 1,
+        "D": 2
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Actualizar arista A → B",
+      "nodo_actual": "A",
+      "vecino_actual": "B",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 2
+      },
+      "cola": [
+        "B"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "B llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Actualizar arista A → C",
+      "nodo_actual": "A",
+      "vecino_actual": "C",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 2
+      },
+      "cola": [
+        "B",
+        "C"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "C llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Desencolar B",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 2
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "B",
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Agregar B al orden",
+      "nodo_actual": "B",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 2
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Actualizar arista B → D",
+      "nodo_actual": "B",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [
+        "C"
+      ],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": 2,
+      "grado_nuevo": 1,
+      "decision": "D conserva 1 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Desencolar C",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "C",
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 10,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Agregar C al orden",
+      "nodo_actual": "C",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 11,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Actualizar arista C → D",
+      "nodo_actual": "C",
+      "vecino_actual": "D",
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [
+        "D"
+      ],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "D llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 12,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Desencolar D",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "D"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 13,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Agregar D al orden",
+      "nodo_actual": "D",
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 14,
+      "titulo": "Dependencias duplicadas normalizadas",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "A": [
+          "B",
+          "C"
+        ],
+        "B": [
+          "D"
+        ],
+        "C": [
+          "D"
+        ],
+        "D": []
+      },
+      "posiciones": {
+        "A": [
+          0,
+          0
+        ],
+        "B": [
+          1.4,
+          1
+        ],
+        "C": [
+          1.4,
+          -1
+        ],
+        "D": [
+          3,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ],
+  "plan_cursos": [
+    {
+      "paso": 0,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Grafo normalizado",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 2,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Dependencias duplicadas eliminadas; vecinos implícitos incluidos.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Programación",
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 0,
+      "mensaje": "La forma del grafo original no se modifica.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 1,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Calcular grados y preparar la cola",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 2,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Encolar únicamente grados cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Programación",
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 2,
+      "mensaje": "Todo nodo en la cola está libre de requisitos pendientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 2,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Programación",
+      "nodo_actual": "Programación",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 2,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "orden_parcial": [],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Programación",
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 3,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Programación al orden",
+      "nodo_actual": "Programación",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 2,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "orden_parcial": [
+        "Programación"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 4,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Programación → Estructuras de Datos",
+      "nodo_actual": "Programación",
+      "vecino_actual": "Estructuras de Datos",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 1,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "orden_parcial": [
+        "Programación"
+      ],
+      "grado_anterior": 2,
+      "grado_nuevo": 1,
+      "decision": "Estructuras de Datos conserva 1 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 5,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Matemáticas Discretas",
+      "nodo_actual": "Matemáticas Discretas",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 1,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Álgebra"
+      ],
+      "orden_parcial": [
+        "Programación"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Matemáticas Discretas",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 6,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Matemáticas Discretas al orden",
+      "nodo_actual": "Matemáticas Discretas",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 1,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Álgebra"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 7,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Matemáticas Discretas → Estructuras de Datos",
+      "nodo_actual": "Matemáticas Discretas",
+      "vecino_actual": "Estructuras de Datos",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Álgebra",
+        "Estructuras de Datos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "Estructuras de Datos llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 8,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Álgebra",
+      "nodo_actual": "Álgebra",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Estructuras de Datos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Álgebra",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 9,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Álgebra al orden",
+      "nodo_actual": "Álgebra",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 1,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Estructuras de Datos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 10,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Álgebra → Optimización",
+      "nodo_actual": "Álgebra",
+      "vecino_actual": "Optimización",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Estructuras de Datos",
+        "Optimización"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "Optimización llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 11,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Estructuras de Datos",
+      "nodo_actual": "Estructuras de Datos",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Optimización"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Estructuras de Datos",
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 12,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Estructuras de Datos al orden",
+      "nodo_actual": "Estructuras de Datos",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 1,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Optimización"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 13,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Estructuras de Datos → Algoritmos",
+      "nodo_actual": "Estructuras de Datos",
+      "vecino_actual": "Algoritmos",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Optimización",
+        "Algoritmos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "Algoritmos llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 14,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Optimización",
+      "nodo_actual": "Optimización",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Algoritmos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Optimización",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 15,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Optimización al orden",
+      "nodo_actual": "Optimización",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 2
+      },
+      "cola": [
+        "Algoritmos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 16,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Optimización → Proyecto Final",
+      "nodo_actual": "Optimización",
+      "vecino_actual": "Proyecto Final",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 1
+      },
+      "cola": [
+        "Algoritmos"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización"
+      ],
+      "grado_anterior": 2,
+      "grado_nuevo": 1,
+      "decision": "Proyecto Final conserva 1 requisito(s); sigue bloqueado.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Proyecto Final"
+      ],
+      "linea_activa": 6,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 17,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Algoritmos",
+      "nodo_actual": "Algoritmos",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Algoritmos",
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 18,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Algoritmos al orden",
+      "nodo_actual": "Algoritmos",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 1
+      },
+      "cola": [],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización",
+        "Algoritmos"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Proyecto Final"
+      ],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 19,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Actualizar arista Algoritmos → Proyecto Final",
+      "nodo_actual": "Algoritmos",
+      "vecino_actual": "Proyecto Final",
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 0
+      },
+      "cola": [
+        "Proyecto Final"
+      ],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización",
+        "Algoritmos"
+      ],
+      "grado_anterior": 1,
+      "grado_nuevo": 0,
+      "decision": "Proyecto Final llega a grado cero y entra a la cola.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Proyecto Final"
+      ],
+      "linea_activa": 7,
+      "mensaje": "Reducir el grado representa retirar una dependencia ya satisfecha.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 20,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Desencolar Proyecto Final",
+      "nodo_actual": "Proyecto Final",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización",
+        "Algoritmos"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Procesar: su grado actual es cero.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [
+        "Proyecto Final"
+      ],
+      "linea_activa": 4,
+      "mensaje": "La cola conserva otros nodos disponibles.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 21,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Agregar Proyecto Final al orden",
+      "nodo_actual": "Proyecto Final",
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización",
+        "Algoritmos",
+        "Proyecto Final"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "El nodo se procesa exactamente una vez.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 5,
+      "mensaje": "Procesar un nodo elimina conceptualmente sus aristas salientes.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    },
+    {
+      "paso": 22,
+      "titulo": "Plan de cursos — problema conductor",
+      "accion": "Orden topológico completo",
+      "nodo_actual": null,
+      "vecino_actual": null,
+      "grados": {
+        "Programación": 0,
+        "Estructuras de Datos": 0,
+        "Matemáticas Discretas": 0,
+        "Algoritmos": 0,
+        "Álgebra": 0,
+        "Optimización": 0,
+        "Proyecto Final": 0
+      },
+      "cola": [],
+      "orden_parcial": [
+        "Programación",
+        "Matemáticas Discretas",
+        "Álgebra",
+        "Estructuras de Datos",
+        "Optimización",
+        "Algoritmos",
+        "Proyecto Final"
+      ],
+      "grado_anterior": null,
+      "grado_nuevo": null,
+      "decision": "Todos los nodos fueron procesados.",
+      "ciclo_detectado": false,
+      "nodos_pendientes": [],
+      "linea_activa": 8,
+      "mensaje": "Cada arista apunta de una posición anterior a una posterior.",
+      "grafo": {
+        "Programación": [
+          "Estructuras de Datos"
+        ],
+        "Estructuras de Datos": [
+          "Algoritmos"
+        ],
+        "Matemáticas Discretas": [
+          "Estructuras de Datos"
+        ],
+        "Algoritmos": [
+          "Proyecto Final"
+        ],
+        "Álgebra": [
+          "Optimización"
+        ],
+        "Optimización": [
+          "Proyecto Final"
+        ],
+        "Proyecto Final": []
+      },
+      "posiciones": {
+        "Programación": [
+          0,
+          1.7
+        ],
+        "Matemáticas Discretas": [
+          0,
+          0.3
+        ],
+        "Estructuras de Datos": [
+          2.2,
+          1
+        ],
+        "Álgebra": [
+          0,
+          -1.4
+        ],
+        "Optimización": [
+          2.2,
+          -1.4
+        ],
+        "Algoritmos": [
+          4.2,
+          1
+        ],
+        "Proyecto Final": [
+          6.2,
+          0
+        ]
+      },
+      "pseudocodigo": [
+        "normalizar el grafo",
+        "calcular grados de entrada",
+        "encolar todos los nodos con grado cero",
+        "mientras la cola no esté vacía",
+        "    actual = desencolar",
+        "    agregar actual al orden",
+        "    reducir el grado de cada vecino",
+        "    si llega a cero: encolar vecino",
+        "si faltan nodos: existe un ciclo"
+      ]
+    }
+  ]
+}
