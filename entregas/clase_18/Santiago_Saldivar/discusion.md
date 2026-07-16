@@ -6,6 +6,7 @@ Caminos mínimos necesita origen. El otro conecta todo
 2. Árbol de expansión
 
 ¿Por qué una solución tiene (V-1) aristas?
+Porque todos los vértices se conectan y no hay redundancias.
 3. Ciclos
 
 ¿Por qué se rechaza una arista cuyos extremos ya están conectados?
@@ -49,6 +50,7 @@ Para limitar el tamaño
 11. Kruskal
 
 ¿Cuál es la operación dominante de Kruskal?
+En complejidad, ordenar.
 12. Grafo desconectado
 
 ¿Por qué Kruskal puede terminar con un bosque?
