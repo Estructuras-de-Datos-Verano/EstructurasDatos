@@ -1,0 +1,6402 @@
+{
+  "union_find_basico": [
+    {
+      "paso": 0,
+      "titulo": "UNION-FIND BÁSICO",
+      "tipo": "union_find",
+      "accion": "Crear cinco conjuntos",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Inicializar",
+      "motivo": "Cada elemento comienza como su propia raíz",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Hay cinco componentes unitarias."
+    },
+    {
+      "paso": 1,
+      "titulo": "UNION-FIND BÁSICO",
+      "tipo": "union_find",
+      "accion": "union(1, 2)",
+      "arista_actual": [
+        1,
+        2,
+        0.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        1,
+        1,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Aceptar",
+      "motivo": "Las raíces 1 y 2 eran distintas",
+      "linea_activa": 5,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Ahora 1 representa a {1,2}."
+    }
+  ],
+  "union_efectiva": [
+    {
+      "paso": 0,
+      "titulo": "UNIÓN EFECTIVA",
+      "tipo": "union_find",
+      "accion": "Preparar union(0, 1)",
+      "arista_actual": [
+        0,
+        1,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar raíces",
+      "motivo": "Aún están separados",
+      "linea_activa": 1,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Predice si disminuirá el contador."
+    },
+    {
+      "paso": 1,
+      "titulo": "UNIÓN EFECTIVA",
+      "tipo": "union_find",
+      "accion": "Ejecutar union(0, 1)",
+      "arista_actual": [
+        0,
+        1,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Devolver True",
+      "motivo": "Se combinan dos componentes",
+      "linea_activa": 5,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Componentes: 4 → 3; tamaño de la nueva raíz: 2."
+    }
+  ],
+  "union_redundante": [
+    {
+      "paso": 0,
+      "titulo": "UNIÓN REDUNDANTE",
+      "tipo": "union_find",
+      "accion": "Preparar union(0, 2)",
+      "arista_actual": [
+        0,
+        2,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar raíces",
+      "motivo": "0 y 2 ya pertenecen a la misma componente",
+      "linea_activa": 1,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "El contador no debe cambiar."
+    },
+    {
+      "paso": 1,
+      "titulo": "UNIÓN REDUNDANTE",
+      "tipo": "union_find",
+      "accion": "Ejecutar union(0, 2)",
+      "arista_actual": [
+        0,
+        2,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Devolver False",
+      "motivo": "Aceptar esta unión crearía un ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Componentes permanece en 2."
+    }
+  ],
+  "compresion_caminos": [
+    {
+      "paso": 0,
+      "titulo": "COMPRESIÓN DE CAMINOS",
+      "tipo": "union_find",
+      "accion": "Preparar find(4)",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        5,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Seguir 4 → 3 → 2 → 1 → 0",
+      "motivo": "La raíz es 0",
+      "linea_activa": 1,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "La representación es profunda, pero la componente ya es una sola."
+    },
+    {
+      "paso": 1,
+      "titulo": "COMPRESIÓN DE CAMINOS",
+      "tipo": "union_find",
+      "accion": "Ejecutar find(4)",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "tamanos": [
+        5,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Devolver 0",
+      "motivo": "Los nodos visitados apuntan directamente a 0",
+      "linea_activa": 1,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "Cambian padres; no cambia la partición ni el contador."
+    }
+  ],
+  "union_por_tamano": [
+    {
+      "paso": 0,
+      "titulo": "UNIÓN POR TAMAÑO",
+      "tipo": "union_find",
+      "accion": "Preparar union(3, 5)",
+      "arista_actual": [
+        3,
+        5,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 4,
+      "padres": [
+        0,
+        0,
+        0,
+        0,
+        4,
+        4
+      ],
+      "tamanos": [
+        4,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar tamaños 4 y 2",
+      "motivo": "El árbol pequeño debe quedar debajo del grande",
+      "linea_activa": 3,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "La altura crece lo menos posible."
+    },
+    {
+      "paso": 1,
+      "titulo": "UNIÓN POR TAMAÑO",
+      "tipo": "union_find",
+      "accion": "Ejecutar union(3, 5)",
+      "arista_actual": [
+        3,
+        5,
+        0.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 4,
+      "padres": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        4
+      ],
+      "tamanos": [
+        6,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "aristas": [],
+      "aristas_ordenadas": [],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Aceptar",
+      "motivo": "La raíz de tamaño 2 apunta a la raíz de tamaño 4",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "validar índices",
+        "raiz_a = find(a); raiz_b = find(b)",
+        "si las raíces coinciden: devolver False",
+        "colocar el árbol pequeño debajo del grande",
+        "actualizar tamaño y disminuir componentes",
+        "devolver True"
+      ],
+      "mensaje": "El tamaño vigente 6 se guarda únicamente en la nueva raíz."
+    }
+  ],
+  "kruskal_basico": [
+    {
+      "paso": 0,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Recibir la lista original",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Copiar antes de ordenar",
+      "motivo": "La entrada no debe modificarse",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "7 aristas; 5 vértices."
+    },
+    {
+      "paso": 1,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Ordenar aristas por peso",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Preparar recorrido",
+      "motivo": "Kruskal considera primero las conexiones más baratas",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Los empates usan un orden estable solo para visualizar."
+    },
+    {
+      "paso": 2,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (2, 3, 1)",
+      "arista_actual": [
+        2,
+        3,
+        1.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 3,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (2, 3, 1)",
+      "arista_actual": [
+        2,
+        3,
+        1.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        1,
+        2,
+        2,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 1."
+    },
+    {
+      "paso": 4,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (0, 2, 2)",
+      "arista_actual": [
+        0,
+        2,
+        2.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        1,
+        2,
+        2,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 5,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (0, 2, 2)",
+      "arista_actual": [
+        0,
+        2,
+        2.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        2,
+        1,
+        2,
+        2,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        3,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 3."
+    },
+    {
+      "paso": 6,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (3, 4, 2)",
+      "arista_actual": [
+        3,
+        4,
+        2.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 4,
+      "padres": [
+        2,
+        1,
+        2,
+        2,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        3,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 7,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (3, 4, 2)",
+      "arista_actual": [
+        3,
+        4,
+        2.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 4,
+      "padres": [
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "tamanos": [
+        1,
+        1,
+        4,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          2,
+          3,
+          4
+        ],
+        [
+          1
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 5.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 5."
+    },
+    {
+      "paso": 8,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (1, 3, 3)",
+      "arista_actual": [
+        1,
+        3,
+        3.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 2,
+      "padres": [
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "tamanos": [
+        1,
+        1,
+        4,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          2,
+          3,
+          4
+        ],
+        [
+          1
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 5.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 9,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (1, 3, 3)",
+      "arista_actual": [
+        1,
+        3,
+        3.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 2,
+      "padres": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "tamanos": [
+        1,
+        1,
+        5,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 8.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 8."
+    },
+    {
+      "paso": 10,
+      "titulo": "KRUSKAL — RED DE CIUDADES",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Alcanzar V - 1 aristas",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "tamanos": [
+        1,
+        1,
+        5,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ],
+        [
+          0,
+          1,
+          4.0
+        ],
+        [
+          0,
+          3,
+          5.0
+        ],
+        [
+          2,
+          4,
+          6.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          0,
+          2,
+          2.0
+        ],
+        [
+          3,
+          4,
+          2.0
+        ],
+        [
+          1,
+          3,
+          3.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 8.0,
+      "decision": "TERMINAR",
+      "motivo": "El bosque ya es un árbol que conecta todos los vértices",
+      "linea_activa": 6,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "MST completo con costo 8."
+    }
+  ],
+  "arista_rechazada": [
+    {
+      "paso": 0,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Recibir la lista original",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Copiar antes de ordenar",
+      "motivo": "La entrada no debe modificarse",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "4 aristas; 4 vértices."
+    },
+    {
+      "paso": 1,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Ordenar aristas por peso",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Preparar recorrido",
+      "motivo": "Kruskal considera primero las conexiones más baratas",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Los empates usan un orden estable solo para visualizar."
+    },
+    {
+      "paso": 2,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 3,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 1."
+    },
+    {
+      "paso": 4,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (1, 2, 2)",
+      "arista_actual": [
+        1,
+        2,
+        2.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 5,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (1, 2, 2)",
+      "arista_actual": [
+        1,
+        2,
+        2.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 3."
+    },
+    {
+      "paso": 6,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (0, 2, 3)",
+      "arista_actual": [
+        0,
+        2,
+        3.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 7,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Rechazar (0, 2, 3)",
+      "arista_actual": [
+        0,
+        2,
+        3.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [
+        [
+          0,
+          2,
+          3.0
+        ]
+      ],
+      "costo_acumulado": 3.0,
+      "decision": "RECHAZAR",
+      "motivo": "Sus extremos ya estaban conectados: produciría un ciclo",
+      "linea_activa": 5,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo y componentes permanecen."
+    },
+    {
+      "paso": 8,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (2, 3, 8)",
+      "arista_actual": [
+        2,
+        3,
+        8.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [
+        [
+          0,
+          2,
+          3.0
+        ]
+      ],
+      "costo_acumulado": 3.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 9,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (2, 3, 8)",
+      "arista_actual": [
+        2,
+        3,
+        8.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "tamanos": [
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_rechazadas": [
+        [
+          0,
+          2,
+          3.0
+        ]
+      ],
+      "costo_acumulado": 11.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 11."
+    },
+    {
+      "paso": 10,
+      "titulo": "KRUSKAL — ARISTA QUE CIERRA CICLO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Alcanzar V - 1 aristas",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "tamanos": [
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          0,
+          2,
+          3.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_rechazadas": [
+        [
+          0,
+          2,
+          3.0
+        ]
+      ],
+      "costo_acumulado": 11.0,
+      "decision": "TERMINAR",
+      "motivo": "El bosque ya es un árbol que conecta todos los vértices",
+      "linea_activa": 6,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "MST completo con costo 11."
+    }
+  ],
+  "pesos_repetidos": [
+    {
+      "paso": 0,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Recibir la lista original",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Copiar antes de ordenar",
+      "motivo": "La entrada no debe modificarse",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "5 aristas; 4 vértices."
+    },
+    {
+      "paso": 1,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Ordenar aristas por peso",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Preparar recorrido",
+      "motivo": "Kruskal considera primero las conexiones más baratas",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Los empates usan un orden estable solo para visualizar."
+    },
+    {
+      "paso": 2,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 3,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 1."
+    },
+    {
+      "paso": 4,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (0, 2, 1)",
+      "arista_actual": [
+        0,
+        2,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 5,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (0, 2, 1)",
+      "arista_actual": [
+        0,
+        2,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 2,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 2."
+    },
+    {
+      "paso": 6,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (3, 0, 1)",
+      "arista_actual": [
+        3,
+        0,
+        1.0
+      ],
+      "raiz_u": 3,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "tamanos": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 7,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (3, 0, 1)",
+      "arista_actual": [
+        3,
+        0,
+        1.0
+      ],
+      "raiz_u": 3,
+      "raiz_v": 0,
+      "padres": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "tamanos": [
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 3."
+    },
+    {
+      "paso": 8,
+      "titulo": "KRUSKAL — VARIOS MST POSIBLES",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Alcanzar V - 1 aristas",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "tamanos": [
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ],
+        [
+          1,
+          2,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          0,
+          2,
+          1.0
+        ],
+        [
+          3,
+          0,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 3.0,
+      "decision": "TERMINAR",
+      "motivo": "El bosque ya es un árbol que conecta todos los vértices",
+      "linea_activa": 6,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "MST completo con costo 3."
+    }
+  ],
+  "grafo_desconectado": [
+    {
+      "paso": 0,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Recibir la lista original",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Copiar antes de ordenar",
+      "motivo": "La entrada no debe modificarse",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "2 aristas; 4 vértices."
+    },
+    {
+      "paso": 1,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Ordenar aristas por peso",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Preparar recorrido",
+      "motivo": "Kruskal considera primero las conexiones más baratas",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Los empates usan un orden estable solo para visualizar."
+    },
+    {
+      "paso": 2,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 3,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (0, 1, 1)",
+      "arista_actual": [
+        0,
+        1,
+        1.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 1."
+    },
+    {
+      "paso": 4,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Considerar (2, 3, 1)",
+      "arista_actual": [
+        2,
+        3,
+        1.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "tamanos": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 1.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 5,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Aceptar (2, 3, 1)",
+      "arista_actual": [
+        2,
+        3,
+        1.0
+      ],
+      "raiz_u": 2,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "tamanos": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 2."
+    },
+    {
+      "paso": 6,
+      "titulo": "KRUSKAL — BOSQUE DESCONECTADO",
+      "tipo": "kruskal",
+      "numero_vertices": 4,
+      "accion": "Agotar las aristas",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "tamanos": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          0,
+          1,
+          1.0
+        ],
+        [
+          2,
+          3,
+          1.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "DESCONECTADO",
+      "motivo": "Quedan varias componentes y no existe árbol de expansión",
+      "linea_activa": 7,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "La función devuelve None; lo seleccionado es un bosque."
+    }
+  ],
+  "road_reparation": [
+    {
+      "paso": 0,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Recibir la lista original",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Copiar antes de ordenar",
+      "motivo": "La entrada no debe modificarse",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "6 aristas; 5 vértices."
+    },
+    {
+      "paso": 1,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Ordenar aristas por peso",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Preparar recorrido",
+      "motivo": "Kruskal considera primero las conexiones más baratas",
+      "linea_activa": 0,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Los empates usan un orden estable solo para visualizar."
+    },
+    {
+      "paso": 2,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (1, 3, 2)",
+      "arista_actual": [
+        1,
+        3,
+        2.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tamanos": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "componentes": 5,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 0.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 3,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (1, 3, 2)",
+      "arista_actual": [
+        1,
+        3,
+        2.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 3,
+      "padres": [
+        0,
+        1,
+        2,
+        1,
+        4
+      ],
+      "tamanos": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 2."
+    },
+    {
+      "paso": 4,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (0, 1, 3)",
+      "arista_actual": [
+        0,
+        1,
+        3.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        0,
+        1,
+        2,
+        1,
+        4
+      ],
+      "tamanos": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "componentes": 4,
+      "grupos": [
+        [
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 2.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 5,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (0, 1, 3)",
+      "arista_actual": [
+        0,
+        1,
+        3.0
+      ],
+      "raiz_u": 0,
+      "raiz_v": 1,
+      "padres": [
+        1,
+        1,
+        2,
+        1,
+        4
+      ],
+      "tamanos": [
+        1,
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 5.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 5."
+    },
+    {
+      "paso": 6,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (4, 3, 4)",
+      "arista_actual": [
+        4,
+        3,
+        4.0
+      ],
+      "raiz_u": 4,
+      "raiz_v": 1,
+      "padres": [
+        1,
+        1,
+        2,
+        1,
+        4
+      ],
+      "tamanos": [
+        1,
+        3,
+        1,
+        1,
+        1
+      ],
+      "componentes": 3,
+      "grupos": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 5.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 7,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (4, 3, 4)",
+      "arista_actual": [
+        4,
+        3,
+        4.0
+      ],
+      "raiz_u": 4,
+      "raiz_v": 1,
+      "padres": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "tamanos": [
+        1,
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          3,
+          4
+        ],
+        [
+          2
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 9.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 9."
+    },
+    {
+      "paso": 8,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Considerar (1, 2, 5)",
+      "arista_actual": [
+        1,
+        2,
+        5.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 2,
+      "padres": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "tamanos": [
+        1,
+        4,
+        1,
+        1,
+        1
+      ],
+      "componentes": 2,
+      "grupos": [
+        [
+          0,
+          1,
+          3,
+          4
+        ],
+        [
+          2
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 9.0,
+      "decision": "Comparar componentes",
+      "motivo": "Raíces iguales implican ciclo",
+      "linea_activa": 2,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Predice aceptar o rechazar."
+    },
+    {
+      "paso": 9,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Aceptar (1, 2, 5)",
+      "arista_actual": [
+        1,
+        2,
+        5.0
+      ],
+      "raiz_u": 1,
+      "raiz_v": 2,
+      "padres": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "tamanos": [
+        1,
+        5,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 14.0,
+      "decision": "ACEPTAR",
+      "motivo": "Conecta dos componentes distintas",
+      "linea_activa": 4,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "Costo acumulado: 14."
+    },
+    {
+      "paso": 10,
+      "titulo": "CSES ROAD REPARATION — EJEMPLO OFICIAL",
+      "tipo": "kruskal",
+      "numero_vertices": 5,
+      "accion": "Alcanzar V - 1 aristas",
+      "arista_actual": null,
+      "raiz_u": null,
+      "raiz_v": null,
+      "padres": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "tamanos": [
+        1,
+        5,
+        1,
+        1,
+        1
+      ],
+      "componentes": 1,
+      "grupos": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "aristas": [
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ]
+      ],
+      "aristas_ordenadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ],
+        [
+          4,
+          0,
+          7.0
+        ],
+        [
+          2,
+          3,
+          8.0
+        ]
+      ],
+      "aristas_seleccionadas": [
+        [
+          1,
+          3,
+          2.0
+        ],
+        [
+          0,
+          1,
+          3.0
+        ],
+        [
+          4,
+          3,
+          4.0
+        ],
+        [
+          1,
+          2,
+          5.0
+        ]
+      ],
+      "aristas_rechazadas": [],
+      "costo_acumulado": 14.0,
+      "decision": "TERMINAR",
+      "motivo": "El bosque ya es un árbol que conecta todos los vértices",
+      "linea_activa": 6,
+      "pseudocodigo": [
+        "ordenar una copia de las aristas por peso",
+        "crear Union-Find y costo = 0",
+        "para cada arista (u, v, peso)",
+        "    si union(u, v) devuelve True",
+        "        aceptar y sumar el peso",
+        "    de lo contrario rechazar por ciclo",
+        "    detener al elegir V - 1 aristas",
+        "si faltan aristas: devolver None"
+      ],
+      "mensaje": "MST completo con costo 14."
+    }
+  ]
+}
