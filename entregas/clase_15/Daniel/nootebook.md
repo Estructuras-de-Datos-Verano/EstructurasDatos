@@ -152,6 +152,7 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿Qué tres representaciones deben permanecer sincronizadas en cada paso?
+- El mapa visual: Para ver qué camino estamos siguiendo y qué nodo está activo en ese momento.  La tabla de control: Donde anotamos a lápiz las distancias provisionales y de qué nodo venimos.  El heap (cola): La lista de tareas pendientes, ordenada de lo más barato a lo más caro. 
 
 **Responde esta pregunta en notebook.md.**
 
@@ -160,6 +161,7 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿Qué responsabilidad tiene cada una de las tres funciones de la entrega?
+- dijkstra: Es el motor; calcula los costos mínimos y quién es el predecesor de cada nodo desde el origen.  reconstruir_camino: Sigue el rastro de predecesores hacia atrás (desde el destino al origen) y lo voltea para darnos la ruta en orden.  camino_minimo: Coordina todo; llama a las dos funciones anteriores para darnos el costo total y la lista de paradas.  
 
 **Responde esta pregunta en notebook.md.**
 
@@ -167,6 +169,8 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿De dónde proviene el factor logarítmico de Dijkstra con heap?
+ 
+- Viene de meter y sacar nodos del heap. Como esta estructura se acomoda sola para mantener el camino más barato en la cima, cada operación de agregar o quitar elementos nos cuesta un paso de reordenamiento equivalente a O(log V)
 
 **Responde esta pregunta en notebook.md.**
 
@@ -174,6 +178,7 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿Cuál es el costo y camino mínimo de A a E en la red conductora?
+Costo: 7  Camino: ['A', 'C', 'B', 'D', 'E']  (Dar esta vuelta es mucho más barato que ir directo por A a B a E, que costaría 11).
 
 **Responde esta pregunta en notebook.md.**
 
@@ -182,6 +187,7 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿Por qué una arista negativa rompe la decisión codiciosa de Dijkstra?
+Porque Dijkstra asume que conforme avanzas por el mapa, el costo del viaje solo puede subir. Dijkstra ya habrá cerrado los nodos anteriores dándolos por definitivos y nunca regresará a corregir la ruta.
 
 
 ## 18. Pruebas y revisión técnica
@@ -189,11 +195,20 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta adicional:** ¿Qué afirmaciones comprobarías además del costo mínimo para validar la reconstrucción?
+Que el camino empiece en el origen y termine en el destino.
+
+Que todas las calles de la ruta existan de verdad en el mapa original.
+
+Que no haya bucles infinitos (pasar por el mismo nodo dos veces).
+
+Que la suma real de los pesos del camino coincida con el costo prometido.
 
 **Responde esta pregunta en notebook.md.**
 
 
 **Pregunta:** ¿Qué caso de prueba demuestra que manejamos entradas obsoletas correctamente?
+- Un caso donde tengas una ruta directa cara (A -> B de costo 10) y una ruta indirecta barata (A -> C -> B de costo 3).  El heap tendrá guardadas ambas opciones para llegar a B. El código debe usar la de 3 y, al sacar la de 10, detectar que ya conoce un camino mejor e ignorarla sin volver a procesarla.  
+
 
 **Responde esta pregunta en notebook.md.**
 
@@ -202,22 +217,24 @@ cuando extraemos el minimo y asi trabajamos sobre eso.
 
 
 **Pregunta:** ¿Qué operación dominante indica que un problema puede resolverse con Dijkstra?
+Tener que buscar la ruta acumulada más barata en un mapa con costos no negativos, eligiendo siempre la opción más corta y prometedora que tengamos a la mano.  
 
 **Responde esta pregunta en notebook.md.**
 
 ## 20. Cierre
 
 
-Los predecesores reconstruyen caminos, las entradas obsoletas simplifican el uso de `heapq` y la complejidad queda en O((V+E) log V). La misma lección atraviesa el curso: elegimos la estructura auxiliar según la operación que debe dominar la ejecución.
 
-> [!IMPORTANT]
-> Dijkstra no visita simplemente “el nodo más cercano”: procesa la menor distancia acumulada conocida y mejora rutas mediante relajación.
-
-**Responde esta pregunta en notebook.md.**
 
 ### Comprueba tu comprensión
 
 **Pregunta:** ¿Qué cadena de decisiones transforma el problema ponderado en Dijkstra?
+Costos reales: Queremos sumar distancias o dinero en lugar de solo contar paradas. 
+Tabla de apuntes: Creamos un registro de costos provisionales y predecesores para no perdernos. 
+Relajación: Comparamos caminos constantemente y nos quedamos con el más barato.  
+Estrategia codiciosa: Decidimos explorar primero el camino pendiente más económico.  
+Min-heap: Usamos esta estructura para encontrar ese mínimo al instante.  
+Pesos no negativos: Prohibimos los costos negativos para asegurar que la estrategia de no mirar atrás funcione. 
 
 **Responde esta pregunta en notebook.md.**
 
