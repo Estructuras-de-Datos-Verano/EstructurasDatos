@@ -1,4 +1,4 @@
- # Respuestas del notebook — Clase 18
+ # Respuestas del notebook — Clase 18- Aristeo
 
 ## Pregunta inicial
 

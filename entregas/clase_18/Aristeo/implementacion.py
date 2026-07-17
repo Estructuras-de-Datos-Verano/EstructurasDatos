@@ -5,7 +5,6 @@ import math
 Peso = int | float
 Arista = tuple[int, int, Peso]
 
-
 class UnionFind:
     """Mantiene una partición de elementos enteros en conjuntos disjuntos."""
 
