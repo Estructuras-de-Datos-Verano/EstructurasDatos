@@ -1,0 +1,10 @@
+1. Problema que resuelve AVLEvita que un BST básico se degenere en una lista enlazada (peor caso $O(n)$) cuando los datos entran ordenados. Garantiza que el árbol se mantenga chato y equilibrado. 
+2. Factor de balanceEs la resta de alturas: $\text{Altura Izquierda} - \text{Altura Derecha}$. Debe ser siempre -1, 0 o 1. Si da 2, significa que el nodo está cargado hacia la izquierda. 
+3. Rotaciones e invariante BSTSon cambios de enlaces locales que corrigen el desbalance sin alterar el recorrido inorden. Con papel y lápiz se detectan al recalcular alturas desde la inserción hacia la raíz hasta hallar un factor fuera de rango. 
+4. Casos LL RR LR RLLL / RR: Desbalances simples en línea recta. Se corrigen con una sola rotación (derecha para LL, izquierda para RR).  LR / RL: Desbalances en "zigzag". No se arreglan en un solo paso; requieren dos tiempos (una rotación al hijo para alinearlo y otra al nodo padre para equilibrarlo). 
+5. ComplejidadInserción: Paga el costo extra de recalcular alturas y rotar en el camino de regreso a la raíz.  Ganancia: Asegura una altura máxima de $O(\log n)$, haciendo que buscar (contiene) sea siempre ultra rápido.  
+6. Pruebas propiasSecuencial inversa: Forzar rotaciones LL continuas.  Zigzag alternado: Validar que las dobles rotaciones (LR/RL) no rompan los punteros.  Duplicados: Verificar que el árbol ignore valores repetidos sin alterar su balance.
+      
+7 y 8. Revisión técnicaRecibida: Feedback del compañero sobre el orden al actualizar alturas y legibilidad del código.Realizada: Revisión del repositorio del compañero, aportando observaciones claras y constructivas para optimizar sus factores de balance.
+9. pregunta 
+¿es para ti reelevante saber las diferencias entre RR, LL, LR, y RL
