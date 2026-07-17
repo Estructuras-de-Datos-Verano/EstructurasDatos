@@ -68,52 +68,41 @@ def test_no_insertar_duplicados():
     assert arbol.inorden() == [2, 4, 6, 8, 9, 10, 12]
 
 
-#@pytest.mark.skip(reason="TODO alumno: diseña una prueba para preorden.")
+@pytest.mark.skip(reason="TODO alumno: diseña una prueba para preorden.")
 def test_todo_preorden():
     """TODO alumno: verifica el recorrido preorden.
 
     Pista: para [8, 4, 10, 2, 6], preorden debe empezar con la raíz.
     """
-    arbol = ArbolBinarioBusqueda()
-    for val in [8, 4, 10, 2, 6]:
-        arbol.insertar(val)
-    preorden = arbol.preorden()
-    assert arbol._raiz == preorden[0]
+
+    assert False
 
 
-#@pytest.mark.skip(reason="TODO alumno: diseña una prueba para postorden.")
+@pytest.mark.skip(reason="TODO alumno: diseña una prueba para postorden.")
 def test_todo_postorden():
     """TODO alumno: verifica el recorrido postorden.
 
     Pista: en postorden, la raíz aparece al final.
     """
 
-    arbol = construir_arbol_base()
-    assert arbol.postorden()[-1] == arbol._raiz.valor
+    assert False
 
 
-#@pytest.mark.skip(reason="TODO alumno: diseña una prueba para inserción creciente.")
+@pytest.mark.skip(reason="TODO alumno: diseña una prueba para inserción creciente.")
 def test_todo_insercion_en_orden_creciente():
     """TODO alumno: inserta valores crecientes y revisa altura.
 
     Pista: insertar [1, 2, 3, 4] produce un árbol degenerado de altura 4.
     """
 
-    arbol = ArbolBinarioBusqueda()
-    for valor in [1, 2, 3, 4]:
-        arbol.insertar(valor)
-    assert arbol.altura() == 4
+    assert False
 
 
-#@pytest.mark.skip(reason="TODO alumno: comprueba que un repetido no aparece dos veces.")
+@pytest.mark.skip(reason="TODO alumno: comprueba que un repetido no aparece dos veces.")
 def test_todo_repetido_no_aparece_dos_veces():
     """TODO alumno: inserta un valor repetido y cuenta apariciones.
 
     Pista: puedes usar ``arbol.inorden().count(valor)``.
     """
 
-    arbol = ArbolBinarioBusqueda()
-    for valor in [1, 2, 3, 4]:
-        arbol.insertar(valor)
-    arbol.insertar(2)
-    assert arbol.inorden().count(2) == 1
+    assert False
