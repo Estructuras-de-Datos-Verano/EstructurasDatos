@@ -30,49 +30,62 @@
 
 ## Punto 7: 7. Laboratorio de decisión interactivo
 - **Pregunta:** ¿Qué debes predecir antes de revelar el algoritmo y qué evidencia usarás para corregir tu predicción?
+- Debemos anticipar el objetivo, la estructura y el algoritmo adecuado, utilizando posteriormente las restricciones y las pruebas distintivas como evidencia para ajustar nuestro análisis.
 
 ## Punto 8: 8. Caso de camino sin pesos: BFS
 - **Pregunta:** ¿Qué invariante permite afirmar que el primer descubrimiento de un nodo en BFS usa el mínimo número de aristas?
-
+- Esto se debe a que BFS procesa el grafo estrictamente por capas de distancia de forma que los nodos más cercanos siempre se exploran antes que cualquier ruta más larga.
 ## Punto 9: 9. Caso de pesos 0/1: 0-1 BFS
 - **Pregunta:** ¿Por qué una mejora de peso 0 entra al frente del deque y una de peso 1 al final?
+- Hacemos esto para mantener la cola ordenada por prioridad de costo, ya que las rutas gratuitas deben procesarse de inmediato mientras que las de costo uno se postergan.
 
 ## Punto 10: 10. Caso de pesos generales: Dijkstra
 - **Pregunta:** ¿Qué operación repetida hace que un heap sea adecuado para Dijkstra?
+- El heap es ideal para esto porque su propósito principal es consultar y extraer de manera barata la menor distancia tentativa que se encuentra acumulada en cada paso.
 
 ## Punto 11: 11. BFS, 0-1 BFS y Dijkstra no forman una competencia
 - **Pregunta:** ¿En qué sentido Dijkstra puede ser correcto pero no la elección más adecuada para pesos 0/1?
+- Aunque Dijkstra encuentra la solución real, no es óptimo para este caso ya que introduce una complejidad de orden logarítmico que el algoritmo 0-1 BFS resuelve de forma lineal.
 
 ## Punto 12: 12. Pesos negativos: rechazar con precisión
 - **Pregunta:** ¿Cómo justificarías técnicamente la respuesta 'ninguno de los estudiados' ante pesos negativos?
+- Explicaría que se viola el contrato de Dijkstra, ya que la presencia de valores negativos rompe el invariante de que una distancia ya extraída del heap es definitiva.
 
 ## Punto 13: 13. Conexión global: Kruskal y Union-Find
 - **Pregunta:** ¿Qué consulta repetida de Kruskal justifica usar Union-Find?
+- Kruskal requiere verificar constantemente si los extremos de una arista ya están conectados, para lo cual Union-Find es perfecto ya que realiza esta validación casi instantáneamente.
 
 ## Punto 14: 14. Árbol de caminos mínimos no es MST
 - **Pregunta:** ¿Por qué un árbol de predecesores producido por Dijkstra no tiene que minimizar el costo total de todas sus aristas?
+- Esto ocurre porque Dijkstra se enfoca en optimizar las rutas individuales partiendo desde un único origen, mientras que un MST busca abaratar la suma total de la red.
 
 ## Punto 15: 15. Dependencias: Kahn y grados de entrada
 - **Pregunta:** ¿Qué significa que un nodo tenga grado de entrada cero durante Kahn?
+- Significa que esa tarea no tiene requisitos pendientes, por lo cual se encuentra completamente disponible para ser procesada e integrada en la secuencia final.
 
 ## Punto 16: 16. BFS y Kahn comparten cola, no invariante
 - **Pregunta:** ¿Qué información adicional a la cola permite distinguir una ejecución de BFS de una de Kahn?
+- Para diferenciarlos observamos los estados auxiliares, ya que BFS utiliza un registro de nodos visitados y distancias mientras que Kahn depende del control de los grados de entrada.
 
 ## Punto 17: 17. Contratos antes de ejecutar
 - **Pregunta:** ¿Qué responsabilidades conserva el código integrador aunque reutilice una implementación ya probada?
+- Sigue siendo responsable de validar que los datos cumplan las precondiciones, ya que debe adaptar los formatos de entrada y dar una interpretación correcta al resultado.
 
 ## Punto 18: 18. Reutilización en lugar de recopia
 - **Pregunta:** ¿Por qué copiar una implementación previa es peor que importarla y adaptar únicamente la entrada y salida?
+- Duplicar código genera problemas de mantenimiento y posibles inconsistencias, mientras que usar un adaptador estrecho mantiene la lógica original limpia y centralizada.
 
 ## Punto 19: 19. Diseñar pruebas que distinguen decisiones
 - **Pregunta:** ¿Qué hace que una prueba sea distintiva y no solo un caso de ejemplo?
+- Una prueba es distintiva porque está diseñada para que una alternativa incorrecta falle, demostrando con un caso límite por qué un algoritmo es mejor que otro para ese escenario.
 
 ## Punto 20: 20. Clínica de selecciones incorrectas
 - **Pregunta:** Elige dos propuestas incorrectas y explica objetivo, contrato violado, operación dominante y corrección.
+- Usar BFS con calles de tiempos variables viola el contrato de costo uniforme; para esto requerimos extraer el costo mínimo con un heap y aplicar Dijkstra. Igualmente, usar Kruskal en dependencias falla porque el objetivo requiere un orden dirigido que se resuelve con Kahn.
 
 ## Punto 21: 21. Trabajo en equipo A: movilidad urbana
 - **Pregunta:** ¿Cómo cambian estructura y algoritmo entre A1, A2 y A3 aunque el objetivo general siga siendo llegar con costo mínimo?
-
+- Cambian según el dominio de los pesos de la red, ya que la ausencia de pesos nos lleva a BFS, los valores binarios a 0-1 BFS y los pesos generales a Dijkstra.
 ## Punto 22: 22. Trabajo en equipo B: construir y planificar
 - **Pregunta:** ¿Por qué reutilizar los mismos nodos no permite reutilizar automáticamente el mismo algoritmo en las dos necesidades?
 
