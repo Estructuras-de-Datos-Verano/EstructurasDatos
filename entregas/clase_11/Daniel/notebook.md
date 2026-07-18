@@ -1,249 +1,105 @@
+# Notebook - Clase 11: Árboles binarios de búsqueda
+
+Este documento contiene las respuestas breves a los desafíos y preguntas de análisis planteados en la clase.
+
+---
+
 ## 1. Motivación
+ **Pregunta:** ¿Qué problema aparece cuando buscamos muchas veces en una lista?
 
-Una lista guarda datos en secuencia. Un árbol organiza datos de forma jerárquica.
+El gran problema es la ineficiencia. En el peor de los casos (cuando el dato no existe o está al final), una lista te obliga a hacer una búsqueda lineal revisando los elementos uno por uno. Si tienes millones de datos y necesitas hacer miles de consultas, el programa se volverá sumamente lento porque su costo de tiempo crece de forma proporcional a la cantidad de elementos.
 
-Motivación central: tengo muchos datos y necesito buscar muchas veces.
-
-Ejemplos:
-
-- IDs de alumnos;
-- matrículas;
-- usuarios;
-- palabras;
-- registros;
-- calificaciones;
-- claves de acceso;
-- números ordenables.
-
-En una lista, buscar puede requerir revisar muchos elementos. En un árbol binario de búsqueda, si la estructura está bien organizada, podemos descartar una parte del espacio en cada paso.
-
-¿Qué problema aparece cuando buscamos muchas veces en una lista?
-  - en escencia que perdemos generalidad
-
-
+---
 
 ## 2. Problemas relacionados
+ **Pregunta:** Elige uno de estos problemas y explica qué concepto de la clase parece practicar.
 
-Estos problemas sirven como mapa de práctica y motivación. No los resolveremos todos hoy.
+Elegí **"700. Search in a Binary Search Tree"**. Este problema practica directamente el concepto del **invariante del BST**. Para resolverlo, necesitas aplicar la lógica de decisión básica: si el valor que buscas es menor que el del nodo actual, te mueves al subárbol izquierdo; si es mayor, te vas al derecho. Es el ejemplo puro de cómo descartar la mitad del camino en cada paso.
 
-LeetCode:
-
-- 94 Binary Tree Inorder Traversal.
-- 144 Binary Tree Preorder Traversal.
-- 145 Binary Tree Postorder Traversal.
-- 700 Search in a Binary Search Tree.
-- 701 Insert into a Binary Search Tree.
-
-CSES:
-
-- [Subordinates](https://cses.fi/problemset/task/1674/): árboles y jerarquías.
-
-**Pregunta.** Elige uno de estos problemas y explica qué concepto de la clase parece practicar.
-  - parece usar una estructura de colas por que vemos que el empleado número 1 es el jefe y entre mas va avanzando el número va disminuyendo la cantidad de empleados
-
+---
 
 ## 3. Conceptos básicos
+ **Pregunta:** Dibuja o describe un árbol con raíz, dos hijos y al menos una hoja.
 
-Vocabulario mínimo:
+Imaginen el nodo raíz con el valor `10`. De él salen dos ramas: a su izquierda se conecta el nodo `5` y a su derecha el nodo `15`. En esta estructura, `5` y `15` actúan como los hijos de la raíz, pero al no tener ninguna conexión hacia abajo, también cumplen el rol de hojas.
 
-- nodo;
-- raíz;
-- hijo izquierdo;
-- hijo derecho;
-- hoja;
-- altura;
-- subárbol;
-- árbol binario.
-
-Un árbol binario es un árbol donde cada nodo tiene como máximo dos hijos.
-
-Dibuja o describe un árbol con raíz, dos hijos y al menos una hoja.
-  - imaginemosnos una hoja en blanco con un nodo en la parte superior y dos aristas que salen de el hacia abajo 
-
-Responde esta pregunta en `notebook.md`.
+---
 
 ## 4. Árbol binario de búsqueda
+ **Pregunta:** ¿Por qué el invariante permite descartar una parte del árbol durante la búsqueda?
 
-Un árbol binario de búsqueda, BST, mantiene este invariante:
+Porque funciona como el juego de adivinar un número con pistas de "más alto" o "más bajo". Como sabemos con total certeza que todo lo menor está a la izquierda y todo lo mayor a la derecha, una sola comparación en el nodo actual nos da permiso para ignorar por completo toda una mitad del árbol. No tenemos que perder tiempo revisando esos nodos descartados.
 
-Para cada nodo:
-
-- todos los valores del subárbol izquierdo son menores que el valor del nodo;
-- todos los valores del subárbol derecho son mayores que el valor del nodo.
-
-En esta clase no permitimos valores repetidos.
-
-**Pregunta.** ¿Por qué el invariante permite descartar una parte del árbol durante la búsqueda?
-
-  - por qwue depende de que etemos trabajando si es con numeros crecientes o decrecientes  
+---
 
 ## 5. Búsqueda
+ **Pregunta:** ¿Qué nodos comparas y qué parte descartas en cada paso? (Buscando `9` en el árbol de ejemplo)
 
-Buscar en una lista puede requerir revisar muchos elementos.
+1. **Comparas con la raíz `8`:** Como `9` es mayor, descartas de golpe la raíz y todo su subárbol izquierdo (nodos `4`, `2` y `6`). Te mueves a la derecha.
+2. **Comparas con el nodo `10`:** Como `9` es menor, descartas el subárbol derecho (nodo `12`). Te mueves a la izquierda.
+3. **Comparas con el nodo `9`:** Los valores coinciden, encontraste el objetivo y termina la búsqueda.
 
-Buscar en un BST:
-
-1. comparar con el nodo actual;
-2. si el valor es igual, terminar;
-3. si el valor es menor, ir al hijo izquierdo;
-4. si el valor es mayor, ir al hijo derecho.
-
-**Ejemplo manual.** En el árbol formado por `8, 4, 10, 2, 6, 9, 12`, busca `9`.
-
-**Pregunta.** ¿Qué nodos comparas y qué parte descartas en cada paso?
-
-  - 
-
+---
 
 ## 6. Inserción
+ **Pregunta:** Inserta manualmente los valores del ejemplo y describe dónde queda cada uno.
 
-Para insertar en un BST seguimos el mismo tipo de decisiones que en búsqueda.
+Siguiendo las reglas de "menor a la izquierda, mayor a la derecha", el árbol se construye así paso a paso:
+* `8`: Se convierte en la **raíz** principal.
+* `4`: Es menor que `8`, queda como su **hijo izquierdo**.
+* `10`: Es mayor que `8`, queda como su **hijo derecho**.
+* `2`: Menor que `8` y menor que `4`, se vuelve **hijo izquierdo de `4`**.
+* `6`: Menor que `8` pero mayor que `4`, se vuelve **hijo derecho de `4`**.
+* `9`: Mayor que `8` pero menor que `10`, se vuelve **hijo izquierdo de `10`**.
+* `12`: Mayor que `8` y mayor que `10`, se vuelve **hijo derecho de `10`**.
 
-Valores de ejemplo:
-
-```text
-8, 4, 10, 2, 6, 9, 12
-```
-
-Regla:
-
-- menor: avanzar a la izquierda;
-- mayor: avanzar a la derecha;
-- repetido: no insertar en esta práctica.
-
-**Pregunta.** Inserta manualmente los valores del ejemplo y describe dónde queda cada uno.
-
-Responde esta pregunta en `notebook.md`.
-
+---
 
 ## 7. Altura
+ **Pregunta:** ¿Qué relación hay entre altura y costo de búsqueda?
 
-Convención de esta clase:
+La altura del árbol define el **peor escenario posible** (el costo máximo) para una búsqueda. Como en cada paso bajamos exactamente un nivel, el número de comparaciones que haremos nunca va a superar la altura del árbol. A menor altura (árbol más equilibrado), las búsquedas serán mucho más rápidas.
 
-- árbol vacío: altura 0;
-- árbol con solo raíz: altura 1.
-
-La altura importa porque una búsqueda sigue un camino desde la raíz hasta algún nodo o hasta `None`.
-
-**Pregunta.** ¿Qué relación hay entre altura y costo de búsqueda?
-
-Responde esta pregunta en `notebook.md`.
-
+---
 
 ## 8. Recorridos
+ **Pregunta:** ¿Por qué inorden produce valores ordenados en un BST?
 
-Tres recorridos clásicos:
+Por la forma en que está definida su secuencia: **Izquierda, Raíz, Derecha**. Como el invariante del propio árbol ya garantiza que todo lo que está a la izquierda es menor que la raíz, y todo lo que está a la derecha es mayor, el recorrido inorden simplemente visita los elementos exactamente en su orden natural de menor a mayor.
 
-- preorden: raíz, izquierda, derecha;
-- inorden: izquierda, raíz, derecha;
-- postorden: izquierda, derecha, raíz.
-
-En un BST, inorden produce los valores ordenados.
-
-**Pregunta.** ¿Por qué inorden produce valores ordenados en un BST?
-
-Responde esta pregunta en `notebook.md`.
+---
 
 ## 9. Animaciones
+ **Pregunta:** ¿Qué te ayuda a ver una animación que no se ve tan claro en una lista de valores?
 
-Los alumnos no programan animaciones en esta clase.
+La animación te permite ver la **toma de decisiones en tiempo real** y la estructura geométrica. En una lista estática solo ves el resultado final, pero la animación te muestra visualmente cómo el algoritmo va "rebotando" de un nodo a otro hacia la izquierda o derecha antes de acomodar o encontrar un dato.
 
-Observa los GIFs:
-
-![Inserción BST](gifs/insercion_bst.gif)
-
-![Búsqueda BST](gifs/busqueda_bst.gif)
-
-![Inorden](gifs/recorrido_inorden.gif)
-
-![Preorden](gifs/recorrido_preorden.gif)
-
-![Postorden](gifs/recorrido_postorden.gif)
-
-**Pregunta.** ¿Qué te ayuda a ver una animación que no se ve tan claro en una lista de valores?
-
-Responde esta pregunta en `notebook.md`.
-
+---
 
 ## 10. Implementación
+ **Pregunta:** ¿Qué métodos parecen depender naturalmente de recursión?
 
-Implementa en `implementacion.py`:
+Todos los que implican explorar la estructura hacia el fondo: `insertar`, `contiene` (búsqueda), `altura`, y sin duda alguna los tres recorridos (`inorden`, `preorden`, `postorden`). Como un árbol está hecho de subárboles más pequeños que repiten la misma estructura, resolver el problema para el nodo actual y llamar al método para sus hijos es una transición completamente natural para la recursión.
 
-```python
-class Nodo:
-    ...
-
-class ArbolBinarioBusqueda:
-    def esta_vacio(self) -> bool: ...
-    def insertar(self, valor: int) -> None: ...
-    def contiene(self, valor: int) -> bool: ...
-    def altura(self) -> int: ...
-    def inorden(self) -> list[int]: ...
-    def preorden(self) -> list[int]: ...
-    def postorden(self) -> list[int]: ...
-```
-
-No implementes eliminación de nodos en esta clase.
-
-**Pregunta.** ¿Qué métodos parecen depender naturalmente de recursión?
-
-Responde esta pregunta en `notebook.md`.
-
+---
 
 ## 11. Pruebas
+ **Pregunta:** ¿Qué problema resuelve `evaluar.py`?
 
-Nuevo flujo técnico: los tests públicos importan directamente desde `implementacion.py`.
+Resuelve los típicos dolores de cabeza con las rutas y las importaciones de Python en las entregas de los alumnos. Al encargarse de verificar que los archivos existan y configurar automáticamente el entorno (`PYTHONPATH`), nos permite a nosotros escribir imports limpios y directos en los tests públicos, garantizando que el sistema evalúe el archivo correcto sin importar la configuración de carpetas del usuario.
 
-```python
-from implementacion import ArbolBinarioBusqueda, Nodo
-```
-
-Para evaluar una entrega usa:
-
-```bash
-python3 evaluar.py entregas/clase_11/nombre clase_11/tests
-```
-
-El script `evaluar.py` verifica que exista `implementacion.py`, agrega la carpeta de entrega al `PYTHONPATH` y ejecuta internamente `pytest -v`.
-
-Observación. Si necesitas ejecutar pytest directamente porque tu entorno no encuentra el comando, usa:
-
-```bash
-python3 -m pytest -v
-```
-
-Este comando usa explícitamente el intérprete de Python y suele resolver problemas con múltiples instalaciones o con el `PATH`.
-
-También debes escribir al menos 3 pruebas propias en `test_estudiante.py`.
-
-`notebook.md` contiene respuestas guiadas del notebook. `discusion.md` es un documento técnico y no debe repetir literalmente esas respuestas.
-
-**Pregunta.** ¿Qué problema resuelve `evaluar.py`?
-
-Responde esta pregunta en `notebook.md`.
+---
 
 ## 12. Patrón descubierto
+ **Pregunta:** Explica con tus palabras el patrón descubierto.
 
-Patrón: organización jerárquica para búsqueda.
+El patrón consiste en usar una **organización jerárquica** para acelerar las búsquedas mediante el descarte masivo de datos. En lugar de formarse en una fila infinita donde tienes que revisar a todos, los datos se ordenan en una estructura de decisiones binarias. Se activa siempre que manejamos un volumen grande de información ordenable en la que necesitamos hacer consultas constantes de existencia o pertenencia de manera ágil.
 
-Preguntas que lo activan:
-
-- ¿Necesito consultar muchas veces si un dato existe?
-- ¿Puedo descartar una parte del espacio en cada paso?
-- ¿Mis datos tienen una relación de orden?
-
-**Pregunta.** Explica con tus palabras el patrón descubierto.
-
-Responde esta pregunta en `notebook.md`.
+---
 
 ## 13. Cierre
-
-Responde en `notebook.md`:
-
-1. ¿Qué ganamos frente a una lista?
-2. ¿Qué propiedad mantiene el BST?
-3. ¿Qué pasa si insertamos datos ordenados?
-4. ¿Cuándo podría degradarse un BST?
-5. ¿Qué problema relacionado puedo practicar?
-
-No respondas aquí. Responde en `notebook.md`.
+1. **¿Qué ganamos frente a una lista?** Ganamos velocidad y eficiencia. Pasamos de revisar elemento por elemento a poder descartar enormes porciones de datos en cada paso del camino.
+2. **¿Qué propiedad mantiene el BST?** Mantiene el invariante de que para cualquier nodo, todo su subárbol izquierdo contiene valores estrictamente menores, y su subárbol derecho contiene valores estrictamente mayores.
+3. **¿Qué pasa si insertamos datos ordenados?** El árbol pierde todo su balance y se deforma, convirtiéndose esencialmente en una lista ligada inclinada hacia un solo lado.
+4. **¿Cuándo podría degradarse un BST?** Se degrada cuando los datos ingresan en un orden perfectamente secuencial (ya sea ascendente o descendente), arruinando la distribución equilibrada de las ramas.
+5. **¿Qué problema relacionado puedo practicar?** El problema de LeetCode *701. Insert into a Binary Search Tree*, que sirve perfectamente para afianzar la lógica de navegar y modificar la estructura respetando el invariante.
