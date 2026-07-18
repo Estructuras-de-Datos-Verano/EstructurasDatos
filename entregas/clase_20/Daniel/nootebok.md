@@ -88,12 +88,15 @@
 - Cambian según el dominio de los pesos de la red, ya que la ausencia de pesos nos lleva a BFS, los valores binarios a 0-1 BFS y los pesos generales a Dijkstra.
 ## Punto 22: 22. Trabajo en equipo B: construir y planificar
 - **Pregunta:** ¿Por qué reutilizar los mismos nodos no permite reutilizar automáticamente el mismo algoritmo en las dos necesidades?
-
+- Esto se debe a que las aristas representan conceptos distintos, ya que el primer problema busca una conexión global no dirigida y el segundo un orden de precedencias dirigidas.
 ## Punto 23: 23. Comunicación técnica de una decisión
 - **Pregunta:** ¿Qué elementos mínimos debe contener una justificación técnica para que otra persona pueda auditar la elección?
+- Debe declarar el objetivo, el tipo de grafo, la operación dominante, la estructura de datos elegida junto con su algoritmo, las precondiciones y su complejidad.
 
 ## Punto 24: 24. Reflexión final del curso
 - **Pregunta:** ¿Qué cambió en tu proceso de decisión desde la primera clase hasta este laboratorio final?
+- Antes seleccionaba las herramientas por pura familiaridad, mientras que ahora identifico primero la operación dominante y las restricciones del problema para elegir con fundamentos.
 
 ## Punto 25: 25. Síntesis y cierre
 - **Pregunta:** Ante un problema nuevo, ¿cómo identificamos la operación dominante y elegimos la estructura de datos y el algoritmo adecuados?
+-  Para lograrlo, seguimos una ruta lógica que conecta el objetivo y el tipo de grafo con la operación repetitiva más costosa, ya que esto nos asegura compatibilidad total.  
