@@ -25,92 +25,118 @@ No es buena idea elegir un algoritmo solo por palabras clave, ya que una misma p
 - MST (Árbol de Expansión Mínimo): Conecta todos los nodos con el menor costo total posible.
 - Orden topológico: Organiza los nodos respetando las dependencias entre ellos.
 
-### 4. Dirección y significado de las aristas
-Si una dependencia dirigida se trata como si fuera bidireccional, se pierde el orden correcto entre las tareas. Esto puede permitir que una tarea se haga antes de cumplir sus requisitos o incluso generar ciclos.
+## 4. Dirección y significado de las aristas
 
-### 5. Clasificar el dominio de pesos
-El dato "hay pesos" es insuficiente porque no especifica las restricciones del dominio. Si los pesos son exclusivamente `0 y 1`, podemos explotar la estructura de un *deque* para resolver el problema en tiempo lineal $O(V + E)$ con **0-1 BFS**. Si los pesos son `no negativos generales` (como valores continuos o mayores a 1), el invariante de 0-1 BFS se rompe y estamos obligados a utilizar un *heap* con **Dijkstra**, lo que eleva el costo a $O((V + E) \log V)$.
+#### ¿Qué decisión incorrecta podría producirse si tratamos una dependencia dirigida como una arista no dirigida?
+Se podría pensar que está en ambos sentidos, por lo que se cae en un ciclo y se rompe el algoritmo
 
-### 6. Matriz de decisión integradora
-La columna **"Operación dominante"**. Es la que conecta directamente la necesidad algorítmica con la ventaja mecánica de la estructura (por ejemplo, "extraer menor distancia" apunta inequívocamente al uso de un Heap).
+## 5. Clasificar el dominio de pesos
 
-### 7. Laboratorio de decisión interactivo
-Antes de revelar el algoritmo, se debe predecir: el **objetivo real**, el **tipo de grafo (pesos/dirección)** y la **operación dominante**. Utilizaré como evidencia las precondiciones del contrato del algoritmo y los contraejemplos de las pruebas distintivas para corregir cualquier supuesto erróneo.
+#### ¿Por qué el dato 'hay pesos' es insuficiente para elegir entre 0-1 BFS y Dijkstra?
+Porque no solamente hay que delimitar el si hay o no pesos, sino su dominio para conocer las invariantes
 
-### 8. Caso de camino sin pesos: BFS
-El invariante de que **la cola procesa los nodos estrictamente en orden creciente de sus distancias (por capas)**. Dado que las aristas no tienen peso (costo uniforme = 1), cuando un nodo es descubierto por primera vez, es imposible que exista un camino posterior con menos aristas que pueda alcanzarlo.
+## 6. Matriz de decisión integradora
 
-### 9. Caso de pesos 0/1: 0-1 BFS
-Una mejora con peso 0 significa que el nodo vecino se encuentra a la misma distancia de la capa actual, por lo que debe ser procesado de inmediato (va al **frente** del deque). Una mejora con peso 1 significa que pertenece a la siguiente capa de distancia absoluta, por lo que se envía al **final** del deque para esperar su turno correspondiente, manteniendo la propiedad de orden sin recurrir a un heap.
+#### ¿Qué columna de la matriz explica mejor por qué se eligió una estructura de datos concreta?
+La operación dominante
 
-### 10. Caso de pesos generales: Dijkstra
-La operación de **extraer el mínimo valor de un conjunto dinámico de distancias tentativas**. El heap permite consultar y remover este mínimo de forma eficiente en tiempo logarítmico, asegurando que el nodo extraído ya posee su distancia mínima definitiva.
+## 7. Laboratorio de decisión interactivo
 
-### 11. BFS, 0-1 BFS y Dijkstra no forman una competencia
-Dijkstra sobre un dominio de pesos 0/1 es técnicamente correcto porque cumple con la precondición de no-negatividad, pero **no es la elección más adecuada** porque introduce un costo extra de ordenamiento logarítmico $O((V+E) \log V)$ mediante el heap, desperdiciando la oportunidad de resolverlo en tiempo lineal $O(V+E)$ usando un deque con 0-1 BFS.
+#### ¿Qué debes predecir antes de revelar el algoritmo y qué evidencia usarás para corregir tu predicción?
+El objetivo real, el tipo de grafo y la operación dominante. 
+Utilizaré como evidencia las precondiciones del contrato del algoritmo y los contraejemplos de las pruebas.
 
-### 12. Pesos negativos: rechazar con precisión
-Técnicamente se justifica porque la presencia de aristas negativas **viola la precondición fundamental (contrato) de Dijkstra**. Al haber pesos negativos, el invariante de codicia se rompe: un nodo extraído del heap como "definitivo" podría mejorar su distancia más adelante a través de una trayectoria con un peso negativo. Al no haberse estudiado algoritmos para el caso general con pesos negativos (como Bellman-Ford), la respuesta honesta y rigurosa es "ninguno de los estudiados".
+## 8. Caso de camino sin pesos: BFS
 
-### 13. Conexión global: Kruskal y Union-Find
-La consulta de alcanzabilidad/conectividad entre componentes: `find(u) == find(v)`. Esta operación se repite para cada arista candidata (ordenadas de menor a mayor peso) para verificar si su unión formaría un ciclo en el árbol.
+#### ¿Qué invariante permite afirmar que el primer descubrimiento de un nodo en BFS usa el mínimo número de aristas?
+Que toda arista tiene peso 1
 
-### 14. Árbol de caminos mínimos no es MST
-Porque Dijkstra toma decisiones locales **minimizando de forma acumulativa la distancia desde un único nodo raíz**. Esto puede provocar que elija aristas individuales muy costosas si estas ofrecen un "atrás directo" más corto a la raíz. En cambio, un MST busca minimizar globalmente la **suma total del peso de la red de cables**, sin importar si las rutas individuales internas entre nodos se vuelven más largas o indirectas.
+## 9. Caso de pesos 0/1: 0-1 BFS
 
-### 15. Dependencias: Kahn y grados de entrada
-Significa que el nodo **no tiene ningún prerrequisito o tarea pendiente** en ese momento del ordenamiento, por lo que está completamente libre y disponible para ser colocado inmediatamente en la secuencia de salida.
+#### ¿Por qué una mejora de peso 0 entra al frente del deque y una de peso 1 al final?
+Para poder diferenciar entre camino conveniente y no conveniente, bien podría hacerse al revés y no cambiaría nada
 
-### 16. BFS y Kahn comparten cola, no invariante
-La información adicional es el **estado auxiliar** y las operaciones sobre los vecinos: BFS utiliza un conjunto/arreglo de `visitados` o `distancias` para evitar ciclos, mientras que Kahn utiliza un arreglo dinámico de `grados de entrada` que se decrementa progresivamente a medida que los requisitos de los nodos sucesores se van liberando.
+## 10. Caso de pesos generales: Dijkstra
 
-### 17. Contratos antes de ejecutar
-Conserva la responsabilidad de **validar y adaptar la representación de los datos de entrada** (verificar que cumplan las precondiciones del contrato), así como de **interpretar correctamente los valores de retorno especiales** (como infinitos, listas vacías o indicadores de ciclos) para traducirlos en respuestas accionables para el dominio del problema.
+#### ¿Qué operación repetida hace que un heap sea adecuado para Dijkstra?
+la que prioriza el valor inimio.
 
-### 18. Reutilización en lugar de recopia
-Copiar el código duplica la lógica propiciando la aparición de bugs divergentes, dificulta el mantenimiento y ensucia el repositorio. Importar y usar un **adaptador estrecho** promueve la modularidad, permite centralizar las optimizaciones o correcciones en una única implementación base ya probada y aísla la lógica de conversión de datos.
+## 11. BFS, 0-1 BFS y Dijkstra no forman una competencia
 
-### 19. Diseñar pruebas que distinguen decisiones
-Una prueba es distintiva porque presenta una **estructura de control/datos mínima diseñada específicamente para forzar a dos algoritmos plausibles a tomar caminos u objetivos diferentes**, demostrando empíricamente por qué uno es correcto y el otro falla (ej. un grafo donde el camino con menos aristas es el más costoso en peso). Un caso feliz común no aporta información porque ambos algoritmos podrían coincidir en el resultado por mero azar del diseño del grafo.
+#### ¿En qué sentido Dijkstra puede ser correcto pero no la elección más adecuada para pesos 0/1?
+Puede ser correcto en el sentido de que encontraría el camino mínimo, pero no sería la elección más adecuada porque aumenta la complejidad
 
-### 20. Clínica de selecciones incorrectas
-*   **Propuesta 1 (“Usaré BFS porque hay que llegar de A a B, pero las calles tienen tiempos 2 y 9”):**
-    *   *Objetivo real:* Camino mínimo optimizando la suma de pesos.
-    *   *Contrato violado:* Costo uniforme/sin pesos (BFS exige que todas las aristas valgan lo mismo).
-    *   *Operación dominante:* Extraer de forma continua la menor distancia tentativa.
-    *   *Corrección:* Utilizar un **Heap** junto con el algoritmo de **Dijkstra**.
-*   **Propuesta 2 (“Usaré Dijkstra para conectar todas las sedes, pero se minimiza el costo total de la red”):**
-    *   *Objetivo real:* Conexión mínima global (unir todos los componentes al menor costo).
-    *   *Contrato violado:* Dijkstra optimiza rutas desde un único origen individual, no el peso de la red completa.
-    *   *Operación dominante:* Validar si dos nodos ya están conectados en el mismo componente y fusionarlos.
-    *   *Corrección:* Utilizar la estructura **Union-Find** junto con el algoritmo de **Kruskal**.
+## 12. Pesos negativos: rechazar con precisión
 
-### 21. Trabajo en equipo A: movilidad urbana
-A pesar de que el fin general es el costo mínimo, la naturaleza del dominio de pesos altera la operación dominante:
-*   En **A1** (sin pesos) la operación dominante es avanzar por capas puras de llegada $\rightarrow$ **Cola + BFS**.
-*   En **A2** (pesos 0 y 1) la operación es priorizar de manera inmediata los costos nulos frente a los unitarios $\rightarrow$ **Deque + 0-1 BFS**.
-*   En **A3** (pesos generales no negativos) la operación dominante es la extracción del mínimo absoluto de un conjunto variable $\rightarrow$ **Heap + Dijkstra**.
+#### ¿Cómo justificarías técnicamente la respuesta 'ninguno de los estudiados' ante pesos negativos?
+Porque cada algoritmo tiene sus propias invariantes que los distinguen y los especializan para ser más eficientes al resolver ciertos problemas, por lo que no existe un caso general que funcione ´de manera óptima.
 
-### 22. Trabajo en equipo B: construir y planificar
-Porque los nodos representan entidades físicas idénticas (los edificios), pero las **aristas poseen semánticas radicalmente distintas**. En la primera necesidad las aristas son enlaces simétricos bidireccionales (no dirigidos) con costo monetario; en la segunda, representan flechas de precedencia temporal estricta (dirigidas) sin pesos asociados. Los algoritmos dependen del significado y restricciones de las aristas, no de la identidad de los nodos.
+## 13. Conexión global: Kruskal y Union-Find
 
-### 23. Comunicación técnica de una decisión
-Debe contener obligatoriamente: el **objetivo del problema**, el **tipo de grafo (dirección y pesos)**, la **operación dominante**, la **estructura de datos seleccionada**, el **algoritmo compatible**, las **precondiciones del contrato**, la **prueba distintiva** aplicada, la **complejidad asintótica** (explicada en variables del problema $V$ y $E$) y la **interpretación del resultado**.
+#### ¿Qué consulta repetida de Kruskal justifica usar Union-Find?
+El revisar si es que dos nodos ya están conectados para decidir si conectarlos o no
 
-### 24. Reflexión final del curso
-1. Antes elegía una estructura por *familiaridad o intuición superficial*; ahora primero identifico *la operación dominante dictada por el objetivo y las restricciones del problema*.
-2. El contrato que más me ayudó a detectar un error fue *la restricción de pesos no negativos en Dijkstra* porque *me forzó a detener la ejecución y rechazar formalmente modelos con bonificaciones negativas en lugar de intentar parchar el algoritmo*.
-3. Ante un algoritmo que no aplica, ahora puedo *declarar con precisión técnica que el problema está fuera del alcance de las soluciones estudiadas, argumentando qué invariante se rompe*.
+## 14. Árbol de caminos mínimos no es MST
 
-### 25. Síntesis y cierre
+#### ¿Por qué un árbol de predecesores producido por Dijkstra no tiene que minimizar el costo total de todas sus aristas?
+Porque Dijkstra nomás mapea el grafo, es otra funcion la que se encarga de minimizar el costo
 
-**Ante un problema nuevo, ¿cómo identificamos la operación dominante y elegimos la estructura de datos y el algoritmo adecuados?**
+## 15. Dependencias: Kahn y grados de entrada
 
-Identificamos la operación dominante desglosando minuciosamente el problema a través de una ruta metodológica clara: primero determinamos el **objetivo de la salida** (camino, MST o precedencia), luego clasificamos el **tipo de grafo** (dirección de aristas y dominio exacto de pesos). La intersección de estas restricciones revela cuál es la acción crítica y repetitiva que gobierna el costo computacional. 
+#### ¿Qué significa que un nodo tenga grado de entrada cero durante Kahn?
+Que no tiene ningún prerrequisito para poder ser procesado.
 
-Con esto en mente, seleccionamos la **estructura de datos** diseñada específicamente para optimizar dicha operación (Cola, Deque, Heap, Union-Find o Grados de entrada) y finalmente adoptamos el **algoritmo** que construya sus invariantes sobre esa estructura, asegurándonos de validar estrictamente sus precondiciones mediante un contrato robusto y pruebas distintivas.
+## 16. BFS y Kahn comparten cola, no invariante
 
----
-## Corrección final de mi respuesta inicial
+#### ¿Qué información adicional a la cola permite distinguir una ejecución de BFS de una de Kahn?
+Que Kahn usa la cola con elementos que ya pueden ser procesados para ir avanzando al tener grado 0 como invariante, mientras que en BFS solo da la información de cuáles posibles caminos hay para seguir avanazando.
 
-*(Al finalizar el laboratorio, compara esta sección con tu intuición original de la materia).*
+## 17. Contratos antes de ejecutar
+
+#### ¿Qué responsabilidades conserva el código integrador aunque reutilice una implementación ya probada
+Que debe de  verificar que efectivamente las invariantes sean respetadas y que pueda detectar errores, así como poder normalizar entradas en algunos casos
+
+## 18. Reutilización en lugar de recopia
+
+#### ¿Por qué copiar una implementación previa es peor que importarla y adaptar únicamente la entrada y salida?
+Porque puede ser que la implementación previa coma cosas distintas y regrese cosas distintas a las que se pide, lo cual no satifacería lo que se pide. 
+
+## 19. Diseñar pruebas que distinguen decisiones
+
+#### ¿Qué hace que una prueba sea distintiva y no solo un caso de ejemplo?
+Que pruebe no solamente los casos felices, que tenga versatilidad
+
+## 20. Clínica de selecciones incorrectas
+
+#### Elige dos propuestas incorrectas y explica objetivo, contrato violado, operación dominante y corrección.
+1. “Usaré BFS porque hay que llegar de A a B”, pero las calles tienen tiempos 2 y 9: Está mal porque BFS trabaja con pesos unitarios o normalizados, no con pesos diferentes. Aquí la correción sería usar 0-1 BFS en vez d BFS
+5. “Usaré Dijkstra aunque existe una arista −3”.:  Esto está incorrecto porque viola la invariante de que Dijkstra no permite pesos negativos, lo que se podría hacer para corregirlo es sumar +3 a todas las aristas para así evitar violar el contrato.
+
+## 21. Trabajo en equipo A: movilidad urbana
+
+#### ¿Cómo cambian estructura y algoritmo entre A1, A2 y A3 aunque el objetivo general siga siendo llegar con costo mínimo?
+En A1 tenemos mismo costo para todas las aristas, por lo que no hay que buscar caminp mínimo por costos, solo por cantidad, por lo que se usaría cola BFS. A2 tiene costos 0 y 1, por lo que se usaría un deque y 0-1 BFS. A3 tiene costos distintos no negativos, por lo que se usaría heap en Dijkstra.
+
+## 22. Trabajo en equipo B: construir y planificar
+
+#### ¿Por qué reutilizar los mismos nodos no permite reutilizar automáticamente el mismo algoritmo en las dos necesidades?
+Porque lo que cambian son las aristas, cambian su signficiado, su "peso" y su sentido
+
+## 23. Comunicación técnica de una decisión
+
+#### ¿Qué elementos mínimos debe contener una justificación técnica para que otra persona pueda auditar la elección?
+Objetivo del problema, tipo de aristas, operación dominante, estructura y algoritmo a utilizar y su contrato e invariantes.
+
+## 24. Reflexión final del curso
+
+1. “Antes elegía una estructura por comodidad; ahora primero identifico el objetivo del problema.”
+2. “El contrato que más me ayudó a detectar un error fue las invariantes porque son reglas explícitas que delimitan el algoritmo.”
+3. “Ante un algoritmo que no aplica, ahora puedo adaptarlo.”
+
+#### ¿Qué cambió en tu proceso de decisión desde la primera clase hasta este laboratorio final?
+Que antes no tenía realmente un proceso de decisión, simplemente era intuición. Ahora puedo hacer un proceso de análisis y evaluación de posibles estructras aplicadas para encontrar la que resuelva el problema de manera óptima.
+
+## 25. Síntesis y cierre
+
+#### Ante un problema nuevo, ¿cómo identificamos la operación dominante y elegimos la estructura de datos y el algoritmo adecuados?
+Desglosando el problema, determinamos el objetivo de la salida y clasificamos el tipo de grafo.

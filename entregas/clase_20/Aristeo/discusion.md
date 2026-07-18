@@ -34,3 +34,4 @@ Si se quiere resolver rutas con pesos negativos, el contrato de Dijkstra se viol
 ## Reflexión final
 
 Creo que con el curso pude aprender estructuras logicas para poder optimzar procesos, así como elegir la mejoir estructura para cada problema a resolver.
+
