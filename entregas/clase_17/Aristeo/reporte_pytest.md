@@ -76,5 +76,3 @@ clase_17::test_8_cero_uno_bfs_peso_invalido PASSED                              
 - Caso de 0-1 BFS que resultó más informativo: El filtrado de tipos defensivo para rechazar booleanos (True/False), previniendo que Python los trate como 1 y 0 respectivamente.
 
 
-
-

@@ -76,7 +76,6 @@ def test_5_bfs_con_ciclo():
         "B": ["C"],
         "C": ["A"]
     }
-    # No debe colgarse y debe retornar el camino directo más corto
     assert bfs_camino(grafo_ciclico, "A", "C") == ["A", "B", "C"]
 
 

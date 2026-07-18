@@ -34,7 +34,7 @@ Porque representan una transición de costo "gratuito" (peso 0). Al ponerlas al 
 
 ### 11. Comparación
 - BFS: Sin pesos, usa Cola, $O(V+E)$.
-- 0-1 BFS: Pesos binarios $\{0, 1\}$, usa Deque, $O(V+E)$.
+- 0-1 BFS: Pesos binarios ${0, 1}$, usa Deque, $O(V+E)$.
 - Dijkstra: Pesos no negativos generales, usa Heap, $O((V+E) log V)$.
 
 ### 12. Elección de estructura
