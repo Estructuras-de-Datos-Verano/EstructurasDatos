@@ -40,7 +40,6 @@ def normalizar_grafo_dirigido(
             if vecino not in adyacencias_temporales[nodo]:
                 adyacencias_temporales[nodo].append(vecino)
 
-    # Construir el resultado final respetando el orden exacto de descubrimiento
     resultado: dict[str, list[str]] = {}
     for nodo in nodos_en_orden:
         # Si era un destino implícito, su lista de adyacencia por defecto es vacía
