@@ -53,13 +53,13 @@ clase_14::test_ultima_piedra_caso_extremo <- ..\entregas\clase_14\ivan\test_estu
 ===================================================================== 29 passed in 0.12s ======================================================================
 ```
 ## Número de pruebas
-16
+29
 
 ## Aprobadas
-16/16
+29
 
 ## Errores
-No 
+Ninguno
 
 ## Prueba propia
 Inserción de mútiples cambios, niveles y test de última piedra en caso extremo.
