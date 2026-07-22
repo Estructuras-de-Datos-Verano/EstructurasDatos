@@ -1,0 +1,9 @@
+[project]
+name = "curso-estructuras-datos"
+version = "0.1.0"
+description = "Materiales y entregas del curso de Estructuras de Datos"
+requires-python = ">=3.10"
+
+# Pytest se configura por clase. Un pythonpath global mezclaría los distintos
+# paquetes locales llamados `src` y las pruebas que importan `implementacion`.
+

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 04 - Pilas abstractas, polimorfismo y pytest</title>
+  <style>
+    :root {
+      --bg: #101624;
+      --panel: #fbfcff;
+      --ink: #111827;
+      --muted: #536173;
+      --line: #dbe3ee;
+      --soft: #f4f7fb;
+      --blue: #2563eb;
+      --green: #0f766e;
+      --gold: #d97706;
+      --red: #dc2626;
+      --violet: #7c3aed;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(135deg, #111827 0%, #172033 48%, #0b1120 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      overflow: hidden;
+      width: min(1380px, 96vw);
+      height: min(820px, 92vh);
+      margin: 4vh auto;
+      padding: 42px 52px 72px;
+      border: 1px solid rgba(255, 255, 255, .64);
+      border-radius: 22px;
+      background: rgba(251, 252, 255, .985);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .30);
+    }
+
+    .slide.active { display: block; }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 8px;
+      background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet));
+    }
+
+    .title-slide {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .97), rgba(244, 247, 251, .93)),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(37, 99, 235, .10) 28px),
+        repeating-linear-gradient(90deg, transparent 0 27px, rgba(15, 118, 110, .10) 28px);
+    }
+
+    .center { display: grid; place-items: center; height: 100%; text-align: center; }
+    h1, h2, h3, p { margin-top: 0; letter-spacing: 0; }
+    h1 { margin-bottom: 22px; font-size: clamp(48px, 5.8vw, 82px); line-height: 1; font-weight: 900; }
+    h2 { margin-bottom: 24px; font-size: clamp(34px, 4vw, 56px); line-height: 1.06; font-weight: 880; }
+    h3 { margin-bottom: 12px; font-size: 28px; line-height: 1.15; }
+    p, li { font-size: 22px; line-height: 1.36; color: #334155; }
+    ul, ol { margin: 0; padding-left: 1.25em; }
+    li + li { margin-top: 8px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 10px 14px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .subtitle { max-width: 980px; margin-inline: auto; font-size: clamp(25px, 2.3vw, 36px); color: #334155; line-height: 1.22; }
+    .question { max-width: 1140px; font-size: clamp(42px, 5vw, 70px); line-height: 1.08; font-weight: 900; }
+    .quote { max-width: 1100px; font-size: clamp(38px, 4.6vw, 62px); line-height: 1.1; font-weight: 850; }
+    .note { color: var(--muted); font-size: 19px; line-height: 1.35; }
+
+    .grid { display: grid; gap: 20px; }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .split { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; }
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+    .card p, .card li { font-size: 21px; }
+    .blue { border-color: #bfdbfe; background: #eff6ff; }
+    .green { border-color: #99f6e4; background: #ecfdf5; }
+    .amber { border-color: #fde68a; background: #fffbeb; }
+    .violet { border-color: #ddd6fe; background: #f5f3ff; }
+    .red { border-color: #fecaca; background: #fef2f2; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243449;
+      font-size: 20px;
+      font-weight: 820;
+    }
+
+    .code {
+      overflow: auto;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      color: #e5e7eb;
+      background: #111827;
+      font-size: 18px;
+      line-height: 1.38;
+      white-space: pre-wrap;
+      tab-size: 2;
+    }
+
+    .table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; font-size: 20px; }
+    .table th, .table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .table th { color: #0f172a; background: #eaf0f8; font-weight: 850; }
+    .table tr:last-child td { border-bottom: 0; }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: var(--blue);
+      font-weight: 850;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.05); }
+    .jump-btn { min-height: 42px; padding: 0 14px; background: #0f766e; font-size: 17px; }
+
+    .num { position: absolute; right: 32px; bottom: 22px; color: #94a3b8; font-size: 16px; font-weight: 850; }
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+    .nav button { min-width: 102px; min-height: 40px; padding: 0 14px; background: rgba(255, 255, 255, .16); font-size: 16px; }
+    .counter { min-width: 84px; text-align: center; font-size: 16px; font-weight: 900; }
+    .progress { position: fixed; inset: auto 0 0; z-index: 25; height: 5px; background: rgba(255, 255, 255, .18); }
+    #bar { width: 0; height: 100%; background: linear-gradient(90deg, var(--blue), var(--green), var(--gold), var(--violet)); transition: width .18s ease; }
+
+    #notes {
+      display: none;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 40;
+      width: min(430px, 92vw);
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .93);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .32);
+      backdrop-filter: blur(12px);
+      font-size: 16px;
+      line-height: 1.36;
+    }
+
+    #practiceTimer {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      color: white;
+      background: rgba(15, 23, 42, .86);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+    #timerDisplay { min-width: 74px; text-align: center; font-size: 21px; font-weight: 950; font-variant-numeric: tabular-nums; }
+    #practiceTimer button { min-height: 36px; padding: 0 10px; background: rgba(255, 255, 255, .16); font-size: 14px; }
+    #practiceTimer button.active { background: var(--green); }
+    #practiceTimer button.danger { background: rgba(220, 38, 38, .82); }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .slide { width: 96vw; height: auto; min-height: 92vh; padding: 30px 24px 92px; overflow: visible; }
+      .two, .three, .four, .split, .flow { grid-template-columns: 1fr; }
+      .nav { width: 94vw; justify-content: center; }
+      #practiceTimer { right: 10px; transform: scale(.92); transform-origin: top right; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="slide active title-slide" data-note="Abrir conectando con Clase 03: ya diseñamos la interfaz; hoy la convertimos en contrato, implementaciones y pruebas.">
+      <div class="center">
+        <div>
+          <div class="tag">Estructuras de datos - Clase 04</div>
+          <h1>Múltiples implementaciones de un TDA</h1>
+          <p class="subtitle">Pilas, clases abstractas, polimorfismo y pruebas con pytest.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Dar la estructura de 4 horas. Recordar que el notebook es el centro de la clase.">
+      <h2>Ruta de la sesión</h2>
+      <div class="grid four">
+        <div class="card blue"><h3>55 min</h3><p>Clase abstracta como contrato.</p></div>
+        <div class="card green"><h3>80 min</h3><p>Tres implementaciones de pila.</p></div>
+        <div class="card amber"><h3>45 min</h3><p>Polimorfismo.</p></div>
+        <div class="card violet"><h3>90 min</h3><p>Assert, pytest y parametrización.</p></div>
+      </div>
+      <div class="pills">
+        <button class="jump-btn" data-jump="8">ABC</button>
+        <button class="jump-btn" data-jump="13">Implementaciones</button>
+        <button class="jump-btn" data-jump="21">pytest</button>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Pregunta guía. Pide una respuesta intuitiva antes de entrar en código.">
+      <div class="center">
+        <div class="question">Si todas son pilas, ¿por qué podríamos implementarlas de distintas formas?</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Recuperar de Clase 03: una pila no es una lista; una pila es comportamiento LIFO con operaciones.">
+      <h2>Recordatorio: TDA e interfaz</h2>
+      <div class="grid three">
+        <div class="card blue"><h3>TDA</h3><p>Describe operaciones y comportamiento esperado.</p></div>
+        <div class="card green"><h3>Interfaz</h3><p>Lo que el usuario puede llamar.</p></div>
+        <div class="card amber"><h3>Implementación</h3><p>Cómo se guarda y procesa internamente.</p></div>
+      </div>
+      <div class="card" style="margin-top: 22px;"><p><strong>LIFO:</strong> último en entrar, primero en salir.</p></div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Fijar las operaciones obligatorias. Estas serán el hilo conductor de código y pruebas.">
+      <h2>La interfaz de Pila</h2>
+      <pre class="code"><code>push(elemento)
+pop()
+peek()
+esta_vacia()
+tamano()</code></pre>
+      <div class="pills">
+        <span class="pill">apilar</span>
+        <span class="pill">desapilar</span>
+        <span class="pill">ver cima</span>
+        <span class="pill">consultar vacío</span>
+        <span class="pill">consultar tamaño</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Idea central. Repetirla varias veces durante la clase.">
+      <div class="center">
+        <div class="quote">La interfaz debe mantenerse estable, pero la implementación puede cambiar.</div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Explicar ABC como contrato en Python, no como un tema avanzado de arquitectura.">
+      <h2>Clase abstracta como contrato</h2>
+      <div class="split">
+        <pre class="code"><code>from abc import ABC, abstractmethod
+
+class PilaAbstracta(ABC):
+    @abstractmethod
+    def push(self, elemento):
+        pass</code></pre>
+        <div class="card blue">
+          <h3>Contrato</h3>
+          <p>Una subclase concreta debe implementar todos los métodos abstractos.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Mostrar que la clase abstracta no es una pila usable. Sirve para obligar a respetar la interfaz.">
+      <h2><code>PilaAbstracta</code> no es una pila concreta</h2>
+      <div class="grid two">
+        <div class="card red"><h3>No se instancia</h3><p>No queremos hacer <code>PilaAbstracta()</code>.</p></div>
+        <div class="card green"><h3>Sí obliga</h3><p>Define qué métodos debe tener toda pila concreta.</p></div>
+      </div>
+      <pre class="code" style="margin-top: 20px;"><code>TypeError: Can't instantiate abstract class ...</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Caminar por el contrato completo. No detenerse en detalles de tipos.">
+      <h2>Contrato completo</h2>
+      <pre class="code"><code>class PilaAbstracta(ABC):
+    @abstractmethod
+    def push(self, elemento): ...
+    @abstractmethod
+    def pop(self): ...
+    @abstractmethod
+    def peek(self): ...
+    @abstractmethod
+    def esta_vacia(self): ...
+    @abstractmethod
+    def tamano(self): ...</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Primera actividad en notebook. El objetivo es completar o leer contrato antes de implementar.">
+      <h2>Actividad 1: contrato</h2>
+      <div class="card amber">
+        <ul>
+          <li>Completa o revisa <code>PilaAbstracta</code>.</li>
+          <li>Explica por qué <code>pop</code> y <code>peek</code> deben definir qué pasa si la pila está vacía.</li>
+          <li>Escribe una prueba mínima en lenguaje natural.</li>
+        </ul>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Transición al bloque 2. Las implementaciones son distintas, pero la interfaz no cambia.">
+      <h2>Bloque 2: varias pilas</h2>
+      <div class="grid three">
+        <div class="card blue"><h3>PilaLista</h3><p>Usa <code>list</code>.</p></div>
+        <div class="card green"><h3>PilaDeque</h3><p>Usa <code>collections.deque</code>.</p></div>
+        <div class="card amber"><h3>PilaTupla</h3><p>Usa <code>tuple</code>.</p></div>
+      </div>
+      <div class="card violet" style="margin-top: 22px;"><p><strong>Reto opcional:</strong> <code>PilaNodo</code> como vista previa de listas ligadas.</p></div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="PilaLista es la más natural para empezar. Cima al final.">
+      <h2><code>PilaLista</code></h2>
+      <div class="split">
+        <pre class="code"><code>push(elemento):
+    agregar elemento al final
+
+pop():
+    quitar y regresar último elemento
+
+peek():
+    regresar último sin quitarlo</code></pre>
+        <div class="grid">
+          <div class="card green"><h3>Ventajas</h3><p>Simple, natural en Python, eficiente al final.</p></div>
+          <div class="card amber"><h3>Desventajas</h3><p>Depende del arreglo dinámico interno de <code>list</code>.</p></div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Deque prepara colas, pero hoy se usa como pila por la derecha.">
+      <h2><code>PilaDeque</code></h2>
+      <div class="split">
+        <pre class="code"><code>from collections import deque
+
+push(elemento):
+    agregar a la derecha
+
+pop():
+    quitar de la derecha</code></pre>
+        <div class="grid">
+          <div class="card green"><h3>Ventajas</h3><p>Diseñada para operaciones eficientes en extremos.</p></div>
+          <div class="card amber"><h3>Desventajas</h3><p>Oculta detalles internos y puede ser menos clara al inicio.</p></div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="PilaTupla es conceptual. No venderla como opción normal para producción.">
+      <h2><code>PilaTupla</code></h2>
+      <div class="split">
+        <pre class="code"><code>push(elemento):
+    crear nueva tupla con elemento al final
+
+pop():
+    guardar último
+    reemplazar por tupla sin último</code></pre>
+        <div class="grid">
+          <div class="card green"><h3>Ventajas</h3><p>Permite hablar de inmutabilidad.</p></div>
+          <div class="card red"><h3>Desventajas</h3><p>Cada cambio crea una nueva tupla.</p></div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="No adelantar listas ligadas. Solo presentar como reto para quien vaya rápido.">
+      <h2>Reto opcional: <code>PilaNodo</code></h2>
+      <div class="card violet">
+        <p>Una pila también puede implementarse con nodos y referencias.</p>
+      </div>
+      <pre class="code" style="margin-top: 20px;"><code>class Nodo:
+    valor
+    siguiente
+
+class PilaNodo:
+    _cima -> Nodo -> Nodo -> None</code></pre>
+      <p class="note">Listas ligadas se estudiarán después; hoy no son el centro.</p>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Tabla de comparación. Que el grupo proponga más filas.">
+      <h2>Comparación</h2>
+      <table class="table">
+        <thead><tr><th>Implementación</th><th>Interno</th><th>Ventaja</th><th>Cuidado</th></tr></thead>
+        <tbody>
+          <tr><td>PilaLista</td><td><code>list</code></td><td>Clara y natural.</td><td>No muestra referencias.</td></tr>
+          <tr><td>PilaDeque</td><td><code>deque</code></td><td>Extremos eficientes.</td><td>Menos familiar.</td></tr>
+          <tr><td>PilaTupla</td><td><code>tuple</code></td><td>Discute inmutabilidad.</td><td>Menos eficiente para cambios.</td></tr>
+          <tr><td>PilaNodo</td><td>Nodos</td><td>Prepara listas ligadas.</td><td>Reto opcional.</td></tr>
+        </tbody>
+      </table>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad larga de implementación. Usar temporizador.">
+      <h2>Actividad 2: implementar</h2>
+      <div class="grid three">
+        <div class="card blue"><h3>25 min</h3><p><code>PilaLista</code></p></div>
+        <div class="card green"><h3>25 min</h3><p><code>PilaDeque</code></p></div>
+        <div class="card amber"><h3>25 min</h3><p><code>PilaTupla</code></p></div>
+      </div>
+      <div class="card" style="margin-top: 22px;"><p>Después de cada implementación, correremos pruebas rápidas con <code>assert</code>.</p></div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Descanso real.">
+      <div class="center">
+        <div>
+          <div class="tag">Descanso - 10 minutos</div>
+          <div class="question">Pausar también evita errores de pila.</div>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Polimorfismo práctico, no definición formal pesada.">
+      <h2>Polimorfismo</h2>
+      <div class="card blue">
+        <p class="quote">La misma función puede usar objetos distintos si respetan la misma interfaz.</p>
+      </div>
+      <div class="pills">
+        <span class="pill">PilaLista</span>
+        <span class="pill">PilaDeque</span>
+        <span class="pill">PilaTupla</span>
+        <span class="pill">misma función</span>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="La función usa métodos públicos. No revisa _datos.">
+      <h2>Función que usa cualquier pila</h2>
+      <pre class="code"><code>def vaciar_pila(pila):
+    elementos = []
+    while not pila.esta_vacia():
+        elementos.append(pila.pop())
+    return elementos</code></pre>
+      <div class="card green" style="margin-top: 20px;"><p>La función no necesita saber si la pila usa <code>list</code>, <code>deque</code> o <code>tuple</code>.</p></div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Segundo ejemplo conceptual. Útil para reforzar interfaz.">
+      <h2>Transferir elementos</h2>
+      <pre class="code"><code>def transferir_elementos(origen, destino):
+    while not origen.esta_vacia():
+        destino.push(origen.pop())</code></pre>
+      <div class="grid two" style="margin-top: 20px;">
+        <div class="card blue"><h3>Origen</h3><p>Cualquier pila.</p></div>
+        <div class="card green"><h3>Destino</h3><p>Cualquier pila.</p></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Entrar al bloque de pruebas. Frase clave: probar no es imprimir.">
+      <h2>Bloque 4: pruebas</h2>
+      <div class="grid two">
+        <div class="card red"><h3>Ejecutar código</h3><p>Ver que algo corre una vez.</p></div>
+        <div class="card green"><h3>Probar código</h3><p>Verificar una expectativa clara.</p></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Assert en notebook antes de pytest.">
+      <h2><code>assert</code></h2>
+      <pre class="code"><code>pila = PilaLista()
+assert pila.esta_vacia()
+
+pila.push(10)
+assert not pila.esta_vacia()
+assert pila.peek() == 10</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Pruebas mínimas requeridas. Estas pasarán a pytest.">
+      <h2>Pruebas mínimas</h2>
+      <div class="grid two">
+        <div class="card blue"><ul><li>pila nueva está vacía</li><li><code>push</code> cambia estado</li><li><code>tamano</code> aumenta</li><li><code>pop</code> respeta LIFO</li></ul></div>
+        <div class="card green"><ul><li><code>peek</code> no elimina</li><li><code>pop</code> en vacía lanza error</li><li><code>peek</code> en vacía lanza error</li><li>misma prueba para varias clases</li></ul></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Introducción mínima a pytest.">
+      <h2>pytest</h2>
+      <div class="split">
+        <pre class="code"><code>tests/
+└── test_pilas.py
+
+def test_pila_nueva_esta_vacia():
+    pila = PilaLista()
+    assert pila.esta_vacia()</code></pre>
+        <div class="card blue">
+          <h3>Convención</h3>
+          <p>Los archivos y funciones de prueba suelen empezar con <code>test_</code>.</p>
+        </div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Mostrar comando. Evitar instalar o depurar demasiado en la presentación.">
+      <h2>Ejecutar pruebas</h2>
+      <pre class="code"><code>pip install -r requirements.txt
+pytest
+
+# guardar evidencia
+pytest > evidencia_pytest.txt</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="pytest.raises es clave para pop/peek vacíos.">
+      <h2>Probar errores esperados</h2>
+      <pre class="code"><code>import pytest
+
+def test_pop_en_vacia_lanza_error():
+    pila = PilaLista()
+    with pytest.raises(IndexError):
+        pila.pop()</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Parametrize conecta directamente con polimorfismo.">
+      <h2><code>pytest.mark.parametrize</code></h2>
+      <pre class="code"><code>@pytest.mark.parametrize("ClasePila", [
+    PilaLista,
+    PilaDeque,
+    PilaTupla,
+])
+def test_pop_respeta_lifo(ClasePila):
+    pila = ClasePila()
+    pila.push(1)
+    pila.push(2)
+    assert pila.pop() == 2</code></pre>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Importantísimo: no revisar _datos, sino comportamiento.">
+      <h2>¿Qué verifican las pruebas?</h2>
+      <div class="grid two">
+        <div class="card green"><h3>Sí</h3><p>Comportamiento público: LIFO, tamaño, errores esperados.</p></div>
+        <div class="card red"><h3>No</h3><p>Detalles internos como <code>_datos</code>, si no forman parte de la interfaz.</p></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Actividad con pytest.">
+      <h2>Actividad 3: pruebas comunes</h2>
+      <div class="card amber">
+        <ol>
+          <li>Ejecuta <code>pytest</code>.</li>
+          <li>Completa una prueba propia.</li>
+          <li>Verifica que las tres implementaciones pasen.</li>
+          <li>Guarda evidencia en <code>evidencia_pytest.txt</code>.</li>
+        </ol>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="GitHub. Conectar con asignar_revisiones.py.">
+      <h2>Actividad GitHub</h2>
+      <div class="flow">
+        <div class="card blue"><h3>Issue</h3><p>Clase 04</p></div>
+        <div class="card green"><h3>Branch</h3><p><code>clase-04-nombre</code></p></div>
+        <div class="card amber"><h3>Commit</h3><p>Entrega individual</p></div>
+        <div class="card violet"><h3>PR</h3><p>Notebook y evidencia</p></div>
+        <div class="card red"><h3>Review</h3><p>Comentario constructivo</p></div>
+      </div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Cierre con entregables.">
+      <h2>Entrega</h2>
+      <pre class="code"><code>entregas/nombre/clase_04/
+├── clase_04_pilas_nombre.ipynb
+├── resumen.md
+└── evidencia_pytest.txt</code></pre>
+      <div class="card" style="margin-top: 20px;"><p><strong>Regla:</strong> no modificar directamente <code>main</code>.</p></div>
+      <div class="num"></div>
+    </section>
+
+    <section class="slide" data-note="Preguntas finales de reflexión.">
+      <h2>Reflexión final</h2>
+      <div class="grid two">
+        <div class="card blue"><ul><li>¿Qué ganamos con una interfaz común?</li><li>¿Qué ganamos con pruebas comunes?</li><li>¿Qué implementación fue más clara?</li></ul></div>
+        <div class="card green"><ul><li>¿Qué prueba fue más importante?</li><li>¿Qué implementación debería entrar al proyecto?</li><li>¿Qué duda queda?</li></ul></div>
+      </div>
+      <div class="num"></div>
+    </section>
+  </main>
+
+  <nav class="nav" aria-label="Navegación de diapositivas">
+    <button id="prev" type="button">Anterior</button>
+    <span id="counter" class="counter">1 / 1</span>
+    <button id="next" type="button">Siguiente</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+  <aside id="notes" aria-live="polite">
+    <strong>Notas del presentador</strong>
+    <div id="notesText" style="margin-top: 8px;"></div>
+  </aside>
+  <div id="practiceTimer" aria-label="Temporizador de práctica">
+    <span id="timerDisplay">00:00</span>
+    <button id="timerStartPause" type="button" title="Iniciar o pausar temporizador (T)">Iniciar</button>
+    <button id="timerReset" class="danger" type="button" title="Reiniciar temporizador">Reiniciar</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.getElementById("counter");
+    const bar = document.getElementById("bar");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    const notes = document.getElementById("notes");
+    const notesText = document.getElementById("notesText");
+    let cur = 0;
+
+    function refresh() {
+      counter.textContent = `${cur + 1} / ${slides.length}`;
+      bar.style.width = `${100 * (cur + 1) / slides.length}%`;
+      slides.forEach((slide, index) => {
+        const num = slide.querySelector(".num");
+        if (num) num.textContent = `${index + 1} / ${slides.length}`;
+      });
+      notesText.textContent = slides[cur].dataset.note || "Sin notas específicas.";
+    }
+
+    function go(index) {
+      if (index < 0 || index >= slides.length || index === cur) return;
+      slides[cur].classList.remove("active");
+      cur = index;
+      slides[cur].classList.add("active");
+      refresh();
+    }
+
+    prevButton.addEventListener("click", () => go(cur - 1));
+    nextButton.addEventListener("click", () => go(cur + 1));
+    document.querySelectorAll("[data-jump]").forEach(button => {
+      button.addEventListener("click", () => go(Number(button.dataset.jump) - 1));
+    });
+
+    document.addEventListener("keydown", event => {
+      const tag = document.activeElement ? document.activeElement.tagName : "";
+      const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+      if (!isEditing && ["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        go(cur + 1);
+      }
+      if (!isEditing && ["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        go(cur - 1);
+      }
+      if (!isEditing && event.key.toLowerCase() === "n") {
+        const visible = window.getComputedStyle(notes).display !== "none";
+        notes.style.display = visible ? "none" : "block";
+        refresh();
+      }
+    });
+
+    const timerDisplay = document.getElementById("timerDisplay");
+    const timerStartPause = document.getElementById("timerStartPause");
+    const timerReset = document.getElementById("timerReset");
+    let timerRunning = false;
+    let timerStartTime = null;
+    let timerElapsedBeforeStart = 0;
+    let timerInterval = null;
+
+    function formatTimer(milliseconds) {
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateTimerDisplay() {
+      const elapsed = timerRunning ? timerElapsedBeforeStart + (Date.now() - timerStartTime) : timerElapsedBeforeStart;
+      timerDisplay.textContent = formatTimer(elapsed);
+    }
+
+    function startTimer() {
+      if (timerRunning) return;
+      timerRunning = true;
+      timerStartTime = Date.now();
+      timerStartPause.textContent = "Pausar";
+      timerStartPause.classList.add("active");
+      timerInterval = setInterval(updateTimerDisplay, 250);
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      if (!timerRunning) return;
+      timerElapsedBeforeStart += Date.now() - timerStartTime;
+      timerRunning = false;
+      timerStartTime = null;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerStartPause.textContent = "Continuar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    function toggleTimer() {
+      if (timerRunning) pauseTimer();
+      else startTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerStartTime = null;
+      timerElapsedBeforeStart = 0;
+      timerInterval = null;
+      timerStartPause.textContent = "Iniciar";
+      timerStartPause.classList.remove("active");
+      updateTimerDisplay();
+    }
+
+    timerStartPause.addEventListener("click", toggleTimer);
+    timerReset.addEventListener("click", resetTimer);
+    document.addEventListener("keydown", event => {
+      const tag = document.activeElement ? document.activeElement.tagName : "";
+      const isEditing = ["INPUT", "SELECT", "TEXTAREA"].includes(tag);
+      if (!isEditing && event.key.toLowerCase() === "t") toggleTimer();
+    });
+
+    window.addEventListener("load", () => {
+      refresh();
+      updateTimerDisplay();
+    });
+    window.addEventListener("resize", refresh);
+  </script>
+</body>
+</html>
